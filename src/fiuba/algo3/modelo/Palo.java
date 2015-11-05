@@ -1,4 +1,4 @@
-package fiuba.algo3.testUnitarios;
+package fiuba.algo3.modelo;
 
 
 public enum Palo {
