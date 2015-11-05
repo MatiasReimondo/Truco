@@ -32,7 +32,7 @@ public class Mazo {
 
     public void mezclarMazo(){
         Collections.shuffle(mazoDeCartas);
-        
+
     }
 
 }

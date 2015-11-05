@@ -13,4 +13,15 @@ public class MazoTest {
 
     }
 
+    @Test
+    public void seMezclaElMazo(){
+        Mazo nuevoMazo= new Mazo();
+        Carta nuevaCarta= nuevoMazo.getMazoDeCartas().getFirst();
+
+        nuevoMazo.mezclarMazo();
+
+        Assert.assertEquals(false, nuevoMazo.getMazoDeCartas().getFirst().equals(nuevaCarta));
+
+    }
+
 }
