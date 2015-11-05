@@ -40,6 +40,8 @@ public class CartaTest {
 
     }
 
+    @Test
+    public void whileTrue(){}
 
 
 
