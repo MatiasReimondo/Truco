@@ -1,5 +1,8 @@
-package fiuba.algo3.modelo;
+package fiuba.algo3.tests;
 
+import fiuba.algo3.modelo.Carta;
+import fiuba.algo3.modelo.Numero;
+import fiuba.algo3.modelo.Palo;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -8,7 +11,7 @@ public class CartaTest {
 
     @Test
     public void seCreaElUnoDeEspadaConFuerza14(){
-        Carta cartaPrueba= new Carta(Numero.UNO,Palo.ESPADA);
+        Carta cartaPrueba= new Carta(Numero.UNO, Palo.ESPADA);
         assertEquals(14, cartaPrueba.getFuerza());
 
     }

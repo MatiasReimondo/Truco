@@ -1,5 +1,7 @@
-package fiuba.algo3.modelo;
+package fiuba.algo3.tests;
 
+import fiuba.algo3.modelo.Carta;
+import fiuba.algo3.modelo.Mazo;
 import junit.framework.Assert;
 import org.junit.Test;
 
