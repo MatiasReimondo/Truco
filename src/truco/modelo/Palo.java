@@ -1,4 +1,4 @@
-package fiuba.algo3.modelo;
+package truco.modelo;
 
 
 public enum Palo {

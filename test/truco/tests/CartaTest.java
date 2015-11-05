@@ -1,8 +1,8 @@
-package fiuba.algo3.tests;
+package truco.tests;
 
-import fiuba.algo3.modelo.Carta;
-import fiuba.algo3.modelo.Numero;
-import fiuba.algo3.modelo.Palo;
+import truco.modelo.Carta;
+import truco.modelo.Numero;
+import truco.modelo.Palo;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
