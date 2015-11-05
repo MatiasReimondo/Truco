@@ -1,6 +1,7 @@
 package fiuba.algo3.modelo;
 
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Mazo {
@@ -27,6 +28,11 @@ public class Mazo {
 
         }
 
+    }
+
+    public void mezclarMazo(){
+        Collections.shuffle(mazoDeCartas);
+        
     }
 
 }
