@@ -3,7 +3,6 @@ package truco.modelo;
 
 public class Carta {
 
-
     private Palo  palo;
     private Numero numero;
     public int fuerza;
@@ -42,44 +41,40 @@ public class Carta {
 
         this.palo = unPalo;
         this.numero= unNumero;
-        this.fuerza= this.determinarFuerza(unNumero, unPalo);
+        determinarFuerza();
 
 
     }
 
-    public int determinarFuerza( Numero unNumero, Palo unPalo){
-        numero = unNumero;
-        palo = unPalo;
+    private void determinarFuerza(){
 
-        if (unNumero.equals(Numero.UNO)&& unPalo.equals(Palo.ESPADA)  ){return 14; }
+        if (numero.equals(Numero.UNO)&& palo.equals(Palo.ESPADA)  ){fuerza= 14; }
 
-        if (unNumero.equals(Numero.UNO)&& unPalo.equals(Palo.BASTO)  ){return 13; }
+        if (numero.equals(Numero.UNO)&& palo.equals(Palo.BASTO)  ){fuerza= 13; }
 
-        if (unNumero.equals(Numero.SIETE)&& unPalo.equals(Palo.ESPADA)  ){return 12; }
+        if (numero.equals(Numero.SIETE)&& palo.equals(Palo.ESPADA)  ){fuerza= 12; }
 
-        if (unNumero.equals(Numero.SIETE)&& unPalo.equals(Palo.ORO)  ){return 11; }
+        if (numero.equals(Numero.SIETE)&& palo.equals(Palo.ORO)  ){fuerza= 11; }
 
-        if (unNumero.equals(Numero.TRES)){return 10; }
+        if (numero.equals(Numero.TRES)){fuerza= 10; }
 
-        if (unNumero.equals(Numero.DOS) ){return 9; }
+        if (numero.equals(Numero.DOS) ){fuerza= 9; }
 
-        if (unNumero.equals(Numero.UNO)){return 8; }
+        if (numero.equals(Numero.UNO)){fuerza= 8; }
 
-        if (unNumero.equals(Numero.DOCE) ){return 7; }
+        if (numero.equals(Numero.DOCE) ){fuerza= 7; }
 
-        if (unNumero.equals(Numero.ONCE) ){return 6; }
+        if (numero.equals(Numero.ONCE) ){fuerza= 6; }
 
-        if (unNumero.equals(Numero.DIEZ) ){return 5; }
+        if (numero.equals(Numero.DIEZ) ){fuerza= 5; }
 
-        if (unNumero.equals(Numero.SIETE) ){return 4; }
+        if (numero.equals(Numero.SIETE) ){fuerza= 4; }
 
-        if (unNumero.equals(Numero.SEIS)){return 3; }
+        if (numero.equals(Numero.SEIS)){fuerza= 3; }
 
-        if (unNumero.equals(Numero.CINCO)){return 2; }
+        if (numero.equals(Numero.CINCO)){fuerza= 2; }
 
-        if (unNumero.equals(Numero.CUATRO)){return 1; }
-
-        else return 0;
+        if (numero.equals(Numero.CUATRO)){fuerza= 1; }
 
     }
 

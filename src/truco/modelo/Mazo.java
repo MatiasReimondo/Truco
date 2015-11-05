@@ -1,35 +1,27 @@
 package truco.modelo;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.List;
 
 public class Mazo {
 
-    private LinkedList<Carta> mazoDeCartas= new LinkedList<Carta>();
-
-    public LinkedList<Carta> getMazoDeCartas() {
-        return mazoDeCartas;
-    }
-
-    public void setMazoDeCartas(LinkedList<Carta> mazoDeCartas) {
-        this.mazoDeCartas = mazoDeCartas;
-    }
-
+    private List<Carta> mazoDeCartas;
 
     public Mazo(){
+        mazoDeCartas=new ArrayList<>();
         for (Numero numero: Numero.values()) {
             for(Palo palo: Palo.values()){
                 Carta nuevaCarta= new Carta(numero,palo);
                 mazoDeCartas.add(nuevaCarta);
-
-
             }
-
         }
-
     }
 
+    public List<Carta> getCartas(){
+        return mazoDeCartas;
+    }
     public void mezclarMazo(){
         Collections.shuffle(mazoDeCartas);
 
