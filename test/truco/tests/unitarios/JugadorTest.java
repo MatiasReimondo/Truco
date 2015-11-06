@@ -1,4 +1,4 @@
-package truco.tests;
+package truco.tests.unitarios;
 
 
 import junit.framework.Assert;
@@ -10,8 +10,8 @@ public class JugadorTest {
     public void elJugadorRecibeUnaCarta(){
         Jugador jugador= new Jugador();
         Carta nuevaCarta= new Carta(Numero.UNO, Palo.BASTO);
-        jugador.recibirCarta(nuevaCarta);
-        Assert.assertEquals(1, jugador.getManoDeCartas().size());
+        jugador.robarCarta(nuevaCarta);
+        Assert.assertEquals(1, jugador.getMano().size());
 
     }
     @Test
@@ -21,11 +21,11 @@ public class JugadorTest {
         Carta carta2= new Carta(Numero.UNO, Palo.ESPADA);
         Carta carta3= new Carta(Numero.SIETE, Palo.ESPADA);
         Carta carta4= new Carta(Numero.SIETE, Palo.ORO);
-        jugador.recibirCarta(carta1);
-        jugador.recibirCarta(carta2);
-        jugador.recibirCarta(carta3);
-        jugador.recibirCarta(carta4);
+        jugador.robarCarta(carta1);
+        jugador.robarCarta(carta2);
+        jugador.robarCarta(carta3);
+        jugador.robarCarta(carta4);
 
-        Assert.assertEquals(3, jugador.getManoDeCartas().size());
+        Assert.assertEquals(3, jugador.getMano().size());
     }
 }

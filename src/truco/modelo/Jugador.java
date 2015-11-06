@@ -1,17 +1,17 @@
 package truco.modelo;
 
-
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Jugador {
-    private LinkedList<Carta> manoDeCartas=new LinkedList<>();
+    private List<Carta> manoDeCartas=new ArrayList<>();
     static final int MAXIMO_CARTAS= 3;
 
-    public LinkedList<Carta> getManoDeCartas(){
+    public List<Carta> getMano(){
         return manoDeCartas;
     }
 
-    public void recibirCarta(Carta unaCarta){
+    public void robarCarta(Carta unaCarta){
         if (manoDeCartas.size()<MAXIMO_CARTAS) {
             manoDeCartas.add(unaCarta);
         }

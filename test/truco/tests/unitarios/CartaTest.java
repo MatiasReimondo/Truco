@@ -1,4 +1,4 @@
-package truco.tests;
+package truco.tests.unitarios;
 
 import truco.modelo.Carta;
 import truco.modelo.Numero;

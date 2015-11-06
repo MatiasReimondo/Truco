@@ -33,7 +33,7 @@ public class Mazo {
     public void repartirCartas(List<Jugador> jugadores){
         for (int i = 0; i <MAXIMO_CARTAS ; i++) {
             for (Jugador jugador: jugadores){
-                jugador.recibirCarta(mazoDeCartas.removeFirst());
+                jugador.robarCarta(mazoDeCartas.removeFirst());
             }
 
         }

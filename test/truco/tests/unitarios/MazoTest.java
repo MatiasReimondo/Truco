@@ -1,4 +1,4 @@
-package truco.tests;
+package truco.tests.unitarios;
 
 import junit.framework.Assert;
 import org.junit.Test;
@@ -27,8 +27,8 @@ public class MazoTest {
         jugadores.add(jugador2);
         nuevoMazo.repartirCartas(jugadores);
 
-        Assert.assertEquals(3, jugadores.get(0).getManoDeCartas().size());
-        Assert.assertEquals(3, jugadores.get(1).getManoDeCartas().size());
+        Assert.assertEquals(3, jugadores.get(0).getMano().size());
+        Assert.assertEquals(3, jugadores.get(1).getMano().size());
 
     }
 
@@ -46,10 +46,10 @@ public class MazoTest {
         jugadores.add(jugador4);
         nuevoMazo.repartirCartas(jugadores);
 
-        Assert.assertEquals(3, jugadores.get(0).getManoDeCartas().size());
-        Assert.assertEquals(3, jugadores.get(1).getManoDeCartas().size());
-        Assert.assertEquals(3, jugadores.get(2).getManoDeCartas().size());
-        Assert.assertEquals(3, jugadores.get(3).getManoDeCartas().size());
+        Assert.assertEquals(3, jugadores.get(0).getMano().size());
+        Assert.assertEquals(3, jugadores.get(1).getMano().size());
+        Assert.assertEquals(3, jugadores.get(2).getMano().size());
+        Assert.assertEquals(3, jugadores.get(3).getMano().size());
     }
     @Test
     public void seAgreganCartasFaltantesAlMazo(){
@@ -58,7 +58,7 @@ public class MazoTest {
         List<Jugador> jugadores= new ArrayList<>();
         jugadores.add(jugador1);
         nuevoMazo.repartirCartas(jugadores);
-        nuevoMazo.juntarMazo(jugadores.get(0).getManoDeCartas());
+        nuevoMazo.juntarMazo(jugadores.get(0).getMano());
 
         Assert.assertEquals(40, nuevoMazo.getCartas().size());
     }
