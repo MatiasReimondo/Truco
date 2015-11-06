@@ -1,16 +1,19 @@
 package truco.modelo;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+
 
 public class Mazo {
 
-    private List<Carta> mazoDeCartas;
+    private LinkedList<Carta> mazoDeCartas;
+    static final int MAXIMO_CARTAS= 3;
+    static final int TAMANIO_MAZO= 40;
 
     public Mazo(){
-        mazoDeCartas=new ArrayList<>();
+        mazoDeCartas=new LinkedList<>();
         for (Numero numero: Numero.values()) {
             for(Palo palo: Palo.values()){
                 Carta nuevaCarta= new Carta(numero,palo);
@@ -19,12 +22,35 @@ public class Mazo {
         }
     }
 
-    public List<Carta> getCartas(){
+    public LinkedList<Carta> getCartas(){
         return mazoDeCartas;
     }
     public void mezclarMazo(){
         Collections.shuffle(mazoDeCartas);
 
     }
+
+    public void repartirCartas(List<Jugador> jugadores){
+        for (int i = 0; i <MAXIMO_CARTAS ; i++) {
+            for (Jugador jugador: jugadores){
+                jugador.recibirCarta(mazoDeCartas.removeFirst());
+            }
+
+        }
+    }
+    public void juntarMazo(LinkedList<Carta> cartasMesa)  {
+        if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO){
+            mazoDeCartas.addAll(cartasMesa);
+        }
+        else{
+            try {
+                throw new FaltanCartasException();
+            } catch (FaltanCartasException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
 }
