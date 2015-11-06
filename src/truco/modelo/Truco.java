@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Echemon on 06/11/2015.
- */
+
 public class Truco {
 
     private HashMap<String,Jugador> jugadores;
@@ -25,7 +23,8 @@ public class Truco {
     }
 
     public void resolverMano(){
-
     }
+
+
 }
 

@@ -39,16 +39,10 @@ public class Mazo {
         }
     }
     public void juntarMazo(LinkedList<Carta> cartasMesa)  {
-        if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO){
+        if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO)
             mazoDeCartas.addAll(cartasMesa);
-        }
-        else{
-            try {
-                throw new FaltanCartasException();
-            } catch (FaltanCartasException e) {
-                e.printStackTrace();
-            }
-        }
+        throw new FaltanCartasException();
+
     }
 
 

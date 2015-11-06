@@ -1,7 +1,7 @@
 package truco.modelo;
 
 
-public class FaltanCartasException extends Exception {
+public class FaltanCartasException extends RuntimeException {
 
     public FaltanCartasException(){}
 
