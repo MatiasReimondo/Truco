@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
-
     private List<Carta> manoDeCartas=new ArrayList<>();
     static final int MAXIMO_CARTAS= 3;
 
@@ -13,9 +12,13 @@ public class Jugador {
     }
 
     public void robarCarta(Carta unaCarta){
-        if (manoDeCartas.size()<MAXIMO_CARTAS)
+        if (manoDeCartas.size()<MAXIMO_CARTAS) {
             manoDeCartas.add(unaCarta);
-        throw new DemasiadasCartasException();
+        }
+        else {
+            throw new DemasiadasCartasException();
+        }
+
     }
 
 }
