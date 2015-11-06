@@ -15,13 +15,10 @@ public class Jugador {
         if (manoDeCartas.size()<MAXIMO_CARTAS) {
             manoDeCartas.add(unaCarta);
         }
-        else{
-            try {
-                throw new DemasiadasCartasException();
-            } catch (DemasiadasCartasException e) {
-                e.printStackTrace();
-            }
+        else {
+            throw new DemasiadasCartasException();
         }
+
     }
 
 }

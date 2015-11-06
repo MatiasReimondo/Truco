@@ -42,13 +42,10 @@ public class Mazo {
         if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO){
             mazoDeCartas.addAll(cartasMesa);
         }
-        else{
-            try {
-                throw new FaltanCartasException();
-            } catch (FaltanCartasException e) {
-                e.printStackTrace();
-            }
+        else {
+            throw new FaltanCartasException();
         }
+
     }
 
 
