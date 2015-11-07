@@ -25,6 +25,7 @@ public class Ronda {
     }
 
 
-    public void agregarCarta(Carta carta) {
+    public void agregarCarta(Jugador jugador,Carta carta) {
+
     }
 }

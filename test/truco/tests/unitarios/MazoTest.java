@@ -51,6 +51,7 @@ public class MazoTest {
         Assert.assertEquals(3, jugadores.get(2).getMano().size());
         Assert.assertEquals(3, jugadores.get(3).getMano().size());
     }
+    /*
     @Test
     public void seAgreganCartasFaltantesAlMazo(){
         Mazo nuevoMazo= new Mazo();
@@ -64,7 +65,7 @@ public class MazoTest {
     }
 
 
-    /*
+
     @Test
     public void seMezclaElMazo(){
         Mazo nuevoMazo= new Mazo();
