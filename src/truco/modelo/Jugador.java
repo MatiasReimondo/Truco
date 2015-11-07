@@ -1,5 +1,8 @@
 package truco.modelo;
 
+import truco.modelo.enumerables.Numero;
+import truco.modelo.enumerables.Palo;
+import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 
 import java.util.ArrayList;
@@ -28,14 +31,22 @@ public class Jugador {
     }
 
     public void robarCarta(Carta unaCarta){
-        if (manoDeCartas.size()<MAXIMO_CARTAS) {
+        if (manoDeCartas.size()<MAXIMO_CARTAS)
             manoDeCartas.add(unaCarta);
-        }
-        else {
+        else
             throw new LimiteDeCartasExcedidoException();
-        }
-
     }
+
+    public Carta jugarCarta(Numero numero,Palo palo){
+        for(Carta carta:manoDeCartas)
+            if(carta.getPalo().equals(palo) && carta.getNumero().equals(numero)) {
+                Carta cartaJugada = carta;
+                manoDeCartas.remove(carta);
+                return cartaJugada;
+            }
+        throw new CartaNoEstaEnLaManoException();
+    }
+
 
 
 }

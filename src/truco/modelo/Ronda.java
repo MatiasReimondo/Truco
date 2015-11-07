@@ -1,31 +1,39 @@
 package truco.modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
 
 public class Ronda {
 
     private HashMap<String,Integer> puntos;
-    private LinkedList<HashMap<Jugador,Carta>> manos;
+    private List<HashMap<Jugador,Carta>> listaManos;
+    private HashMap<Jugador,Carta> manoActual;
 
     public Ronda(){
-        manos=new LinkedList<>();
+        listaManos =new ArrayList<>();
+        manoActual=new HashMap<>();
     }
 
     public HashMap<Jugador,Carta> getPrimera(){
-        return manos.get(0);
+        return listaManos.get(0);
     }
 
     public HashMap<Jugador,Carta> getSegunda(){
-        return manos.get(1);
+        return listaManos.get(1);
     }
 
     public HashMap<Jugador,Carta> getTercera(){
-        return manos.get(2);
+        return listaManos.get(2);
     }
 
+    public void siguienteMano(){
+        listaManos.add(manoActual);
+        HashMap<Jugador,Carta> nuevaMano=new HashMap<>();
+        manoActual=nuevaMano;
+    }
 
     public void agregarCarta(Jugador jugador,Carta carta) {
-
+        manoActual.put(jugador,carta);
     }
 }

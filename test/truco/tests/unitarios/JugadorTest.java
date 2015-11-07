@@ -7,6 +7,7 @@ import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
+import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 
 public class JugadorTest {
@@ -35,8 +36,19 @@ public class JugadorTest {
         tester.robarCarta(carta2);
         tester.robarCarta(carta3);
         tester.robarCarta(carta4);
-
-
     }
+
+    @Test
+    public void testJugarCartaDeLaMano(){
+        Carta carta=new Carta(Numero.CINCO,Palo.BASTO);
+        tester.robarCarta(carta);
+        Assert.assertEquals(tester.jugarCarta(Numero.CINCO,Palo.BASTO),carta);
+    }
+
+    @Test(expected = CartaNoEstaEnLaManoException.class)
+    public void testJugarCartaInvalida(){
+        tester.jugarCarta(Numero.CINCO,Palo.BASTO);
+    }
+    
 
 }

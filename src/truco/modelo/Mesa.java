@@ -14,6 +14,7 @@ public class Mesa {
     public boolean esTurnoDelJugador(Jugador jugador){
         return true;
     }
+
     public void jugarCarta(Jugador jugador,Carta carta){
         if(!esTurnoDelJugador(jugador))
             throw new NoEsTurnoDelJugadorException();
@@ -22,6 +23,9 @@ public class Mesa {
             throw new CartaNoEstaEnLaManoException();
 
         rondaActual.agregarCarta(jugador,carta);
-
     }
+
+
+
+
 }
