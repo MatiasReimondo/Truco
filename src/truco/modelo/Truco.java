@@ -6,7 +6,6 @@ import truco.modelo.excepciones.JugadorInexistenteException;
 import truco.modelo.excepciones.JugadorYaExisteException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Truco {
@@ -56,8 +55,6 @@ public class Truco {
         }
         throw new JugadorYaExisteException();
     }
-
-
 
     public void resolverMano(){
     }

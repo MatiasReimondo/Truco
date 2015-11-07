@@ -1,4 +1,4 @@
-package truco.tests.unitarios;
+package truco.tests.unitarios.integracion;
 
 import junit.framework.Assert;
 import org.junit.Before;
