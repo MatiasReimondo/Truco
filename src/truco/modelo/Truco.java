@@ -1,9 +1,9 @@
 package truco.modelo;
 
 import truco.modelo.excepciones.EquipoInexistenteException;
-import truco.modelo.excepciones.EquipoYaExisteException;
+import truco.modelo.excepciones.EquipoExistenteException;
 import truco.modelo.excepciones.JugadorInexistenteException;
-import truco.modelo.excepciones.JugadorYaExisteException;
+import truco.modelo.excepciones.JugadorExistenteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class Truco {
             equipos.add(nuevoEquipo);
             return;
         }
-        throw new EquipoYaExisteException();
+        throw new EquipoExistenteException();
     }
 
     public void nuevoJugador(String nombreJugador,String equipo){
@@ -53,7 +53,7 @@ public class Truco {
             nuevoJugador.setNombre(nombreJugador);
             return;
         }
-        throw new JugadorYaExisteException();
+        throw new JugadorExistenteException();
     }
 
     public void resolverMano(){

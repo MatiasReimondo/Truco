@@ -1,6 +1,8 @@
 package truco.modelo;
 
 
+import truco.modelo.enumerables.Numero;
+import truco.modelo.enumerables.Palo;
 import truco.modelo.excepciones.FaltanCartasException;
 
 import java.util.Collections;

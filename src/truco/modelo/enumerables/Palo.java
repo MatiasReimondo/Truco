@@ -1,4 +1,4 @@
-package truco.modelo;
+package truco.modelo.enumerables;
 
 
 public enum Palo {

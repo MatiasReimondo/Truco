@@ -1,6 +1,6 @@
 package truco.modelo;
 
-import truco.modelo.excepciones.DemasiadasCartasException;
+import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,10 @@ public class Jugador {
             manoDeCartas.add(unaCarta);
         }
         else {
-            throw new DemasiadasCartasException();
+            throw new LimiteDeCartasExcedidoException();
         }
 
     }
+
 
 }

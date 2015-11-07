@@ -1,24 +1,24 @@
 package truco.modelo;
 
 
+import truco.modelo.enumerables.Numero;
+import truco.modelo.enumerables.Palo;
+
 public class Carta {
 
-    private Palo  palo;
+    private Palo palo;
     private Numero numero;
     public int fuerza;
 
+    public Carta(Numero unNumero, Palo unPalo){
+
+        this.palo = unPalo;
+        this.numero= unNumero;
+        determinarFuerza();
+    }
 
     public void setPalo(Palo palo) {
         this.palo = palo;
-    }
-
-    public Palo getPalo() {
-        return palo;
-    }
-
-    public int getFuerza(){
-
-        return fuerza;
     }
 
     public void setFuerza(int fuerza) {
@@ -26,25 +26,25 @@ public class Carta {
         this.fuerza = fuerza;
     }
 
+    public void setNumero(Numero numero) {
+
+        this.numero = numero;
+    }
+
+    public Palo getPalo() {
+        return palo;
+    }
 
     public Numero getNumero() {
 
         return numero;
     }
 
-    public void setNumero(Numero numero) {
+    public int getFuerza(){
 
-        this.numero = numero;
+        return fuerza;
     }
 
-    public Carta(Numero unNumero, Palo unPalo){
-
-        this.palo = unPalo;
-        this.numero= unNumero;
-        determinarFuerza();
-
-
-    }
 
     private void determinarFuerza(){
 
