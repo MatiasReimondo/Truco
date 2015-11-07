@@ -21,7 +21,7 @@ public class Mesa {
         if(!jugador.getMano().contains(carta))
             throw new CartaNoEstaEnLaManoException();
 
-        rondaActual.agregarCarta(carta);
+        rondaActual.agregarCarta(jugador,carta);
 
     }
 }

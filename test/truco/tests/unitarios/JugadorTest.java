@@ -7,6 +7,7 @@ import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
+import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 
 public class JugadorTest {
 
@@ -24,7 +25,7 @@ public class JugadorTest {
         Assert.assertEquals(1,tester.getMano().size());
     }
     
-    @Test
+    @Test(expected=LimiteDeCartasExcedidoException.class)
     public void seTrataDeAgregarUnaCuartaCartaYnoSeLaAgrega(){
         Carta carta1= new Carta(Numero.UNO, Palo.BASTO);
         Carta carta2= new Carta(Numero.UNO, Palo.ESPADA);
@@ -35,7 +36,7 @@ public class JugadorTest {
         tester.robarCarta(carta3);
         tester.robarCarta(carta4);
 
-        Assert.assertEquals(3, tester.getMano().size());
+
     }
 
 }
