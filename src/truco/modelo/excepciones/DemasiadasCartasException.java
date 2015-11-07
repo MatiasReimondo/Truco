@@ -1,4 +1,4 @@
-package truco.modelo;
+package truco.modelo.excepciones;
 
 
 public class DemasiadasCartasException extends RuntimeException {

@@ -1,5 +1,7 @@
 package truco.modelo;
 
+import truco.modelo.excepciones.DemasiadasCartasException;
+
 import java.util.ArrayList;
 import java.util.List;
 
