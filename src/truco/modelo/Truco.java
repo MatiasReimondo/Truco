@@ -1,25 +1,34 @@
 package truco.modelo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 
 public class Truco {
 
-    private HashMap<String,Jugador> jugadores;
     private Mazo mazo;
+    private HashMap<String,Equipo> tablaEquipos;
 
     public void Truco(){
-        jugadores=new HashMap<>();
+        mazo=new Mazo();
+        tablaEquipos=new HashMap<>();
+    }
+
+    public void nuevoEquipo(String nombreEquipo){
+        Equipo nuevoEquipo=new Equipo();
+        nuevoEquipo.setNombre(nombreEquipo);
+        tablaEquipos.put(nombreEquipo,nuevoEquipo);
     }
 
     public Jugador getJugador(String nombreJugador){
-        Jugador jugadorBuscado=jugadores.get(nombreJugador);
-        if(jugadorBuscado==null)
-            throw new JugadorInexistenteException();
+        if(equipoA.getIntegrantes().containsKey(nombreJugador))
+            return equipoA.getIntegrantes().get(nombreJugador);
+        if(equipoB.getIntegrantes().containsKey(nombreJugador))
+            return equipoB.getIntegrantes().get(nombreJugador);
+        throw new JugadorInexistenteException();
+    }
 
-        return jugadorBuscado;
+    public void nuevoJugador(String nombreJugador,String equipo){
+        Jugador nuevoJugador=new Jugador();
+        nuevoJugador.setNombre(nombreJugador);
     }
 
     public void resolverMano(){
