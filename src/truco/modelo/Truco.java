@@ -13,7 +13,7 @@ public class Truco {
     private Mazo mazo;
     private List<Equipo> equipos;
 
-    public void Truco(){
+    public Truco(){
         mazo=new Mazo();
         equipos=new ArrayList<>();
     }

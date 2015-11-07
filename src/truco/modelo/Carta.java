@@ -74,7 +74,7 @@ public class Carta {
 
         if (numero.equals(Numero.CINCO)){fuerza= 2; return;}
 
-        if (numero.equals(Numero.CUATRO)){fuerza= 1; return;}
+        if (numero.equals(Numero.CUATRO)){fuerza= 1;}
 
     }
 
