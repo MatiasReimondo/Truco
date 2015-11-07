@@ -37,7 +37,7 @@ public class Truco {
     }
 
     public void nuevoEquipo(String nombreEquipo){
-        try{getEquipo(nombreEquipo)} catch (EquipoInexistenteException e) {
+        try{getEquipo(nombreEquipo);} catch (EquipoInexistenteException e) {
             Equipo nuevoEquipo = new Equipo();
             nuevoEquipo.setNombre(nombreEquipo);
             equipos.add(nuevoEquipo);
@@ -48,7 +48,7 @@ public class Truco {
 
     public void nuevoJugador(String nombreJugador,String equipo){
 
-        try{getJugador(nombreJugador)} catch (JugadorInexistenteException e) {
+        try{getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
             Jugador nuevoJugador = new Jugador();
             nuevoJugador.setNombre(nombreJugador);
             return;
