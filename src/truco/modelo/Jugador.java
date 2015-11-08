@@ -54,7 +54,7 @@ public class Jugador {
     }
 
     public int getEnvido() {
-        Boolean hayEnvido = false;
+
         int puntajeEnvido1 = 0;
         int puntajeEnvido2 = 0;
         int puntajeEnvido3 = 0;
@@ -68,7 +68,11 @@ public class Jugador {
         if (manoDeCartas.get(1).getPalo().equals(manoDeCartas.get(2).getPalo())) {
             puntajeEnvido3 = 20 + this.manoDeCartas.get(1).getPuntosEnvido() + this.manoDeCartas.get(2).getPuntosEnvido();
         }
+        return devolverPuntajeMasAlto(puntajeEnvido1,puntajeEnvido2,puntajeEnvido3);
 
+    }
+
+    private int devolverPuntajeMasAlto(int puntajeEnvido1, int puntajeEnvido2, int puntajeEnvido3){
         if (puntajeEnvido1 > puntajeEnvido2) {
             if (puntajeEnvido1 > puntajeEnvido3) {
                 return puntajeEnvido1;
@@ -81,7 +85,6 @@ public class Jugador {
         } else {
             return puntajeEnvido3;
         }
-
     }
 
     public boolean hayFlor(){
