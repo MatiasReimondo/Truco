@@ -1,25 +1,25 @@
 package integracion;
 
-import junit.framework.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.Truco;
+import truco.modelo.excepciones.ListaJugadoresVaciaException;
 
 
 public class TrucoTest {
 
     private Truco truco;
 
-
+    /*
 
     @Before
     public void setup(){
         truco=new Truco();
     }
+    */
 
-
-    @Test
+    @Test (expected = ListaJugadoresVaciaException.class)
     public void testCartaMasFuerteGana(){
+        truco=new Truco();
         /*
 
         Carta cuatroDeCopas=new Carta(Numero.CUATRO, Palo.COPA);
@@ -36,7 +36,7 @@ public class TrucoTest {
 
         Assert.assertEquals(truco.getRondaActual().getMano(Mano.PRIMERA).getGanador(), truco.getJugador(Juan));
         */
-        Assert.assertEquals(1,1);
+
     }
 
 }
