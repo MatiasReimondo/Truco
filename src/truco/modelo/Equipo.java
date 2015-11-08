@@ -1,5 +1,5 @@
 package truco.modelo;
-
+import java.util.Map;
 import java.util.HashMap;
 
 public class Equipo extends Jugador {
