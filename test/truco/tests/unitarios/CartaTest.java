@@ -39,6 +39,19 @@ public class CartaTest {
         assertEquals(7, cartaPrueba.getFuerza());
 
     }
+    @Test
+    public void seCreaElUnoDeBastoConPuntosEnvido1(){
+        Carta cartaPrueba= new Carta(Numero.UNO,Palo.BASTO);
+        assertEquals(1, cartaPrueba.getPuntosEnvido());
+
+    }
+    @Test
+    public void seCreaElCuatroDeOroConPuntosEnvido4() {
+        Carta cartaPrueba = new Carta(Numero.CUATRO, Palo.ORO);
+        assertEquals(4, cartaPrueba.getPuntosEnvido());
+    }
+
+
 
 
 }

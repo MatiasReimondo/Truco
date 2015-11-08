@@ -47,6 +47,37 @@ public class Jugador {
         throw new CartaNoEstaEnLaManoException();
     }
 
+    public int getEnvido() {
+        Boolean hayEnvido = false;
+        int puntajeEnvido1 = 0;
+        int puntajeEnvido2 = 0;
+        int puntajeEnvido3 = 0;
+
+        if (manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(1).getPalo())) {
+            puntajeEnvido1 = 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido();
+        }
+        if (manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(2).getPalo())) {
+            puntajeEnvido2 = 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+        }
+        if (manoDeCartas.get(1).getPalo().equals(manoDeCartas.get(2).getPalo())) {
+            puntajeEnvido3 = 20 + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+        }
+
+        if (puntajeEnvido1 > puntajeEnvido2) {
+            if (puntajeEnvido1 > puntajeEnvido3) {
+                return puntajeEnvido1;
+            } else {
+                return puntajeEnvido3;
+            }
+        }
+        if (puntajeEnvido2 > puntajeEnvido3) {
+            return puntajeEnvido2;
+        } else {
+            return puntajeEnvido3;
+        }
+
+    }
+
 
 
 }

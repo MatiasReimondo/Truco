@@ -49,6 +49,41 @@ public class JugadorTest {
     public void testJugarCartaInvalida(){
         tester.jugarCarta(Numero.CINCO,Palo.BASTO);
     }
+
+    @Test
+    public void testSeReparteUn765YDevuelveEnvido33(){
+        Carta nuevaCarta1= new Carta(Numero.SIETE, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(33,tester.getEnvido());
+
+    }
+    @Test
+    public void testSeReparteUn567YDevuelveEnvido33(){
+        Carta nuevaCarta1= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.BASTO);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(33,tester.getEnvido());
+
+    }
+
+    @Test
+    public void testSeReparteUn657YDevuelveEnvido33(){
+        Carta nuevaCarta1= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.BASTO);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(33,tester.getEnvido());
+
+    }
     
 
 }

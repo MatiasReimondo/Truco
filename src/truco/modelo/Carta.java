@@ -9,12 +9,14 @@ public class Carta {
     private Palo palo;
     private Numero numero;
     public int fuerza;
+    public int puntosEnvido;
 
     public Carta(Numero unNumero, Palo unPalo){
 
         this.palo = unPalo;
         this.numero= unNumero;
         determinarFuerza();
+        determinarPuntosEnvido();
     }
 
     public void setPalo(Palo palo) {
@@ -38,6 +40,10 @@ public class Carta {
     public Numero getNumero() {
 
         return numero;
+    }
+
+    public int getPuntosEnvido(){
+        return puntosEnvido;
     }
 
     public int getFuerza(){
@@ -74,9 +80,34 @@ public class Carta {
 
         if (numero.equals(Numero.CINCO)){fuerza= 2; return;}
 
-        if (numero.equals(Numero.CUATRO)){fuerza= 1;}
+        if (numero.equals(Numero.CUATRO)){fuerza= 1; return;}
 
     }
+
+    private void determinarPuntosEnvido(){
+
+        if (numero.equals(Numero.TRES)){puntosEnvido= 3;return;}
+
+        if (numero.equals(Numero.DOS) ){puntosEnvido= 2;return;}
+
+        if (numero.equals(Numero.UNO)){puntosEnvido= 1;return; }
+
+        if (numero.equals(Numero.DOCE) ){puntosEnvido= 0;return;}
+
+        if (numero.equals(Numero.ONCE) ){puntosEnvido= 0;return;}
+
+        if (numero.equals(Numero.DIEZ) ){puntosEnvido= 0;return;}
+
+        if (numero.equals(Numero.SIETE) ){puntosEnvido= 7;return;}
+
+        if (numero.equals(Numero.SEIS)){puntosEnvido= 6;return;}
+
+        if (numero.equals(Numero.CINCO)){puntosEnvido= 5;return;}
+
+        if (numero.equals(Numero.CUATRO)){puntosEnvido= 4;return;}
+
+    }
+
 
 
 
