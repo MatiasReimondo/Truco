@@ -53,54 +53,31 @@ public class Jugador {
         throw new CartaNoEstaEnLaManoException();
     }
 
+    private int sumarEnvido(Carta carta1, Carta carta2){
+        if(carta1.getPalo().equals(carta2.getPalo()))
+            return (carta1.getPuntosEnvido()+carta2.getPuntosEnvido()+20);
+        return Math.max(carta1.getPuntosEnvido(),carta2.getPuntosEnvido());
+    }
+
     public int getEnvido() {
 
-        int puntajeEnvido1 = 0;
-        int puntajeEnvido2 = 0;
-        int puntajeEnvido3 = 0;
+        int envidoMax=sumarEnvido(manoDeCartas.get(0),manoDeCartas.get(1));
 
-        if (this.manoDeCartas.get(0).getPalo().equals(this.manoDeCartas.get(1).getPalo())) {
-            puntajeEnvido1 = 20 + this.manoDeCartas.get(0).getPuntosEnvido() + this.manoDeCartas.get(1).getPuntosEnvido();
-        }
-        if (this.manoDeCartas.get(0).getPalo().equals(this.manoDeCartas.get(2).getPalo())) {
-            puntajeEnvido2 = 20 + this.manoDeCartas.get(0).getPuntosEnvido() + this.manoDeCartas.get(2).getPuntosEnvido();
-        }
-        if (manoDeCartas.get(1).getPalo().equals(manoDeCartas.get(2).getPalo())) {
-            puntajeEnvido3 = 20 + this.manoDeCartas.get(1).getPuntosEnvido() + this.manoDeCartas.get(2).getPuntosEnvido();
-        }
-        return devolverPuntajeMasAlto(puntajeEnvido1,puntajeEnvido2,puntajeEnvido3);
+        if (sumarEnvido(manoDeCartas.get(1),manoDeCartas.get(2))>envidoMax)
+            envidoMax=sumarEnvido(manoDeCartas.get(1),manoDeCartas.get(2));
 
+        if(sumarEnvido(manoDeCartas.get(0),manoDeCartas.get(2))>envidoMax)
+            envidoMax=sumarEnvido(manoDeCartas.get(0),manoDeCartas.get(2));
+
+        return envidoMax;
     }
 
-    private int devolverPuntajeMasAlto(int puntajeEnvido1, int puntajeEnvido2, int puntajeEnvido3){
-        if (puntajeEnvido1 > puntajeEnvido2) {
-            if (puntajeEnvido1 > puntajeEnvido3) {
-                return puntajeEnvido1;
-            } else {
-                return puntajeEnvido3;
-            }
-        }
-        if (puntajeEnvido2 > puntajeEnvido3) {
-            return puntajeEnvido2;
-        } else {
-            return puntajeEnvido3;
-        }
-    }
-
-    public boolean hayFlor(){
-        if( manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(1).getPalo()) && manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(2).getPalo())){
-            return true;
-        }
-        else{
-            return false;
-        }
-
+    public boolean tieneFlor(){
+        return manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(1).getPalo()) && manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(2).getPalo());
     }
 
     public int getFlor(){
-        int valorDeFlor;
-        valorDeFlor= 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
-        return valorDeFlor;
+        return 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
     }
 
 

@@ -93,7 +93,7 @@ public class JugadorTest {
         tester.robarCarta(nuevaCarta2);
         Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.BASTO);
         tester.robarCarta(nuevaCarta3);
-        Assert.assertEquals(true,tester.hayFlor());
+        Assert.assertEquals(true,tester.tieneFlor());
 
     }
     @Test
@@ -104,7 +104,7 @@ public class JugadorTest {
         tester.robarCarta(nuevaCarta2);
         Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.ESPADA);
         tester.robarCarta(nuevaCarta3);
-        Assert.assertEquals(false,tester.hayFlor());
+        Assert.assertEquals(false,tester.tieneFlor());
 
     }
     @Test
