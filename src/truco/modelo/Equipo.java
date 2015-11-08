@@ -11,7 +11,7 @@ public class Equipo extends Jugador {
         this.integrantes=new HashMap<String,Jugador>();
     }
 
-    public HashMap<String,Jugador> getIntegrantes(){
+    public Map<String,Jugador> getIntegrantes(){
         return this.integrantes;
     }
 
