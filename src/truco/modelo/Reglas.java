@@ -10,9 +10,9 @@ public class Reglas {
     public Jugador resolverMano(HashMap<Jugador,Carta> mano){
         int maxFuerza=0;
         Jugador jugadorMax=null;
-        Set<HashMap.Entry<Jugador,Carta>> set=mano.entrySet();
+        Set<Map.Entry<Jugador,Carta>> set=mano.entrySet();
 
-        for(HashMap.Entry<Jugador,Carta> item: set)
+        for(Map.Entry<Jugador,Carta> item: set)
             if(item.getValue().getFuerza()>maxFuerza){
                 maxFuerza=item.getValue().getFuerza();
                 jugadorMax=item.getKey();
