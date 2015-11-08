@@ -84,6 +84,42 @@ public class JugadorTest {
         Assert.assertEquals(33,tester.getEnvido());
 
     }
-    
+
+    @Test
+    public void testSeReparteTresCartasDelMismoPaloYHayFlor(){
+        Carta nuevaCarta1= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.BASTO);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(true,tester.hayFlor());
+
+    }
+    @Test
+    public void testSeReparteTresCartasDelDiferentePaloYHayFlor(){
+        Carta nuevaCarta1= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.ESPADA);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(false,tester.hayFlor());
+
+    }
+    @Test
+    public void testSeReparteTresCartasDelMismoPaloYDevuelveLaFlor(){
+        Carta nuevaCarta1= new Carta(Numero.SEIS, Palo.BASTO);
+        tester.robarCarta(nuevaCarta1);
+        Carta nuevaCarta2= new Carta(Numero.CINCO, Palo.BASTO);
+        tester.robarCarta(nuevaCarta2);
+        Carta nuevaCarta3= new Carta(Numero.SIETE, Palo.BASTO);
+        tester.robarCarta(nuevaCarta3);
+        Assert.assertEquals(38,tester.getFlor());
+
+    }
+
+
+
 
 }

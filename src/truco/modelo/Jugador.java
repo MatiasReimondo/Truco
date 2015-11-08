@@ -84,6 +84,24 @@ public class Jugador {
 
     }
 
+    public boolean hayFlor(){
+        if( manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(1).getPalo()) && manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(2).getPalo())){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public int getFlor(){
+        int valorDeFlor;
+        valorDeFlor= 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+        return valorDeFlor;
+    }
+
+
+
 
 
 }
