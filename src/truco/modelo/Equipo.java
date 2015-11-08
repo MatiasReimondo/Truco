@@ -5,29 +5,29 @@ import java.util.HashMap;
 public class Equipo extends Jugador {
 
     private int puntaje;
-    private HashMap<String,Jugador> integrantes;
+    private Map<String,Jugador> integrantes;
 
     public Equipo(){
-        integrantes=new HashMap<>();
+        this.integrantes=new HashMap<String,Jugador>();
     }
 
     public HashMap<String,Jugador> getIntegrantes(){
-        return integrantes;
+        return this.integrantes;
     }
 
     public int getPuntaje(){
-        return puntaje;
+        return this.puntaje;
     }
 
     public void agregarIntegrante(Jugador jugador){
-        integrantes.put(jugador.getNombre(),jugador);
+        this.integrantes.put(jugador.getNombre(),jugador);
     }
 
     public boolean jugadorPertenece(String nombreJugador){
-        return integrantes.containsKey(nombreJugador);
+        return this.integrantes.containsKey(nombreJugador);
     }
 
     public void sumarPuntos(int puntos){
-        puntaje+=puntos;
+        this.puntaje+=puntos;
     }
 }
