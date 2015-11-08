@@ -15,7 +15,7 @@ public class Jugador {
     static final int MAXIMO_CARTAS= 3;
 
     public Jugador(){
-        manoDeCartas=new ArrayList<>();
+        this.manoDeCartas=new ArrayList<Carta>();
     }
 
     public void setNombre(String nombre){
@@ -23,25 +23,31 @@ public class Jugador {
     }
 
     public String getNombre(){
-        return nombre;
+        return this.nombre;
     }
 
     public List<Carta> getMano(){
-        return manoDeCartas;
+        return this.manoDeCartas;
     }
 
-    public void robarCarta(Carta unaCarta){
-        if (manoDeCartas.size()<MAXIMO_CARTAS)
-            manoDeCartas.add(unaCarta);
-        else
+    public void robarCarta(Carta unaCarta) throws LimiteDeCartasExcedidoException{
+        if(this.manoDeCartas.size() >= MAXIMO_CARTAS){
             throw new LimiteDeCartasExcedidoException();
+        }
+        //Se agrega una carta
+        this.manoDeCartas.add(unaCarta);
+        
+       /* if (this.manoDeCartas.size()<MAXIMO_CARTAS)
+            this.manoDeCartas.add(unaCarta);
+        else
+            throw new LimiteDeCartasExcedidoException();*/
     }
 
-    public Carta jugarCarta(Numero numero,Palo palo){
-        for(Carta carta:manoDeCartas)
+    public Carta jugarCarta(Numero numero,Palo palo) throws CartaNoEstaEnLaManoException {
+        for(Carta carta: this.manoDeCartas)
             if(carta.getPalo().equals(palo) && carta.getNumero().equals(numero)) {
                 Carta cartaJugada = carta;
-                manoDeCartas.remove(carta);
+                this.manoDeCartas.remove(carta);
                 return cartaJugada;
             }
         throw new CartaNoEstaEnLaManoException();
@@ -53,14 +59,14 @@ public class Jugador {
         int puntajeEnvido2 = 0;
         int puntajeEnvido3 = 0;
 
-        if (manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(1).getPalo())) {
-            puntajeEnvido1 = 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido();
+        if (this.manoDeCartas.get(0).getPalo().equals(this.manoDeCartas.get(1).getPalo())) {
+            puntajeEnvido1 = 20 + this.manoDeCartas.get(0).getPuntosEnvido() + this.manoDeCartas.get(1).getPuntosEnvido();
         }
-        if (manoDeCartas.get(0).getPalo().equals(manoDeCartas.get(2).getPalo())) {
-            puntajeEnvido2 = 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+        if (this.manoDeCartas.get(0).getPalo().equals(this.manoDeCartas.get(2).getPalo())) {
+            puntajeEnvido2 = 20 + this.manoDeCartas.get(0).getPuntosEnvido() + this.manoDeCartas.get(2).getPuntosEnvido();
         }
         if (manoDeCartas.get(1).getPalo().equals(manoDeCartas.get(2).getPalo())) {
-            puntajeEnvido3 = 20 + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+            puntajeEnvido3 = 20 + this.manoDeCartas.get(1).getPuntosEnvido() + this.manoDeCartas.get(2).getPuntosEnvido();
         }
 
         if (puntajeEnvido1 > puntajeEnvido2) {
