@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
+@SuppressWarnings("ALL")
 public class Mazo {
 
     private LinkedList<Carta> mazoDeCartas;

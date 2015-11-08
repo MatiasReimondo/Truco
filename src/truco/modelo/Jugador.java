@@ -8,6 +8,7 @@ import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class Jugador {
 
     private String nombre;
@@ -15,7 +16,7 @@ public class Jugador {
     static final int MAXIMO_CARTAS= 3;
 
     public Jugador(){
-        this.manoDeCartas=new ArrayList<Carta>();
+        this.manoDeCartas=new ArrayList<>();
     }
 
     public void setNombre(String nombre){

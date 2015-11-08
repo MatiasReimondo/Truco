@@ -7,6 +7,7 @@ import truco.modelo.excepciones.NoEsTurnoDelJugadorException;
 import java.util.*;
 
 
+@SuppressWarnings("ALL")
 public class Master {
 
     private Ronda rondaActual;

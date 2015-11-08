@@ -8,6 +8,7 @@ import truco.modelo.excepciones.JugadorExistenteException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class Truco {
 
     private Mazo mazo;

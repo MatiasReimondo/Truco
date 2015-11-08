@@ -4,6 +4,7 @@ package truco.modelo;
 import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
 
+@SuppressWarnings("ALL")
 public class Carta {
 
     private Palo palo;
@@ -80,7 +81,7 @@ public class Carta {
 
         if (numero.equals(Numero.CINCO)){fuerza= 2; return;}
 
-        if (numero.equals(Numero.CUATRO)){fuerza= 1; return;}
+        if (numero.equals(Numero.CUATRO)){fuerza= 1; }
 
     }
 
@@ -104,7 +105,7 @@ public class Carta {
 
         if (numero.equals(Numero.CINCO)){puntosEnvido= 5;return;}
 
-        if (numero.equals(Numero.CUATRO)){puntosEnvido= 4;return;}
+        if (numero.equals(Numero.CUATRO)){puntosEnvido= 4;}
 
     }
 

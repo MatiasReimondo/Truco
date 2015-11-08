@@ -5,10 +5,10 @@ import java.util.HashMap;
 public class Equipo extends Jugador {
 
     private int puntaje;
-    private Map<String,Jugador> integrantes;
+    private final Map<String,Jugador> integrantes;
 
     public Equipo(){
-        this.integrantes=new HashMap<String,Jugador>();
+        this.integrantes=new HashMap<>();
     }
 
     public Map<String,Jugador> getIntegrantes(){

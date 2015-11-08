@@ -1,6 +1,7 @@
 package truco.modelo.enumerables;
 
 
+@SuppressWarnings("ALL")
 public enum Numero {
     UNO,
     DOS,
