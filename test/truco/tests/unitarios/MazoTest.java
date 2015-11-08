@@ -71,7 +71,7 @@ public class MazoTest {
         Mazo nuevoMazo= new Mazo();
         Carta nuevaCarta= nuevoMazo.getCartas().getFirst();
 
-        nuevoMazo.mezclarMazo();
+        nuevoMazo.mezclar();
 
         Assert.assertEquals(false, nuevoMazo.getCartas().getFirst().equals(nuevaCarta));
 

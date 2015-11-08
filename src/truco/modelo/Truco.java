@@ -12,10 +12,16 @@ public class Truco {
 
     private Mazo mazo;
     private List<Equipo> equipos;
+    private CircularList<Jugador> jugadoresActivos;
+    private Master master;
 
     public Truco(){
         mazo=new Mazo();
         equipos=new ArrayList<>();
+        jugadoresActivos =new CircularList<>();
+        master =new Master();
+        master.setJugadores(jugadoresActivos);
+
     }
 
     public Mazo getMazo(){
@@ -56,9 +62,12 @@ public class Truco {
         throw new JugadorExistenteException();
     }
 
-    public void resolverMano(){
-    }
+    public void nuevaRonda(){
+        master.actualizarJugadorManoPie();
+        mazo.mezclar();
 
+
+    }
 
 }
 

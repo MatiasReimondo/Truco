@@ -27,6 +27,10 @@ public class Ronda {
         return listaManos.get(2);
     }
 
+    public HashMap<Jugador,Carta> getManoActual(){
+        return manoActual;
+    }
+
     public void siguienteMano(){
         listaManos.add(manoActual);
         HashMap<Jugador,Carta> nuevaMano=new HashMap<>();

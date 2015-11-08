@@ -29,7 +29,8 @@ public class Mazo {
     public LinkedList<Carta> getCartas(){
         return mazoDeCartas;
     }
-    public void mezclarMazo(){
+
+    public void mezclar(){
         Collections.shuffle(mazoDeCartas);
 
     }
@@ -42,6 +43,7 @@ public class Mazo {
 
         }
     }
+
     public void juntarMazo(LinkedList<Carta> cartasMesa)  {
         if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO){
             mazoDeCartas.addAll(cartasMesa);
