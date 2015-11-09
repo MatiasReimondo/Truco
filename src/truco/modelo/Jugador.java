@@ -19,6 +19,11 @@ public class Jugador {
         this.manoDeCartas=new ArrayList<>();
     }
 
+    public Jugador(String unNombre){
+        this.nombre =unNombre;
+        this.manoDeCartas=new ArrayList<>();
+    }
+
     public void setNombre(String nombre){
         this.nombre=nombre;
     }

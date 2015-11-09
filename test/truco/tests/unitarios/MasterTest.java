@@ -18,8 +18,8 @@ public class MasterTest {
     @Before
     public void setup(){
         master=new Master();
-        Jugador jugador1=new Jugador();
-        Jugador jugador2=new Jugador();
+        Jugador jugador1=new Jugador("Pepe");
+        Jugador jugador2=new Jugador("Juan");
         CircularList<Jugador> jugadores=new CircularList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
@@ -33,8 +33,19 @@ public class MasterTest {
 
     @Test
     public void testActualizarManoPieLegal(){
+
+        master=new Master();
+        Jugador jugador1=new Jugador("Pepe");
+        Jugador jugador2=new Jugador("Juan");
+        CircularList<Jugador> jugadores=new CircularList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        master.setJugadores(jugadores);
         master.actualizarJugadorManoPie();
-        Assert.assertTrue(true);
+        //si se actualiza una vez mas falla
+
+
+        Assert.assertTrue(master.jugadorEsPie(jugador2));
     }
 
     @Test(expected = ListaJugadoresVaciaException.class)

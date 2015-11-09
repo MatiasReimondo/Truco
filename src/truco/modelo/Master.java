@@ -39,8 +39,8 @@ public class Master {
             jugadorPie=iterPie.next();
     }
 
-    public boolean esPie(Jugador jugador){
-        return true;
+    public boolean jugadorEsPie(Jugador jugador){
+       return jugador.getNombre().equals(jugadorPie.getNombre());
     }
 
     public boolean esTurnoDelJugador(Jugador jugador){
@@ -55,7 +55,7 @@ public class Master {
             throw new CartaNoEstaEnLaManoException();
 
         rondaActual.agregarCarta(jugador,carta);
-        if(esPie(jugador))
+        if(jugadorEsPie(jugador))
             resolverMano();
     }
 
