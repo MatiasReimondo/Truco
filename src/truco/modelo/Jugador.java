@@ -42,20 +42,17 @@ public class Jugador {
         }
         //Se agrega una carta
         this.manoDeCartas.add(unaCarta);
-        
-       /* if (this.manoDeCartas.size()<MAXIMO_CARTAS)
-            this.manoDeCartas.add(unaCarta);
-        else
-            throw new LimiteDeCartasExcedidoException();*/
     }
 
     public Carta jugarCarta(Numero numero,Palo palo) throws CartaNoEstaEnLaManoException {
+
         for(Carta carta: this.manoDeCartas)
-            if(carta.getPalo().equals(palo) && carta.getNumero().equals(numero)) {
+            if ( carta.Comparar(new Carta(numero, palo))){
                 Carta cartaJugada = carta;
                 this.manoDeCartas.remove(carta);
                 return cartaJugada;
             }
+
         throw new CartaNoEstaEnLaManoException();
     }
 
