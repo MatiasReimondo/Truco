@@ -13,13 +13,13 @@ public class Truco {
 
     private Mazo mazo;
     private List<Equipo> equipos;
-    private CircularList<Jugador> jugadoresActivos;
+    private List<Jugador> jugadoresActivos;
     private Master master;
 
     public Truco(){
         mazo=new Mazo();
         equipos=new ArrayList<>();
-        jugadoresActivos =new CircularList<>();
+        jugadoresActivos =new ArrayList<>();
         master =new Master();
         master.setJugadores(jugadoresActivos);
 

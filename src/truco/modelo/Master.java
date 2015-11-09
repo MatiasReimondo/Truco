@@ -12,7 +12,7 @@ public class Master {
 
     private Ronda rondaActual;
     private List<Ronda> historial;
-    private CircularList<Jugador> listaJugadores;
+    private List<Jugador> listaJugadores;
     private Iterator<Jugador> iterMano;
     private Iterator<Jugador> iterPie;
     private Jugador jugadorMano;
@@ -23,20 +23,33 @@ public class Master {
         historial=new ArrayList<>();
     }
 
-    public void setJugadores(CircularList<Jugador> jugadoresActivos) {
+    public void setJugadores(List<Jugador> jugadoresActivos) {
         listaJugadores=jugadoresActivos;
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
         iterMano=listaJugadores.iterator();
         iterPie=listaJugadores.iterator();
-        for(int i=1;i<listaJugadores.size();i++)
-            jugadorPie=iterPie.next();
+
+        jugadorMano=listaJugadores.get(0);
+        jugadorPie=listaJugadores.get(listaJugadores.size()-1);
+    }
+
+    public Jugador getJugadorMano(){
+        return jugadorMano;
+    }
+
+    public Jugador getJugadorPie(){
+        return jugadorPie;
     }
 
     public void actualizarJugadorManoPie(){
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
-            jugadorMano=iterMano.next();
-            jugadorPie=iterPie.next();
+
+        try{ jugadorMano=iterMano.next(); } catch (NoSuchElementException e)
+        { iterMano=listaJugadores.iterator(); jugadorMano=listaJugadores.get(0);}
+
+        try{ jugadorPie=iterPie.next(); } catch (NoSuchElementException e)
+        { iterPie=listaJugadores.iterator(); jugadorPie=listaJugadores.get(0);}
     }
 
     public boolean jugadorEsPie(Jugador jugador){
@@ -79,7 +92,7 @@ public class Master {
     }
 
 
-    public CircularList<Jugador> getJugadores() {
+    public List<Jugador> getJugadores() {
         return listaJugadores;
     }
 }

@@ -3,10 +3,12 @@ package truco.tests.unitarios;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import truco.modelo.CircularList;
 import truco.modelo.Jugador;
 import truco.modelo.Master;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Eze Cruz Avila on 07/11/2015.
@@ -14,15 +16,17 @@ import truco.modelo.excepciones.ListaJugadoresVaciaException;
 public class MasterTest {
 
     private Master master;
+    private Jugador jugadorJuan;
+    private Jugador jugadorPepe;
 
     @Before
     public void setup(){
         master=new Master();
-        Jugador jugador1=new Jugador("Pepe");
-        Jugador jugador2=new Jugador("Juan");
-        CircularList<Jugador> jugadores=new CircularList<>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
+        jugadorJuan=new Jugador("Pepe");
+        jugadorPepe=new Jugador("Juan");
+        List<Jugador> jugadores=new ArrayList<>();
+        jugadores.add(jugadorJuan);
+        jugadores.add(jugadorPepe);
         master.setJugadores(jugadores);
     }
 
@@ -32,32 +36,43 @@ public class MasterTest {
     }
 
     @Test
-    public void testActualizarManoPieLegal(){
+    public void testJugadorManoAlComenzar(){
+        Assert.assertEquals(jugadorJuan,master.getJugadorMano());
+    }
 
-        master=new Master();
-        Jugador jugador1=new Jugador("Pepe");
-        Jugador jugador2=new Jugador("Juan");
-        CircularList<Jugador> jugadores=new CircularList<>();
-        jugadores.add(jugador1);
-        jugadores.add(jugador2);
-        master.setJugadores(jugadores);
+    @Test
+    public void testJugadorPieAlComenzar(){
+        Assert.assertEquals(jugadorPepe,master.getJugadorPie());
+    }
+
+    @Test
+    public void testActualizarManoPieNoLanzaExcepcion(){
         master.actualizarJugadorManoPie();
-        //si se actualiza una vez mas falla
+        master.actualizarJugadorManoPie();
+        master.actualizarJugadorManoPie();
+        Assert.assertTrue(true);
+    }
 
+    @Test
+    public void testActualizarManoPie(){
+        Assert.assertEquals(jugadorJuan,master.getJugadorMano());
+        Assert.assertEquals(jugadorPepe,master.getJugadorPie());
+        master.actualizarJugadorManoPie();
+        Assert.assertEquals(jugadorPepe,master.getJugadorMano());
+        Assert.assertEquals(jugadorJuan,master.getJugadorPie());
 
-        Assert.assertTrue(master.jugadorEsPie(jugador2));
     }
 
     @Test(expected = ListaJugadoresVaciaException.class)
-    public void testActualizarManoPieSinJugadoresLanzaExcepcionSiJugadoresEstaVacio(){
-        CircularList<Jugador> lista=new CircularList<>();
+    public void testActualizarManoPieConListaVacia(){
+        List<Jugador> lista=new ArrayList<>();
         master.setJugadores(lista);
         master.actualizarJugadorManoPie();
     }
 
     @Test(expected = ListaJugadoresVaciaException.class)
     public void testSetJugadoresVaciaLanzaExcepcionSiEstaVacia(){
-        CircularList<Jugador> listaPrueba=new CircularList<>();
+        List<Jugador> listaPrueba=new ArrayList<>();
         master.setJugadores(listaPrueba);
     }
 }
