@@ -9,15 +9,15 @@ public class Carta {
 
     private Palo palo;
     private Numero numero;
-    public int fuerza;
-    public int puntosEnvido;
+    private int fuerza;
+    private int puntosEnvido;
 
     public Carta(Numero unNumero, Palo unPalo){
 
         this.palo = unPalo;
         this.numero= unNumero;
-        determinarFuerza();
-        determinarPuntosEnvido();
+        this.determinarFuerza();
+        this.determinarPuntosEnvido();
     }
 
     public void setPalo(Palo palo) {
@@ -35,84 +35,81 @@ public class Carta {
     }
 
     public Palo getPalo() {
-        return palo;
+        return this.palo;
     }
 
     public Numero getNumero() {
 
-        return numero;
+        return this.numero;
     }
 
     public int getPuntosEnvido(){
-        return puntosEnvido;
+        return this.puntosEnvido;
     }
 
     public int getFuerza(){
 
-        return fuerza;
+        return this.fuerza;
     }
 
+    public boolean Comparar(Carta carta) {
+        return ( carta.getPalo().equals(this.palo) && carta.getNumero().equals(this.numero) );
+    }
+
+    /**************************** Métodos privados ***********************************/
 
     private void determinarFuerza(){
 
-        if (numero.equals(Numero.UNO)&& palo.equals(Palo.ESPADA)  ){fuerza= 14; return;}
+        if (this.numero.equals(Numero.UNO) && this.palo.equals(Palo.ESPADA)  ){this.fuerza= 14;}
 
-        if (numero.equals(Numero.UNO)&& palo.equals(Palo.BASTO)  ){fuerza= 13; return;}
+        else if (this.numero.equals(Numero.UNO)&& this.palo.equals(Palo.BASTO)  ){this.fuerza= 13; }
 
-        if (numero.equals(Numero.SIETE)&& palo.equals(Palo.ESPADA)  ){fuerza= 12; return;}
+        else if (this.numero.equals(Numero.SIETE)&& this.palo.equals(Palo.ESPADA)  ){this.fuerza= 12;}
 
-        if (numero.equals(Numero.SIETE)&& palo.equals(Palo.ORO)  ){fuerza= 11; return;}
+        else if (this.numero.equals(Numero.SIETE)&& this.palo.equals(Palo.ORO)  ){this.fuerza= 11; }
 
-        if (numero.equals(Numero.TRES)){fuerza= 10; return;}
+        else if (this.numero.equals(Numero.TRES)){this.fuerza= 10; }
 
-        if (numero.equals(Numero.DOS) ){fuerza= 9; return;}
+        else if (this.numero.equals(Numero.DOS) ){this.fuerza= 9; }
 
-        if (numero.equals(Numero.UNO)){fuerza= 8; return;}
+        else if (this.numero.equals(Numero.UNO)){this.fuerza= 8; }
 
-        if (numero.equals(Numero.DOCE) ){fuerza= 7; return;}
+        else if (this.numero.equals(Numero.DOCE) ){this.fuerza= 7;}
 
-        if (numero.equals(Numero.ONCE) ){fuerza= 6; return;}
+        else if (this.numero.equals(Numero.ONCE) ){this.fuerza= 6;}
 
-        if (numero.equals(Numero.DIEZ) ){fuerza= 5; return;}
+        else if (this.numero.equals(Numero.DIEZ) ){this.fuerza= 5; }
 
-        if (numero.equals(Numero.SIETE) ){fuerza= 4; return;}
+        else if (this.numero.equals(Numero.SIETE) ){this.fuerza= 4; }
 
-        if (numero.equals(Numero.SEIS)){fuerza= 3; return;}
+        else if (this.numero.equals(Numero.SEIS)){this.fuerza= 3; }
 
-        if (numero.equals(Numero.CINCO)){fuerza= 2; return;}
+        else if (this.numero.equals(Numero.CINCO)){this.fuerza= 2;}
 
-        if (numero.equals(Numero.CUATRO)){fuerza= 1; }
+        else if (numero.equals(Numero.CUATRO)){ this.fuerza= 1; }
 
     }
 
     private void determinarPuntosEnvido(){
 
-        if (numero.equals(Numero.TRES)){puntosEnvido= 3;return;}
+        if (this.numero.equals(Numero.TRES)){this.puntosEnvido= 3;}
 
-        if (numero.equals(Numero.DOS) ){puntosEnvido= 2;return;}
+        else if (this.numero.equals(Numero.DOS) ){this.puntosEnvido= 2;}
 
-        if (numero.equals(Numero.UNO)){puntosEnvido= 1;return; }
+        else if (this.numero.equals(Numero.UNO)){this.puntosEnvido= 1; }
 
-        if (numero.equals(Numero.DOCE) ){puntosEnvido= 0;return;}
+        else if (this.numero.equals(Numero.DOCE) ){this.puntosEnvido= 0;}
 
-        if (numero.equals(Numero.ONCE) ){puntosEnvido= 0;return;}
+        else if (this.numero.equals(Numero.ONCE) ){this.puntosEnvido= 0;}
 
-        if (numero.equals(Numero.DIEZ) ){puntosEnvido= 0;return;}
+        else if (this.numero.equals(Numero.DIEZ) ){this.puntosEnvido= 0;}
 
-        if (numero.equals(Numero.SIETE) ){puntosEnvido= 7;return;}
+        else if (this.numero.equals(Numero.SIETE) ){this.puntosEnvido= 7;}
 
-        if (numero.equals(Numero.SEIS)){puntosEnvido= 6;return;}
+        else if (this.numero.equals(Numero.SEIS)){this.puntosEnvido= 6;}
 
-        if (numero.equals(Numero.CINCO)){puntosEnvido= 5;return;}
+        else if (this.numero.equals(Numero.CINCO)){this.puntosEnvido= 5;}
 
-        if (numero.equals(Numero.CUATRO)){puntosEnvido= 4;}
-
+        else if (this.numero.equals(Numero.CUATRO)){this.puntosEnvido= 4;}
     }
-
-
-
-
-
-
-
 }
