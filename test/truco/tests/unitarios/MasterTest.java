@@ -1,6 +1,6 @@
 package truco.tests.unitarios;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.Jugador;
@@ -10,9 +10,6 @@ import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Eze Cruz Avila on 07/11/2015.
- */
 public class MasterTest {
 
     private Master master;
@@ -31,7 +28,7 @@ public class MasterTest {
     }
 
     @Test
-    public void testListaJugadores(){
+    public void testGetListaJugadores(){
         Assert.assertFalse(master.getJugadores()==null);
     }
 
@@ -58,8 +55,8 @@ public class MasterTest {
         Assert.assertEquals(jugadorJuan,master.getJugadorMano());
         Assert.assertEquals(jugadorPepe,master.getJugadorPie());
         master.actualizarJugadorManoPie();
-        Assert.assertEquals(jugadorPepe,master.getJugadorMano());
-        Assert.assertEquals(jugadorJuan,master.getJugadorPie());
+        Assert.assertEquals(jugadorJuan,master.getJugadorMano());
+        Assert.assertEquals(jugadorPepe,master.getJugadorPie());
 
     }
 

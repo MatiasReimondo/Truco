@@ -24,11 +24,14 @@ public class Master {
     }
 
     public void setJugadores(List<Jugador> jugadoresActivos) {
+        if(jugadoresActivos.isEmpty()) throw new ListaJugadoresVaciaException();
+
         listaJugadores=jugadoresActivos;
-        if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
         iterMano=listaJugadores.iterator();
         iterPie=listaJugadores.iterator();
+        while(iterPie.hasNext())
+            iterPie.next();
 
         jugadorMano=listaJugadores.get(0);
         jugadorPie=listaJugadores.get(listaJugadores.size()-1);
@@ -45,11 +48,13 @@ public class Master {
     public void actualizarJugadorManoPie(){
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
-        try{ jugadorMano=iterMano.next(); } catch (NoSuchElementException e)
-        { iterMano=listaJugadores.iterator(); jugadorMano=listaJugadores.get(0);}
+        if(iterMano.hasNext())
+            jugadorMano=iterMano.next();
+        else iterMano=listaJugadores.iterator();
 
-        try{ jugadorPie=iterPie.next(); } catch (NoSuchElementException e)
-        { iterPie=listaJugadores.iterator(); jugadorPie=listaJugadores.get(0);}
+        if(iterPie.hasNext())
+            jugadorPie=iterPie.next();
+        else iterPie=listaJugadores.iterator();
     }
 
     public boolean jugadorEsPie(Jugador jugador){
