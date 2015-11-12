@@ -16,6 +16,7 @@ public class Carta {
 
         this.palo = unPalo;
         this.numero= unNumero;
+        armarTablaDeFuerza();
     }
 
     public void setPalo(Palo palo) {
