@@ -44,7 +44,7 @@ public class Jugador {
         this.manoDeCartas.add(unaCarta);
     }
 
-    public Carta jugarCarta(Numero numero,Palo palo) throws CartaNoEstaEnLaManoException {
+    public Carta jugarCarta(Numero numero,Palo palo) {
 
         for(Carta carta: this.manoDeCartas)
             if ( carta.Comparar(new Carta(numero, palo))){
