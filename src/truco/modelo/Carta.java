@@ -1,7 +1,5 @@
 package truco.modelo;
 
-
-import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
 
 import java.util.Hashtable;
@@ -24,12 +22,7 @@ public class Carta {
         this.palo = palo;
     }
 
-    public void setFuerza(int fuerza) {
-
-        this.fuerza = fuerza;
-    }
-
-    public void setNumero(Numero numero) {
+    public void setNumero(int numero) {
 
         this.numero = numero;
     }
@@ -39,7 +32,6 @@ public class Carta {
     }
 
     public int getNumero() {
-
         return this.numero;
     }
 
@@ -49,19 +41,15 @@ public class Carta {
 
     public int getFuerza(){
 
-        return this.fuerza;
+        return tablaFuerza.get(this);
     }
 
-
-    @Override
     public boolean equals(Carta carta) {
         if(carta==null) return false;
         if(this.getNumero()<7 && this.getNumero()>1 || this.getNumero()>9)
             return this.getNumero()==carta.getNumero();
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
     }
-
-    /**************************** Métodos privados ***********************************/
 
     private void armarTablaDeFuerza(){
 

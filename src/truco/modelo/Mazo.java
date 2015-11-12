@@ -19,12 +19,16 @@ public class Mazo {
 
     public Mazo(){
         mazoDeCartas=new LinkedList<>();
-        for (Numero numero: Numero.values()) {
+        for (int numero=1;numero<8;numero++)
             for(Palo palo: Palo.values()){
                 Carta nuevaCarta= new Carta(numero,palo);
                 mazoDeCartas.add(nuevaCarta);
             }
-        }
+        for (int numero=10;numero<13;numero++)
+            for(Palo palo: Palo.values()){
+                Carta nuevaCarta= new Carta(numero,palo);
+                mazoDeCartas.add(nuevaCarta);
+            }
     }
 
     public LinkedList<Carta> getCartas(){

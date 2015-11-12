@@ -44,10 +44,10 @@ public class Jugador {
         this.manoDeCartas.add(unaCarta);
     }
 
-    public Carta jugarCarta(Numero numero,Palo palo) {
+    public Carta jugarCarta(int numero,Palo palo) {
 
         for(Carta carta: this.manoDeCartas)
-            if ( carta.Comparar(new Carta(numero, palo))){
+            if ( carta.equals(new Carta(numero, palo))){
                 Carta cartaJugada = carta;
                 this.manoDeCartas.remove(carta);
                 return cartaJugada;
