@@ -1,5 +1,6 @@
 package truco.modelo;
 
+import javafx.collections.ObservableList;
 import truco.modelo.enumerables.Palo;
 
 import java.util.Hashtable;
@@ -44,10 +45,18 @@ public class Carta {
         return tablaFuerza.getTabla().get(this);
     }
 
-    public boolean equals(Carta carta) {
-        if(carta==null) return false;
+    @Override
+    public boolean equals(Object objeto) {
+        if(objeto==null)
+            return false;
+
+        if (getClass() != objeto.getClass())
+            return false;
+
+        final Carta carta=(Carta) objeto;
         if(this.getNumero()<7 && this.getNumero()>1 || this.getNumero()>9)
             return this.getNumero()==carta.getNumero();
+
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
     }
 
