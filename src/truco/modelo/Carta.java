@@ -1,9 +1,7 @@
 package truco.modelo;
 
-import javafx.collections.ObservableList;
-import truco.modelo.enumerables.Palo;
 
-import java.util.Hashtable;
+import truco.modelo.enumerables.Palo;
 
 @SuppressWarnings("ALL")
 public class Carta {
@@ -50,7 +48,7 @@ public class Carta {
         if(objeto==null)
             return false;
 
-        if (getClass() != objeto.getClass())
+        if (this.getClass() != objeto.getClass())
             return false;
 
         final Carta carta=(Carta) objeto;
@@ -60,7 +58,4 @@ public class Carta {
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
     }
 
-    private void armarTablaDeFuerza(){
-
-    }
 }

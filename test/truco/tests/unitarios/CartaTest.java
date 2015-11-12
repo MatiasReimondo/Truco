@@ -1,5 +1,6 @@
 package truco.tests.unitarios;
 
+import junit.framework.Assert;
 import truco.modelo.Carta;
 import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
@@ -8,6 +9,28 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 
 public class CartaTest {
+
+    @Test
+    public void testOverrideDeEqualsTrue1(){
+        Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
+        Carta AsDeEspadas2=new Carta(1,Palo.ESPADA);
+        Assert.assertTrue(AsDeEspadas1.equals(AsDeEspadas2));
+    }
+
+    @Test
+    public void testOverrideDeEqualsTrue2(){
+        Carta carta1=new Carta(5,Palo.COPA);
+        Carta carta2=new Carta(5,Palo.ORO);
+
+        Assert.assertTrue(carta1.equals(carta2));
+    }
+
+    @Test
+    public void testOverrideDeEqualsFalse(){
+        Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
+        Carta AsDeCopas=new Carta(1,Palo.COPA);
+        Assert.assertFalse(AsDeEspadas1.equals(AsDeCopas));
+    }
 
     @Test
     public void seCreaElUnoDeEspadaConFuerza14(){
