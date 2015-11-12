@@ -18,6 +18,10 @@ public class Carta {
         this.palo = unPalo;
         this.numero= unNumero;
 
+        if(numero>9)
+            puntosEnvido=0;
+        else puntosEnvido=numero;
+
     }
 
     @Override
@@ -120,7 +124,7 @@ public class Carta {
             return false;
 
         final Carta carta=(Carta) objeto;
-        if(this.getNumero()<7 && this.getNumero()>1 || this.getNumero()>9)
+        if(this.getNumero()>1 && this.getNumero()<7 || this.getNumero()>9)
             return this.getNumero()==carta.getNumero();
 
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
