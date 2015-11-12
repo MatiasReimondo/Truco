@@ -20,12 +20,6 @@ public class CartaTest {
     }
 
     @Test
-    public void testTablaFuerzaNoEsNull(){
-        Carta carta=new Carta(1,Palo.ORO);
-        Assert.assertFalse(carta.getTablaFuerza()==null);
-    }
-
-    @Test
     public void testOverrideDeEqualsTrue1(){
         Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
         Carta AsDeEspadas2=new Carta(1,Palo.ESPADA);
@@ -80,13 +74,13 @@ public class CartaTest {
     @Test
     public void seCreaElUnoDeBastoConPuntosEnvido1(){
         Carta cartaPrueba= new Carta(1,Palo.BASTO);
-        assertEquals(1, cartaPrueba.getPuntosEnvido());
+        assertEquals(1, cartaPrueba.getValorEnvido());
 
     }
     @Test
     public void seCreaElCuatroDeOroConPuntosEnvido4() {
         Carta cartaPrueba = new Carta(4, Palo.ORO);
-        assertEquals(4, cartaPrueba.getPuntosEnvido());
+        assertEquals(4, cartaPrueba.getValorEnvido());
     }
 
 

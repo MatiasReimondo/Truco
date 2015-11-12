@@ -1,6 +1,5 @@
 package truco.modelo;
 
-import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
@@ -58,8 +57,8 @@ public class Jugador {
 
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
-            return (carta1.getPuntosEnvido()+carta2.getPuntosEnvido()+20);
-        return Math.max(carta1.getPuntosEnvido(),carta2.getPuntosEnvido());
+            return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
+        return Math.max(carta1.getValorEnvido(),carta2.getValorEnvido());
     }
 
     public int getEnvido() {
@@ -80,7 +79,7 @@ public class Jugador {
     }
 
     public int getFlor(){
-        return 20 + manoDeCartas.get(0).getPuntosEnvido() + manoDeCartas.get(1).getPuntosEnvido() + manoDeCartas.get(2).getPuntosEnvido();
+        return 20 + manoDeCartas.get(0).getValorEnvido() + manoDeCartas.get(1).getValorEnvido() + manoDeCartas.get(2).getValorEnvido();
     }
 
 

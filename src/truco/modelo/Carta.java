@@ -24,12 +24,23 @@ public class Carta {
 
     }
 
-    @Override
-    public int hashCode() {
-        int result = palo != null ? palo.hashCode() : 0;
-        result = 31 * result + numero;
-        result = 31 * result + puntosEnvido;
-        return result;
+    public int getFuerza(){
+        if(tablaFuerza==null)
+            armarTablaDeFuerza();
+
+        return tablaFuerza.get(this);
+    }
+
+    public Palo getPalo() {
+        return this.palo;
+    }
+
+    public int getNumero() {
+        return this.numero;
+    }
+
+    public int getValorEnvido(){
+        return this.puntosEnvido;
     }
 
     private void armarTablaDeFuerza(){
@@ -83,36 +94,12 @@ public class Carta {
 
     }
 
-    public Hashtable<Carta,Integer> getTablaFuerza() {
-        return tablaFuerza;
-    }
-
-    public void setPalo(Palo palo) {
-        this.palo = palo;
-    }
-
-    public void setNumero(int numero) {
-
-        this.numero = numero;
-    }
-
-    public Palo getPalo() {
-        return this.palo;
-    }
-
-    public int getNumero() {
-        return this.numero;
-    }
-
-    public int getPuntosEnvido(){
-        return this.puntosEnvido;
-    }
-
-    public int getFuerza(){
-        if(tablaFuerza==null)
-            armarTablaDeFuerza();
-
-        return tablaFuerza.get(this);
+    @Override
+    public int hashCode() {
+        int result = palo != null ? palo.hashCode() : 0;
+        result = 31 * result + numero;
+        result = 31 * result + puntosEnvido;
+        return result;
     }
 
     @Override
