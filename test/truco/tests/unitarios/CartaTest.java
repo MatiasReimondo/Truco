@@ -2,13 +2,28 @@ package truco.tests.unitarios;
 
 import junit.framework.Assert;
 import truco.modelo.Carta;
-import truco.modelo.enumerables.Numero;
+import truco.modelo.TablaFuerzaCarta;
 import truco.modelo.enumerables.Palo;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
 public class CartaTest {
+
+    @Test
+    public void testAsignarTablaFuerza(){
+        TablaFuerzaCarta tabla=new TablaFuerzaCarta();
+        Assert.assertFalse(tabla.getTabla()==null);
+        Carta carta=new Carta(1,Palo.ESPADA);
+
+        Assert.assertTrue(tabla.getTabla().get(carta)==14);
+    }
+
+    @Test
+    public void testTablaFuerzaNoEsNull(){
+        Carta carta=new Carta(1,Palo.ORO);
+        Assert.assertFalse(carta.getTablaFuerza()==null);
+    }
 
     @Test
     public void testOverrideDeEqualsTrue1(){
