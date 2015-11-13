@@ -111,7 +111,10 @@ public class Carta {
             return false;
 
         final Carta carta=(Carta) objeto;
-        if(this.getNumero()>1 && this.getNumero()<7 || this.getNumero()>9)
+
+        System.out.println("Numero:"+carta.getNumero()+"  Palo:"+carta.getPalo());
+
+        if(carta.getNumero()>1 && carta.getNumero()<7 || carta.getNumero()>9)
             return this.getNumero()==carta.getNumero();
 
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
