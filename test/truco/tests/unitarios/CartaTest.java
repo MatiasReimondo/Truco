@@ -98,10 +98,10 @@ public class CartaTest {
 
     @Test
     public void testGetFuerza6DeTodosLosPalos(){
-        Carta cartaBasto= new Carta(4,Palo.BASTO);
-        Carta cartaCopa= new Carta(4,Palo.COPA);
-        Carta cartaEspada= new Carta(4,Palo.ESPADA);
-        Carta cartaOro= new Carta(4,Palo.ORO);
+        Carta cartaBasto= new Carta(6,Palo.BASTO);
+        Carta cartaCopa= new Carta(6,Palo.COPA);
+        Carta cartaEspada= new Carta(6,Palo.ESPADA);
+        Carta cartaOro= new Carta(6,Palo.ORO);
 
         assertEquals(3, cartaBasto.getFuerza());
         assertEquals(3, cartaCopa.getFuerza());
@@ -111,10 +111,10 @@ public class CartaTest {
 
     @Test
     public void testGetFuerza7DeTodosLosPalos(){
-        Carta cartaBasto= new Carta(4,Palo.BASTO);
-        Carta cartaCopa= new Carta(4,Palo.COPA);
-        Carta cartaEspada= new Carta(4,Palo.ESPADA);
-        Carta cartaOro= new Carta(4,Palo.ORO);
+        Carta cartaBasto= new Carta(7,Palo.BASTO);
+        Carta cartaCopa= new Carta(7,Palo.COPA);
+        Carta cartaEspada= new Carta(7,Palo.ESPADA);
+        Carta cartaOro= new Carta(7,Palo.ORO);
 
         assertEquals(4, cartaBasto.getFuerza());
         assertEquals(4, cartaCopa.getFuerza());
@@ -137,10 +137,10 @@ public class CartaTest {
 
     @Test
     public void testGetFuerza11DeTodosLosPalos(){
-        Carta cartaBasto= new Carta(10,Palo.BASTO);
-        Carta cartaCopa= new Carta(10,Palo.COPA);
-        Carta cartaEspada= new Carta(10,Palo.ESPADA);
-        Carta cartaOro= new Carta(10,Palo.ORO);
+        Carta cartaBasto= new Carta(11,Palo.BASTO);
+        Carta cartaCopa= new Carta(11,Palo.COPA);
+        Carta cartaEspada= new Carta(11,Palo.ESPADA);
+        Carta cartaOro= new Carta(11,Palo.ORO);
 
         assertEquals(6, cartaBasto.getFuerza());
         assertEquals(6, cartaCopa.getFuerza());
@@ -150,10 +150,10 @@ public class CartaTest {
 
     @Test
     public void testGetFuerza12DeTodosLosPalos(){
-        Carta cartaBasto= new Carta(10,Palo.BASTO);
-        Carta cartaCopa= new Carta(10,Palo.COPA);
-        Carta cartaEspada= new Carta(10,Palo.ESPADA);
-        Carta cartaOro= new Carta(10,Palo.ORO);
+        Carta cartaBasto= new Carta(12,Palo.BASTO);
+        Carta cartaCopa= new Carta(12,Palo.COPA);
+        Carta cartaEspada= new Carta(12,Palo.ESPADA);
+        Carta cartaOro= new Carta(12,Palo.ORO);
 
         assertEquals(7, cartaBasto.getFuerza());
         assertEquals(7, cartaCopa.getFuerza());

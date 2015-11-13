@@ -15,16 +15,11 @@ public class Carta {
     private Hashtable<Carta,Integer> tablaFuerza;
 
     public Carta(int unNumero, Palo unPalo){
-
         if(numero<0 || numero>12)
             throw new NumeroCartaExcedeElRangoException();
+
         this.palo = unPalo;
         this.numero= unNumero;
-
-        if(numero>9)
-            puntosEnvido=0;
-        else puntosEnvido=numero;
-
     }
 
     public int getFuerza(){
@@ -43,7 +38,9 @@ public class Carta {
     }
 
     public int getValorEnvido(){
-        return this.puntosEnvido;
+        if(numero>9)
+           return 0;
+        return numero;
     }
 
     private void armarTablaDeFuerza() {
@@ -202,10 +199,6 @@ public class Carta {
             return false;
 
         final Carta carta=(Carta) objeto;
-
-        System.out.println("Numero:" + carta.getNumero() + "  Palo:" + carta.getPalo());
-        System.out.println("Numero:" + this.getNumero() + "  Palo:" + this.getPalo());
-        System.out.println();
 
         if(carta.getNumero()>1 && carta.getNumero()<7 || this.getNumero()>1 && this.getNumero()<7 || carta.getNumero()>9 || this.getNumero()>9)
             return this.getNumero()==carta.getNumero();
