@@ -11,7 +11,6 @@ public class Carta {
 
     private Palo palo;
     private int numero;
-    private int puntosEnvido;
     private Hashtable<Carta,Integer> tablaFuerza;
 
     public Carta(int unNumero, Palo unPalo){
@@ -179,14 +178,10 @@ public class Carta {
         tablaFuerza.put(CuatroDeOro, 1);
     }
 
-
-
-
-        @Override
+    @Override
     public int hashCode() {
         int result = palo != null ? palo.hashCode() : 0;
         result = 31 * result + numero;
-        result = 31 * result + puntosEnvido;
         return result;
     }
 
