@@ -45,8 +45,7 @@ public class Truco {
 
     public void nuevoEquipo(String nombreEquipo){
         try{getEquipo(nombreEquipo);} catch (EquipoInexistenteException e) {
-            Equipo nuevoEquipo = new Equipo();
-            nuevoEquipo.setNombre(nombreEquipo);
+            Equipo nuevoEquipo = new Equipo(nombreEquipo);
             equipos.add(nuevoEquipo);
             return;
         }
