@@ -104,7 +104,7 @@ public class Carta {
 
     @Override
     public boolean equals(Object objeto) {
-        if(objeto==null)
+        if(objeto==null || this==null)
             return false;
 
         if (this.getClass() != objeto.getClass())
@@ -112,9 +112,11 @@ public class Carta {
 
         final Carta carta=(Carta) objeto;
 
-        System.out.println("Numero:"+carta.getNumero()+"  Palo:"+carta.getPalo());
+        System.out.println("Numero:" + carta.getNumero() + "  Palo:" + carta.getPalo());
+        System.out.println("Numero:" + this.getNumero() + "  Palo:" + this.getPalo());
+        System.out.println();
 
-        if(carta.getNumero()>1 && carta.getNumero()<7 || carta.getNumero()>9)
+        if(carta.getNumero()>1 && carta.getNumero()<7 || this.getNumero()>1 && this.getNumero()<7 || carta.getNumero()>9 || this.getNumero()>9)
             return this.getNumero()==carta.getNumero();
 
         return (this.getNumero()==carta.getNumero() && this.getPalo().equals(carta.getPalo()));
