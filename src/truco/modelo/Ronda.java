@@ -10,6 +10,7 @@ public class Ronda {
     private HashMap<String,Integer> puntos;
     private List<HashMap<Jugador,Carta>> listaManos;
     private HashMap<Jugador,Carta> manoActual;
+    private HashMap<Jugador,Integer> tantosActuales;
 
     public Ronda(){
         listaManos =new ArrayList<>();
@@ -30,6 +31,10 @@ public class Ronda {
 
     public HashMap<Jugador,Carta> getManoActual(){
         return manoActual;
+    }
+
+    public HashMap<Jugador,Integer> getTantosActuales(){
+        return tantosActuales;
     }
 
     public void siguienteMano(){

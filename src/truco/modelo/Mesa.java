@@ -39,6 +39,26 @@ public class Mesa {
 
     }
 
+    public Jugador resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
+        int maxEnvido = 0;
+        Jugador jugadorMax = null;
+
+        Set<Map.Entry<Jugador,Integer>> set = rondaActual.getTantosActuales().entrySet();
+
+        for (Map.Entry<Jugador,Integer> item : set) {
+            if (item.getValue() > maxEnvido) {
+                maxEnvido = item.getValue();
+                jugadorMax = item.getKey();
+            } else if (item.getValue()== maxEnvido && item.getKey().getNombre().equals(jugadorMano.getNombre())) {
+                jugadorMax = item.getKey();
+            }
+        }
+
+        return jugadorMax;
+
+
+    }
+
 
     public void resolverEnvido(){;}
 
