@@ -12,6 +12,8 @@ public class Jugador {
 
     private String nombre;
     private List<Carta> manoDeCartas;
+    private Mesa mesa;
+    private Equipo equipo;
     static final int MAXIMO_CARTAS= 3;
 
     public Jugador(){
@@ -27,10 +29,17 @@ public class Jugador {
         this.nombre=nombre;
     }
 
+    public void setEquipo(Equipo equipo){
+        this.equipo=equipo;
+    }
+
     public String getNombre(){
         return this.nombre;
     }
 
+    public Equipo getEquipo(){
+        return equipo;
+    }
     public List<Carta> getMano(){
         return this.manoDeCartas;
     }
