@@ -20,8 +20,9 @@ public class Jugador {
         this.manoDeCartas=new ArrayList<>();
     }
 
-    public Jugador(String unNombre){
+    public Jugador(String unNombre, Equipo unEquipo){
         this.nombre =unNombre;
+        this.equipo= unEquipo;
         this.manoDeCartas=new ArrayList<>();
     }
 

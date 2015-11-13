@@ -5,9 +5,11 @@ import java.util.HashMap;
 public class Equipo extends Jugador {
 
     private int puntaje;
+    private String nombre;
     private final Map<String,Jugador> integrantes;
 
-    public Equipo(){
+    public Equipo(String nombreDelEquipo){
+        this.nombre= nombreDelEquipo;
         this.integrantes=new HashMap<>();
     }
 
