@@ -123,7 +123,7 @@ public class CartaTest {
     }
 
     @Test
-         public void testGetFuerza10DeTodosLosPalos(){
+    public void testGetFuerza10DeTodosLosPalos(){
         Carta cartaBasto= new Carta(10,Palo.BASTO);
         Carta cartaCopa= new Carta(10,Palo.COPA);
         Carta cartaEspada= new Carta(10,Palo.ESPADA);
@@ -167,6 +167,7 @@ public class CartaTest {
         assertEquals(1, cartaPrueba.getValorEnvido());
 
     }
+
     @Test
     public void seCreaElCuatroDeOroConPuntosEnvido4() {
         Carta cartaPrueba = new Carta(4, Palo.ORO);
