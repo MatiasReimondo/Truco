@@ -5,7 +5,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
-import truco.modelo.enumerables.Numero;
 import truco.modelo.enumerables.Palo;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;

@@ -2,6 +2,7 @@ package truco.modelo;
 
 
 import truco.modelo.enumerables.Palo;
+import truco.modelo.excepciones.NumeroCartaExcedeElRangoException;
 
 import java.util.Hashtable;
 
@@ -11,10 +12,12 @@ public class Carta {
     private Palo palo;
     private int numero;
     private int puntosEnvido;
-    private static Hashtable<Carta,Integer> tablaFuerza;
+    private Hashtable<Carta,Integer> tablaFuerza;
 
     public Carta(int unNumero, Palo unPalo){
 
+        if(numero<0 || numero>12)
+            throw new NumeroCartaExcedeElRangoException();
         this.palo = unPalo;
         this.numero= unNumero;
 
