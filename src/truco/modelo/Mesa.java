@@ -58,8 +58,19 @@ public class Mesa {
 
 
     }
+/*
+    public void resolverEnvido(List<Jugador> listaJugadores){
 
+        Jugador ganador=null;
+        int envidoMax=0;
+        for(Jugador jugador:listaJugadores){
+            if(jugador.getEnvido()>envidoMax)
+                ganador=jugador;
+        }
 
+        ganador.getEquipo().sumarPuntos();
+    }
+*/
     public void resolverEnvido(){;}
 
     public void resolverTruco(){;}
