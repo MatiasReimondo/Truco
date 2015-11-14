@@ -1,15 +1,24 @@
 package truco.modelo;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import truco.modelo.excepciones.MazoSinCartasException;
+
+import java.util.*;
 
 
 public class Mesa {
 
+    private Mazo mazo;
+    private Ronda rondaActual;
+    private List<Ronda> historial;
 
-    public Mesa(){;}
+    public Mesa() {
+        mazo = new Mazo();
+        historial=new ArrayList<>();
+    }
+
+    public Mazo getMazo(){
+        return mazo;
+    }
 
     public List<Jugador> resolverMano(Ronda rondaActual) {
         int maxFuerza = 0;
@@ -37,6 +46,15 @@ public class Mesa {
         return ganadores;
 
 
+    }
+
+    public void repartirCartas(List<Jugador> listaJugadores){
+
+        for(int i=0;i<3;i++)
+            for(Jugador jugador:listaJugadores) {
+                if (mazo.getCartas().size() == 0) throw new MazoSinCartasException();
+                jugador.robarCarta(mazo.getCartas().removeFirst());
+            }
     }
 
     public Jugador resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
@@ -71,7 +89,14 @@ public class Mesa {
         ganador.getEquipo().sumarPuntos();
     }
 */
-    public void resolverEnvido(){;}
-
     public void resolverTruco(){;}
+
+    public void agregarCarta(Carta carta) {
+    }
+
+    public void siguienteRonda(){
+        historial.add(rondaActual);
+        rondaActual=new Ronda();
+        actualizarJugadorManoPie();
+    }
 }

@@ -1,7 +1,6 @@
 package truco.modelo;
 
 
-import truco.modelo.enumerables.Palo;
 import truco.modelo.excepciones.NumeroCartaExcedeElRangoException;
 
 import java.util.Hashtable;

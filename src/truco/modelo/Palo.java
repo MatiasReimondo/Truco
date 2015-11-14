@@ -1,4 +1,4 @@
-package truco.modelo.enumerables;
+package truco.modelo;
 
 
 @SuppressWarnings("ALL")

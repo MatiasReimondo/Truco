@@ -77,11 +77,7 @@ public class Master {
             resolverMano();
     }
 
-    public void siguienteRonda(){
-        historial.add(rondaActual);
-        rondaActual=new Ronda();
-        actualizarJugadorManoPie();
-    }
+
 
     public Jugador resolverMano(){
         int maxFuerza=0;
@@ -95,7 +91,6 @@ public class Master {
             }
         return jugadorMax;
     }
-
 
     public List<Jugador> getJugadores() {
         return listaJugadores;

@@ -2,7 +2,7 @@ package truco.tests.unitarios;
 
 import junit.framework.Assert;
 import truco.modelo.Carta;
-import truco.modelo.enumerables.Palo;
+import truco.modelo.Palo;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;

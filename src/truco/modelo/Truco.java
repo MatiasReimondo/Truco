@@ -54,8 +54,9 @@ public class Truco {
 
     public void nuevoJugador(String nombreJugador,String equipo){
 
-        try{getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
-            Jugador nuevoJugador = new Jugador();
+        this.getEquipo(equipo);
+        try{this.getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
+            Jugador nuevoJugador = new Jugador(nombreJugador);
             nuevoJugador.setNombre(nombreJugador);
             return;
         }

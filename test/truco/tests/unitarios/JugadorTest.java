@@ -5,7 +5,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
-import truco.modelo.enumerables.Palo;
+import truco.modelo.Palo;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 
@@ -15,7 +15,7 @@ public class JugadorTest {
 
     @Before
     public void setup(){
-        tester=new Jugador();
+        tester=new Jugador("Pepe");
     }
     
     @Test
@@ -26,7 +26,7 @@ public class JugadorTest {
     }
     
     @Test(expected=LimiteDeCartasExcedidoException.class)
-    public void seTrataDeAgregarUnaCuartaCartaYnoSeLaAgrega(){
+    public void testJugadorIntentaRobar4Cartas(){
         Carta carta1= new Carta(1, Palo.BASTO);
         Carta carta2= new Carta(1, Palo.ESPADA);
         Carta carta3= new Carta(7, Palo.ESPADA);
