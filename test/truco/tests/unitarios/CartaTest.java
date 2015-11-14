@@ -1,6 +1,6 @@
 package truco.tests.unitarios;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import truco.modelo.Carta;
 import truco.modelo.Palo;
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class CartaTest {
     public void testEquals2CartasIguales(){
         Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
         Carta AsDeEspadas2=new Carta(1,Palo.ESPADA);
-        Assert.assertTrue(AsDeEspadas1.equals(AsDeEspadas2));
+        org.junit.Assert.assertTrue(AsDeEspadas1.equals(AsDeEspadas2));
     }
 
     @Test

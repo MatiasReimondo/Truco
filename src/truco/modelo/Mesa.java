@@ -70,7 +70,7 @@ public class Mesa {
         int fuerzaEmpate = 0;
         Jugador jugadorMax = null;
         Jugador jugadorEmpate = null;
-        List<Jugador> ganadores = new LinkedList<Jugador>();
+        List<Jugador> ganadores = new LinkedList<>();
 
         Set<Map.Entry<Jugador, Carta>> set = rondaActual.getManoActual().entrySet();
 
