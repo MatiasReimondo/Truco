@@ -37,13 +37,6 @@ public class JugadorTest {
         tester.robarCarta(carta4);
     }
 
-    @Test
-    public void testJugarCartaDeLaMano(){
-        Carta carta=new Carta(5,Palo.BASTO);
-        tester.robarCarta(carta);
-        Assert.assertEquals(tester.jugarCarta(5,Palo.BASTO),carta);
-    }
-
     @Test(expected = CartaNoEstaEnLaManoException.class)
     public void testJugarCartaInvalida(){
         tester.jugarCarta(5,Palo.BASTO);

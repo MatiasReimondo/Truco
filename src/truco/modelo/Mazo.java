@@ -1,10 +1,8 @@
 package truco.modelo;
 
-import truco.modelo.excepciones.FaltanCartasException;
-
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
+
 
 
 @SuppressWarnings("ALL")
@@ -32,27 +30,11 @@ public class Mazo {
         return mazoDeCartas;
     }
 
+    public int cantidadDeCartas(){
+        return mazoDeCartas.size();
+    }
     public void mezclar(){
         Collections.shuffle(mazoDeCartas);
-
-    }
-
-    public void repartirCartas(List<Jugador> jugadores){
-        for (int i = 0; i <MAXIMO_CARTAS ; i++) {
-            for (Jugador jugador: jugadores){
-                jugador.robarCarta(mazoDeCartas.removeFirst());
-            }
-
-        }
-    }
-
-    public void juntarMazo(LinkedList<Carta> cartasMesa)  {
-        if(cartasMesa.size()+mazoDeCartas.size()==TAMANIO_MAZO){
-            mazoDeCartas.addAll(cartasMesa);
-        }
-        else {
-            throw new FaltanCartasException();
-        }
 
     }
 

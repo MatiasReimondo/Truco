@@ -1,5 +1,6 @@
 package truco.modelo;
 
+import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.modelo.excepciones.MazoSinCartasException;
 
 import java.util.*;
@@ -10,14 +11,58 @@ public class Mesa {
     private Mazo mazo;
     private Ronda rondaActual;
     private List<Ronda> historial;
+    private List<Jugador> listaJugadores;
+    private Iterator<Jugador> iterMano;
+    private Iterator<Jugador> iterPie;
+    private Jugador jugadorMano;
+    private Jugador jugadorPie;
 
+    /**CONSTRUCTOR**/
     public Mesa() {
         mazo = new Mazo();
         historial=new ArrayList<>();
     }
 
+    /**SETTERS**/
+    public void setJugadores(List<Jugador> listaJugadores) {
+        if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
+
+        this.listaJugadores=listaJugadores;
+
+        iterMano=this.listaJugadores.iterator();
+        iterPie=this.listaJugadores.iterator();
+
+        while(iterPie.hasNext())
+            iterPie.next();
+
+        jugadorMano=this.listaJugadores.get(0);
+        jugadorPie=this.listaJugadores.get(listaJugadores.size()-1);
+    }
+
+    /**GETTERS**/
     public Mazo getMazo(){
         return mazo;
+    }
+
+    public List<Jugador> getJugadores() {
+        return listaJugadores;
+    }
+
+    /**ACCIONES**/
+    public Jugador getJugadorMano(){
+        return jugadorMano;
+    }
+
+    public Jugador getJugadorPie(){
+        return jugadorPie;
+    }
+
+    public boolean jugadorEsPie(Jugador jugador){
+        return jugador.getNombre().equals(jugadorPie.getNombre());
+    }
+
+    public boolean esTurnoDelJugador(Jugador jugador){
+        return true;
     }
 
     public List<Jugador> resolverMano(Ronda rondaActual) {
@@ -48,12 +93,17 @@ public class Mesa {
 
     }
 
-    public void repartirCartas(List<Jugador> listaJugadores){
-
+    public void repartirCartas(){
         for(int i=0;i<3;i++)
-            for(Jugador jugador:listaJugadores) {
+            for(int j=0;j<listaJugadores.size();j++) {
                 if (mazo.getCartas().size() == 0) throw new MazoSinCartasException();
-                jugador.robarCarta(mazo.getCartas().removeFirst());
+
+                if(iterMano.hasNext())
+                    iterMano.next().robarCarta(mazo.getCartas().removeFirst());
+                else{
+                    iterMano=listaJugadores.iterator();
+                    iterMano.next().robarCarta(mazo.getCartas().removeFirst());
+                }
             }
     }
 
@@ -89,14 +139,27 @@ public class Mesa {
         ganador.getEquipo().sumarPuntos();
     }
 */
-    public void resolverTruco(){;}
+    public void resolverTruco(){}
 
     public void agregarCarta(Carta carta) {
     }
 
-    public void siguienteRonda(){
+    public void actualizarJugadorManoPie(){
+        if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
+
+        if(iterMano.hasNext())
+            jugadorMano=iterMano.next();
+        else iterMano=listaJugadores.iterator();
+
+        if(iterPie.hasNext())
+            jugadorPie=iterPie.next();
+        else iterPie=listaJugadores.iterator();
+    }
+
+    public void nuevaRonda(){
         historial.add(rondaActual);
         rondaActual=new Ronda();
+        mazo=new Mazo();
         actualizarJugadorManoPie();
     }
 }

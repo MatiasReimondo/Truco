@@ -19,17 +19,24 @@ public class ResolverJugadas {
     @Before
     public void setup(){
         mesa=new Mesa();
+
         equipoPepe =new Equipo("EquipoPepe");
         equipoJuan=new Equipo("EquipoJuan");
+
         jugadorJuan=new Jugador("Juan");
         jugadorPepe=new Jugador("Pepe");
+
         equipoPepe.agregarIntegrante(jugadorPepe);
         equipoJuan.agregarIntegrante(jugadorJuan);
+
         listaJugadores=new ArrayList<>();
         listaJugadores.add(jugadorPepe);
         listaJugadores.add(jugadorJuan);
+
         jugadorJuan.setMesa(mesa);
         jugadorPepe.setMesa(mesa);
+
+        mesa.setJugadores(listaJugadores);
     }
 
     @Test
