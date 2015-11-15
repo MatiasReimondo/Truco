@@ -8,29 +8,25 @@ import java.util.List;
 public class Ronda {
 
     private HashMap<String,Integer> puntos;
-    private HashMap<Jugador,Carta> primera;
-    private HashMap<Jugador,Carta> segunda;
-    private HashMap<Jugador,Carta> tercera;
+    private List<HashMap<Jugador,Carta>> manos;
     private HashMap<Jugador,Carta> manoActual;
     private HashMap<Jugador,Integer> tantosActuales;
 
     public Ronda(){
-        primera=new HashMap<>();
-        segunda=new HashMap<>();
-        tercera=new HashMap<>();
-        manoActual=primera;
+        manos =new ArrayList<>(3);
+        manoActual=manos.get(0);
     }
 
     public HashMap<Jugador,Carta> getPrimera(){
-        return primera;
+        return manos.get(0);
     }
 
     public HashMap<Jugador,Carta> getSegunda(){
-        return segunda;
+        return manos.get(1);
     }
 
     public HashMap<Jugador,Carta> getTercera(){
-        return tercera;
+        return manos.get(2);
     }
 
     public HashMap<Jugador,Carta> getManoActual(){
@@ -42,6 +38,9 @@ public class Ronda {
     }
 
     public void siguienteMano(){
+        manos.add(manoActual);
+        HashMap<Jugador,Carta> nuevaMano=new HashMap<>();
+        manoActual=nuevaMano;
     }
 
     public void agregarCarta(Jugador jugador,Carta carta) {
