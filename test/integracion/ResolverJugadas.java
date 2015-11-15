@@ -41,15 +41,11 @@ public class ResolverJugadas {
 
     @Test
     public void testCartaMasFuerteVenceACartaMasDebil(){
-
-
         mesa.nuevaRonda();
-        jugadorPepe.robarCarta(new Carta(4,Palo.BASTO));
-        jugadorJuan.robarCarta(new Carta(5,Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(5, Palo.BASTO));
 
         jugadorPepe.jugarCarta(4,Palo.BASTO);
         jugadorJuan.jugarCarta(5,Palo.BASTO);
-
-
     }
 }

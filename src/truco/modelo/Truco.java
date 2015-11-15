@@ -11,26 +11,20 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class Truco {
 
-    private Mazo mazo;
     private List<Equipo> equipos;
     private List<Jugador> jugadoresActivos;
     private Mesa mesa;
 
     public Truco(){
-        mazo=new Mazo();
         equipos=new ArrayList<>();
         jugadoresActivos =new ArrayList<>();
 
     }
 
-    public Mazo getMazo(){
-        return mazo;
-    }
-
     public Jugador getJugador(String nombreJugador){
-        for(Equipo equipo:equipos)
-            if (equipo.getIntegrantes().containsKey(nombreJugador))
-                return equipo.getIntegrantes().get(nombreJugador);
+        for(Jugador jugador:jugadoresActivos)
+            if (jugador.getNombre().equals(nombreJugador))
+                return jugador;
         throw new JugadorInexistenteException();
     }
 
@@ -54,18 +48,14 @@ public class Truco {
 
         this.getEquipo(equipo);
         try{this.getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
+            System.out.println("PASO POR ACA");
             Jugador nuevoJugador = new Jugador(nombreJugador);
             nuevoJugador.setNombre(nombreJugador);
+            jugadoresActivos.add(nuevoJugador);
+
             return;
         }
         throw new JugadorExistenteException();
-    }
-
-    public void nuevaRonda(){
-        mesa.actualizarJugadorManoPie();
-        mazo.mezclar();
-
-
     }
 
 }

@@ -6,7 +6,9 @@ import org.junit.Test;
 import truco.modelo.Equipo;
 import truco.modelo.Jugador;
 import truco.modelo.Mesa;
+import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
+import truco.modelo.excepciones.MazoSinCartasException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +50,36 @@ public class MesaTest {
         Assert.assertFalse(mesaTester.getJugadores() == null);
     }
 
+    @Test(expected = LimiteDeCartasExcedidoException.class)
+    public void testRobarCartaLanzaExcepcion(){
+        for(int i=0;i<5;i++)
+            jugadorJuan.robarCartaDelMazo();
+    }
+
     @Test
     public void testJugadorManoAlComenzar() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
     }
 
+    @Test
+    public void testJugadorEsPieVerdadero(){
+        Assert.assertTrue(mesaTester.jugadorEsPie(jugadorPepe));
+    }
+
+    @Test
+    public void testJugadorEsPieFalso(){
+        Assert.assertFalse(mesaTester.jugadorEsPie(jugadorJuan));
+    }
+
+    @Test
+    public void testJugadorEsManoVerdadero(){
+        Assert.assertTrue(mesaTester.jugadorEsMano(jugadorJuan));
+    }
+
+    @Test
+    public void testJugadorEsManoFalso(){
+        Assert.assertFalse(mesaTester.jugadorEsMano(jugadorPepe));
+    }
     @Test
     public void testJugadorPieAlComenzar() {
         Assert.assertEquals(jugadorPepe, mesaTester.getJugadorPie());
@@ -95,5 +122,13 @@ public class MesaTest {
         Assert.assertEquals(jugadorJuan.getMano().size(),3);
         Assert.assertEquals(jugadorPepe.getMano().size(),3);
         Assert.assertEquals(mesaTester.getMazo().cantidadDeCartas(),34);
+    }
+
+    @Test(expected = MazoSinCartasException.class)
+    public void testLanzarExcepcionCuandoElMazoNoTieneCartas(){
+       for(int i=0;i<40;i++)
+         mesaTester.getMazo().getCartas().removeFirst();
+
+        jugadorJuan.robarCartaDelMazo();
     }
 }

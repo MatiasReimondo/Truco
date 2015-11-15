@@ -4,11 +4,24 @@ import org.junit.Assert;
 import truco.modelo.Carta;
 import truco.modelo.Palo;
 import org.junit.Test;
+import truco.modelo.excepciones.NumeroCartaExcedeElRangoException;
 
 import static junit.framework.Assert.assertEquals;
 
 public class CartaTest {
 
+    @Test
+    public void testEqualsFalseConNull(){
+        Carta carta=new Carta(4,Palo.BASTO);
+
+        Assert.assertFalse(carta.equals(null));
+    }
+
+    @Test
+    public void testEqualsConOtroObjeto(){
+        Carta carta=new Carta(4,Palo.BASTO);
+        Assert.assertFalse(carta.equals(true));
+    }
     @Test
     public void testEquals2CartasIguales(){
         Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
@@ -29,6 +42,20 @@ public class CartaTest {
         Carta AsDeEspadas1=new Carta(1,Palo.ESPADA);
         Carta AsDeCopas=new Carta(1,Palo.COPA);
         Assert.assertFalse(AsDeEspadas1.equals(AsDeCopas));
+    }
+
+    @Test
+    public void testValorEnvido(){
+        Carta carta1=new Carta(4,Palo.BASTO);
+        Carta carta2=new Carta(12,Palo.BASTO);
+        Assert.assertEquals(carta1.getValorEnvido(),4);
+        Assert.assertEquals(carta2.getValorEnvido(),0);
+    }
+
+    @Test(expected = NumeroCartaExcedeElRangoException.class)
+    public void testIntentoDeCrearUnaCartaInvalida(){
+        Carta carta=new Carta(8,Palo.BASTO);
+        Assert.assertTrue(true);
     }
 
     @Test

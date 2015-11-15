@@ -2,6 +2,7 @@ package truco.modelo;
 
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
 import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
+import truco.modelo.excepciones.MazoSinCartasException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,6 @@ public class Jugador {
     static final int MAXIMO_CARTAS= 3;
 
     /**CONSTRUCTOR**/
-    public Jugador(){;}
-
     public Jugador(String unNombre){
         this.nombre =unNombre;
         this.mano =new ArrayList<>();
@@ -50,14 +49,19 @@ public class Jugador {
     }
 
     /**ACCIONES**/
-    public void robarCarta(Carta unaCarta) throws LimiteDeCartasExcedidoException{
-        if(this.mano.size() >= MAXIMO_CARTAS){
+    public void levantarCarta(Carta unaCarta) throws LimiteDeCartasExcedidoException{
+        if(this.mano.size() >= MAXIMO_CARTAS)
             throw new LimiteDeCartasExcedidoException();
-        }
-        //Se agrega una carta
         this.mano.add(unaCarta);
     }
 
+    public void robarCartaDelMazo(){
+        if(this.mano.size() >= MAXIMO_CARTAS)
+            throw new LimiteDeCartasExcedidoException();
+        if(mesa.getMazo().getCartas().size()==0)
+            throw new MazoSinCartasException();
+        mano.add(mesa.getMazo().getCartas().removeFirst());
+    }
     public void jugarCarta(int numero, Palo palo) {
 
         for(Carta carta:mano)

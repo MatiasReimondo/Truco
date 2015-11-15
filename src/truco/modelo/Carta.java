@@ -13,7 +13,7 @@ public class Carta {
     private Hashtable<Carta,Integer> tablaFuerza;
 
     public Carta(int unNumero, Palo unPalo){
-        if(numero<0 || numero>12)
+        if(unNumero<0 || unNumero>12 || unNumero==8 || unNumero==9)
             throw new NumeroCartaExcedeElRangoException();
 
         this.palo = unPalo;

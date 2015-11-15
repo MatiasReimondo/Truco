@@ -61,11 +61,14 @@ public class Mesa {
         return jugador.getNombre().equals(jugadorPie.getNombre());
     }
 
+    public boolean jugadorEsMano(Jugador jugador){
+        return jugador.getNombre().equals(jugadorMano.getNombre());
+    }
     public boolean esTurnoDelJugador(Jugador jugador){
         return true;
     }
 
-    public List<Jugador> resolverMano(Ronda rondaActual) {
+    public List<Jugador> resolverMano() {
         int maxFuerza = 0;
         int fuerzaEmpate = 0;
         Jugador jugadorMax = null;
@@ -96,13 +99,11 @@ public class Mesa {
     public void repartirCartas(){
         for(int i=0;i<3;i++)
             for(int j=0;j<listaJugadores.size();j++) {
-                if (mazo.getCartas().size() == 0) throw new MazoSinCartasException();
-
                 if(iterMano.hasNext())
-                    iterMano.next().robarCarta(mazo.getCartas().removeFirst());
+                    iterMano.next().robarCartaDelMazo();
                 else{
                     iterMano=listaJugadores.iterator();
-                    iterMano.next().robarCarta(mazo.getCartas().removeFirst());
+                    iterMano.next().robarCartaDelMazo();
                 }
             }
     }
