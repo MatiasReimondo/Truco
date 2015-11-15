@@ -12,6 +12,7 @@ public class Carta {
     private int numero;
     private Hashtable<Carta,Integer> tablaFuerza;
 
+    /**CONSTRUCTOR**/
     public Carta(int unNumero, Palo unPalo){
         if(unNumero<0 || unNumero>12 || unNumero==8 || unNumero==9)
             throw new NumeroCartaExcedeElRangoException();
@@ -20,6 +21,7 @@ public class Carta {
         this.numero= unNumero;
     }
 
+    /**GETTERS**/
     public int getFuerza(){
         if(tablaFuerza==null)
             armarTablaDeFuerza();
@@ -41,6 +43,7 @@ public class Carta {
         return numero;
     }
 
+    /**ACCIONES**/
     private void armarTablaDeFuerza() {
 
         tablaFuerza = new Hashtable<>();

@@ -1,7 +1,6 @@
 package truco.modelo;
 
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
-import truco.modelo.excepciones.MazoSinCartasException;
 
 import java.util.*;
 
@@ -16,6 +15,7 @@ public class Mesa {
     private Iterator<Jugador> iterPie;
     private Jugador jugadorMano;
     private Jugador jugadorPie;
+    private HashMap<Jugador,Carta> listaDeCartas = new HashMap<Jugador,Carta>();
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -48,6 +48,10 @@ public class Mesa {
         return listaJugadores;
     }
 
+    public HashMap<Jugador, Carta> getListaDeCartas() {
+        return listaDeCartas;
+    }
+
     /**ACCIONES**/
     public Jugador getJugadorMano(){
         return jugadorMano;
@@ -75,9 +79,8 @@ public class Mesa {
         Jugador jugadorEmpate = null;
         List<Jugador> ganadores = new LinkedList<>();
 
-        Set<Map.Entry<Jugador, Carta>> set = rondaActual.getManoActual().entrySet();
 
-        for (Map.Entry<Jugador, Carta> item : set) {
+        for (Map.Entry<Jugador, Carta> item : rondaActual.getManoActual().entrySet() ) {
             if (item.getValue().getFuerza() > maxFuerza) {
                 maxFuerza = item.getValue().getFuerza();
                 jugadorMax = item.getKey();
@@ -108,7 +111,7 @@ public class Mesa {
             }
     }
 
-    public Jugador resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
+    public void resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
         int maxEnvido = 0;
         Jugador jugadorMax = null;
 
@@ -123,7 +126,7 @@ public class Mesa {
             }
         }
 
-        return jugadorMax;
+        jugadorMax.getEquipo().sumarPuntos(2);
 
 
     }
@@ -142,7 +145,10 @@ public class Mesa {
 */
     public void resolverTruco(){}
 
-    public void agregarCarta(Carta carta) {
+    public void agregarCarta(Carta carta, Jugador unJugador) {
+        rondaActual.agregarCarta(unJugador,carta);
+        listaDeCartas.put(unJugador, carta);
+
     }
 
     public void actualizarJugadorManoPie(){
@@ -159,7 +165,9 @@ public class Mesa {
 
     public void nuevaRonda(){
         historial.add(rondaActual);
+        listaDeCartas = new HashMap<Jugador,Carta>();
         rondaActual=new Ronda();
+
         mazo=new Mazo();
         actualizarJugadorManoPie();
     }

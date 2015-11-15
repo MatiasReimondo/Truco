@@ -1,5 +1,6 @@
 package integracion;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
@@ -47,5 +48,8 @@ public class ResolverJugadas {
 
         jugadorPepe.jugarCarta(4,Palo.BASTO);
         jugadorJuan.jugarCarta(5,Palo.BASTO);
+
+        List<Jugador> ganador=mesa.resolverMano();
+        Assert.assertEquals(true,ganador.contains(jugadorJuan));
     }
 }

@@ -11,12 +11,16 @@ public class Ronda {
     private List<HashMap<Jugador,Carta>> manos;
     private HashMap<Jugador,Carta> manoActual;
     private HashMap<Jugador,Integer> tantosActuales;
+    private Mesa mesa;
 
+    /**CONSTRUCTOR**/
     public Ronda(){
         manos =new ArrayList<>(3);
-        manoActual=manos.get(0);
+        manoActual= new HashMap<Jugador,Carta>();
+
     }
 
+    /**GETTERS**/
     public HashMap<Jugador,Carta> getPrimera(){
         return manos.get(0);
     }
@@ -37,6 +41,7 @@ public class Ronda {
         return tantosActuales;
     }
 
+    /**ACCIONES**/
     public void siguienteMano(){
         manos.add(manoActual);
         HashMap<Jugador,Carta> nuevaMano=new HashMap<>();

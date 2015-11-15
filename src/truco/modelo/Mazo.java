@@ -8,10 +8,12 @@ import java.util.LinkedList;
 @SuppressWarnings("ALL")
 public class Mazo {
 
+
     private LinkedList<Carta> mazoDeCartas;
     static final int MAXIMO_CARTAS= 3;
     static final int TAMANIO_MAZO= 40;
 
+    /**CONSTRUCTOR**/
     public Mazo(){
         mazoDeCartas=new LinkedList<>();
         for (int numero=1;numero<8;numero++)
@@ -26,10 +28,12 @@ public class Mazo {
             }
     }
 
+    /** GETTERS**/
     public LinkedList<Carta> getCartas(){
         return mazoDeCartas;
     }
 
+    /**ACCIONES**/
     public int cantidadDeCartas(){
         return mazoDeCartas.size();
     }

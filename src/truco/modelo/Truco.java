@@ -15,12 +15,14 @@ public class Truco {
     private List<Jugador> jugadoresActivos;
     private Mesa mesa;
 
+    /**CONSTRUCTOR**/
     public Truco(){
         equipos=new ArrayList<>();
         jugadoresActivos =new ArrayList<>();
 
     }
 
+    /**GETTERS**/
     public Jugador getJugador(String nombreJugador){
         for(Jugador jugador:jugadoresActivos)
             if (jugador.getNombre().equals(nombreJugador))
@@ -35,6 +37,7 @@ public class Truco {
         throw new EquipoInexistenteException();
     }
 
+    /**ACCIONES**/
     public void nuevoEquipo(String nombreEquipo){
         try{getEquipo(nombreEquipo);} catch (EquipoInexistenteException e) {
             Equipo nuevoEquipo = new Equipo(nombreEquipo);

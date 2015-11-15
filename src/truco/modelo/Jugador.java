@@ -66,7 +66,7 @@ public class Jugador {
 
         for(Carta carta:mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)) {
-                mesa.agregarCarta(carta);
+                mesa.agregarCarta(carta,this);
                 mano.remove(carta);
                 return;
             }
