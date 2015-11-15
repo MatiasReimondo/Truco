@@ -15,7 +15,7 @@ public class Mesa {
     private Iterator<Jugador> iterPie;
     private Jugador jugadorMano;
     private Jugador jugadorPie;
-    private HashMap<Jugador,Carta> listaDeCartas = new HashMap<Jugador,Carta>();
+
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -48,9 +48,7 @@ public class Mesa {
         return listaJugadores;
     }
 
-    public HashMap<Jugador, Carta> getListaDeCartas() {
-        return listaDeCartas;
-    }
+
 
     /**ACCIONES**/
     public Jugador getJugadorMano(){
@@ -147,7 +145,7 @@ public class Mesa {
 
     public void agregarCarta(Carta carta, Jugador unJugador) {
         rondaActual.agregarCarta(unJugador,carta);
-        listaDeCartas.put(unJugador, carta);
+
 
     }
 
@@ -165,7 +163,6 @@ public class Mesa {
 
     public void nuevaRonda(){
         historial.add(rondaActual);
-        listaDeCartas = new HashMap<Jugador,Carta>();
         rondaActual=new Ronda();
 
         mazo=new Mazo();
