@@ -31,7 +31,7 @@ public class Mesa {
 
         this.listaJugadores=listaJugadores;
 
-        iterMano=this.listaJugadores.iterator();
+        iterMano =this.listaJugadores.iterator();
         iterPie=this.listaJugadores.iterator();
 
         while(iterPie.hasNext())
@@ -71,7 +71,7 @@ public class Mesa {
     }
 
     public boolean esTurnoDelJugador(Jugador jugador){
-        return true;
+        return jugador==jugadorActivo;
     }
 
     public List<Jugador> resolverMano() {
@@ -104,7 +104,7 @@ public class Mesa {
     public void repartirCartas(){
         for(int i=0;i<3;i++)
             for(int j=0;j<listaJugadores.size();j++)
-                this.siguienteJugador().robarCartaDelMazo();
+                this.siguienteJugador(iterMano).robarCartaDelMazo();
 
     }
 
@@ -140,7 +140,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;
                     equipoGanador = jugadorActivo.getEquipo();
                 }
-            jugadorActivo=this.siguienteJugador();
+            jugadorActivo=this.siguienteJugador(iterMano);
         }
         if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
          equipoGanador.sumarPuntos(this.rondaActual.getTantoActivo().getPuntos(equipoGanador,equipoPerdedor));
@@ -151,19 +151,13 @@ public class Mesa {
     public void agregarCarta(Carta carta, Jugador unJugador) {
         rondaActual.agregarCarta(unJugador,carta);
 
-
     }
 
     public void actualizarJugadorManoPie(){
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
-        if(iterMano.hasNext())
-            jugadorMano=iterMano.next();
-        else iterMano=listaJugadores.iterator();
-
-        if(iterPie.hasNext())
-            jugadorPie=iterPie.next();
-        else iterPie=listaJugadores.iterator();
+        jugadorMano=this.siguienteJugador(iterMano);
+        jugadorPie=this.siguienteJugador(iterPie);
     }
 
     public void nuevaRonda(){
@@ -175,11 +169,11 @@ public class Mesa {
     }
 
     /**AUXILIARES**/
-    private Jugador siguienteJugador(){
-        if(iterMano.hasNext())
-            return iterMano.next();
-        iterMano=listaJugadores.iterator();
-        return iterMano.next();
+    private Jugador siguienteJugador(Iterator<Jugador> iterator){
+        if(iterator.hasNext())
+            return iterator.next();
+        iterator =listaJugadores.iterator();
+        return iterator.next();
     }
 
     public boolean jugadorPuedeCantarTanto(Jugador jugador) {
