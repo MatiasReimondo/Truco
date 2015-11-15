@@ -66,6 +66,7 @@ public class Mesa {
     public boolean jugadorEsMano(Jugador jugador){
         return jugador.getNombre().equals(jugadorMano.getNombre());
     }
+
     public boolean esTurnoDelJugador(Jugador jugador){
         return true;
     }
@@ -99,14 +100,9 @@ public class Mesa {
 
     public void repartirCartas(){
         for(int i=0;i<3;i++)
-            for(int j=0;j<listaJugadores.size();j++) {
-                if(iterMano.hasNext())
-                    iterMano.next().robarCartaDelMazo();
-                else{
-                    iterMano=listaJugadores.iterator();
-                    iterMano.next().robarCartaDelMazo();
-                }
-            }
+            for(int j=0;j<listaJugadores.size();j++)
+                siguienteJugador().robarCartaDelMazo();
+
     }
 
     public void resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
@@ -128,19 +124,11 @@ public class Mesa {
 
 
     }
-/*
-    public void resolverEnvido(List<Jugador> listaJugadores){
 
-        Jugador ganador=null;
-        int envidoMax=0;
-        for(Jugador jugador:listaJugadores){
-            if(jugador.getEnvido()>envidoMax)
-                ganador=jugador;
-        }
+    public void resolverEnvido(){
 
-        ganador.getEquipo().sumarPuntos();
     }
-*/
+
     public void resolverTruco(){}
 
     public void agregarCarta(Carta carta, Jugador unJugador) {
@@ -167,5 +155,13 @@ public class Mesa {
 
         mazo=new Mazo();
         actualizarJugadorManoPie();
+    }
+
+    /**AUXILIARES**/
+    private Jugador siguienteJugador(){
+        if(iterMano.hasNext())
+            return iterMano.next();
+        iterMano=listaJugadores.iterator();
+        return iterMano.next();
     }
 }
