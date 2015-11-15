@@ -6,7 +6,7 @@ import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.Palo;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
-import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
+import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
 
 public class JugadorTest {
 
@@ -49,7 +49,7 @@ public class JugadorTest {
         Assert.assertEquals(1,tester.getMano().size());
     }
     
-    @Test(expected=LimiteDeCartasExcedidoException.class)
+    @Test(expected=LimiteDeCartasEnLaManoExcedidoException.class)
     public void testJugadorIntentaRobar4Cartas(){
         Carta carta1= new Carta(1, Palo.BASTO);
         Carta carta2= new Carta(1, Palo.ESPADA);

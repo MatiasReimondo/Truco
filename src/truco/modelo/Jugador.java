@@ -1,7 +1,9 @@
 package truco.modelo;
 
+import truco.modelo.envido.Envido;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
-import truco.modelo.excepciones.LimiteDeCartasExcedidoException;
+import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
+import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
 import truco.modelo.excepciones.MazoSinCartasException;
 
 import java.util.ArrayList;
@@ -49,19 +51,20 @@ public class Jugador {
     }
 
     /**ACCIONES**/
-    public void levantarCarta(Carta unaCarta) throws LimiteDeCartasExcedidoException{
+    public void levantarCarta(Carta unaCarta) throws LimiteDeCartasEnLaManoExcedidoException {
         if(this.mano.size() >= MAXIMO_CARTAS)
-            throw new LimiteDeCartasExcedidoException();
+            throw new LimiteDeCartasEnLaManoExcedidoException();
         this.mano.add(unaCarta);
     }
 
     public void robarCartaDelMazo(){
         if(this.mano.size() >= MAXIMO_CARTAS)
-            throw new LimiteDeCartasExcedidoException();
+            throw new LimiteDeCartasEnLaManoExcedidoException();
         if(mesa.getMazo().getCartas().size()==0)
             throw new MazoSinCartasException();
         mano.add(mesa.getMazo().getCartas().removeFirst());
     }
+
     public void jugarCarta(int numero, Palo palo) {
 
         for(Carta carta:mano)
@@ -95,13 +98,22 @@ public class Jugador {
         return 20 + mano.get(0).getValorEnvido() + mano.get(1).getValorEnvido() + mano.get(2).getValorEnvido();
     }
 
+    public boolean quiereMostrarEnvido() {
+        return true;
+    }
+
+    public void cantarTanto(Envido envido){
+
+        if(mesa.jugadorPuedeCantarTanto(this))
+            mesa.getRondaActual().activarTanto(envido);
+        throw new JugadorNoHabilitadoParaCantarTanto();
+    }
     /**AUXILIARES**/
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
         return Math.max(carta1.getValorEnvido(),carta2.getValorEnvido());
     }
-
 
 
 

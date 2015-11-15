@@ -4,7 +4,7 @@ import org.junit.Assert;
 import truco.modelo.Carta;
 import truco.modelo.Palo;
 import org.junit.Test;
-import truco.modelo.excepciones.NumeroCartaExcedeElRangoException;
+import truco.modelo.excepciones.NumeroDeCartaInvalidoParaElTrucoException;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -52,7 +52,7 @@ public class CartaTest {
         Assert.assertEquals(carta2.getValorEnvido(),0);
     }
 
-    @Test(expected = NumeroCartaExcedeElRangoException.class)
+    @Test(expected = NumeroDeCartaInvalidoParaElTrucoException.class)
     public void testIntentoDeCrearUnaCartaInvalida(){
         Carta carta=new Carta(8,Palo.BASTO);
         Assert.assertTrue(true);

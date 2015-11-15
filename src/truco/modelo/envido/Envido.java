@@ -11,6 +11,13 @@ public class Envido {
         puntos=2;
     }
 
+    public void setSubEnvido(Envido envido){
+        if(subEnvido==null)
+            subEnvido=envido;
+        else
+            subEnvido.setSubEnvido(envido);
+    }
+
     public void subirApuesta(Envido envido){
         subEnvido=envido;
     }

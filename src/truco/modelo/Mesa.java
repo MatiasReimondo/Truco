@@ -11,11 +11,13 @@ public class Mesa {
     private Ronda rondaActual;
     private List<Ronda> historial;
     private List<Jugador> listaJugadores;
+
     private Iterator<Jugador> iterMano;
     private Iterator<Jugador> iterPie;
+
     private Jugador jugadorMano;
     private Jugador jugadorPie;
-
+    private Jugador jugadorActivo;
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -48,9 +50,6 @@ public class Mesa {
         return listaJugadores;
     }
 
-
-
-    /**ACCIONES**/
     public Jugador getJugadorMano(){
         return jugadorMano;
     }
@@ -59,6 +58,10 @@ public class Mesa {
         return jugadorPie;
     }
 
+    public Ronda getRondaActual(){
+        return rondaActual;
+    }
+    /**ACCIONES**/
     public boolean jugadorEsPie(Jugador jugador){
         return jugador.getNombre().equals(jugadorPie.getNombre());
     }
@@ -101,7 +104,7 @@ public class Mesa {
     public void repartirCartas(){
         for(int i=0;i<3;i++)
             for(int j=0;j<listaJugadores.size();j++)
-                siguienteJugador().robarCartaDelMazo();
+                this.siguienteJugador().robarCartaDelMazo();
 
     }
 
@@ -127,6 +130,20 @@ public class Mesa {
 
     public void resolverEnvido(){
 
+        int envidoMax=0;
+        Equipo equipoGanador=null;
+        Equipo equipoPerdedor=null;
+        for(int i=0;i<listaJugadores.size();i++){
+            if(jugadorActivo.quiereMostrarEnvido())
+                if(jugadorActivo.getEnvido()>envidoMax) {
+                    if (jugadorActivo.getEquipo() != equipoGanador)
+                        equipoPerdedor = equipoGanador;
+                    equipoGanador = jugadorActivo.getEquipo();
+                }
+            jugadorActivo=this.siguienteJugador();
+        }
+        if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
+         equipoGanador.sumarPuntos(this.rondaActual.getTantoActivo().getPuntos(equipoGanador,equipoPerdedor));
     }
 
     public void resolverTruco(){}
@@ -163,5 +180,13 @@ public class Mesa {
             return iterMano.next();
         iterMano=listaJugadores.iterator();
         return iterMano.next();
+    }
+
+    public boolean jugadorPuedeCantarTanto(Jugador jugador) {
+        if(jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()==null)
+            return true;
+        if(!jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()!=null)
+            return true;
+        return false;
     }
 }

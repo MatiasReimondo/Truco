@@ -1,5 +1,7 @@
 package truco.modelo;
 
+import truco.modelo.envido.Envido;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +14,8 @@ public class Ronda {
     private HashMap<Jugador,Carta> manoActual;
     private HashMap<Jugador,Integer> tantosActuales;
     private Mesa mesa;
+
+    private Envido tantoActivo;
 
     /**CONSTRUCTOR**/
     public Ronda(){
@@ -50,5 +54,15 @@ public class Ronda {
 
     public void agregarCarta(Jugador jugador,Carta carta) {
         manoActual.put(jugador,carta);
+    }
+
+    public Envido getTantoActivo() {
+        return tantoActivo;
+    }
+
+    public void activarTanto(Envido envido) {
+        if(tantoActivo==null)
+            tantoActivo=envido;
+        else tantoActivo.setSubEnvido(envido);
     }
 }

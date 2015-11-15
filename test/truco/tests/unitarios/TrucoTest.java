@@ -3,9 +3,9 @@ package truco.tests.unitarios;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.Truco;
-import truco.modelo.excepciones.EquipoExistenteException;
+import truco.modelo.excepciones.EquipoPreExistenteException;
 import truco.modelo.excepciones.EquipoInexistenteException;
-import truco.modelo.excepciones.JugadorExistenteException;
+import truco.modelo.excepciones.JugadorPreExistenteException;
 
 /**
  * Created by Eze Cruz Avila on 15/11/2015.
@@ -21,12 +21,12 @@ public class TrucoTest {
         trucoTester.nuevoJugador("Juan","Pikachu");
     }
 
-    @Test(expected = EquipoExistenteException.class)
+    @Test(expected = EquipoPreExistenteException.class)
     public void testLanzarExcepcionCuandoEquipoYaExiste(){
         trucoTester.nuevoEquipo("Pikachu");
     }
 
-    @Test(expected = JugadorExistenteException.class)
+    @Test(expected = JugadorPreExistenteException.class)
     public void testLanzaExcepcionCuandoJugadorYaExiste(){
         System.out.println("TEST");
         trucoTester.nuevoJugador("Juan","Pikachu");
