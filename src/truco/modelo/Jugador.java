@@ -52,7 +52,7 @@ public class Jugador {
 
     /**ACCIONES**/
     public void levantarCarta(Carta unaCarta) throws LimiteDeCartasEnLaManoExcedidoException {
-        if(this.mano.size() >= MAXIMO_CARTAS)
+        if(this.mano.size() >=  MAXIMO_CARTAS)
             throw new LimiteDeCartasEnLaManoExcedidoException();
         this.mano.add(unaCarta);
     }

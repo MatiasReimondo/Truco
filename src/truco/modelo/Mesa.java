@@ -104,7 +104,7 @@ public class Mesa {
     public void repartirCartas(){
         for(int i=0;i<3;i++)
             for(int j=0;j<listaJugadores.size();j++)
-                this.siguienteJugador(iterMano).robarCartaDelMazo();
+                this.siguienteJugadorMano().robarCartaDelMazo();
 
     }
 
@@ -140,7 +140,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;
                     equipoGanador = jugadorActivo.getEquipo();
                 }
-            jugadorActivo=this.siguienteJugador(iterMano);
+            jugadorActivo=this.siguienteJugadorMano();
         }
         if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
          equipoGanador.sumarPuntos(this.rondaActual.getTantoActivo().getPuntos(equipoGanador,equipoPerdedor));
@@ -156,8 +156,8 @@ public class Mesa {
     public void actualizarJugadorManoPie(){
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
-        jugadorMano=this.siguienteJugador(iterMano);
-        jugadorPie=this.siguienteJugador(iterPie);
+        jugadorMano=this.siguienteJugadorMano();
+        //jugadorPie=this.siguienteJugador(iterPie);
     }
 
     public void nuevaRonda(){
@@ -169,13 +169,18 @@ public class Mesa {
     }
 
     /**AUXILIARES**/
-    private Jugador siguienteJugador(Iterator<Jugador> iterator){
-        if(iterator.hasNext())
-            return iterator.next();
-        iterator =listaJugadores.iterator();
-        return iterator.next();
-    }
+    private Jugador siguienteJugadorMano(){
+        if (this.iterMano.hasNext()){
+            return this.iterMano.next();
+        }
+        this.iterMano = this.listaJugadores.iterator();
+        return this.iterMano.next();
+       /* if(iterator.hasNext()){
+            return iterator.next();}
 
+        iterator =this.listaJugadores.iterator();
+        return iterator.next();*/
+    }
     public boolean jugadorPuedeCantarTanto(Jugador jugador) {
         if(jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()==null)
             return true;

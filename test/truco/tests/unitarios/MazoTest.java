@@ -24,7 +24,6 @@ public class MazoTest {
         Carta carta=mazo.getCartas().removeFirst();
         mazo.getCartas().add(carta);
         mazo.mezclar();
-
         Assert.assertFalse(carta == mazo.getCartas().removeFirst());
     }
 }
