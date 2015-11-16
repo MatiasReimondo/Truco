@@ -11,6 +11,7 @@ public class Mesa {
     private Ronda rondaActual;
     private List<Ronda> historial;
     private List<Jugador> listaJugadores;
+    private Boolean conFlor= false;
 
     private Iterator<Jugador> iterMano;
     private Iterator<Jugador> iterPie;
@@ -61,6 +62,11 @@ public class Mesa {
     public Ronda getRondaActual(){
         return rondaActual;
     }
+
+    public Boolean getConFlor(){
+        return conFlor;
+    }
+
     /**ACCIONES**/
     public boolean jugadorEsPie(Jugador jugador){
         return jugador.getNombre().equals(jugadorPie.getNombre());
@@ -187,5 +193,9 @@ public class Mesa {
         if(!jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()!=null)
             return true;
         return false;
+    }
+
+    public void setSeJuegaConFlor(){
+        conFlor= true;
     }
 }

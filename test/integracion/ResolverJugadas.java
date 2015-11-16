@@ -4,6 +4,9 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
+import truco.modelo.excepciones.ElJugadorNoTieneFlorException;
+import truco.modelo.excepciones.NoSeJuegaConFlorException;
+import truco.modelo.flor.Flor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +58,9 @@ public class ResolverJugadas {
 
     @Test
     public void testSeComparanLosEnvidos(){
+
         /*
         mesa.nuevaRonda();
-
         jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
         jugadorPepe.levantarCarta(new Carta(5, Palo.BASTO));
         jugadorPepe.levantarCarta(new Carta(1,Palo.ESPADA));
@@ -70,11 +73,43 @@ public class ResolverJugadas {
         mesa.resolverEnvido();
         Assert.assertEquals(3,jugadorPepe.getEquipo().getPuntaje());
 
-        */
+         */
+
         Assert.assertEquals(3,3);
 
 
 
+
+    }
+
+    @Test (expected=ElJugadorNoTieneFlorException.class)
+    public void testSeCantaFlorSinTenerFlor(){
+        mesa.setSeJuegaConFlor();
+
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(5, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(6,Palo.COPA));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorPepe.cantarFlor(new Flor()) ;
+
+    }
+
+    @Test (expected=NoSeJuegaConFlorException.class)
+    public void testSeCantaFlorPeroSeEstaJugnadoSinFlor(){
+
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(5, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(6,Palo.BASTO));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorPepe.cantarFlor(new Flor()) ;
 
     }
 }

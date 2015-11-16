@@ -1,6 +1,7 @@
 package truco.modelo;
 
 import truco.modelo.envido.Envido;
+import truco.modelo.flor.Flor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class Ronda {
     private Mesa mesa;
 
     private Envido tantoActivo;
+    private Flor florActiva;
 
     /**CONSTRUCTOR**/
     public Ronda(){
@@ -45,6 +47,10 @@ public class Ronda {
         return tantosActuales;
     }
 
+    public Flor getFlorActiva(){
+        return florActiva;
+    }
+
     /**ACCIONES**/
     public void siguienteMano(){
         manos.add(manoActual);
@@ -64,5 +70,10 @@ public class Ronda {
         if(tantoActivo==null)
             tantoActivo=envido;
         else tantoActivo.setSubEnvido(envido);
+    }
+    public void activarFlor(Flor flor) {
+        if(florActiva==null)
+            florActiva=flor;
+        else florActiva.setContraFlor(flor);
     }
 }

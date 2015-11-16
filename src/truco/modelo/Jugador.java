@@ -1,10 +1,8 @@
 package truco.modelo;
 
 import truco.modelo.envido.Envido;
-import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
-import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
-import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
-import truco.modelo.excepciones.MazoSinCartasException;
+import truco.modelo.excepciones.*;
+import truco.modelo.flor.Flor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +106,19 @@ public class Jugador {
             mesa.getRondaActual().activarTanto(envido);
         throw new JugadorNoHabilitadoParaCantarTanto();
     }
+
+    public void cantarFlor(Flor flor){
+        if( mesa.getConFlor().equals(false)){
+            throw new NoSeJuegaConFlorException();
+        }if(this.tieneFlor()==false){
+            throw new ElJugadorNoTieneFlorException();
+        }
+        else{
+            mesa.getRondaActual().activarFlor(flor);
+
+        }
+    }
+
     /**AUXILIARES**/
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
