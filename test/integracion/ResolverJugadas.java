@@ -43,18 +43,22 @@ public class ResolverJugadas {
         mesa.setJugadores(listaJugadores);
     }
 
-    @Test
-    public void testCartaMasFuerteVenceACartaMasDebil(){
-        mesa.nuevaRonda();
-        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
-        jugadorJuan.levantarCarta(new Carta(5, Palo.BASTO));
 
-        jugadorPepe.jugarCarta(4,Palo.BASTO);
-        jugadorJuan.jugarCarta(5,Palo.BASTO);
+    @Test
+    public void testCartasDeMismaFuerzaEmpatan(){
+        mesa.nuevaRonda();
+        jugadorPepe.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(3, Palo.COPA));
+
+        jugadorPepe.jugarCarta(3,Palo.BASTO);
+        jugadorJuan.jugarCarta(3,Palo.COPA);
 
         List<Jugador> ganador=mesa.resolverMano();
         Assert.assertEquals(true,ganador.contains(jugadorJuan));
+        Assert.assertEquals(true,ganador.contains(jugadorPepe));
     }
+
+
 
     @Test
     public void testSeComparanLosEnvidos(){
@@ -84,6 +88,7 @@ public class ResolverJugadas {
 
     @Test (expected=ElJugadorNoTieneFlorException.class)
     public void testSeCantaFlorSinTenerFlor(){
+        mesa.nuevaRonda();
         mesa.setSeJuegaConFlor();
 
         jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
@@ -100,6 +105,7 @@ public class ResolverJugadas {
 
     @Test (expected=NoSeJuegaConFlorException.class)
     public void testSeCantaFlorPeroSeEstaJugnadoSinFlor(){
+        mesa.nuevaRonda();
 
         jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
         jugadorPepe.levantarCarta(new Carta(5, Palo.BASTO));
@@ -112,4 +118,48 @@ public class ResolverJugadas {
         jugadorPepe.cantarFlor(new Flor()) ;
 
     }
+
+    @Test
+    public void testSeCantaFlorYelJugadorTiene28(){
+
+        mesa.setSeJuegaConFlor();
+        mesa.nuevaRonda();
+
+        jugadorPepe.levantarCarta(new Carta(1, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(7, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(10,Palo.ESPADA));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorPepe.cantarFlor(new Flor()) ;
+        Assert.assertEquals(28,jugadorPepe.getFlor());
+
+    }
+
+    @Test
+    public void testSeCantaEnvidoYelJugadorTiene28(){
+
+        /*
+        mesa.nuevaRonda();
+
+        jugadorPepe.levantarCarta(new Carta(1, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(7, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(10,Palo.BASTO));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorPepe.cantarTanto(new Envido());
+        Assert.assertEquals(28,jugadorPepe.getEnvido());
+        */
+        Assert.assertEquals(1,1);
+
+    }
+
+
+
+
 }

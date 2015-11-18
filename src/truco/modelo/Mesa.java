@@ -24,6 +24,7 @@ public class Mesa {
     public Mesa() {
         mazo = new Mazo();
         historial=new ArrayList<>();
+
     }
 
     /**SETTERS**/
@@ -93,12 +94,12 @@ public class Mesa {
                 maxFuerza = item.getValue().getFuerza();
                 jugadorMax = item.getKey();
             } else if (item.getValue().getFuerza() == maxFuerza) {
-                if(!item.getKey().getEquipo().getNombre().equals(jugadorMax.getEquipo().getNombre()))
                 fuerzaEmpate = item.getValue().getFuerza();
                 jugadorEmpate = item.getKey();
             }
         }
         ganadores.add(jugadorMax);
+
         if (maxFuerza==fuerzaEmpate){
             ganadores.add(jugadorEmpate);
         }
