@@ -24,6 +24,8 @@ public class Ronda {
         manos =new ArrayList<>(3);
         manoActual= new HashMap<Jugador,Carta>();
 
+
+
     }
 
     /**GETTERS**/

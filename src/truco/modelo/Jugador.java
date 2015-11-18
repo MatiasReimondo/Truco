@@ -102,9 +102,11 @@ public class Jugador {
 
     public void cantarTanto(Envido envido){
 
-        if(mesa.jugadorPuedeCantarTanto(this))
+        if(mesa.jugadorPuedeCantarTanto(this)) {
             mesa.getRondaActual().activarTanto(envido);
-        throw new JugadorNoHabilitadoParaCantarTanto();
+        }else{
+            throw new JugadorNoHabilitadoParaCantarTanto();
+        }
     }
 
     public void cantarFlor(Flor flor){

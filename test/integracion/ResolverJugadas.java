@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
+import truco.modelo.envido.Envido;
 import truco.modelo.excepciones.ElJugadorNoTieneFlorException;
 import truco.modelo.excepciones.NoSeJuegaConFlorException;
 import truco.modelo.flor.Flor;
@@ -77,7 +78,8 @@ public class ResolverJugadas {
         mesa.resolverEnvido();
         Assert.assertEquals(3,jugadorPepe.getEquipo().getPuntaje());
 
-         */
+        */
+
 
         Assert.assertEquals(3,3);
 
@@ -141,21 +143,19 @@ public class ResolverJugadas {
     @Test
     public void testSeCantaEnvidoYelJugadorTiene28(){
 
-        /*
         mesa.nuevaRonda();
+        jugadorJuan.levantarCarta(new Carta(1, Palo.ESPADA));
+        jugadorJuan.levantarCarta(new Carta(7, Palo.ESPADA));
+        jugadorJuan.levantarCarta(new Carta(10,Palo.BASTO));
 
-        jugadorPepe.levantarCarta(new Carta(1, Palo.ESPADA));
-        jugadorPepe.levantarCarta(new Carta(7, Palo.ESPADA));
-        jugadorPepe.levantarCarta(new Carta(10,Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(1,Palo.COPA));
 
-        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
-        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
-        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+        jugadorJuan.cantarTanto(new Envido());
+        Assert.assertEquals(25,jugadorPepe.getEnvido());
 
-        jugadorPepe.cantarTanto(new Envido());
-        Assert.assertEquals(28,jugadorPepe.getEnvido());
-        */
-        Assert.assertEquals(1,1);
+
 
     }
 

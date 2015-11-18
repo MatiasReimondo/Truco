@@ -25,6 +25,7 @@ public class Mesa {
         mazo = new Mazo();
         historial=new ArrayList<>();
 
+
     }
 
     /**SETTERS**/
@@ -164,7 +165,7 @@ public class Mesa {
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
 
         jugadorMano=this.siguienteJugadorMano();
-        //jugadorPie=this.siguienteJugador(iterPie);
+        //jugadorPie=this.siguienteJugadorPie();
     }
 
     public void nuevaRonda(){
@@ -189,11 +190,15 @@ public class Mesa {
         return iterator.next();*/
     }
     public boolean jugadorPuedeCantarTanto(Jugador jugador) {
-        if(jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()==null)
+        if(jugadorEsPie(jugador) && rondaActual.getTantoActivo()==null) {
             return true;
-        if(!jugadorEsPie(jugadorActivo) && rondaActual.getTantoActivo()!=null)
+        }
+        if(!jugadorEsPie(jugador) && rondaActual.getTantoActivo()!=null) {
             return true;
-        return false;
+        }else {
+            return false;
+        }
+
     }
 
     public void setSeJuegaConFlor(){
