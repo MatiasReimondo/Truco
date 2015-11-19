@@ -82,7 +82,7 @@ public class MesaTest {
     }
     @Test
     public void testJugadorPieAlComenzar() {
-        Assert.assertEquals(jugadorPepe, mesaTester.getJugadorPieEquipo2());
+        Assert.assertTrue(mesaTester.jugadorEsPie(jugadorPepe));
     }
 
     /*
@@ -97,10 +97,10 @@ public class MesaTest {
     @Test
     public void testActualizarManoPie() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
-        Assert.assertEquals(jugadorPepe, mesaTester.getJugadorPieEquipo2());
+        Assert.assertTrue(mesaTester.jugadorEsPie(jugadorPepe));
         System.out.println("TEST");
         mesaTester.actualizarJugadorManoPie();
-        Assert.assertEquals(jugadorJuan, mesaTester.getJugadorPieEquipo1());
+        Assert.assertTrue(mesaTester.jugadorEsPie(jugadorJuan));
         Assert.assertEquals(jugadorPepe, mesaTester.getJugadorMano());
 
     }

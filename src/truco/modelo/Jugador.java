@@ -65,10 +65,9 @@ public class Jugador {
     }
 
     public void jugarCarta(int numero, Palo palo) {
-
         for(Carta carta:mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)) {
-                mesa.agregarCarta(carta,this);
+                mesa.getRondaActual().agregarCarta(this,carta);
                 mano.remove(carta);
                 return;
             }

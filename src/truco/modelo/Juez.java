@@ -20,14 +20,6 @@ public class Juez {
         if(jugadores.size()%2!=0) throw new CantidadDeJugadoresDebeSerNumeroParException();
     }
 
-    public boolean jugadorEsPie(Jugador jugador){
-
-        if(mesa.getJugadores().size()==2)
-            return mesa.getJugadores().get(1).getNombre().equals(jugador.getNombre());
-
-        return (mesa.getJugadorPieEquipo1().getNombre().equals(jugador.getNombre()) || mesa.getJugadorPieEquipo2().getNombre().equals(jugador.getNombre()));
-    }
-
     public boolean jugadorEsMano(Jugador jugador){
 
         return mesa.getJugadorMano().getNombre().equals(jugador.getNombre());
