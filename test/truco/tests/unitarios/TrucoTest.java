@@ -28,7 +28,6 @@ public class TrucoTest {
 
     @Test(expected = JugadorPreExistenteException.class)
     public void testLanzaExcepcionCuandoJugadorYaExiste(){
-        System.out.println("TEST");
         trucoTester.nuevoJugador("Juan","Pikachu");
     }
 

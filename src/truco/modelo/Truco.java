@@ -51,7 +51,6 @@ public class Truco {
 
         this.getEquipo(equipo);
         try{this.getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
-            System.out.println("PASO POR ACA");
             Jugador nuevoJugador = new Jugador(nombreJugador);
             nuevoJugador.setNombre(nombreJugador);
             jugadoresActivos.add(nuevoJugador);
