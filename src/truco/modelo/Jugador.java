@@ -123,7 +123,7 @@ public class Jugador {
     }
 
     public void cantarTruco(){
-        if(mesa.getEstadoTruco().getClass().equals(new TrucoNoCantado().getClass())) {
+        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
@@ -131,7 +131,7 @@ public class Jugador {
     }
 
     public void cantarRetruco(){
-        if(mesa.getEstadoTruco().getClass().equals(new TrucoQuerido().getClass())) {
+        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
@@ -139,7 +139,7 @@ public class Jugador {
     }
 
     public void cantarValeCuatro(){
-        if(mesa.getEstadoTruco().getClass().equals(new RetrucoQuerido().getClass())) {
+        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
@@ -147,9 +147,9 @@ public class Jugador {
     }
 
     public void quiero() {
-        if (mesa.getEstadoTruco().getClass().equals(new TrucoCantado().getClass()) ||
-                mesa.getEstadoTruco().getClass().equals(new RetrucoCantado().getClass()) ||
-                mesa.getEstadoTruco().getClass().equals(new ValeCuatroCantado().getClass())) {
+        if (mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoQuerido().getClass()) ||
+                mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoQuerido().getClass()) ||
+                mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroQuerido().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         } else {
             throw new NoSePuedeCantarAhoraException();

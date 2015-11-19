@@ -35,6 +35,16 @@ public class EstadosTrucoTest {
 
         mesa.setJugadores(listaJugadores);
     }
+    @Test
+    public void seCantaTruco(){
+        mesa.nuevaRonda();
+        jugadorJuan.cantarTruco();
+        jugadorPepe.quiero();
+
+
+        Assert.assertEquals(2,mesa.getEstadoTruco().devolverPuntaje());
+
+    }
 
     @Test
     public void seCantaTrucoRetruco(){

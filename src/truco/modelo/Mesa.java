@@ -188,4 +188,13 @@ public class Mesa {
     public void setSeJuegaConFlor(){
         conFlor= true;
     }
+
+    public void repartirCartas() {
+        mazo.mezclar();
+        for(int i=0;i<3;i++){
+            for (int j=0;j<listaJugadores.size();j++){
+                listaJugadores.get(j).robarCartaDelMazo();
+            }
+        }
+    }
 }
