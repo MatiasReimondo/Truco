@@ -2,6 +2,7 @@ package truco.modelo;
 
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
+import truco.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 
 import java.util.*;
@@ -22,8 +23,6 @@ public class Mesa {
     private Jugador jugadorPieEquipo2;
     private Jugador jugadorActivo;
 
-
-
     private EstadoTruco estadoTruco;
 
     /**CONSTRUCTOR**/
@@ -34,13 +33,14 @@ public class Mesa {
     /**SETTERS**/
     public void setJugadores(List<Jugador> listaJugadores) {
         if(listaJugadores.isEmpty()) throw new ListaJugadoresVaciaException();
+        if(listaJugadores.size()<2) throw new CantidadDeJugadoresInsuficienteException();
 
         this.listaJugadores=listaJugadores;
 
-        iterMano =this.listaJugadores.iterator();
+        iterMano =listaJugadores.iterator();
         iterMano.next();
 
-        iterPie=this.listaJugadores.iterator();
+        iterPie=listaJugadores.iterator();
 
         while(iterPie.hasNext())
             iterPie.next();
@@ -50,6 +50,7 @@ public class Mesa {
         jugadorPieEquipo2=listaJugadores.get(listaJugadores.size()-1);
 
     }
+
     public void setEstadoTruco(EstadoTruco estadoTruco) {
         this.estadoTruco = estadoTruco;
     }
@@ -128,43 +129,16 @@ public class Mesa {
 
     }
 
-    public void repartirCartas(){
-        for(Jugador jugador:listaJugadores)
-            for(int i=0;i<3;i++)
-                jugador.robarCartaDelMazo();
-
-    }
-
-    public void resolverEnvido(Ronda rondaActual, Jugador jugadorMano) {
-        int maxEnvido = 0;
-        Jugador jugadorMax = null;
-
-        Set<Map.Entry<Jugador,Integer>> set = rondaActual.getTantosActuales().entrySet();
-
-        for (Map.Entry<Jugador,Integer> item : set) {
-            if (item.getValue() > maxEnvido) {
-                maxEnvido = item.getValue();
-                jugadorMax = item.getKey();
-            } else if (item.getValue()== maxEnvido && item.getKey().getNombre().equals(jugadorMano.getNombre())) {
-                jugadorMax = item.getKey();
-            }
-        }
-
-        jugadorMax.getEquipo().sumarPuntos(2);
-
-
-    }
-
     public void resolverEnvido(){
 
         int envidoMax=0;
         Equipo equipoGanador=null;
         Equipo equipoPerdedor=null;
         for(int i=0;i<listaJugadores.size();i++){
-            if(jugadorActivo.quiereMostrarEnvido())
-                if(jugadorActivo.getEnvido()>envidoMax) {
-                    if (jugadorActivo.getEquipo() != equipoGanador)
-                        equipoPerdedor = equipoGanador;
+            if(jugadorActivo.quiereMostrarEnvido())                      //Pregunta al jugador si quiere cantar su envido
+                if(jugadorActivo.getEnvido()>envidoMax) {                //Evalua si el envido del jugador es mayor al maximo actual
+                    if (jugadorActivo.getEquipo() != equipoGanador)      //Si el envido es mayor, verifica si el equipo ganador actual es el mismo que el que pertenece el jugador
+                        equipoPerdedor = equipoGanador;                  //Si la linea previa es verdadera, el viejo equipo ganador ahora es el nuevo equipo perdedor
                     equipoGanador = jugadorActivo.getEquipo();
                 }
             jugadorActivo=this.siguienteJugador(iterMano);

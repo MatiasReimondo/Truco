@@ -145,6 +145,7 @@ public class Jugador {
             throw new NoSePuedeCantarAhoraException();
         }
     }
+
     public void quiero() {
         if (mesa.getEstadoTruco().getClass().equals(new TrucoCantado().getClass()) ||
                 mesa.getEstadoTruco().getClass().equals(new RetrucoCantado().getClass()) ||

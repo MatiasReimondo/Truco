@@ -10,11 +10,10 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class Ronda {
 
-    private HashMap<String,Integer> puntos;
     private List<HashMap<Jugador,Carta>> manos;
     private HashMap<Jugador,Carta> manoActual;
-    private HashMap<Jugador,Integer> tantosActuales;
     private Mesa mesa;
+    boolean primera;
 
     private Envido tantoActivo;
     private Flor florActiva;
@@ -23,9 +22,7 @@ public class Ronda {
     public Ronda(){
         manos =new ArrayList<>(3);
         manoActual= new HashMap<Jugador,Carta>();
-
-
-
+        primera=true;
     }
 
     /**GETTERS**/
@@ -45,19 +42,19 @@ public class Ronda {
         return manoActual;
     }
 
-    public HashMap<Jugador,Integer> getTantosActuales(){
-        return tantosActuales;
-    }
-
     public Flor getFlorActiva(){
         return florActiva;
     }
 
     /**ACCIONES**/
-    public void siguienteMano(){
+    public void avanzarALaSiguienteMano(){
         manos.add(manoActual);
-        HashMap<Jugador,Carta> nuevaMano=new HashMap<>();
-        manoActual=nuevaMano;
+        manoActual=new HashMap<>();
+        this.primera=false;
+    }
+
+    public boolean seEstaJugandoLaPrimera(){
+        return primera;
     }
 
     public void agregarCarta(Jugador jugador,Carta carta) {

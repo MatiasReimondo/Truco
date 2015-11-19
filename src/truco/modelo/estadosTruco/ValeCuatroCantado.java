@@ -9,7 +9,6 @@ public class ValeCuatroCantado implements EstadoTruco {
 
     @Override
     public EstadoTruco avanzarEstado() {
-        ValeCuatroQuerido valeCuatroQuerido= new ValeCuatroQuerido();
-        return valeCuatroQuerido;
+        return new ValeCuatroQuerido();
     }
 }

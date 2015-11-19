@@ -11,7 +11,6 @@ public class RetrucoCantado implements EstadoTruco {
 
     @Override
     public EstadoTruco avanzarEstado() {
-        RetrucoQuerido retrucoQuerido= new RetrucoQuerido();
-        return retrucoQuerido;
+        return new RetrucoQuerido();
     }
 }

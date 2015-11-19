@@ -180,6 +180,9 @@ public class Carta {
         tablaFuerza.put(CuatroDeOro, 1);
     }
 
+    public boolean esMasFuerteQue(Carta carta){
+        return this.getFuerza()>carta.getFuerza();
+    }
     @Override
     public int hashCode() {
         int result = palo != null ? palo.hashCode() : 0;

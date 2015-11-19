@@ -9,7 +9,6 @@ public class RetrucoQuerido implements EstadoTruco {
 
     @Override
     public EstadoTruco avanzarEstado() {
-        ValeCuatroCantado valeCuatroCantado= new ValeCuatroCantado();
-        return valeCuatroCantado;
+        return new ValeCuatroCantado();
     }
 }
