@@ -1,5 +1,6 @@
 package truco.modelo;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
@@ -128,8 +129,6 @@ public class Mesa {
             ganadores.add(jugadorEmpate);
         }
         return ganadores;
-
-
     }
 
     public void resolverMano2(){
