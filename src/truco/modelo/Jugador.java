@@ -1,6 +1,7 @@
 package truco.modelo;
 
 import truco.modelo.envido.Envido;
+import truco.modelo.estadosTruco.*;
 import truco.modelo.excepciones.*;
 import truco.modelo.flor.Flor;
 
@@ -109,17 +110,55 @@ public class Jugador {
         }
     }
 
-    public void cantarFlor(Flor flor){
-        if( mesa.getConFlor().equals(false)){
+    public void cantarFlor(Flor flor) {
+        if (mesa.getConFlor().equals(false)) {
             throw new NoSeJuegaConFlorException();
-        }if(this.tieneFlor()==false){
-            throw new ElJugadorNoTieneFlorException();
         }
-        else{
+        if (this.tieneFlor() == false) {
+            throw new ElJugadorNoTieneFlorException();
+        } else {
             mesa.getRondaActual().activarFlor(flor);
 
         }
     }
+
+    public void cantarTruco(){
+        if(mesa.getEstadoTruco().getClass().equals(new TrucoNoCantado().getClass())) {
+            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
+        }else{
+            throw new NoSePuedeCantarAhoraException();
+        }
+    }
+
+    public void cantarRetruco(){
+        if(mesa.getEstadoTruco().getClass().equals(new TrucoQuerido().getClass())) {
+            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
+        }else{
+            throw new NoSePuedeCantarAhoraException();
+        }
+    }
+
+    public void cantarValeCuatro(){
+        if(mesa.getEstadoTruco().getClass().equals(new RetrucoQuerido().getClass())) {
+            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
+        }else{
+            throw new NoSePuedeCantarAhoraException();
+        }
+    }
+    public void quiero() {
+        if (mesa.getEstadoTruco().getClass().equals(new TrucoCantado().getClass()) ||
+                mesa.getEstadoTruco().getClass().equals(new RetrucoCantado().getClass()) ||
+                mesa.getEstadoTruco().getClass().equals(new ValeCuatroCantado().getClass())) {
+            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
+        } else {
+            throw new NoSePuedeCantarAhoraException();
+        }
+    }
+
+    public void noQuiero(){
+
+    }
+
 
     /**AUXILIARES**/
     private int sumarEnvido(Carta carta1, Carta carta2){

@@ -1,5 +1,7 @@
 package truco.modelo;
 
+import truco.modelo.estadosTruco.EstadoTruco;
+import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 
 import java.util.*;
@@ -19,6 +21,10 @@ public class Mesa {
     private Jugador jugadorPieEquipo1;
     private Jugador jugadorPieEquipo2;
     private Jugador jugadorActivo;
+
+
+
+    private EstadoTruco estadoTruco;
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -43,6 +49,9 @@ public class Mesa {
         jugadorPieEquipo1 =this.listaJugadores.get(listaJugadores.size()-2);
         jugadorPieEquipo2=listaJugadores.get(listaJugadores.size()-1);
 
+    }
+    public void setEstadoTruco(EstadoTruco estadoTruco) {
+        this.estadoTruco = estadoTruco;
     }
 
     /**GETTERS**/
@@ -72,6 +81,10 @@ public class Mesa {
 
     public Boolean getConFlor(){
         return conFlor;
+    }
+
+    public EstadoTruco getEstadoTruco() {
+        return estadoTruco;
     }
 
     /**ACCIONES**/
@@ -177,6 +190,7 @@ public class Mesa {
     public void nuevaRonda(){
         rondaActual=new Ronda();
         mazo=new Mazo();
+        estadoTruco= new TrucoNoCantado();
         actualizarJugadorManoPie();
     }
 
