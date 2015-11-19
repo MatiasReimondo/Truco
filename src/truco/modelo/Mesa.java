@@ -13,7 +13,7 @@ public class Mesa {
     private List<Jugador> jugadores;
     private int nroJugadores;
     private Boolean conFlor= false;
-    private Iterator<Jugador> iterJugadorActivo;
+    private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
     private EstadoTruco estadoTruco;
     private Juez juez;
@@ -33,7 +33,7 @@ public class Mesa {
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
 
-        iterJugadorActivo = jugadores.iterator();
+        iterJugadorActivo = jugadores.listIterator();
         iterJugadorActivo.next();
     }
 
@@ -97,7 +97,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;                  //Si la linea previa es verdadera, el viejo equipo ganador ahora es el nuevo equipo perdedor
                     equipoGanador = jugadorActivo.getEquipo();
                 }
-            jugadorActivo=this.siguienteJugador(iterJugadorActivo);
+            jugadorActivo=this.siguienteJugador();
         }
         if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
             equipoGanador.sumarPuntos(this.ronda.getTantoActivo().getPuntos(equipoGanador, equipoPerdedor));
@@ -132,6 +132,22 @@ public class Mesa {
 
     }
 
+    public void resolverMano2(){
+
+        int fzaMax=0;
+        for(ParCartaJugador par: cartasEnMesa) {
+            if (par.getCarta().getFuerza() > fzaMax) {
+                ronda.setEquipoConVentaja().par.getJugador().getEquipo();                    //Si la carta tiene es mas fuerte que la previamente mas fuerte,
+                fzaMax = par.getCarta().getFuerza();                                         //se actualiza el equipo con ventaja.
+            }
+            else if(par.getCarta().getFuerza()==fzaMax)
+                if(par.getJugador().getEquipo.equals(this.getJugadorMano().getEquipo())) {   //Si es parda, el equipo con ventaja es el equipo del jugador mano.
+                    ronda.setEquipoConVentaja().par.getJugador().getEquipo();
+                    fzaMax = par.getCarta().getFuerza();
+                }
+        }
+    }
+
     public void nuevaRonda(){
         ronda =new Ronda();
         mazo=new Mazo();
@@ -147,12 +163,12 @@ public class Mesa {
         jugadores.add(jugadores.remove(0));
     }
 
-    private Jugador siguienteJugador(Iterator<Jugador> iter){
-        if (iter.hasNext()){
-           return iter.next();
+    private Jugador siguienteJugador(){
+        if (iterJugadorActivo.hasNext()){
+           return iterJugadorActivo.next();
         }
-        iter = jugadores.iterator();
-        return iter.next();
+        iterJugadorActivo = jugadores.listIterator();
+        return iterJugadorActivo.next();
     }
 
     public void setSeJuegaConFlor(){
