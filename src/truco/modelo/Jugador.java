@@ -67,7 +67,7 @@ public class Jugador {
     public void jugarCarta(int numero, Palo palo) {
         for(Carta carta:mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)) {
-                mesa.getRondaActual().agregarCarta(this,carta);
+                mesa.getRonda().agregarCarta(this,carta);
                 mano.remove(carta);
                 return;
             }
@@ -102,8 +102,8 @@ public class Jugador {
 
     public void cantarTanto(Envido envido){
 
-        if(mesa.jugadorPuedeCantarTanto(this)) {
-            mesa.getRondaActual().activarTanto(envido);
+        if(mesa.getJuez().jugadorPuedeCantarTanto(this)) {
+            mesa.getRonda().activarTanto(envido);
         }else{
             throw new JugadorNoHabilitadoParaCantarTanto();
         }
@@ -116,7 +116,7 @@ public class Jugador {
         if (this.tieneFlor() == false) {
             throw new ElJugadorNoTieneFlorException();
         } else {
-            mesa.getRondaActual().activarFlor(flor);
+            mesa.getRonda().activarFlor(flor);
 
         }
     }
