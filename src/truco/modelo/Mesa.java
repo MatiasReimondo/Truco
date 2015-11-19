@@ -89,6 +89,12 @@ public class Mesa {
     }
 
     /**ACCIONES**/
+
+    public void repartirCartas(){
+        for(Jugador jugador:listaJugadores)
+            for(int i=0;i<3;i++)
+                jugador.robarCartaDelMazo();
+    }
     public boolean jugadorEsPie(Jugador jugador){
         return (jugador.getNombre().equals(jugadorPieEquipo1.getNombre()) && !jugadorEsMano(jugador) ||
                 jugador.getNombre().equals(jugadorPieEquipo2.getNombre()) && !jugadorEsMano(jugador));
@@ -164,6 +170,7 @@ public class Mesa {
     public void nuevaRonda(){
         rondaActual=new Ronda();
         mazo=new Mazo();
+        mazo.mezclar();
         estadoTruco= new TrucoNoCantado();
         actualizarJugadorManoPie();
     }
@@ -187,14 +194,5 @@ public class Mesa {
 
     public void setSeJuegaConFlor(){
         conFlor= true;
-    }
-
-    public void repartirCartas() {
-        mazo.mezclar();
-        for(int i=0;i<3;i++){
-            for (int j=0;j<listaJugadores.size();j++){
-                listaJugadores.get(j).robarCartaDelMazo();
-            }
-        }
     }
 }
