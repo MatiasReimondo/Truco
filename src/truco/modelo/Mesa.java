@@ -120,7 +120,7 @@ public class Mesa {
                     equipoGanador=null;
         }
 
-        if(ronda.getResultados().contains(equipoGanador) && !ronda.seEstaJugandoLaPrimera())
+        if(equipoGanador!=null && ronda.getResultados().contains(equipoGanador) && !ronda.seEstaJugandoLaPrimera())
             equipoGanador.sumarPuntos(this.estadoTruco.getPuntaje());
         else ronda.agregarResultado(equipoGanador);
     }
