@@ -87,9 +87,9 @@ public class MesaTest {
     /*
     @Test
     public void testActualizarManoPieNoLanzaExcepcion() {
-        mesaTester.actualizarJugadorManoPie();
-        mesaTester.actualizarJugadorManoPie();
-        mesaTester.actualizarJugadorManoPie();
+        mesaTester.actualizarJugadorMano();
+        mesaTester.actualizarJugadorMano();
+        mesaTester.actualizarJugadorMano();
         Assert.assertTrue(true);
     }
 */
@@ -97,7 +97,7 @@ public class MesaTest {
     public void testActualizarManoPie() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
         Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorPepe));
-        mesaTester.actualizarJugadorManoPie();
+        mesaTester.actualizarJugadorMano();
         Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorJuan));
         Assert.assertEquals(jugadorPepe, mesaTester.getJugadorMano());
 
@@ -107,7 +107,7 @@ public class MesaTest {
     public void testActualizarManoPieConListaVacia() {
         List<Jugador> lista = new ArrayList<>();
         mesaTester.setJugadores(lista);
-        mesaTester.actualizarJugadorManoPie();
+        mesaTester.actualizarJugadorMano();
     }
 
     @Test(expected = ListaJugadoresVaciaException.class)

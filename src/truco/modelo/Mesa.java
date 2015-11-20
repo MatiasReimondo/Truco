@@ -23,6 +23,7 @@ public class Mesa {
         mazo = new Mazo();
         juez=new Juez();
         juez.setMesa(this);
+        ronda=new Ronda();
     }
 
     /**SETTERS**/
@@ -101,7 +102,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;                  //Si la linea previa es verdadera, el viejo equipo ganador ahora es el nuevo equipo perdedor
                     equipoGanador = jugadorActivo.getEquipo();
                 }
-            jugadorActivo=this.proximoTurno();
+            this.proximoTurno();
         }
         if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
             equipoGanador.sumarPuntos(this.ronda.getTantoActivo().getPuntos(equipoGanador, equipoPerdedor));
@@ -135,23 +136,22 @@ public class Mesa {
         mazo=new Mazo();
         mazo.mezclar();
         estadoTruco= new TrucoNoCantado();
-        //actualizarJugadorManoPie();
+        //actualizarJugadorMano();
         jugadorActivo=this.jugadores.get(0);
         iterJugadorActivo= jugadores.listIterator(1);
     }
 
-    public Jugador proximoTurno(){
-        if(iterJugadorActivo.hasNext()){
-            return iterJugadorActivo.next();
-        }else{
+    public void proximoTurno(){
+        if(iterJugadorActivo.hasNext())
+            jugadorActivo= iterJugadorActivo.next();
+        else{
             iterJugadorActivo=jugadores.listIterator();
-            return iterJugadorActivo.next();
+            jugadorActivo= iterJugadorActivo.next();
         }
-
     }
 
     /**AUXILIARES**/
-    public void actualizarJugadorManoPie(){
+    public void actualizarJugadorMano(){
         if(jugadores.isEmpty()) throw new ListaJugadoresVaciaException();
         jugadores.add(jugadores.remove(0));
     }

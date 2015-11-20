@@ -61,11 +61,6 @@ public class JugadorTest {
         tester.levantarCarta(carta4);
     }
 
-    @Test(expected = CartaNoEstaEnLaManoException.class)
-    public void testJugarCartaInvalida(){
-        tester.jugarCarta(5,Palo.BASTO);
-    }
-
     @Test
     public void testSeReparteUn765YDevuelveEnvido33(){
         Carta nuevaCarta1= new Carta(7, Palo.BASTO);

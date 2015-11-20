@@ -1,6 +1,5 @@
 package integracion;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +33,9 @@ public class ResolverJugadas {
 
         equipoPepe.agregarIntegrante(jugadorPepe);
         equipoJuan.agregarIntegrante(jugadorJuan);
+
+        jugadorJuan.setEquipo(equipoJuan);
+        jugadorPepe.setEquipo(equipoPepe);
 
         listaJugadores=new ArrayList<>();
         listaJugadores.add(jugadorPepe);
@@ -79,15 +81,7 @@ public class ResolverJugadas {
         jugadorJuan.cantarTanto(new RealEnvido());
         mesa.resolverEnvido();
         Assert.assertEquals(3,jugadorPepe.getEquipo().getPuntaje());
-
-
-
-
         Assert.assertEquals(3,3);
-
-
-
-
     }
 */
     @Test (expected=ElJugadorNoTieneFlorException.class)
@@ -161,7 +155,20 @@ public class ResolverJugadas {
 
     }
 
+    @Test
+    public void testResolverUnaManoSimple(){
 
+        mesa.nuevaRonda();
+        jugadorPepe.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(6,Palo.BASTO));
+
+        jugadorPepe.jugarCarta(5, Palo.BASTO);
+        jugadorJuan.jugarCarta(6,Palo.BASTO);
+
+        mesa.resolverMano();
+
+        Assert.assertTrue(mesa.getRonda().getResultados().contains(equipoJuan));
+    }
 
 
 }
