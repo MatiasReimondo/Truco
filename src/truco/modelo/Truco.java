@@ -14,6 +14,7 @@ public class Truco {
     private List<Equipo> equipos;
     private List<Jugador> jugadoresActivos;
     private Mesa mesa;
+    private boolean flor;
 
     /**CONSTRUCTOR**/
     public Truco(){
@@ -60,7 +61,9 @@ public class Truco {
         throw new JugadorPreExistenteException();
     }
 
-
+    public void seJuegaConFlor(){
+        flor=true;
+    }
 
 }
 

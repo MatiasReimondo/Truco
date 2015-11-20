@@ -12,7 +12,6 @@ public class Mesa {
     private Ronda ronda;
     private List<Jugador> jugadores;
     private int nroJugadores;
-    private Boolean conFlor= false;
     private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
     private EstadoTruco estadoTruco;
@@ -68,10 +67,6 @@ public class Mesa {
 
     public Juez getJuez() {
         return juez;
-    }
-
-    public Boolean getConFlor(){
-        return conFlor;
     }
 
     public EstadoTruco getEstadoTruco() {
@@ -148,9 +143,6 @@ public class Mesa {
         return iterJugadorActivo.next();
     }
 
-    public void setSeJuegaConFlor(){
-        conFlor= true;
-    }
 
 
 }
