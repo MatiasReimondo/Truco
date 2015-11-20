@@ -1,5 +1,6 @@
 package integracion;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +46,7 @@ public class ResolverJugadas {
     }
 
 
+    /*
     @Test
     public void testCartasDeMismaFuerzaEmpatan(){
         mesa.nuevaRonda();
@@ -58,7 +60,7 @@ public class ResolverJugadas {
         Assert.assertEquals(true,ganador.contains(jugadorJuan));
         Assert.assertEquals(true,ganador.contains(jugadorPepe));
     }
-
+/*
 
 
     @Test
@@ -78,7 +80,7 @@ public class ResolverJugadas {
         mesa.resolverEnvido();
         Assert.assertEquals(3,jugadorPepe.getEquipo().getPuntaje());
 
-        */
+
 
 
         Assert.assertEquals(3,3);
@@ -87,7 +89,7 @@ public class ResolverJugadas {
 
 
     }
-
+*/
     @Test (expected=ElJugadorNoTieneFlorException.class)
     public void testSeCantaFlorSinTenerFlor(){
         mesa.nuevaRonda();

@@ -98,7 +98,6 @@ public class MesaTest {
     public void testActualizarManoPie() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
         Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorPepe));
-        System.out.println("TEST");
         mesaTester.actualizarJugadorManoPie();
         Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorJuan));
         Assert.assertEquals(jugadorPepe, mesaTester.getJugadorMano());

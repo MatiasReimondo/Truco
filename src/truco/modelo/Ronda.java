@@ -6,6 +6,7 @@ import truco.modelo.flor.Flor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 @SuppressWarnings("ALL")
 public class Ronda {
@@ -14,6 +15,7 @@ public class Ronda {
     private HashMap<Jugador,Carta> manoActual;
     private Mesa mesa;
     boolean primera;
+    private Vector<Equipo> resultados;
 
     private Envido tantoActivo;
     private Flor florActiva;
@@ -23,6 +25,7 @@ public class Ronda {
         manos =new ArrayList<>(3);
         manoActual= new HashMap<Jugador,Carta>();
         primera=true;
+        resultados=new Vector<>(3);
     }
 
     /**GETTERS**/
@@ -74,5 +77,13 @@ public class Ronda {
         if(florActiva==null)
             florActiva=flor;
         else florActiva.setContraFlor(flor);
+    }
+
+    public Vector<Equipo> getResultados() {
+        return resultados;
+    }
+
+    public void agregarResultado(Equipo equipoGanador) {
+        resultados.add(equipoGanador);
     }
 }

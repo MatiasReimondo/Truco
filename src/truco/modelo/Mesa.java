@@ -1,6 +1,5 @@
 package truco.modelo;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
@@ -106,45 +105,23 @@ public class Mesa {
 
     public void resolverTruco(){}
 
-    public List<Jugador> resolverMano() {
-        int maxFuerza = 0;
-        int fuerzaEmpate = 0;
-        Jugador jugadorMax = null;
-        Jugador jugadorEmpate = null;
-        List<Jugador> ganadores = new LinkedList<>();
+    public void resolverMano() {
 
+        int maxFza = 0;
+        Equipo equipoGanador=null;
 
-        for (Map.Entry<Jugador, Carta> item : ronda.getManoActual().entrySet() ) {
-            if (item.getValue().getFuerza() > maxFuerza) {
-                maxFuerza = item.getValue().getFuerza();
-                jugadorMax = item.getKey();
-            } else if (item.getValue().getFuerza() == maxFuerza) {
-                if(!item.getKey().getEquipo().getNombre().equals(jugadorMax.getEquipo().getNombre()))
-                    fuerzaEmpate = item.getValue().getFuerza();
-                jugadorEmpate = item.getKey();
+        for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoActual().entrySet() ) {
+            if (parJugadorCarta.getValue().getFuerza() > maxFza) {
+                maxFza = parJugadorCarta.getValue().getFuerza();
+                equipoGanador = parJugadorCarta.getKey().getEquipo();
             }
+             else if (parJugadorCarta.getValue().getFuerza() == maxFza)
+                if(!parJugadorCarta.getKey().getEquipo().equals(this.getJugadorMano().getEquipo()))
+                    equipoGanador=null;
         }
-        ganadores.add(jugadorMax);
-        if (maxFuerza==fuerzaEmpate){
-            ganadores.add(jugadorEmpate);
-        }
-        return ganadores;
-    }
 
-    public void resolverMano2(){
-
-        int fzaMax=0;
-        for(ParCartaJugador par: cartasEnMesa) {
-            if (par.getCarta().getFuerza() > fzaMax) {
-                ronda.setEquipoConVentaja().par.getJugador().getEquipo();                    //Si la carta tiene es mas fuerte que la previamente mas fuerte,
-                fzaMax = par.getCarta().getFuerza();                                         //se actualiza el equipo con ventaja.
-            }
-            else if(par.getCarta().getFuerza()==fzaMax)
-                if(par.getJugador().getEquipo.equals(this.getJugadorMano().getEquipo())) {   //Si es parda, el equipo con ventaja es el equipo del jugador mano.
-                    ronda.setEquipoConVentaja().par.getJugador().getEquipo();
-                    fzaMax = par.getCarta().getFuerza();
-                }
-        }
+        if(ronda.getResultados().contains(equipoGanador) && !ronda.seEstaJugandoLaPrimera());
+        else ronda.agregarResultado(equipoGanador);
     }
 
     public void nuevaRonda(){
