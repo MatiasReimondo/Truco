@@ -41,11 +41,6 @@ public class Mesa {
         this.estadoTruco = estadoTruco;
     }
 
-    public void setJugadorActivo(Jugador jugadorActivo) {
-        this.jugadorActivo = jugadorActivo;
-    }
-
-
     /**GETTERS**/
     public Mazo getMazo(){
         return mazo;
