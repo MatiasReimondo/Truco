@@ -108,7 +108,7 @@ public class Jugador {
             throw new JugadorNoHabilitadoParaCantarTanto();
         }
     }
-/*
+
     public void cantarFlor(Flor flor) {
         if (mesa.getConFlor().equals(false)) {
             throw new NoSeJuegaConFlorException();
@@ -120,7 +120,7 @@ public class Jugador {
 
         }
     }
-*/
+
     public void cantarTruco(){
         if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
