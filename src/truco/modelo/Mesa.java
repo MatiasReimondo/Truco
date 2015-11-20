@@ -33,13 +33,17 @@ public class Mesa {
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
 
-        iterJugadorActivo = jugadores.listIterator();
-        iterJugadorActivo.next();
+
     }
 
     public void setEstadoTruco(EstadoTruco estadoTruco) {
         this.estadoTruco = estadoTruco;
     }
+
+    public void setJugadorActivo(Jugador jugadorActivo) {
+        this.jugadorActivo = jugadorActivo;
+    }
+
 
     /**GETTERS**/
     public Mazo getMazo(){
@@ -97,7 +101,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;                  //Si la linea previa es verdadera, el viejo equipo ganador ahora es el nuevo equipo perdedor
                     equipoGanador = jugadorActivo.getEquipo();
                 }
-            jugadorActivo=this.siguienteJugador();
+            jugadorActivo=this.proximoTurno();
         }
         if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
             equipoGanador.sumarPuntos(this.ronda.getTantoActivo().getPuntos(equipoGanador, equipoPerdedor));
@@ -125,13 +129,25 @@ public class Mesa {
         else ronda.agregarResultado(equipoGanador);
     }
 
+
     public void nuevaRonda(){
         ronda =new Ronda();
         mazo=new Mazo();
         mazo.mezclar();
         estadoTruco= new TrucoNoCantado();
-        actualizarJugadorManoPie();
-        jugadorActivo=this.getJugadorMano();
+        //actualizarJugadorManoPie();
+        jugadorActivo=this.jugadores.get(0);
+        iterJugadorActivo= jugadores.listIterator(1);
+    }
+
+    public Jugador proximoTurno(){
+        if(iterJugadorActivo.hasNext()){
+            return iterJugadorActivo.next();
+        }else{
+            iterJugadorActivo=jugadores.listIterator();
+            return iterJugadorActivo.next();
+        }
+
     }
 
     /**AUXILIARES**/
@@ -140,13 +156,6 @@ public class Mesa {
         jugadores.add(jugadores.remove(0));
     }
 
-    private Jugador siguienteJugador(){
-        if (iterJugadorActivo.hasNext()){
-           return iterJugadorActivo.next();
-        }
-        iterJugadorActivo = jugadores.listIterator();
-        return iterJugadorActivo.next();
-    }
 
     public void setSeJuegaConFlor(){
         conFlor= true;

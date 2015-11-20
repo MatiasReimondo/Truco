@@ -2,6 +2,7 @@ package truco.modelo;
 
 import truco.modelo.envido.Envido;
 import truco.modelo.estadosTruco.*;
+import truco.modelo.ex.NoEsElTurnoDelJugadorException;
 import truco.modelo.excepciones.*;
 import truco.modelo.flor.Flor;
 
@@ -64,14 +65,27 @@ public class Jugador {
         mano.add(mesa.getMazo().getCartas().removeFirst());
     }
 
+
     public void jugarCarta(int numero, Palo palo) {
-        for(Carta carta:mano)
-            if(carta.getNumero()==numero && carta.getPalo().equals(palo)) {
-                mesa.getRonda().agregarCarta(this,carta);
-                mano.remove(carta);
-                return;
+        boolean cartaJugada= false;
+
+        if(this.equals(mesa.getJugadorActivo())) {
+            for (int i=0;i<mano.size();i++) {
+                if (mano.get(i).getNumero() == numero && mano.get(i).getPalo().equals(palo)) {
+                    mesa.getRonda().agregarCarta(this, mano.get(i));
+                    mano.remove(mano.get(i));
+                    cartaJugada=true;
+                    mesa.setJugadorActivo(mesa.proximoTurno());
+                }
             }
-        throw new CartaNoEstaEnLaManoException();
+            if (cartaJugada==false){
+                throw new CartaNoEstaEnLaManoException();
+            }
+        }
+        else{
+            throw new NoEsElTurnoDelJugadorException();
+
+        }
 
     }
 

@@ -3,9 +3,8 @@ package truco.tests.unitarios;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import truco.modelo.Equipo;
-import truco.modelo.Jugador;
-import truco.modelo.Mesa;
+import truco.modelo.*;
+import truco.modelo.ex.NoEsElTurnoDelJugadorException;
 import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.modelo.excepciones.MazoSinCartasException;
@@ -131,5 +130,58 @@ public class MesaTest {
          mesaTester.getMazo().getCartas().removeFirst();
 
         jugadorJuan.robarCartaDelMazo();
+    }
+
+    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    public void testJugadorTrataDeJugarCuandoNoEsSuTurno(){
+        mesaTester.nuevaRonda();
+
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(5, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(6,Palo.COPA));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorJuan.jugarCarta(3,Palo.BASTO);
+        jugadorJuan.jugarCarta(2,Palo.BASTO);
+
+    }
+    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    public void testJugadorTrataDeJugarCuandoNoEsSuTurno2(){
+        mesaTester.nuevaRonda();
+
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(5, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(6,Palo.COPA));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorPepe.jugarCarta(4,Palo.BASTO);
+
+
+    }
+
+    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    public void testJugadorTrataDeJugarCuandoNoEsSuTurno3(){
+        mesaTester.nuevaRonda();
+
+        jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorPepe.levantarCarta(new Carta(5, Palo.ESPADA));
+        jugadorPepe.levantarCarta(new Carta(6,Palo.COPA));
+
+        jugadorJuan.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorJuan.levantarCarta(new Carta(1,Palo.COPA));
+
+        jugadorJuan.jugarCarta(3,Palo.BASTO);
+        jugadorPepe.jugarCarta(4, Palo.BASTO);
+        jugadorJuan.jugarCarta(2,Palo.BASTO);
+        jugadorJuan.jugarCarta(1,Palo.COPA);
+
+
     }
 }
