@@ -3,7 +3,7 @@ package truco.modelo.estadosTruco;
 
 public interface EstadoTruco {
 
-     int devolverPuntaje();
+     int getPuntaje();
      EstadoTruco avanzarEstado();
 
 

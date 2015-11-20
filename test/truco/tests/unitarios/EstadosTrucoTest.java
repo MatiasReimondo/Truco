@@ -42,7 +42,7 @@ public class EstadosTrucoTest {
         jugadorPepe.quiero();
 
 
-        Assert.assertEquals(2,mesa.getEstadoTruco().devolverPuntaje());
+        Assert.assertEquals(2,mesa.getEstadoTruco().getPuntaje());
 
     }
 
@@ -54,7 +54,7 @@ public class EstadosTrucoTest {
         jugadorPepe.cantarRetruco();
         jugadorJuan.quiero();
 
-        Assert.assertEquals(3,mesa.getEstadoTruco().devolverPuntaje());
+        Assert.assertEquals(3,mesa.getEstadoTruco().getPuntaje());
 
     }
 
@@ -68,7 +68,7 @@ public class EstadosTrucoTest {
         jugadorJuan.cantarValeCuatro();
         jugadorPepe.quiero();
 
-        Assert.assertEquals(4,mesa.getEstadoTruco().devolverPuntaje());
+        Assert.assertEquals(4,mesa.getEstadoTruco().getPuntaje());
 
     }
 }

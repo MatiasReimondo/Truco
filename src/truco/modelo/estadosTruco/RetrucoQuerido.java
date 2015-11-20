@@ -3,7 +3,7 @@ package truco.modelo.estadosTruco;
 
 public class RetrucoQuerido implements EstadoTruco {
     @Override
-    public int devolverPuntaje() {
+    public int getPuntaje() {
         return 3;
     }
 

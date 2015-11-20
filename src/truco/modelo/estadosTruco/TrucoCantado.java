@@ -4,7 +4,7 @@ package truco.modelo.estadosTruco;
 public class TrucoCantado implements EstadoTruco {
 
     @Override
-    public int devolverPuntaje(){
+    public int getPuntaje(){
         return 1;
 
     }

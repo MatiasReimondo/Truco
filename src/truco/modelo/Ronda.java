@@ -11,7 +11,6 @@ import java.util.Vector;
 @SuppressWarnings("ALL")
 public class Ronda {
 
-    private List<HashMap<Jugador,Carta>> manos;
     private HashMap<Jugador,Carta> manoActual;
     private Mesa mesa;
     boolean primera;
@@ -22,23 +21,9 @@ public class Ronda {
 
     /**CONSTRUCTOR**/
     public Ronda(){
-        manos =new ArrayList<>(3);
         manoActual= new HashMap<Jugador,Carta>();
         primera=true;
-        resultados=new Vector<>(3);
-    }
-
-    /**GETTERS**/
-    public HashMap<Jugador,Carta> getPrimera(){
-        return manos.get(0);
-    }
-
-    public HashMap<Jugador,Carta> getSegunda(){
-        return manos.get(1);
-    }
-
-    public HashMap<Jugador,Carta> getTercera(){
-        return manos.get(2);
+        resultados=new Vector<>();
     }
 
     public HashMap<Jugador,Carta> getManoActual(){
@@ -51,7 +36,6 @@ public class Ronda {
 
     /**ACCIONES**/
     public void avanzarALaSiguienteMano(){
-        manos.add(manoActual);
         manoActual=new HashMap<>();
         this.primera=false;
     }
@@ -81,6 +65,10 @@ public class Ronda {
 
     public Vector<Equipo> getResultados() {
         return resultados;
+    }
+
+    public boolean termino(){
+        return resultados.size()==2;
     }
 
     public void agregarResultado(Equipo equipoGanador) {
