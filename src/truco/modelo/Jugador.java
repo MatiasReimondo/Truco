@@ -21,7 +21,7 @@ public class Jugador {
     private Equipo equipo;
     static final int MAXIMO_CARTAS= 3;
 
-    /********************** Métodos de la clase ***********************************/
+    /********************** Metodos de la clase ***********************************/
     /**CONSTRUCTOR**/
     public Jugador(String unNombre){
         this.nombre =unNombre;
@@ -172,7 +172,7 @@ public class Jugador {
     }
 
 
-    /********************* Métodos privados ***********************/
+    /********************* Metodos privados ***********************/
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
