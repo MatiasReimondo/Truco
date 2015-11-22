@@ -7,7 +7,7 @@ import truco.modelo.excepciones.NoSePuedeCantarAhoraException;
  *********************************************************************************/
 public class TrucoCantado implements EstadoTruco {
 
-    /********************** Métodos de la clase ***********************************/
+    /********************** Metodos de la clase ***********************************/
     @Override
     public int getPuntaje(){
         return 1;
