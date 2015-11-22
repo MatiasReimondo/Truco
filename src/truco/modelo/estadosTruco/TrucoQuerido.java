@@ -7,7 +7,7 @@ import truco.modelo.excepciones.NoSePuedeCantarAhoraException;
  *********************************************************************************/
 public class TrucoQuerido implements EstadoTruco {
 
-    /********************** Métodos de la clase ***********************************/
+    /********************** Metodos de la clase ***********************************/
     @Override
     public int getPuntaje() {
         return 2;
@@ -16,7 +16,7 @@ public class TrucoQuerido implements EstadoTruco {
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa ) {
 
-        //si no son iguales se lanza una excepción
+        //si no son iguales se lanza una excepciÃ³n
         if ( !mesa.getEstadoTruco().getClass().equals(new TrucoQuerido().getClass()) ){
             throw new NoSePuedeCantarAhoraException();
         }
