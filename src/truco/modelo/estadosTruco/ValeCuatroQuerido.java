@@ -6,7 +6,7 @@ import truco.modelo.Mesa;
  *********************************************************************************/
 public class ValeCuatroQuerido implements EstadoTruco {
 
-    /********************** Métodos de la clase ***********************************/
+    /********************** Metodos de la clase ***********************************/
     @Override
     public int getPuntaje() {
         return 4;
