@@ -1,13 +1,16 @@
 package truco.modelo;
-
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 
 import java.util.*;
 
+/*********************************************************************************
+ * *******************************  Mesa  ****************************************
+ * *********************************************************************************/
 public class Mesa {
 
+    /*********************** Atributos de la clase ********************************/
     private Mazo mazo;
     private Ronda ronda;
     private List<Jugador> jugadores;
@@ -18,6 +21,7 @@ public class Mesa {
     private EstadoTruco estadoTruco;
     private Juez juez;
 
+    /********************** Métodos de la clase ***********************************/
     /**CONSTRUCTOR**/
     public Mesa() {
         mazo = new Mazo();
@@ -33,8 +37,6 @@ public class Mesa {
 
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
-
-
     }
 
     public void setEstadoTruco(EstadoTruco estadoTruco) {
@@ -125,7 +127,6 @@ public class Mesa {
         else ronda.agregarResultado(equipoGanador);
     }
 
-
     public void nuevaRonda(){
         ronda =new Ronda();
         mazo=new Mazo();
@@ -151,10 +152,11 @@ public class Mesa {
         jugadores.add(jugadores.remove(0));
     }
 
-
     public void setSeJuegaConFlor(){
         conFlor= true;
     }
 
-
+    public void cambiarEstado() {
+        this.estadoTruco = this.estadoTruco.avanzarEstado(this);
+    }
 }

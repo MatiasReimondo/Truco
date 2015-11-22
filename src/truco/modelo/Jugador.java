@@ -1,5 +1,4 @@
 package truco.modelo;
-
 import truco.modelo.envido.Envido;
 import truco.modelo.estadosTruco.*;
 import truco.modelo.ex.NoEsElTurnoDelJugadorException;
@@ -9,15 +8,20 @@ import truco.modelo.flor.Flor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**********************************************************************************
+ * *******************************  Jugador  **************************************
+ * *********************************************************************************/
 @SuppressWarnings("ALL")
 public class Jugador {
 
+    /*********************** Atributos de la clase ********************************/
     private String nombre;
     private List<Carta> mano;
     private Mesa mesa;
     private Equipo equipo;
     static final int MAXIMO_CARTAS= 3;
 
+    /********************** Métodos de la clase ***********************************/
     /**CONSTRUCTOR**/
     public Jugador(String unNombre){
         this.nombre =unNombre;
@@ -43,7 +47,7 @@ public class Jugador {
     }
 
     public Equipo getEquipo(){
-        return equipo;
+        return this.equipo;
     }
 
     public List<Carta> getMano(){
@@ -60,11 +64,10 @@ public class Jugador {
     public void robarCartaDelMazo(){
         if(this.mano.size() >= MAXIMO_CARTAS)
             throw new LimiteDeCartasEnLaManoExcedidoException();
-        if(mesa.getMazo().getCartas().size()==0)
+        if(this.mesa.getMazo().getCartas().size()==0)
             throw new MazoSinCartasException();
-        mano.add(mesa.getMazo().getCartas().removeFirst());
+        this.mano.add(this.mesa.getMazo().getCartas().removeFirst());
     }
-
 
     public void jugarCarta(int numero, Palo palo) {
 
@@ -127,37 +130,41 @@ public class Jugador {
     }
 
     public void cantarTruco(){
-        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoCantado().getClass())) {
+        this.mesa.cambiarEstado();
+       /* if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
-        }
+        } */
     }
 
     public void cantarRetruco(){
-        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoCantado().getClass())) {
+        this.mesa.cambiarEstado();
+/*        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
-        }
+        }*/
     }
 
     public void cantarValeCuatro(){
-        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroCantado().getClass())) {
+        this.mesa.cambiarEstado();
+        /*if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroCantado().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         }else{
             throw new NoSePuedeCantarAhoraException();
-        }
+        }*/
     }
 
     public void quiero() {
-        if (mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoQuerido().getClass()) ||
+        this.mesa.cambiarEstado();
+       /* if (mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoQuerido().getClass()) ||
                 mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoQuerido().getClass()) ||
                 mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroQuerido().getClass())) {
             mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
         } else {
             throw new NoSePuedeCantarAhoraException();
-        }
+        }*/
     }
 
     public void noQuiero(){
@@ -165,7 +172,7 @@ public class Jugador {
     }
 
 
-    /**AUXILIARES**/
+    /********************* Métodos privados ***********************/
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
