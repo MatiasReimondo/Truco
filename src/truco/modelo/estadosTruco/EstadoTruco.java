@@ -6,7 +6,7 @@ import truco.modelo.Mesa;
  *********************************************************************************/
 public interface EstadoTruco {
 
-     /********************** Métodos de la clase ***********************************/
+     /********************** Metodos de la clase ***********************************/
      int getPuntaje();
 
      EstadoTruco avanzarEstado(Mesa mesa);
