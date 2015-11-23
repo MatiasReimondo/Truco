@@ -48,7 +48,7 @@ public class ResolverJugadas {
     }
 
 
-    /*
+
     @Test
     public void testCartasDeMismaFuerzaEmpatan(){
         mesa.nuevaRonda();
@@ -57,18 +57,20 @@ public class ResolverJugadas {
 
         jugadorPepe.jugarCarta(3,Palo.BASTO);
         jugadorJuan.jugarCarta(3,Palo.COPA);
+        mesa.resolverMano();
 
-        List<Jugador> ganador=mesa.resolverMano();
-        Assert.assertEquals(true,ganador.contains(jugadorJuan));
-        Assert.assertEquals(true,ganador.contains(jugadorPepe));
+
+        Assert.assertEquals(false,mesa.getRonda().getResultados().contains(jugadorJuan));
+        Assert.assertEquals(false,mesa.getRonda().getResultados().contains(jugadorPepe));
     }
-/*
 
 
+
+    /*
     @Test
     public void testSeComparanLosEnvidos(){
 
-        /*
+
         mesa.nuevaRonda();
         jugadorPepe.levantarCarta(new Carta(4, Palo.BASTO));
         jugadorPepe.levantarCarta(new Carta(5, Palo.BASTO));
@@ -81,9 +83,10 @@ public class ResolverJugadas {
         jugadorJuan.cantarTanto(new RealEnvido());
         mesa.resolverEnvido();
         Assert.assertEquals(3,jugadorPepe.getEquipo().getPuntaje());
-        Assert.assertEquals(3,3);
+        //Assert.assertEquals(3,3);
     }
-*/
+    */
+
     @Test (expected=ElJugadorNoTieneFlorException.class)
     public void testSeCantaFlorSinTenerFlor(){
         mesa.nuevaRonda();

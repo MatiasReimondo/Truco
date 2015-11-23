@@ -1,6 +1,5 @@
 package truco.modelo;
 import truco.modelo.envido.Envido;
-import truco.modelo.estadosTruco.*;
 import truco.modelo.ex.NoEsElTurnoDelJugadorException;
 import truco.modelo.excepciones.*;
 import truco.modelo.flor.Flor;
@@ -131,40 +130,22 @@ public class Jugador {
 
     public void cantarTruco(){
         this.mesa.cambiarEstado();
-       /* if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoCantado().getClass())) {
-            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
-        }else{
-            throw new NoSePuedeCantarAhoraException();
-        } */
+
     }
 
     public void cantarRetruco(){
         this.mesa.cambiarEstado();
-/*        if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoCantado().getClass())) {
-            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
-        }else{
-            throw new NoSePuedeCantarAhoraException();
-        }*/
+
     }
 
     public void cantarValeCuatro(){
         this.mesa.cambiarEstado();
-        /*if(mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroCantado().getClass())) {
-            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
-        }else{
-            throw new NoSePuedeCantarAhoraException();
-        }*/
+
     }
 
     public void quiero() {
         this.mesa.cambiarEstado();
-       /* if (mesa.getEstadoTruco().avanzarEstado().getClass().equals(new TrucoQuerido().getClass()) ||
-                mesa.getEstadoTruco().avanzarEstado().getClass().equals(new RetrucoQuerido().getClass()) ||
-                mesa.getEstadoTruco().avanzarEstado().getClass().equals(new ValeCuatroQuerido().getClass())) {
-            mesa.setEstadoTruco(mesa.getEstadoTruco().avanzarEstado());
-        } else {
-            throw new NoSePuedeCantarAhoraException();
-        }*/
+
     }
 
     public void noQuiero(){
