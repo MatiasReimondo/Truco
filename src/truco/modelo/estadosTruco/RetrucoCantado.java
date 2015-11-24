@@ -2,10 +2,6 @@ package truco.modelo.estadosTruco;
 import truco.modelo.Mesa;
 import truco.modelo.excepciones.NoSePuedeCantarAhoraException;
 
-
-/**
- * Created by shaun on 18/11/2015.
- */
 public class RetrucoCantado implements EstadoTruco {
     @Override
     public int getPuntaje() {

@@ -359,4 +359,83 @@ public class ResolverJugadas {
 
     }
 
+    @Test
+         public void testManoGanaPrimeraYSegundaConTruco(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(2, Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(7, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
+
+        jugadorMano.cantarTruco();
+        jugadorPie.quiero();
+        jugadorMano.jugarCarta(3,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        jugadorMano.jugarCarta(2,Palo.BASTO);
+        jugadorPie.jugarCarta(7,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        Assert.assertEquals(2,equipoMano.getPuntaje());
+        Assert.assertEquals(0,equipoPie.getPuntaje());
+    }
+
+    @Test
+    public void testManoGanaPrimeraYSegundaConRetruco(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(2, Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(7, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
+
+        jugadorMano.cantarTruco();
+        jugadorPie.quiero();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quiero();
+        jugadorMano.jugarCarta(3,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        jugadorMano.jugarCarta(2,Palo.BASTO);
+        jugadorPie.jugarCarta(7,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        Assert.assertEquals(3,equipoMano.getPuntaje());
+        Assert.assertEquals(0,equipoPie.getPuntaje());
+    }
+
+    @Test
+    public void testManoGanaPrimeraYSegundaConTruco2(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(2, Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(7, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
+
+        jugadorMano.quiero();
+        jugadorPie.quiero();
+        jugadorMano.jugarCarta(3,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        jugadorMano.jugarCarta(2,Palo.BASTO);
+        jugadorPie.jugarCarta(7,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        Assert.assertEquals(2,equipoMano.getPuntaje());
+        Assert.assertEquals(0,equipoPie.getPuntaje());
+    }
 }

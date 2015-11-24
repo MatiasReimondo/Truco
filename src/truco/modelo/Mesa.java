@@ -167,11 +167,12 @@ public class Mesa {
                     else equipo.sumarPuntos(this.estadoTruco.getPuntaje());
         }
     }
+
     public void setSeJuegaConFlor(){
         conFlor= true;
     }
 
-    public void cambiarEstado() {
+    public void cambiarEstadoTruco() {
         this.estadoTruco = this.estadoTruco.avanzarEstado(this);
     }
 }
