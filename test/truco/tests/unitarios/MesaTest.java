@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
-import truco.modelo.ex.NoEsElTurnoDelJugadorException;
 import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.modelo.excepciones.MazoSinCartasException;
+import truco.modelo.excepciones.NoEsTurnoDelJugadorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +132,7 @@ public class MesaTest {
         jugadorJuan.robarCartaDelMazo();
     }
 
-    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    @Test (expected = NoEsTurnoDelJugadorException.class)
     public void testJugadorTrataDeJugarCuandoNoEsSuTurno(){
         mesaTester.nuevaRonda();
 
@@ -148,7 +148,7 @@ public class MesaTest {
         jugadorJuan.jugarCarta(2,Palo.BASTO);
 
     }
-    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    @Test (expected = NoEsTurnoDelJugadorException.class)
     public void testJugadorTrataDeJugarCuandoNoEsSuTurno2(){
         mesaTester.nuevaRonda();
 
@@ -165,7 +165,7 @@ public class MesaTest {
 
     }
 
-    @Test (expected = NoEsElTurnoDelJugadorException.class)
+    @Test (expected = NoEsTurnoDelJugadorException.class)
     public void testJugadorTrataDeJugarCuandoNoEsSuTurno3(){
         mesaTester.nuevaRonda();
 

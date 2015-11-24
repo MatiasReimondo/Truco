@@ -112,19 +112,17 @@ public class Mesa {
         int maxFza = 0;
         Equipo equipoGanador=null;
 
-        for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoActual().entrySet() ) {
+        for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoActual().entrySet() )
             if (parJugadorCarta.getValue().getFuerza() > maxFza) {
                 maxFza = parJugadorCarta.getValue().getFuerza();
                 equipoGanador = parJugadorCarta.getKey().getEquipo();
             }
              else if (parJugadorCarta.getValue().getFuerza() == maxFza)
-                if(!parJugadorCarta.getKey().getEquipo().equals(this.getJugadorMano().getEquipo()))
+                if(!parJugadorCarta.getKey().getEquipo().equals(equipoGanador))
                     equipoGanador=null;
-        }
 
-        if(equipoGanador!=null && ronda.getResultados().contains(equipoGanador) && !ronda.seEstaJugandoLaPrimera())
-            equipoGanador.sumarPuntos(this.estadoTruco.getPuntaje());
-        else ronda.agregarResultado(equipoGanador);
+        this.evaluarMano(equipoGanador);
+        ronda.avanzarALaSiguienteMano();
     }
 
     public void nuevaRonda(){
@@ -152,6 +150,23 @@ public class Mesa {
         jugadores.add(jugadores.remove(0));
     }
 
+    private void evaluarMano(Equipo equipo){
+        switch (ronda.getResultados().size()){
+            case 0: ronda.resultadoManoActual(equipo); return;
+            case 1: {
+                if (ronda.getResultados().contains(null) || ronda.getResultados().contains(equipo))
+                    if (equipo != null) {
+                        equipo.sumarPuntos(this.estadoTruco.getPuntaje());
+                        ronda.terminar();
+                        return;
+                    }
+                ronda.resultadoManoActual(equipo);
+                return;
+            }
+            case 2: if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(this.estadoTruco.getPuntaje());
+                    else equipo.sumarPuntos(this.estadoTruco.getPuntaje());
+        }
+    }
     public void setSeJuegaConFlor(){
         conFlor= true;
     }

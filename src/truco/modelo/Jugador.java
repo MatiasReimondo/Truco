@@ -1,6 +1,5 @@
 package truco.modelo;
 import truco.modelo.envido.Envido;
-import truco.modelo.ex.NoEsElTurnoDelJugadorException;
 import truco.modelo.excepciones.*;
 import truco.modelo.flor.Flor;
 
@@ -71,7 +70,7 @@ public class Jugador {
     public void jugarCarta(int numero, Palo palo) {
 
         if(!mesa.getJuez().esTurnoDelJugador(this))
-            throw new NoEsElTurnoDelJugadorException();
+            throw new NoEsTurnoDelJugadorException();
         for(Carta carta: mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)){
                 mesa.getRonda().agregarCarta(this,carta);

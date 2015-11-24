@@ -13,7 +13,8 @@ public class Ronda {
 
     private HashMap<Jugador,Carta> manoActual;
     private Mesa mesa;
-    boolean primera;
+    private boolean primera;
+    private boolean terminada;
     private Vector<Equipo> resultados;
 
     private Envido tantoActivo;
@@ -57,6 +58,7 @@ public class Ronda {
             tantoActivo=envido;
         else tantoActivo.setSubEnvido(envido);
     }
+
     public void activarFlor(Flor flor) {
         if(florActiva==null)
             florActiva=flor;
@@ -67,11 +69,14 @@ public class Ronda {
         return resultados;
     }
 
+    public void terminar(){
+        terminada=true;
+    }
     public boolean termino(){
-        return resultados.size()==2;
+        return terminada;
     }
 
-    public void agregarResultado(Equipo equipoGanador) {
+    public void resultadoManoActual(Equipo equipoGanador) {
         resultados.add(equipoGanador);
     }
 }
