@@ -2,13 +2,12 @@ package truco.modelo.envido;
 
 import truco.modelo.Equipo;
 
-public class Envido {
-
+public class EnvidoNoCantado extends Envido{
     private Envido subEnvido;
     private int puntos;
 
-    public Envido(){
-        puntos=2;
+    public EnvidoNoCantado(){
+        puntos=0;
     }
 
     public void anidarEnvido(Envido envido){
@@ -28,3 +27,4 @@ public class Envido {
         return puntos+subEnvido.getPuntos(equipoGanador,equipoPerdedor);
     }
 }
+

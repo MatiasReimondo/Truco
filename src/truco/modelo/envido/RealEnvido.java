@@ -13,6 +13,7 @@ public class RealEnvido extends Envido {
         this.puntos=3;
     }
 
+    @Override
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){
         if(subEnvido==null)
             return this.puntos;

@@ -111,8 +111,24 @@ public class Jugador {
             throw new JugadorNoHabilitadoParaCantarTanto();
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
             throw new TantoSoloSePuedeCantarEnLaPrimeraException();
-        mesa.getRonda().activarTanto(envido);
+        mesa.proximoTurno();
+        if(mesa.getJugadorActivo().quieroEnvido())
+            mesa.getRonda().subirApuestaDelEnvido(envido);
+    }
 
+    public boolean quieroEnvido(){
+        return true;
+
+    }
+    private void responderTanto(Envido envido) {
+
+        //Si el jugador sube la apuesta
+        mesa.proximoTurno();
+        //mesa.getJugadorActivo().responderTanto();
+
+        //Si el jugador quiere
+        mesa.getRonda().subirApuestaDelEnvido(envido);
+        mesa.jugadorAnterior();
     }
 
     public void cantarFlor(Flor flor) {

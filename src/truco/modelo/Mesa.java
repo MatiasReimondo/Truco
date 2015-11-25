@@ -2,6 +2,7 @@ package truco.modelo;
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
+import truco.modelo.excepciones.RondaTerminadaException;
 
 import java.util.*;
 
@@ -110,12 +111,14 @@ public class Mesa {
                     }
             this.proximoTurno();
         }
-            equipoGanador.sumarPuntos(this.ronda.getTantoActivo().getPuntos(equipoGanador, equipoPerdedor));
+            equipoGanador.sumarPuntos(this.ronda.getTanto().getPuntos(equipoGanador, equipoPerdedor));
     }
 
     public void resolverTruco(){}
 
     public void resolverMano() {
+        if(ronda.termino())
+            throw new RondaTerminadaException();
 
         int maxFza = 0;
         Equipo equipoGanador=null;
@@ -185,5 +188,10 @@ public class Mesa {
 
     public void cambiarEstadoTruco() {
         this.estadoTruco = this.estadoTruco.avanzarEstado(this);
+    }
+
+    public void jugadorAnterior() {
+
+        jugadorActivo=iterJugadorActivo.previous();
     }
 }

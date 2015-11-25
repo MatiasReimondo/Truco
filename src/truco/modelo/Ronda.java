@@ -1,23 +1,20 @@
 package truco.modelo;
 
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.flor.Flor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Vector;
 
-@SuppressWarnings("ALL")
 public class Ronda {
 
     private HashMap<Jugador,Carta> manoActual;
-    private Mesa mesa;
     private boolean primera;
     private boolean terminada;
     private Vector<Equipo> resultados;
 
-    private Envido tantoActivo;
+    private Envido tanto;
     private Flor florActiva;
 
     /**CONSTRUCTOR**/
@@ -25,14 +22,24 @@ public class Ronda {
         manoActual= new HashMap<Jugador,Carta>();
         primera=true;
         resultados=new Vector<>();
+        tanto=new EnvidoNoCantado();
     }
 
+    /**GETTERS**/
     public HashMap<Jugador,Carta> getManoActual(){
         return manoActual;
     }
 
     public Flor getFlorActiva(){
         return florActiva;
+    }
+
+    public Envido getTanto() {
+        return tanto;
+    }
+
+    public Vector<Equipo> getResultados() {
+        return resultados;
     }
 
     /**ACCIONES**/
@@ -49,24 +56,14 @@ public class Ronda {
         manoActual.put(jugador,carta);
     }
 
-    public Envido getTantoActivo() {
-        return tantoActivo;
-    }
-
-    public void activarTanto(Envido envido) {
-        if(tantoActivo==null)
-            tantoActivo=envido;
-        else tantoActivo.setSubEnvido(envido);
+    public void subirApuestaDelEnvido(Envido envido) {
+        tanto.anidarEnvido(envido);
     }
 
     public void activarFlor(Flor flor) {
         if(florActiva==null)
             florActiva=flor;
         else florActiva.setContraFlor(flor);
-    }
-
-    public Vector<Equipo> getResultados() {
-        return resultados;
     }
 
     public void terminar(){
