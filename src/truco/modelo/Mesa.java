@@ -90,18 +90,26 @@ public class Mesa {
     public void resolverEnvido(){
 
         int envidoMax=0;
-        Equipo equipoGanador=null;
-        Equipo equipoPerdedor=null;
-        for(int i=0;i< jugadores.size();i++){
-            if(jugadorActivo.quiereMostrarEnvido())                      //Pregunta al jugador si quiere cantar su envido
-                if(jugadorActivo.getEnvido()>envidoMax) {                //Evalua si el envido del jugador es mayor al maximo actual
-                    if (jugadorActivo.getEquipo() != equipoGanador)      //Si el envido es mayor, verifica si el equipo ganador actual es el mismo que el que pertenece el jugador
-                        equipoPerdedor = equipoGanador;                  //Si la linea previa es verdadera, el viejo equipo ganador ahora es el nuevo equipo perdedor
-                    equipoGanador = jugadorActivo.getEquipo();
-                }
+        this.jugadorActivo=this.getJugadorMano();
+        Equipo equipoGanador=this.getJugadorMano().getEquipo();
+        Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
+
+        for(int i=0;i<nroJugadores;i++) {
+            if (jugadorActivo.quiereMostrarEnvido())
+                if (jugadorActivo.getEnvido() > envidoMax) {
+                    envidoMax = jugadorActivo.getEnvido();
+                    if (jugadorActivo.getEquipo() != equipoGanador) {
+                        equipoPerdedor = equipoGanador;
+                        equipoGanador = jugadorActivo.getEquipo();
+                    }
+            }
+            else if(jugadorActivo.getEnvido()==envidoMax)
+                    if(jugadorActivo.getEquipo().equals(this.getJugadorMano().getEquipo()) && !equipoGanador.equals(this.getJugadorMano().getEquipo())) {
+                        equipoPerdedor = equipoGanador;
+                        equipoGanador = jugadorActivo.getEquipo();
+                    }
             this.proximoTurno();
         }
-        //if(equipoGanador!=null && equipoPerdedor!=null) //Esta linea solo está para que Java no reclame que los equipos pueden ser NULL.
             equipoGanador.sumarPuntos(this.ronda.getTantoActivo().getPuntos(equipoGanador, equipoPerdedor));
     }
 
@@ -133,6 +141,9 @@ public class Mesa {
         //actualizarJugadorMano();
         jugadorActivo=this.jugadores.get(0);
         iterJugadorActivo= jugadores.listIterator(1);
+
+        for(Jugador jugador:jugadores)
+            jugador.getMano().clear();
     }
 
     public void proximoTurno(){

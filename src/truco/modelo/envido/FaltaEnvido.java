@@ -2,9 +2,6 @@ package truco.modelo.envido;
 
 import truco.modelo.Equipo;
 
-/**
- * Created by Eze Cruz Avila on 15/11/2015.
- */
 public class FaltaEnvido extends Envido {
 
     private int ptsEquipo1;

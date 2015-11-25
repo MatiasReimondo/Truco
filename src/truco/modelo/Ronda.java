@@ -72,6 +72,7 @@ public class Ronda {
     public void terminar(){
         terminada=true;
     }
+
     public boolean termino(){
         return terminada;
     }

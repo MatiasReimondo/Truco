@@ -43,4 +43,8 @@ public class Equipo {
     public void sumarPuntos(int puntos){
         this.puntaje+=puntos;
     }
+
+    public void resetPuntos(){
+        puntaje=0;
+    }
 }

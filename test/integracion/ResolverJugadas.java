@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.RealEnvido;
 import truco.modelo.excepciones.ElJugadorNoTieneFlorException;
 import truco.modelo.excepciones.NoSeJuegaConFlorException;
 import truco.modelo.flor.Flor;
@@ -313,7 +314,7 @@ public class ResolverJugadas {
     }
 
     @Test
-         public void testPardaLaPrimeraGanaManoLaSegunda(){
+    public void testPardaLaPrimeraGanaManoLaSegunda(){
         mesaTester.nuevaRonda();
 
         jugadorMano.levantarCarta(new Carta(5, Palo.BASTO));
@@ -335,6 +336,7 @@ public class ResolverJugadas {
         Assert.assertEquals(0,equipoPie.getPuntaje());
 
     }
+
     @Test
     public void testPardaLaPrimeraGanaPieLaSegunda(){
         mesaTester.nuevaRonda();
@@ -360,7 +362,7 @@ public class ResolverJugadas {
     }
 
     @Test
-         public void testManoGanaPrimeraYSegundaConTruco(){
+    public void testManoGanaPrimeraYSegundaConTruco(){
         mesaTester.nuevaRonda();
 
         jugadorMano.levantarCarta(new Carta(4, Palo.BASTO));
@@ -437,5 +439,78 @@ public class ResolverJugadas {
 
         Assert.assertEquals(2,equipoMano.getPuntaje());
         Assert.assertEquals(0,equipoPie.getPuntaje());
+    }
+
+    @Test
+    public void testManoGanaConEnvidoMasGrande(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
+
+        jugadorMano.cantarTanto(new Envido());
+        mesaTester.resolverEnvido();
+
+        Assert.assertEquals(2,equipoMano.getPuntaje());
+    }
+
+    @Test
+    public void testManoGanaAlgunasCombinacionesDeTanto(){
+
+        mesaTester.nuevaRonda();
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
+        jugadorMano.cantarTanto(new Envido());
+        mesaTester.resolverEnvido();
+        Assert.assertEquals(2,equipoMano.getPuntaje());
+        equipoMano.resetPuntos();
+
+        mesaTester.nuevaRonda();
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
+        jugadorMano.cantarTanto(new RealEnvido());
+        mesaTester.resolverEnvido();
+        Assert.assertEquals(3,equipoMano.getPuntaje());
+        equipoMano.resetPuntos();
+
+        mesaTester.nuevaRonda();
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
+        jugadorMano.cantarTanto(new Envido());
+        jugadorMano.cantarTanto(new Envido());
+        mesaTester.resolverEnvido();
+        Assert.assertEquals(4,equipoMano.getPuntaje());
+        equipoMano.resetPuntos();
+
+        mesaTester.nuevaRonda();
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
+        jugadorMano.cantarTanto(new Envido());
+        jugadorMano.cantarTanto(new RealEnvido());
+        mesaTester.resolverEnvido();
+        Assert.assertEquals(5,equipoMano.getPuntaje());
+        equipoMano.resetPuntos();
+
     }
 }
