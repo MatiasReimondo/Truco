@@ -7,7 +7,7 @@ import truco.modelo.excepciones.NoSePuedeCantarEnvidoDespuesDeRealEnvidoExceptio
 
 public class RealEnvido extends Envido {
 
-    private int puntos;
+    private final int puntos;
     private Envido subEnvido;
 
     public RealEnvido(){

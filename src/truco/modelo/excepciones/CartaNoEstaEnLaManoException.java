@@ -1,5 +1,5 @@
 package truco.modelo.excepciones;
 
 @SuppressWarnings("ALL")
-public class CartaNoEstaEnLaManoException extends RuntimeException {
+public class CartaNoEstaEnLaManoException extends AccionInvalidaException {
 }

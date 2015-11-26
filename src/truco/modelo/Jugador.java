@@ -9,10 +9,10 @@ public class Jugador {
 
     /**ATRIBUTOS**/
     private String nombre;
-    private List<Carta> mano;
+    private final List<Carta> mano;
     private Mesa mesa;
     private Equipo equipo;
-    static final int MAXIMO_CARTAS= 3;
+    private static final int MAXIMO_CARTAS= 3;
 
     /**CONSTRUCTOR**/
     public Jugador(String unNombre){
@@ -135,12 +135,15 @@ public class Jugador {
     }
 
     public void noQuieroTruco(){
-        this.mesa.noQuiero(this.getEquipo());
+        mesa.siguienteJugador();
+        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTrucoEnJuego().getPuntaje());
+        mesa.jugadorAnterior();
+        mesa.getRonda().terminar();
     }
 
     /**FLOR**/
     public void cantarFlor() {
-        if(!this.tieneFlor()) throw new ElJugadorNoTieneFlorException();
+        if(!this.tieneFlor()) throw new JugadorNoTieneFlorException();
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
         mesa.getArbitro().jugadorPuedeCantarFlor(this);

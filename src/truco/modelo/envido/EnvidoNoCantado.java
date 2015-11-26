@@ -4,7 +4,7 @@ import truco.modelo.Equipo;
 
 public class EnvidoNoCantado extends Envido{
     private Envido subEnvido;
-    private int puntos;
+    private final int puntos;
 
     public EnvidoNoCantado(){
         puntos=1;

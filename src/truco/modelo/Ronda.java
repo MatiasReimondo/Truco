@@ -13,10 +13,10 @@ public class Ronda {
     private HashMap<Jugador,Carta> manoActual;
     private boolean primera;
     private boolean terminada;
-    private Vector<Equipo> resultados;
-    private Mesa mesa;
+    private final Vector<Equipo> resultados;
+    private final Mesa mesa;
 
-    private Envido tantoEnJuego;
+    private final Envido tantoEnJuego;
     private Envido tantoPendiente;
     private Flor florEnJuego;
     private EstadoTruco trucoEnJuego;

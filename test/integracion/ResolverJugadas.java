@@ -11,7 +11,7 @@ import truco.modelo.estadosTruco.RetrucoCantado;
 import truco.modelo.estadosTruco.RetrucoQuerido;
 import truco.modelo.estadosTruco.TrucoCantado;
 import truco.modelo.estadosTruco.TrucoQuerido;
-import truco.modelo.excepciones.ElJugadorNoTieneFlorException;
+import truco.modelo.excepciones.JugadorNoTieneFlorException;
 import truco.modelo.excepciones.NoSeJuegaConFlorException;
 
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class ResolverJugadas {
         Assert.assertFalse(mesaTester.getRonda().getResultados().contains(jugadorMano));
     }
 
-    @Test (expected=ElJugadorNoTieneFlorException.class)
+    @Test (expected=JugadorNoTieneFlorException.class)
     public void testSeCantaFlorSinTenerFlor(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();

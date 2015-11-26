@@ -1,5 +1,5 @@
 package truco.modelo.excepciones;
 
 
-public class NoSePuedeCantarAhoraException extends RuntimeException {
+public class NoSePuedeCantarAhoraException extends AccionInvalidaException {
 }

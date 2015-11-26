@@ -14,7 +14,7 @@ public class Mesa {
     private boolean flor;
     private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
-    private Arbitro arbitro;
+    private final Arbitro arbitro;
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -109,22 +109,18 @@ public class Mesa {
         this.jugadorActivo=this.getJugadorMano();
         resetJugadorActivo();
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
-        Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
+
 
         for(int i=0;i<nroJugadores;i++) {
             if (jugadorActivo.quiereMostrarEnvido())
                 if (jugadorActivo.getFlor() > florMax) {
                     florMax = jugadorActivo.getEnvido();
-                    if (jugadorActivo.getEquipo() != equipoGanador) {
-                        equipoPerdedor = equipoGanador;
+                    if (jugadorActivo.getEquipo() != equipoGanador)
                         equipoGanador = jugadorActivo.getEquipo();
-                    }
                 }
                 else if(jugadorActivo.getFlor()==florMax)
-                    if(jugadorActivo.getEquipo().equals(this.getJugadorMano().getEquipo()) && !equipoGanador.equals(this.getJugadorMano().getEquipo())) {
-                        equipoPerdedor = equipoGanador;
+                    if(jugadorActivo.getEquipo().equals(this.getJugadorMano().getEquipo()) && !equipoGanador.equals(this.getJugadorMano().getEquipo()))
                         equipoGanador = jugadorActivo.getEquipo();
-                    }
             this.siguienteJugador();
         }
         equipoGanador.sumarPuntos(ronda.getFlorEnJuego().getPuntos());
@@ -217,17 +213,6 @@ public class Mesa {
 
     public boolean seJuegaConFlor(){
         return flor;
-    }
-
-    public void noQuiero(Equipo equipoPerdedor){
-        boolean equipoEncontrado= false;
-        Equipo equipoGanador= null;
-        for(int i=0;i<jugadores.size();i++) {
-            if (!equipoPerdedor.equals(jugadores.get(i).getEquipo())) {
-                equipoGanador = jugadores.get(i).getEquipo();
-            }
-        }
-        equipoGanador.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
     }
 
 

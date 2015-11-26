@@ -12,9 +12,6 @@ import truco.modelo.excepciones.RondaTerminadaException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Eze Cruz Avila on 19/11/2015.
- */
 public class CasosParticulares {
     private Mesa mesaTester;
     private Equipo equipoMano;

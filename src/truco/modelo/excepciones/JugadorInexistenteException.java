@@ -4,5 +4,5 @@ package truco.modelo.excepciones;
  * Created by Eze Cruz Avila on 06/11/2015.
  */
 @SuppressWarnings("ALL")
-public class JugadorInexistenteException extends RuntimeException {
+public class JugadorInexistenteException extends PrecondicionesDelTrucoVioladasException {
 }

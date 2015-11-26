@@ -1,4 +1,4 @@
 package truco.modelo.excepciones;
 
-public class NoSePuedeQuererSinTenerFlorException extends RuntimeException {
+public class NoSePuedeQuererSinTenerFlorException extends AccionInvalidaException {
 }

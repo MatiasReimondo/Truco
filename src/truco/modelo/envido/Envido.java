@@ -6,7 +6,7 @@ import truco.modelo.excepciones.NoSePuedeCantarMasDeDosVecesEnvidoException;
 public class Envido {
 
     private Envido subEnvido;
-    private int puntos;
+    private final int puntos;
 
     public Envido(){
         puntos=2;

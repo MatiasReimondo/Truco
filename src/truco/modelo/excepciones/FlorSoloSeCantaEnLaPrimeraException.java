@@ -1,4 +1,4 @@
 package truco.modelo.excepciones;
 
-public class FlorSoloSeCantaEnLaPrimeraException extends RuntimeException {
+public class FlorSoloSeCantaEnLaPrimeraException extends AccionInvalidaException {
 }

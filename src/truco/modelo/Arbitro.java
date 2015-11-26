@@ -38,7 +38,7 @@ public class Arbitro {
     }
 
     public void jugadorPuedeCantarTanto(Jugador jugador){
-        if(jugadorEsPie(mesa.getJugadorActivo()) && mesa.getRonda().seEstaJugandoLaPrimera())
+        if(jugadorEsPie(jugador) && mesa.getRonda().seEstaJugandoLaPrimera())
             return;
         if(mesa.getNroJugadores()==2 && mesa.getRonda().seEstaJugandoLaPrimera())
             return;
@@ -57,6 +57,8 @@ public class Arbitro {
             throw new FlorSoloSeCantaEnLaPrimeraException();
         if(mesa.getRonda().getFlorEnJuego()!=null)
             throw new SoloSePuedeCantarFlorUnaVezException();
+        if(!mesa.getJugadorActivo().equals(jugador))
+            throw new NoEsTurnoDelJugadorException();
     }
 
     public void jugadorPuedeCantarContraflor(Jugador jugador){
