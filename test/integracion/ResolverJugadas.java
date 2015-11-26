@@ -428,7 +428,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(7, Palo.BASTO));
         jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
 
-        jugadorMano.quiero();
+        jugadorMano.cantarTruco();
         jugadorPie.quiero();
         jugadorMano.jugarCarta(3,Palo.BASTO);
         jugadorPie.jugarCarta(5,Palo.BASTO);

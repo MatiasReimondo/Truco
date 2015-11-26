@@ -20,22 +20,33 @@ public class EstadosTrucoTest {
     private Jugador jugadorJuan;
     private List<Jugador> listaJugadores;
 
+
     @Before
     public void setup(){
-        mesa=new Mesa();
+        mesa =new Mesa();
 
-        jugadorJuan=new Jugador("Juan");
-        jugadorPepe=new Jugador("Pepe");
+        equipoPepe =new Equipo("EquipoPepe");
+        equipoJuan =new Equipo("EquipoJuan");
+
+        jugadorJuan =new Jugador("Juan");
+        jugadorPepe =new Jugador("Pepe");
+
+        equipoPepe.agregarIntegrante(jugadorPepe);
+        equipoJuan.agregarIntegrante(jugadorJuan);
+
+        jugadorPepe.setEquipo(equipoPepe);
+        jugadorJuan.setEquipo(equipoJuan);
 
         listaJugadores=new ArrayList<>();
-        listaJugadores.add(jugadorPepe);
         listaJugadores.add(jugadorJuan);
+        listaJugadores.add(jugadorPepe);
 
-        jugadorJuan.setMesa(mesa);
         jugadorPepe.setMesa(mesa);
+        jugadorJuan.setMesa(mesa);
 
         mesa.setJugadores(listaJugadores);
     }
+
     @Test
     public void seCantaTruco(){
         mesa.nuevaRonda();
@@ -104,5 +115,18 @@ public class EstadosTrucoTest {
         jugadorPepe.quiero();
         jugadorPepe.cantarValeCuatro();
     }
+
+
+    @Test
+    public void seCantaTrucoRetrucoNoSeQuiere(){
+        mesa.nuevaRonda();
+        jugadorJuan.cantarTruco();
+        jugadorPepe.quiero();
+        jugadorPepe.cantarRetruco();
+        jugadorJuan.noQuiero();
+        Assert.assertEquals(2, jugadorPepe.getEquipo().getPuntaje());
+
+    }
+
 
 }

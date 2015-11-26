@@ -159,6 +159,7 @@ public class Jugador {
     }
 
     public void noQuiero(){
+        this.mesa.noQuiero(this.getEquipo());
 
     }
 

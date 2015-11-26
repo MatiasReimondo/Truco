@@ -194,5 +194,29 @@ public class Mesa {
         this.estadoTruco = this.estadoTruco.avanzarEstado(this);
     }
 
+    public void cantarTruco() {
+        this.estadoTruco= this.estadoTruco.cantarTruco();
+    }
+    public void cantarRetruco() {
+        this.estadoTruco= this.estadoTruco.cantarRetruco();
+    }
+    public void cantarValecuatro() {
+        this.estadoTruco= this.estadoTruco.cantarValecuatro();
+    }
+    public void quiero() {
+        this.estadoTruco= this.estadoTruco.quiero();
+    }
+
+    public void noQuiero(Equipo equipoPerdedor){
+        boolean equipoEncontrado= false;
+        Equipo equipoGanador= null;
+        for(int i=0;i<jugadores.size();i++) {
+            if (equipoPerdedor.equals(jugadores.get(i).getEquipo()) == false) {
+                equipoGanador = jugadores.get(i).getEquipo();
+            }
+        }
+        equipoGanador.sumarPuntos(this.getEstadoTruco().getPuntaje());
+    }
+
 
 }
