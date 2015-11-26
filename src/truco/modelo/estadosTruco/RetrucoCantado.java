@@ -16,4 +16,24 @@ public class RetrucoCantado implements EstadoTruco {
         }
         return new RetrucoQuerido();
     }
+
+    @Override
+    public EstadoTruco cantarTruco() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco cantarRetruco() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco cantarValecuatro() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco quiero() {
+        return new RetrucoQuerido();
+    }
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 import truco.modelo.Equipo;
 import truco.modelo.Jugador;
 import truco.modelo.Mesa;
+import truco.modelo.excepciones.NoSePuedeCantarAhoraException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,4 +72,37 @@ public class EstadosTrucoTest {
         Assert.assertEquals(4,mesa.getEstadoTruco().getPuntaje());
 
     }
+
+    @Test (expected = NoSePuedeCantarAhoraException.class)
+    public void seQuiereCuandoNoHayNadaCantado(){
+        mesa.nuevaRonda();
+        jugadorPepe.quiero();
+
+
+
+
+    }
+
+    @Test (expected = NoSePuedeCantarAhoraException.class)
+    public void seCantaReTrucoSinElTruco(){
+        mesa.nuevaRonda();
+        jugadorPepe.cantarRetruco();
+
+    }
+
+    @Test (expected = NoSePuedeCantarAhoraException.class)
+    public void seCantaValeCuatroSinElTruco(){
+        mesa.nuevaRonda();
+        jugadorPepe.cantarValeCuatro();
+
+    }
+
+    @Test (expected = NoSePuedeCantarAhoraException.class)
+    public void seCantaTrucoValeCuatro(){
+        mesa.nuevaRonda();
+        jugadorJuan.cantarTruco();
+        jugadorPepe.quiero();
+        jugadorPepe.cantarValeCuatro();
+    }
+
 }

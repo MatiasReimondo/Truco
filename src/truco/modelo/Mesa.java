@@ -194,4 +194,17 @@ public class Mesa {
 
         jugadorActivo=iterJugadorActivo.previous();
     }
+
+    public void cantarTruco() {
+        this.estadoTruco= this.estadoTruco.cantarTruco();
+    }
+    public void cantarRetruco() {
+        this.estadoTruco= this.estadoTruco.cantarRetruco();
+    }
+    public void cantarValecuatro() {
+        this.estadoTruco= this.estadoTruco.cantarValecuatro();
+    }
+    public void quiero() {
+        this.estadoTruco= this.estadoTruco.quiero();
+    }
 }

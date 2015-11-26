@@ -146,23 +146,22 @@ public class Jugador {
     public void cantarTruco(){
         //if(!mesa.getJuez().esTurnoDelJugador(this))
       //      throw new NoEsTurnoDelJugadorException();
-        this.mesa.cambiarEstadoTruco();
+        this.mesa.cantarTruco();
 
 
     }
 
     public void cantarRetruco(){
-        this.mesa.cambiarEstadoTruco();
-
+        this.mesa.cantarRetruco();
     }
 
     public void cantarValeCuatro(){
-        this.mesa.cambiarEstadoTruco();
+        this.mesa.cantarValecuatro();
 
     }
 
     public void quiero() {
-        this.mesa.cambiarEstadoTruco();
+        this.mesa.quiero();
 
     }
 
