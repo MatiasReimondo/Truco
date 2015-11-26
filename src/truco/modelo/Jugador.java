@@ -85,9 +85,8 @@ public class Jugador {
       throw new CartaNoEstaEnLaManoException();
     }
 
-    public boolean tieneFlor(){
-        if(mano.size()<3) return false;
-        return mano.get(0).getPalo().equals(mano.get(1).getPalo()) && mano.get(0).getPalo().equals(mano.get(2).getPalo());
+    public boolean tieneFlor() {
+        return mano.size() >= 3 && mano.get(0).getPalo().equals(mano.get(1).getPalo()) && mano.get(0).getPalo().equals(mano.get(2).getPalo());
     }
 
     /**ENVIDO**/
