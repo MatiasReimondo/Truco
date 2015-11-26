@@ -75,7 +75,7 @@ public class Jugador {
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)){
                 mesa.getRonda().agregarCarta(this,carta);
                 mano.remove(carta);
-                mesa.proximoTurno();
+                mesa.jugadorActivoAvanzar();
                 return;
             }
       throw new CartaNoEstaEnLaManoException();
@@ -111,24 +111,17 @@ public class Jugador {
             throw new JugadorNoHabilitadoParaCantarTanto();
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
             throw new TantoSoloSePuedeCantarEnLaPrimeraException();
-        mesa.proximoTurno();
-        if(mesa.getJugadorActivo().quieroEnvido())
-            mesa.getRonda().subirApuestaDelEnvido(envido);
-    }
 
-    public boolean quieroEnvido(){
-        return true;
-
-    }
-    private void responderTanto(Envido envido) {
-
-        //Si el jugador sube la apuesta
-        mesa.proximoTurno();
-        //mesa.getJugadorActivo().responderTanto();
-
-        //Si el jugador quiere
         mesa.getRonda().subirApuestaDelEnvido(envido);
-        mesa.jugadorAnterior();
+        mesa.jugadorActivoAvanzar();
+    }
+
+    public void quieroEnvido(){
+        mesa.getRonda().cambiarTantoEnJuego();
+    }
+
+    public void noQuieroEnvido(){
+
     }
 
     public void cantarFlor(Flor flor) {

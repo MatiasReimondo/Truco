@@ -14,15 +14,17 @@ public class Ronda {
     private boolean terminada;
     private Vector<Equipo> resultados;
 
-    private Envido tanto;
+    private Envido tantoEnJuego;
+    private Envido tantoPendiente;
     private Flor florActiva;
 
     /**CONSTRUCTOR**/
     public Ronda(){
-        manoActual= new HashMap<Jugador,Carta>();
+        manoActual= new HashMap<>();
         primera=true;
         resultados=new Vector<>();
-        tanto=new EnvidoNoCantado();
+        tantoEnJuego =new EnvidoNoCantado();
+        tantoPendiente=new EnvidoNoCantado();
     }
 
     /**GETTERS**/
@@ -34,8 +36,8 @@ public class Ronda {
         return florActiva;
     }
 
-    public Envido getTanto() {
-        return tanto;
+    public Envido getTantoEnJuego() {
+        return tantoEnJuego;
     }
 
     public Vector<Equipo> getResultados() {
@@ -57,9 +59,12 @@ public class Ronda {
     }
 
     public void subirApuestaDelEnvido(Envido envido) {
-        tanto.anidarEnvido(envido);
+        tantoPendiente=envido;
     }
 
+    public void cambiarTantoEnJuego(){
+        tantoEnJuego.anidarEnvido(tantoPendiente);
+    }
     public void activarFlor(Flor flor) {
         if(florActiva==null)
             florActiva=flor;
