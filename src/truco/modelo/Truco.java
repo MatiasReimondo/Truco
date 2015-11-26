@@ -12,20 +12,21 @@ import java.util.List;
 public class Truco {
 
     private List<Equipo> equipos;
-    private List<Jugador> jugadoresActivos;
+    private List<Jugador> jugadores;
     private Mesa mesa;
     private boolean flor;
 
     /**CONSTRUCTOR**/
     public Truco(){
         equipos=new ArrayList<>();
-        jugadoresActivos =new ArrayList<>();
+        jugadores =new ArrayList<>();
+        mesa=new Mesa();
 
     }
 
     /**GETTERS**/
     public Jugador getJugador(String nombreJugador){
-        for(Jugador jugador:jugadoresActivos)
+        for(Jugador jugador: jugadores)
             if (jugador.getNombre().equals(nombreJugador))
                 return jugador;
         throw new JugadorInexistenteException();
@@ -39,6 +40,11 @@ public class Truco {
     }
 
     /**ACCIONES**/
+    public void empezarJuego(){
+        mesa.setJugadores(jugadores);
+        mesa.nuevaRonda();
+    }
+
     public void nuevoEquipo(String nombreEquipo){
         try{getEquipo(nombreEquipo);} catch (EquipoInexistenteException e) {
             Equipo nuevoEquipo = new Equipo(nombreEquipo);
@@ -54,7 +60,7 @@ public class Truco {
         try{this.getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
             Jugador nuevoJugador = new Jugador(nombreJugador);
             nuevoJugador.setNombre(nombreJugador);
-            jugadoresActivos.add(nuevoJugador);
+            jugadores.add(nuevoJugador);
 
             return;
         }

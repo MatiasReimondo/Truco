@@ -1,6 +1,7 @@
 package truco.modelo.envido;
 
 import truco.modelo.Equipo;
+import truco.modelo.excepciones.NoSePuedeCantarMasDeDosVecesEnvidoException;
 
 public class Envido {
 
@@ -14,12 +15,10 @@ public class Envido {
     public void anidarEnvido(Envido envido){
         if(subEnvido==null)
             subEnvido=envido;
+        else if(envido.getClass().equals(Envido.class))
+            throw new NoSePuedeCantarMasDeDosVecesEnvidoException();
         else
             subEnvido.anidarEnvido(envido);
-    }
-
-    public void subirApuesta(Envido envido){
-        subEnvido=envido;
     }
 
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){

@@ -1,46 +1,35 @@
 package truco.modelo;
-import truco.modelo.estadosTruco.EstadoTruco;
-import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.modelo.excepciones.RondaTerminadaException;
 
 import java.util.*;
 
-/*********************************************************************************
- * *******************************  Mesa  ****************************************
- * *********************************************************************************/
 public class Mesa {
 
-    /*********************** Atributos de la clase ********************************/
+    /**ATRIBUTOS**/
     private Mazo mazo;
     private Ronda ronda;
     private List<Jugador> jugadores;
     private int nroJugadores;
-    private Boolean conFlor= false;
+    private boolean flor;
     private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
-    private EstadoTruco estadoTruco;
-    private Juez juez;
+    private Arbitro arbitro;
 
-    /********************** Métodos de la clase ***********************************/
     /**CONSTRUCTOR**/
     public Mesa() {
         mazo = new Mazo();
-        juez=new Juez();
-        juez.setMesa(this);
+        arbitro =new Arbitro();
+        arbitro.setMesa(this);
     }
 
     /**SETTERS**/
     public void setJugadores(List<Jugador> listaJugadores) {
 
-        juez.evaluarListaDeJugadores(listaJugadores);
+        arbitro.evaluarListaDeJugadores(listaJugadores);
 
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
-    }
-
-    public void setEstadoTruco(EstadoTruco estado){
-        estadoTruco=estado;
     }
 
     /**GETTERS**/
@@ -68,19 +57,19 @@ public class Mesa {
         return nroJugadores;
     }
 
-    public Juez getJuez() {
-        return juez;
+    public Arbitro getArbitro() {
+        return arbitro;
     }
 
-    public Boolean getConFlor(){
-        return conFlor;
-    }
-
-    public EstadoTruco getEstadoTruco() {
-        return estadoTruco;
+    public Boolean getFlor(){
+        return flor;
     }
 
     /**ACCIONES**/
+    public void jugarConFlor(){
+        flor=true;
+    }
+
     public void repartirCartas(){
         for(Jugador jugador: jugadores)
             for(int i=0;i<3;i++)
@@ -114,6 +103,33 @@ public class Mesa {
             equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
     }
 
+    public void resolverFlor(){
+
+        int florMax=0;
+        this.jugadorActivo=this.getJugadorMano();
+        resetJugadorActivo();
+        Equipo equipoGanador=this.getJugadorMano().getEquipo();
+        Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
+
+        for(int i=0;i<nroJugadores;i++) {
+            if (jugadorActivo.quiereMostrarEnvido())
+                if (jugadorActivo.getFlor() > florMax) {
+                    florMax = jugadorActivo.getEnvido();
+                    if (jugadorActivo.getEquipo() != equipoGanador) {
+                        equipoPerdedor = equipoGanador;
+                        equipoGanador = jugadorActivo.getEquipo();
+                    }
+                }
+                else if(jugadorActivo.getFlor()==florMax)
+                    if(jugadorActivo.getEquipo().equals(this.getJugadorMano().getEquipo()) && !equipoGanador.equals(this.getJugadorMano().getEquipo())) {
+                        equipoPerdedor = equipoGanador;
+                        equipoGanador = jugadorActivo.getEquipo();
+                    }
+            this.siguienteJugador();
+        }
+        equipoGanador.sumarPuntos(ronda.getFlorEnJuego().getPuntos());
+    }
+
     public void resolverMano() {
         if(ronda.termino())
             throw new RondaTerminadaException();
@@ -138,7 +154,6 @@ public class Mesa {
         ronda =new Ronda(this);
         mazo=new Mazo();
         mazo.mezclar();
-        estadoTruco= new TrucoNoCantado();
         jugadorActivo=this.jugadores.get(0);
         iterJugadorActivo= jugadores.listIterator(1);
 
@@ -184,24 +199,24 @@ public class Mesa {
 
     private void evaluarMano(Equipo equipo){
         switch (ronda.getResultados().size()){
-            case 0: ronda.resultadoManoActual(equipo); return;
+            case 0: ronda.resultadoMano(equipo); return;
             case 1: {
                 if (ronda.getResultados().contains(null) || ronda.getResultados().contains(equipo))
                     if (equipo != null) {
-                        equipo.sumarPuntos(this.estadoTruco.getPuntaje());
+                        equipo.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
                         ronda.terminar();
                         return;
                     }
-                ronda.resultadoManoActual(equipo);
+                ronda.resultadoMano(equipo);
                 return;
             }
-            case 2: if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(this.estadoTruco.getPuntaje());
-                    else equipo.sumarPuntos(this.estadoTruco.getPuntaje());
+            case 2: if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
+                    else equipo.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
         }
     }
 
-    public void jugarConFlor(){
-        conFlor= true;
+    public boolean seJuegaConFlor(){
+        return flor;
     }
 
     public void noQuiero(Equipo equipoPerdedor){
@@ -212,7 +227,7 @@ public class Mesa {
                 equipoGanador = jugadores.get(i).getEquipo();
             }
         }
-        equipoGanador.sumarPuntos(this.getEstadoTruco().getPuntaje());
+        equipoGanador.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
     }
 
 

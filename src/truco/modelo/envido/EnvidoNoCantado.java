@@ -18,11 +18,6 @@ public class EnvidoNoCantado extends Envido{
     }
 
     @Override
-    public void subirApuesta(Envido envido){
-        subEnvido=envido;
-    }
-
-    @Override
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){
         if(subEnvido==null)
             return puntos;

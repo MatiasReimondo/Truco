@@ -62,26 +62,26 @@ public class MesaTest {
 
     @Test
     public void testJugadorEsPieVerdadero(){
-        Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorPepe));
+        Assert.assertTrue(mesaTester.getArbitro().jugadorEsPie(jugadorPepe));
     }
 
     @Test
     public void testJugadorEsPieFalso(){
-        Assert.assertFalse(mesaTester.getJuez().jugadorEsPie(jugadorJuan));
+        Assert.assertFalse(mesaTester.getArbitro().jugadorEsPie(jugadorJuan));
     }
 
     @Test
     public void testJugadorEsManoVerdadero(){
-        Assert.assertTrue(mesaTester.getJuez().jugadorEsMano(jugadorJuan));
+        Assert.assertTrue(mesaTester.getArbitro().jugadorEsMano(jugadorJuan));
     }
 
     @Test
     public void testJugadorEsManoFalso(){
-        Assert.assertFalse(mesaTester.getJuez().jugadorEsMano(jugadorPepe));
+        Assert.assertFalse(mesaTester.getArbitro().jugadorEsMano(jugadorPepe));
     }
     @Test
     public void testJugadorPieAlComenzar() {
-        Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorPepe));
+        Assert.assertTrue(mesaTester.getArbitro().jugadorEsPie(jugadorPepe));
     }
 
     /*
@@ -96,9 +96,9 @@ public class MesaTest {
     @Test
     public void testActualizarManoPie() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
-        Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorPepe));
+        Assert.assertTrue(mesaTester.getArbitro().jugadorEsPie(jugadorPepe));
         mesaTester.actualizarJugadorMano();
-        Assert.assertTrue(mesaTester.getJuez().jugadorEsPie(jugadorJuan));
+        Assert.assertTrue(mesaTester.getArbitro().jugadorEsPie(jugadorJuan));
         Assert.assertEquals(jugadorPepe, mesaTester.getJugadorMano());
 
     }

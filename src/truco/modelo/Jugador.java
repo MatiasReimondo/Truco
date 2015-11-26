@@ -1,7 +1,6 @@
 package truco.modelo;
 import truco.modelo.envido.Envido;
 import truco.modelo.excepciones.*;
-import truco.modelo.flor.Flor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +74,7 @@ public class Jugador {
 
     public void jugarCarta(int numero, Palo palo) {
 
-        mesa.getJuez().jugadorPuedeAccionar(this);
+        mesa.getArbitro().jugadorPuedeAccionar(this);
         for(Carta carta: mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)){
                 mesa.getRonda().agregarCarta(this,carta);
@@ -90,13 +89,13 @@ public class Jugador {
         return mano.get(0).getPalo().equals(mano.get(1).getPalo()) && mano.get(0).getPalo().equals(mano.get(2).getPalo());
     }
 
+    /**ENVIDO**/
     public boolean quiereMostrarEnvido() {
         return true;
     }
 
     public void cantarEnvido(Envido envido){
-        if(!mesa.getJuez().jugadorPuedeCantarTanto(this))
-            throw new JugadorNoHabilitadoParaCantarTanto();
+        mesa.getArbitro().jugadorPuedeCantarTanto(this);
         mesa.getRonda().subirApuestaDelEnvido(envido);
         mesa.siguienteJugador();
     }
@@ -111,43 +110,70 @@ public class Jugador {
         mesa.jugadorAnterior();
     }
 
+    /**TRUCO**/
     public void cantarTruco(){
-        mesa.getJuez().jugadorPuedeAccionar(this);
-        mesa.setEstadoTruco(mesa.getEstadoTruco().cantarTruco());
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarTruco());
         mesa.siguienteJugador();
     }
 
     public void cantarRetruco(){
-        mesa.getJuez().jugadorPuedeAccionar(this);
-        mesa.setEstadoTruco(mesa.getEstadoTruco().cantarRetruco());
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarRetruco());
         mesa.siguienteJugador();
     }
 
     public void cantarValeCuatro(){
-        mesa.getJuez().jugadorPuedeAccionar(this);
-        mesa.setEstadoTruco(mesa.getEstadoTruco().cantarValecuatro());
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarValecuatro());
         mesa.siguienteJugador();
     }
 
     public void quieroTruco() {
-        mesa.getJuez().jugadorPuedeAccionar(this);
-        mesa.setEstadoTruco(mesa.getEstadoTruco().quiero());
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().quiero());
     }
 
     public void noQuieroTruco(){
         this.mesa.noQuiero(this.getEquipo());
     }
 
-    public void cantarFlor(Flor flor) {
-        if (mesa.getConFlor().equals(false)) {
-            throw new NoSeJuegaConFlorException();
-        }
-        if (this.tieneFlor() == false) {
-            throw new ElJugadorNoTieneFlorException();
-        } else {
-            mesa.getRonda().activarFlor(flor);
+    /**FLOR**/
+    public void cantarFlor() {
+        if(!this.tieneFlor()) throw new ElJugadorNoTieneFlorException();
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getArbitro().seJuegaConFlor();
+        mesa.getArbitro().jugadorPuedeCantarFlor(this);
+        mesa.getRonda().activarFlor();
 
+        mesa.siguienteJugador();
+        if(!mesa.getJugadorActivo().tieneFlor()){
+            mesa.jugadorAnterior();
+            mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getFlorEnJuego().getPuntos());
         }
+        mesa.siguienteJugador();
+
+    }
+
+    public void cantarContraFlor(){
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getArbitro().seJuegaConFlor();
+        mesa.getArbitro().jugadorPuedeCantarContraflor(this);
+        mesa.getRonda().getFlorEnJuego().contraflor();
+        mesa.siguienteJugador();
+    }
+
+    public void cantarContraflorAlResto(){
+        mesa.getArbitro().jugadorPuedeAccionar(this);
+        mesa.getArbitro().seJuegaConFlor();
+        mesa.getArbitro().jugadorPuedeCantarContraflor(this);
+        mesa.getRonda().getFlorEnJuego().contraflorAlResto();
+        mesa.siguienteJugador();
+    }
+
+    public void quieroFlor(){
+        if(!this.tieneFlor())
+            throw new NoSePuedeQuererSinTenerFlorException();
     }
 
     /**AUXILIARES**/

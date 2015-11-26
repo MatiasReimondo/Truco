@@ -2,7 +2,8 @@ package truco.modelo;
 
 import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
-import truco.modelo.flor.Flor;
+import truco.modelo.estadosTruco.EstadoTruco;
+import truco.modelo.estadosTruco.TrucoNoCantado;
 
 import java.util.HashMap;
 import java.util.Vector;
@@ -17,7 +18,8 @@ public class Ronda {
 
     private Envido tantoEnJuego;
     private Envido tantoPendiente;
-    private Flor florActiva;
+    private Flor florEnJuego;
+    private EstadoTruco trucoEnJuego;
 
     /**CONSTRUCTOR**/
     public Ronda(Mesa mesa){
@@ -27,6 +29,7 @@ public class Ronda {
         tantoEnJuego =new EnvidoNoCantado();
         tantoPendiente=new EnvidoNoCantado();
         this.mesa=mesa;
+        trucoEnJuego=new TrucoNoCantado();
     }
 
     /**GETTERS**/
@@ -34,8 +37,8 @@ public class Ronda {
         return manoActual;
     }
 
-    public Flor getFlorActiva(){
-        return florActiva;
+    public Flor getFlorEnJuego(){
+        return florEnJuego;
     }
 
     public Envido getTantoEnJuego() {
@@ -44,6 +47,15 @@ public class Ronda {
 
     public Vector<Equipo> getResultados() {
         return resultados;
+    }
+
+    public EstadoTruco getTrucoEnJuego(){
+        return trucoEnJuego;
+    }
+
+    /**SETTERS**/
+    public void setTrucoEnJuego(EstadoTruco estado){
+        trucoEnJuego=estado;
     }
 
     /**ACCIONES**/
@@ -68,10 +80,8 @@ public class Ronda {
         tantoEnJuego.anidarEnvido(tantoPendiente);
     }
 
-    public void activarFlor(Flor flor) {
-        if(florActiva==null)
-            florActiva=flor;
-        else florActiva.setContraFlor(flor);
+    public void activarFlor() {
+        florEnJuego =new Flor();
     }
 
     public void terminar(){
@@ -83,7 +93,7 @@ public class Ronda {
         return terminada;
     }
 
-    public void resultadoManoActual(Equipo equipoGanador) {
+    public void resultadoMano(Equipo equipoGanador) {
         resultados.add(equipoGanador);
     }
 }

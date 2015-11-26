@@ -1,12 +1,13 @@
 package integracion;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import truco.modelo.Equipo;
-import truco.modelo.Jugador;
-import truco.modelo.Mesa;
-import truco.modelo.Palo;
+import truco.modelo.*;
+import truco.modelo.envido.Envido;
 import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
+import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
+import truco.modelo.excepciones.RondaTerminadaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,42 +16,74 @@ import java.util.List;
  * Created by Eze Cruz Avila on 19/11/2015.
  */
 public class CasosParticulares {
-    private Mesa mesa;
-    private Equipo equipoPepe;
-    private Equipo equipoJuan;
-    private Jugador jugadorPepe;
-    private Jugador jugadorJuan;
+    private Mesa mesaTester;
+    private Equipo equipoMano;
+    private Equipo equipoPie;
+    private Jugador jugadorMano;
+    private Jugador jugadorPie;
     private List<Jugador> listaJugadores;
 
     @Before
     public void setup(){
-        mesa=new Mesa();
+        mesaTester =new Mesa();
 
-        equipoPepe =new Equipo("EquipoPepe");
-        equipoJuan=new Equipo("EquipoJuan");
+        equipoMano =new Equipo("EquipoPepe");
+        equipoPie =new Equipo("EquipoJuan");
 
-        jugadorJuan=new Jugador("Juan");
-        jugadorPepe=new Jugador("Pepe");
+        jugadorPie =new Jugador("Juan");
+        jugadorMano =new Jugador("Pepe");
 
-        equipoPepe.agregarIntegrante(jugadorPepe);
-        equipoJuan.agregarIntegrante(jugadorJuan);
+        equipoMano.agregarIntegrante(jugadorMano);
+        equipoPie.agregarIntegrante(jugadorPie);
 
-        jugadorJuan.setEquipo(equipoJuan);
-        jugadorPepe.setEquipo(equipoPepe);
+        jugadorPie.setEquipo(equipoPie);
+        jugadorMano.setEquipo(equipoMano);
 
         listaJugadores=new ArrayList<>();
-        listaJugadores.add(jugadorPepe);
-        listaJugadores.add(jugadorJuan);
+        listaJugadores.add(jugadorMano);
+        listaJugadores.add(jugadorPie);
 
-        jugadorJuan.setMesa(mesa);
-        jugadorPepe.setMesa(mesa);
+        jugadorPie.setMesa(mesaTester);
+        jugadorMano.setMesa(mesaTester);
 
-        mesa.setJugadores(listaJugadores);
+        mesaTester.setJugadores(listaJugadores);
     }
 
     @Test(expected = CartaNoEstaEnLaManoException.class)
     public void testJugarUnaCartaQueNoEstaEnLaMano(){
-        mesa.nuevaRonda();
-        jugadorPepe.jugarCarta(10, Palo.BASTO);
+        mesaTester.nuevaRonda();
+        jugadorMano.jugarCarta(10, Palo.BASTO);
+    }
+
+    @Test(expected = JugadorNoHabilitadoParaCantarTanto.class)
+    public void testJugadorNoPuedeCantarTanto(){
+        mesaTester.nuevaRonda();
+        jugadorMano.levantarCarta(new Carta(4, Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(5, Palo.ESPADA));
+        mesaTester.resolverMano();
+        jugadorMano.cantarEnvido(new Envido());
+    }
+
+    @Test(expected = RondaTerminadaException.class)
+    public void testIntentarJugarDespuesDeTerminadaLaRonda(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(4, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(5, Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(2, Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(1,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
+
+        jugadorMano.jugarCarta(4,Palo.BASTO);
+        jugadorPie.jugarCarta(3,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        jugadorMano.jugarCarta(2,Palo.BASTO);
+        jugadorPie.jugarCarta(1,Palo.BASTO);
+        mesaTester.resolverMano();
+
+        jugadorMano.cantarTruco();
     }
 }

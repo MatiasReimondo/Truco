@@ -2,6 +2,7 @@ package truco.modelo.envido;
 
 import truco.modelo.Equipo;
 import truco.modelo.envido.Envido;
+import truco.modelo.excepciones.NoSePuedeCantarEnvidoDespuesDeRealEnvidoException;
 
 
 public class RealEnvido extends Envido {
@@ -11,6 +12,16 @@ public class RealEnvido extends Envido {
 
     public RealEnvido(){
         this.puntos=3;
+    }
+
+    @Override
+    public void anidarEnvido(Envido envido){
+        if(subEnvido==null)
+            subEnvido=envido;
+        else if(envido.getClass().equals(Envido.class))
+            throw new NoSePuedeCantarEnvidoDespuesDeRealEnvidoException();
+        else
+            subEnvido.anidarEnvido(envido);
     }
 
     @Override

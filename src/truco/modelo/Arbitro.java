@@ -5,11 +5,12 @@ import truco.modelo.excepciones.*;
 
 import java.util.List;
 
-public class Juez {
+public class Arbitro {
 
     private Mesa mesa;
+    private boolean flor;
 
-    public Juez(){}
+    public Arbitro(){}
 
     public void setMesa(Mesa mesa){
         this.mesa=mesa;
@@ -36,13 +37,12 @@ public class Juez {
         return false;
     }
 
-
-    public boolean jugadorPuedeCantarTanto(Jugador jugador){
-        if(mesa.getJuez().jugadorEsPie(mesa.getJugadorActivo()) && mesa.getRonda().seEstaJugandoLaPrimera())
-            return true;
+    public void jugadorPuedeCantarTanto(Jugador jugador){
+        if(jugadorEsPie(mesa.getJugadorActivo()) && mesa.getRonda().seEstaJugandoLaPrimera())
+            return;
         if(mesa.getNroJugadores()==2 && mesa.getRonda().seEstaJugandoLaPrimera())
-            return true;
-        return false;
+            return;
+        throw new JugadorNoHabilitadoParaCantarTanto();
     }
 
     public void jugadorPuedeAccionar(Jugador jugador){
@@ -52,4 +52,26 @@ public class Juez {
             throw new NoEsTurnoDelJugadorException();
     }
 
+    public void jugadorPuedeCantarFlor(Jugador jugador){
+        if(!mesa.getRonda().seEstaJugandoLaPrimera())
+            throw new FlorSoloSeCantaEnLaPrimeraException();
+        if(mesa.getRonda().getFlorEnJuego()!=null)
+            throw new SoloSePuedeCantarFlorUnaVezException();
+    }
+
+    public void jugadorPuedeCantarContraflor(Jugador jugador){
+        if(!mesa.getRonda().seEstaJugandoLaPrimera())
+            throw new FlorSoloSeCantaEnLaPrimeraException();
+        if(mesa.getRonda().getFlorEnJuego()==null)
+            throw new ContraFlorSoloSePuedeCantarDespuesDeFlorException();
+    }
+
+    public void florHabilitada(){
+        flor=true;
+    }
+
+    public void seJuegaConFlor(){
+        if(!flor)
+            throw new NoSeJuegaConFlorException();
+    }
 }
