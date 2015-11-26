@@ -28,7 +28,6 @@ public class Mesa {
         mazo = new Mazo();
         juez=new Juez();
         juez.setMesa(this);
-        ronda=new Ronda();
     }
 
     /**SETTERS**/
@@ -38,6 +37,10 @@ public class Mesa {
 
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
+    }
+
+    public void setEstadoTruco(EstadoTruco estado){
+        estadoTruco=estado;
     }
 
     /**GETTERS**/
@@ -106,7 +109,7 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;
                         equipoGanador = jugadorActivo.getEquipo();
                     }
-            this.jugadorActivoAvanzar();
+            this.siguienteJugador();
         }
             equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
     }
@@ -132,11 +135,10 @@ public class Mesa {
     }
 
     public void nuevaRonda(){
-        ronda =new Ronda();
+        ronda =new Ronda(this);
         mazo=new Mazo();
         mazo.mezclar();
         estadoTruco= new TrucoNoCantado();
-        //actualizarJugadorMano();
         jugadorActivo=this.jugadores.get(0);
         iterJugadorActivo= jugadores.listIterator(1);
 
@@ -144,9 +146,8 @@ public class Mesa {
             jugador.getMano().clear();
     }
 
-
     /**AUXILIARES**/
-    public void jugadorActivoAvanzar(){
+    public void siguienteJugador(){
         if(iterJugadorActivo.hasNext())
             jugadorActivo= iterJugadorActivo.next();
         else{
@@ -155,14 +156,27 @@ public class Mesa {
         }
     }
 
-    public void jugadorActivoRetroceder() {
-        jugadorActivo=iterJugadorActivo.previous();
+    public void jugadorAnterior() {
+        if(iterJugadorActivo.hasPrevious())
+            iterJugadorActivo.previous();
+        else {
+            iterJugadorActivo = jugadores.listIterator();
+            iterJugadorActivo.next();
+        }
+        if(iterJugadorActivo.hasPrevious())
+            jugadorActivo=iterJugadorActivo.previous();
+        else {
+            iterJugadorActivo=jugadores.listIterator();
+            jugadorActivo=iterJugadorActivo.next();
+        }
+        iterJugadorActivo.next();
     }
 
     private void resetJugadorActivo(){
         iterJugadorActivo=jugadores.listIterator();
         iterJugadorActivo.next();
     }
+
     public void actualizarJugadorMano(){
         if(jugadores.isEmpty()) throw new ListaJugadoresVaciaException();
         jugadores.add(jugadores.remove(0));
@@ -186,32 +200,15 @@ public class Mesa {
         }
     }
 
-    public void setSeJuegaConFlor(){
+    public void jugarConFlor(){
         conFlor= true;
-    }
-
-    public void cambiarEstadoTruco() {
-        this.estadoTruco = this.estadoTruco.avanzarEstado(this);
-    }
-
-    public void cantarTruco() {
-        this.estadoTruco= this.estadoTruco.cantarTruco();
-    }
-    public void cantarRetruco() {
-        this.estadoTruco= this.estadoTruco.cantarRetruco();
-    }
-    public void cantarValecuatro() {
-        this.estadoTruco= this.estadoTruco.cantarValecuatro();
-    }
-    public void quiero() {
-        this.estadoTruco= this.estadoTruco.quiero();
     }
 
     public void noQuiero(Equipo equipoPerdedor){
         boolean equipoEncontrado= false;
         Equipo equipoGanador= null;
         for(int i=0;i<jugadores.size();i++) {
-            if (equipoPerdedor.equals(jugadores.get(i).getEquipo()) == false) {
+            if (!equipoPerdedor.equals(jugadores.get(i).getEquipo())) {
                 equipoGanador = jugadores.get(i).getEquipo();
             }
         }

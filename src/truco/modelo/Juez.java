@@ -1,10 +1,7 @@
 package truco.modelo;
 
 
-import truco.modelo.excepciones.CantidadDeJugadoresDebeSerNumeroParException;
-import truco.modelo.excepciones.CantidadDeJugadoresInsuficienteException;
-import truco.modelo.excepciones.ListaJugadoresVaciaException;
-import truco.modelo.excepciones.MaximoDeJugadoresExcedidoException;
+import truco.modelo.excepciones.*;
 
 import java.util.List;
 
@@ -39,9 +36,6 @@ public class Juez {
         return false;
     }
 
-    public boolean esTurnoDelJugador(Jugador jugador){
-        return jugador.equals(mesa.getJugadorActivo());
-    }
 
     public boolean jugadorPuedeCantarTanto(Jugador jugador){
         if(mesa.getJuez().jugadorEsPie(mesa.getJugadorActivo()) && mesa.getRonda().seEstaJugandoLaPrimera())
@@ -49,6 +43,13 @@ public class Juez {
         if(mesa.getNroJugadores()==2 && mesa.getRonda().seEstaJugandoLaPrimera())
             return true;
         return false;
+    }
+
+    public void jugadorPuedeAccionar(Jugador jugador){
+        if(mesa.getRonda().termino())
+            throw new RondaTerminadaException();
+        if(!jugador.equals(mesa.getJugadorActivo()))
+            throw new NoEsTurnoDelJugadorException();
     }
 
 }

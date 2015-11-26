@@ -51,7 +51,7 @@ public class EstadosTrucoTest {
     public void seCantaTruco(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
 
 
         Assert.assertEquals(2,mesa.getEstadoTruco().getPuntaje());
@@ -62,9 +62,9 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetruco(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
         jugadorPepe.cantarRetruco();
-        jugadorJuan.quiero();
+        jugadorJuan.quieroTruco();
 
         Assert.assertEquals(3,mesa.getEstadoTruco().getPuntaje());
 
@@ -74,11 +74,11 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetrucoValeCuatro(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
         jugadorPepe.cantarRetruco();
-        jugadorJuan.quiero();
+        jugadorJuan.quieroTruco();
         jugadorJuan.cantarValeCuatro();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
 
         Assert.assertEquals(4,mesa.getEstadoTruco().getPuntaje());
 
@@ -87,7 +87,7 @@ public class EstadosTrucoTest {
     @Test (expected = NoSePuedeCantarAhoraException.class)
     public void seQuiereCuandoNoHayNadaCantado(){
         mesa.nuevaRonda();
-        jugadorPepe.quiero();
+        jugadorJuan.quieroTruco();
 
 
 
@@ -97,14 +97,14 @@ public class EstadosTrucoTest {
     @Test (expected = NoSePuedeCantarAhoraException.class)
     public void seCantaReTrucoSinElTruco(){
         mesa.nuevaRonda();
-        jugadorPepe.cantarRetruco();
+        jugadorJuan.cantarRetruco();
 
     }
 
     @Test (expected = NoSePuedeCantarAhoraException.class)
     public void seCantaValeCuatroSinElTruco(){
         mesa.nuevaRonda();
-        jugadorPepe.cantarValeCuatro();
+        jugadorJuan.cantarValeCuatro();
 
     }
 
@@ -112,7 +112,7 @@ public class EstadosTrucoTest {
     public void seCantaTrucoValeCuatro(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
         jugadorPepe.cantarValeCuatro();
     }
 
@@ -121,9 +121,9 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetrucoNoSeQuiere(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quiero();
+        jugadorPepe.quieroTruco();
         jugadorPepe.cantarRetruco();
-        jugadorJuan.noQuiero();
+        jugadorJuan.noQuieroTruco();
         Assert.assertEquals(2, jugadorPepe.getEquipo().getPuntaje());
 
     }

@@ -7,7 +7,7 @@ public class EnvidoNoCantado extends Envido{
     private int puntos;
 
     public EnvidoNoCantado(){
-        puntos=0;
+        puntos=1;
     }
 
     public void anidarEnvido(Envido envido){
@@ -17,14 +17,16 @@ public class EnvidoNoCantado extends Envido{
             subEnvido.anidarEnvido(envido);
     }
 
+    @Override
     public void subirApuesta(Envido envido){
         subEnvido=envido;
     }
 
+    @Override
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){
         if(subEnvido==null)
             return puntos;
-        return puntos+subEnvido.getPuntos(equipoGanador,equipoPerdedor);
+        return subEnvido.getPuntos(equipoGanador,equipoPerdedor);
     }
 }
 

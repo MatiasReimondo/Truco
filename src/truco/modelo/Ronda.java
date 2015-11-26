@@ -13,18 +13,20 @@ public class Ronda {
     private boolean primera;
     private boolean terminada;
     private Vector<Equipo> resultados;
+    private Mesa mesa;
 
     private Envido tantoEnJuego;
     private Envido tantoPendiente;
     private Flor florActiva;
 
     /**CONSTRUCTOR**/
-    public Ronda(){
+    public Ronda(Mesa mesa){
         manoActual= new HashMap<>();
         primera=true;
         resultados=new Vector<>();
         tantoEnJuego =new EnvidoNoCantado();
         tantoPendiente=new EnvidoNoCantado();
+        this.mesa=mesa;
     }
 
     /**GETTERS**/
@@ -65,6 +67,7 @@ public class Ronda {
     public void cambiarTantoEnJuego(){
         tantoEnJuego.anidarEnvido(tantoPendiente);
     }
+
     public void activarFlor(Flor flor) {
         if(florActiva==null)
             florActiva=flor;
@@ -73,6 +76,7 @@ public class Ronda {
 
     public void terminar(){
         terminada=true;
+        mesa.actualizarJugadorMano();
     }
 
     public boolean termino(){
