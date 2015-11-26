@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.RealEnvido;
 import truco.modelo.excepciones.*;
 
 import java.util.ArrayList;
@@ -117,4 +118,62 @@ public class CasosParticulares {
         mesaTester.setJugadores(listaJugadores);
     }
 
+    @Test(expected = NoSePuedeCantarMasDeDosVecesEnvidoException.class)
+    public void testSeIntentaCantarEnvido3Veces(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarEnvido(new Envido());
+        jugadorPie.quieroEnvido();
+        jugadorPie.cantarEnvido(new Envido());
+        jugadorMano.quieroEnvido();
+        jugadorMano.cantarEnvido(new Envido());
+        jugadorPie.quieroEnvido();
+    }
+
+    @Test(expected = NoSePuedeCantarEnvidoDespuesDeRealEnvidoException.class)
+    public void testSeIntentaCantarEnvidoDespuesDeRealEnvido(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarEnvido(new RealEnvido());
+        jugadorPie.quieroEnvido();
+        jugadorPie.cantarEnvido(new Envido());
+        jugadorMano.quieroEnvido();
+    }
+
+    @Test(expected = FlorSoloSeCantaEnLaPrimeraException.class)
+    public void testSeIntentaCantarFlorEnLaSegundaMano(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+
+        jugadorMano.jugarCarta(5,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.ESPADA);
+        mesaTester.resolverMano();
+        jugadorMano.cantarFlor();
+    }
+
+    @Test(expected = SoloSePuedeCantarFlorUnaVezException.class)
+    public void testSeIntentaCantarFlor2Veces(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(7,Palo.ESPADA));
+
+        jugadorMano.cantarFlor();
+        jugadorPie.quieroFlor();
+        jugadorPie.cantarFlor();
+    }
+
+    @Test(expected = ContraFlorSoloSePuedeCantarDespuesDeFlorException.class)
+    public void testSeIntentaCantarContraflorAntesDeFlor(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+
+        jugadorMano.cantarContraFlor();
+    }
 }

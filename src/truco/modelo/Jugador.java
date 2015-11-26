@@ -86,6 +86,7 @@ public class Jugador {
     }
 
     public boolean tieneFlor(){
+        if(mano.size()<3) return false;
         return mano.get(0).getPalo().equals(mano.get(1).getPalo()) && mano.get(0).getPalo().equals(mano.get(2).getPalo());
     }
 
@@ -143,10 +144,11 @@ public class Jugador {
 
     /**FLOR**/
     public void cantarFlor() {
-        if(!this.tieneFlor()) throw new JugadorNoTieneFlorException();
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
         mesa.getArbitro().jugadorPuedeCantarFlor(this);
+        if(!this.tieneFlor()) throw new JugadorNoTieneFlorException();
+
         mesa.getRonda().activarFlor();
 
         mesa.siguienteJugador();
@@ -154,7 +156,6 @@ public class Jugador {
             mesa.jugadorAnterior();
             mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getFlorEnJuego().getPuntos());
         }
-        mesa.siguienteJugador();
 
     }
 

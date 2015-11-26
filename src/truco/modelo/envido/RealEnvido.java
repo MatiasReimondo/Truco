@@ -16,10 +16,11 @@ public class RealEnvido extends Envido {
 
     @Override
     public void anidarEnvido(Envido envido){
-        if(subEnvido==null)
-            subEnvido=envido;
-        else if(envido.getClass().equals(Envido.class))
+
+       if(envido.getClass().equals(Envido.class))
             throw new NoSePuedeCantarEnvidoDespuesDeRealEnvidoException();
+       else if(subEnvido==null)
+            subEnvido=envido;
         else
             subEnvido.anidarEnvido(envido);
     }
