@@ -40,6 +40,10 @@ public class Mesa {
         nroJugadores =listaJugadores.size();
     }
 
+    public void setEstadoTruco(EstadoTruco estadoTruco) {
+        this.estadoTruco = estadoTruco;
+    }
+
     /**GETTERS**/
     public Mazo getMazo(){
         return mazo;
@@ -88,7 +92,6 @@ public class Mesa {
 
         int envidoMax=0;
         this.jugadorActivo=this.getJugadorMano();
-        resetJugadorActivo();
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
         Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
 
@@ -106,10 +109,12 @@ public class Mesa {
                         equipoPerdedor = equipoGanador;
                         equipoGanador = jugadorActivo.getEquipo();
                     }
-            this.jugadorActivoAvanzar();
+            this.proximoTurno();
         }
-            equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
+            equipoGanador.sumarPuntos(this.ronda.getTanto().getPuntos(equipoGanador, equipoPerdedor));
     }
+
+    public void resolverTruco(){}
 
     public void resolverMano() {
         if(ronda.termino())
@@ -144,9 +149,7 @@ public class Mesa {
             jugador.getMano().clear();
     }
 
-
-    /**AUXILIARES**/
-    public void jugadorActivoAvanzar(){
+    public void proximoTurno(){
         if(iterJugadorActivo.hasNext())
             jugadorActivo= iterJugadorActivo.next();
         else{
@@ -155,14 +158,7 @@ public class Mesa {
         }
     }
 
-    public void jugadorActivoRetroceder() {
-        jugadorActivo=iterJugadorActivo.previous();
-    }
-
-    private void resetJugadorActivo(){
-        iterJugadorActivo=jugadores.listIterator();
-        iterJugadorActivo.next();
-    }
+    /**AUXILIARES**/
     public void actualizarJugadorMano(){
         if(jugadores.isEmpty()) throw new ListaJugadoresVaciaException();
         jugadores.add(jugadores.remove(0));
@@ -194,5 +190,21 @@ public class Mesa {
         this.estadoTruco = this.estadoTruco.avanzarEstado(this);
     }
 
+    public void jugadorAnterior() {
 
+        jugadorActivo=iterJugadorActivo.previous();
+    }
+
+    public void cantarTruco() {
+        this.estadoTruco= this.estadoTruco.cantarTruco();
+    }
+    public void cantarRetruco() {
+        this.estadoTruco= this.estadoTruco.cantarRetruco();
+    }
+    public void cantarValecuatro() {
+        this.estadoTruco= this.estadoTruco.cantarValecuatro();
+    }
+    public void quiero() {
+        this.estadoTruco= this.estadoTruco.quiero();
+    }
 }

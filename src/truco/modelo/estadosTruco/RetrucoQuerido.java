@@ -22,4 +22,24 @@ public class RetrucoQuerido implements EstadoTruco {
         }
         return new ValeCuatroCantado();
     }
+
+    @Override
+    public EstadoTruco cantarTruco() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco cantarRetruco() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco cantarValecuatro() {
+        return new ValeCuatroCantado();
+    }
+
+    @Override
+    public EstadoTruco quiero() {
+        throw new NoSePuedeCantarAhoraException();
+    }
 }

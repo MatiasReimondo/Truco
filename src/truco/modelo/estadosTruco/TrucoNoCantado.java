@@ -22,4 +22,24 @@ public class TrucoNoCantado implements EstadoTruco {
         }
         return new TrucoCantado();
     }
+
+    @Override
+    public EstadoTruco cantarTruco() {
+        return new TrucoCantado();
+    }
+
+    @Override
+    public EstadoTruco cantarRetruco() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco cantarValecuatro() {
+        throw new NoSePuedeCantarAhoraException();
+    }
+
+    @Override
+    public EstadoTruco quiero() {
+        throw new NoSePuedeCantarAhoraException();
+    }
 }

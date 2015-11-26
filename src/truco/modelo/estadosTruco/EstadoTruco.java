@@ -11,5 +11,13 @@ public interface EstadoTruco {
 
      EstadoTruco avanzarEstado(Mesa mesa);
 
+     EstadoTruco cantarTruco();
+
+     EstadoTruco cantarRetruco();
+
+     EstadoTruco cantarValecuatro();
+
+     EstadoTruco quiero();
+
 
 }
