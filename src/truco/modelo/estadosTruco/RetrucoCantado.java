@@ -11,7 +11,7 @@ public class RetrucoCantado implements EstadoTruco {
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa) {
         //Si no son iguales,se lanza una excepcion
-        if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals(new RetrucoCantado().getClass()) ) {
+        if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals(RetrucoCantado.class) ) {
             throw new NoSePuedeCantarAhoraException();
         }
         return new RetrucoQuerido();

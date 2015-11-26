@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.envido.Envido;
-import truco.modelo.excepciones.CartaNoEstaEnLaManoException;
-import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
-import truco.modelo.excepciones.RondaTerminadaException;
+import truco.modelo.excepciones.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,4 +81,40 @@ public class CasosParticulares {
 
         jugadorMano.cantarTruco();
     }
+
+    @Test(expected = NoSePuedeQuererSinTenerFlorException.class)
+    public void testQuererFlorSinTener(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+        jugadorMano.levantarCarta(new Carta(7,Palo.ESPADA));
+        jugadorMano.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorMano.levantarCarta(new Carta(5,Palo.ESPADA));
+
+        jugadorPie.levantarCarta(new Carta(1,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(10, Palo.ORO));
+
+        jugadorMano.cantarFlor();
+        jugadorPie.quieroFlor();
+    }
+
+    @Test(expected = CantidadDeJugadoresDebeSerNumeroParException.class)
+    public void testSeIntentaJugadorCon3Jugadores(){
+        listaJugadores.add(new Jugador("Ricardito"));
+        mesaTester.setJugadores(listaJugadores);
+    }
+
+    @Test(expected = CantidadDeJugadoresInsuficienteException.class)
+    public void testSeIntentaJugarCon1Jugador(){
+        listaJugadores.remove(0);
+        mesaTester.setJugadores(listaJugadores);
+    }
+
+    @Test(expected = MaximoDeJugadoresExcedidoException.class)
+    public void testSeIntentaJugadorCon7Jugadores(){
+        for(int i=0;i<8;i++)
+            listaJugadores.add(new Jugador("Pepe"));
+        mesaTester.setJugadores(listaJugadores);
+    }
+
 }

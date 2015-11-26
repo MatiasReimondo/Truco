@@ -17,7 +17,7 @@ public class TrucoQuerido implements EstadoTruco {
     public EstadoTruco avanzarEstado(Mesa mesa ) {
 
         //si no son iguales se lanza una excepción
-        if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals(new TrucoQuerido().getClass()) ){
+        if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoQuerido.class) ){
             throw new NoSePuedeCantarAhoraException();
         }
         return new RetrucoCantado();

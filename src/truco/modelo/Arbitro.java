@@ -61,7 +61,7 @@ public class Arbitro {
             throw new NoEsTurnoDelJugadorException();
     }
 
-    public void jugadorPuedeCantarContraflor(Jugador jugador){
+    public void jugadorPuedeCantarContraflor(){
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
             throw new FlorSoloSeCantaEnLaPrimeraException();
         if(mesa.getRonda().getFlorEnJuego()==null)

@@ -161,7 +161,7 @@ public class Jugador {
     public void cantarContraFlor(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
-        mesa.getArbitro().jugadorPuedeCantarContraflor(this);
+        mesa.getArbitro().jugadorPuedeCantarContraflor();
         mesa.getRonda().getFlorEnJuego().contraflor();
         mesa.siguienteJugador();
     }
@@ -169,7 +169,7 @@ public class Jugador {
     public void cantarContraflorAlResto(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
-        mesa.getArbitro().jugadorPuedeCantarContraflor(this);
+        mesa.getArbitro().jugadorPuedeCantarContraflor();
         mesa.getRonda().getFlorEnJuego().contraflorAlResto();
         mesa.siguienteJugador();
     }
