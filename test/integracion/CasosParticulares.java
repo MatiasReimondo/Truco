@@ -151,6 +151,25 @@ public class CasosParticulares {
         jugadorMano.cantarFlor();
     }
 
+    @Test(expected = FlorSoloSeCantaEnLaPrimeraException.class)
+    public void testSeIntentaCantarContraFlorEnLaSegundaMano(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+
+        jugadorMano.jugarCarta(5,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.ESPADA);
+        mesaTester.resolverMano();
+        jugadorMano.cantarContraFlor();
+    }
+
+    @Test(expected = NoEsTurnoDelJugadorException.class)
+    public void testJugadorCantaFlorPeroNoEsSuTurno(){
+        mesaTester.nuevaRonda();
+        mesaTester.getArbitro().florHabilitada();
+        jugadorPie.cantarFlor();
+    }
     @Test(expected = SoloSePuedeCantarFlorUnaVezException.class)
     public void testSeIntentaCantarFlor2Veces(){
         mesaTester.nuevaRonda();
@@ -175,5 +194,48 @@ public class CasosParticulares {
         mesaTester.getArbitro().florHabilitada();
 
         jugadorMano.cantarContraFlor();
+    }
+
+    @Test(expected = RondaTerminadaException.class)
+    public void testSeIntentaJugarDespuesDeTerminadaLaRonda(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(7,Palo.ESPADA));
+
+        jugadorMano.jugarCarta(7,Palo.BASTO);
+        jugadorPie.jugarCarta(6,Palo.ESPADA);
+        mesaTester.resolverMano();
+        jugadorMano.jugarCarta(6,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.ESPADA);
+        mesaTester.resolverMano();
+        jugadorMano.jugarCarta(5,Palo.BASTO);
+
+    }
+
+    @Test(expected = RondaTerminadaException.class)
+    public void testResolverManoDespuesDeTerminadaLaRonda(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(5,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(6,Palo.BASTO));
+        jugadorMano.levantarCarta(new Carta(7,Palo.BASTO));
+
+        jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(6,Palo.ESPADA));
+        jugadorPie.levantarCarta(new Carta(7,Palo.ESPADA));
+
+        jugadorMano.jugarCarta(7,Palo.BASTO);
+        jugadorPie.jugarCarta(6,Palo.ESPADA);
+        mesaTester.resolverMano();
+        jugadorMano.jugarCarta(6,Palo.BASTO);
+        jugadorPie.jugarCarta(5,Palo.ESPADA);
+        mesaTester.resolverMano();
+        mesaTester.resolverMano();
     }
 }

@@ -145,7 +145,7 @@ public class Jugador {
     public void cantarFlor() {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
-        mesa.getArbitro().jugadorPuedeCantarFlor(this);
+        mesa.getArbitro().jugadorPuedeCantarFlor();
         if(!this.tieneFlor()) throw new JugadorNoTieneFlorException();
 
         mesa.getRonda().activarFlor();

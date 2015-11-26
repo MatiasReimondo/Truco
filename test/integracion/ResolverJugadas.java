@@ -52,6 +52,7 @@ public class ResolverJugadas {
         mesaTester.setJugadores(listaJugadores);
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     @Test
     public void testCartasDeMismaFuerzaEmpatan(){
         mesaTester.nuevaRonda();
@@ -119,6 +120,25 @@ public class ResolverJugadas {
 
     }
 
+    @Test
+    public void testResolverFlor(){
+        mesaTester.getArbitro().florHabilitada();
+        mesaTester.nuevaRonda();
+
+        jugadorMano.levantarCarta(new Carta(1, Palo.ESPADA));
+        jugadorMano.levantarCarta(new Carta(7, Palo.ESPADA));
+        jugadorMano.levantarCarta(new Carta(10, Palo.ESPADA));
+
+        jugadorPie.levantarCarta(new Carta(3, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(2, Palo.BASTO));
+        jugadorPie.levantarCarta(new Carta(1, Palo.BASTO));
+
+        jugadorMano.cantarFlor();
+        jugadorPie.quieroFlor();
+        mesaTester.resolverFlor();
+
+        Assert.assertEquals(3,equipoMano.getPuntaje());
+    }
     @Test
     public void testSeCantaEnvidoYelJugadorTiene28(){
 

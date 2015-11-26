@@ -14,7 +14,6 @@ public class Truco {
     private List<Equipo> equipos;
     private List<Jugador> jugadores;
     private Mesa mesa;
-    private boolean flor;
 
     /**CONSTRUCTOR**/
     public Truco(){
@@ -68,7 +67,7 @@ public class Truco {
     }
 
     public void seJuegaConFlor(){
-        flor=true;
+        mesa.getArbitro().florHabilitada();
     }
 
 }

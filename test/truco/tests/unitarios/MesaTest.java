@@ -79,20 +79,12 @@ public class MesaTest {
     public void testJugadorEsManoFalso(){
         Assert.assertFalse(mesaTester.getArbitro().jugadorEsMano(jugadorPepe));
     }
+
     @Test
     public void testJugadorPieAlComenzar() {
         Assert.assertTrue(mesaTester.getArbitro().jugadorEsPie(jugadorPepe));
     }
 
-    /*
-    @Test
-    public void testActualizarManoPieNoLanzaExcepcion() {
-        mesaTester.actualizarJugadorMano();
-        mesaTester.actualizarJugadorMano();
-        mesaTester.actualizarJugadorMano();
-        Assert.assertTrue(true);
-    }
-*/
     @Test
     public void testActualizarManoPie() {
         Assert.assertEquals(jugadorJuan, mesaTester.getJugadorMano());
@@ -148,6 +140,7 @@ public class MesaTest {
         jugadorJuan.jugarCarta(2,Palo.BASTO);
 
     }
+
     @Test (expected = NoEsTurnoDelJugadorException.class)
     public void testJugadorTrataDeJugarCuandoNoEsSuTurno2(){
         mesaTester.nuevaRonda();
@@ -183,5 +176,10 @@ public class MesaTest {
         jugadorJuan.jugarCarta(1,Palo.COPA);
 
 
+    }
+
+    @Test
+    public void testJugadorAnteriorNoLanzaException(){
+        mesaTester.jugadorAnterior();
     }
 }

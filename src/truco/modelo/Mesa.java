@@ -11,7 +11,6 @@ public class Mesa {
     private Ronda ronda;
     private List<Jugador> jugadores;
     private int nroJugadores;
-    private boolean flor;
     private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
     private final Arbitro arbitro;
@@ -30,6 +29,7 @@ public class Mesa {
 
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
+        iterJugadorActivo=jugadores.listIterator();
     }
 
     /**GETTERS**/
@@ -61,14 +61,8 @@ public class Mesa {
         return arbitro;
     }
 
-    public Boolean getFlor(){
-        return flor;
-    }
 
     /**ACCIONES**/
-    public void jugarConFlor(){
-        flor=true;
-    }
 
     public void repartirCartas(){
         for(Jugador jugador: jugadores)
@@ -93,11 +87,6 @@ public class Mesa {
                         equipoGanador = jugadorActivo.getEquipo();
                     }
             }
-            else if(jugadorActivo.getEnvido()==envidoMax)
-                    if(jugadorActivo.getEquipo().equals(this.getJugadorMano().getEquipo()) && !equipoGanador.equals(this.getJugadorMano().getEquipo())) {
-                        equipoPerdedor = equipoGanador;
-                        equipoGanador = jugadorActivo.getEquipo();
-                    }
             this.siguienteJugador();
         }
             equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
@@ -109,7 +98,6 @@ public class Mesa {
         this.jugadorActivo=this.getJugadorMano();
         resetJugadorActivo();
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
-
 
         for(int i=0;i<nroJugadores;i++) {
             if (jugadorActivo.quiereMostrarEnvido())
@@ -206,14 +194,11 @@ public class Mesa {
                 ronda.resultadoMano(equipo);
                 return;
             }
-            case 2: if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
+            case 2: {if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
                     else equipo.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
+                    ronda.terminar();
+            }
         }
     }
-
-    public boolean seJuegaConFlor(){
-        return flor;
-    }
-
 
 }
