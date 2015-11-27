@@ -12,7 +12,7 @@ public class ValeCuatroCantado implements EstadoTruco {
     public int getPuntaje() {
         return 3;
     }
-
+/*
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa) {
 
@@ -22,7 +22,7 @@ public class ValeCuatroCantado implements EstadoTruco {
         }
         return new ValeCuatroQuerido();
     }
-
+ */
     @Override
     public EstadoTruco cantarTruco() {
         throw new NoSePuedeCantarAhoraException();

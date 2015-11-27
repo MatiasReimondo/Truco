@@ -457,6 +457,25 @@ public class ResolverJugadas {
     }
 
     @Test
+    public void testTrucoNoQueridoAsigna1Punto(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.noQuieroTruco();
+        Assert.assertEquals(1,equipoMano.getPuntaje());
+    }
+
+    @Test
+    public void testValeCuatroNoQueridoSon3Puntos(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.noQuieroTruco();
+        Assert.assertEquals(3,equipoMano.getPuntaje());
+    }
+    @Test
     public void testManoGanaPrimeraYSegundaConRetruco(){
         mesaTester.nuevaRonda();
 

@@ -9,7 +9,7 @@ public interface EstadoTruco {
      /********************** Metodos de la clase ***********************************/
      int getPuntaje();
 
-     EstadoTruco avanzarEstado(Mesa mesa);
+/*     EstadoTruco avanzarEstado(Mesa mesa);*/
 
      EstadoTruco cantarTruco();
 

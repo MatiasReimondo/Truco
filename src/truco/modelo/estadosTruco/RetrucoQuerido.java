@@ -12,7 +12,7 @@ public class RetrucoQuerido implements EstadoTruco {
     public int getPuntaje() {
         return 3;
     }
-
+/*
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa) {
         if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals(RetrucoQuerido.class))  {
@@ -20,7 +20,7 @@ public class RetrucoQuerido implements EstadoTruco {
         }
         return new ValeCuatroCantado();
     }
-
+*/
     @Override
     public EstadoTruco cantarTruco() {
         throw new NoSePuedeCantarAhoraException();

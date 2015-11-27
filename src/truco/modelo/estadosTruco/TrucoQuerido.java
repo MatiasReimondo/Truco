@@ -12,7 +12,7 @@ public class TrucoQuerido implements EstadoTruco {
     public int getPuntaje() {
         return 2;
     }
-
+/*
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa ) {
 
@@ -22,7 +22,7 @@ public class TrucoQuerido implements EstadoTruco {
         }
         return new RetrucoCantado();
     }
-
+*/
     @Override
     public EstadoTruco cantarTruco() {
         throw new NoSePuedeCantarAhoraException();

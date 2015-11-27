@@ -251,4 +251,192 @@ public class CasosParticulares {
         jugadorMano.cantarEnvido(new FaltaEnvido());
         jugadorPie.quieroEnvido();
     }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarRetruco2Veces(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarRetruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTruco2Veces(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarValeCuatro2Veces(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarValeCuatro();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarValeCuatroConValeCuatroCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.cantarValeCuatro();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarValeCuatroConRetrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.cantarValeCuatro();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarValeCuatroConTrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.cantarValeCuatro();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarRetrucoConRetrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.cantarRetruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTrucoConTrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.cantarTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTrucoDespuesDelRetruco(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarRetrucoConTrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.cantarRetruco();
+    }
+
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeQuiereDosVecesElValeCuatro(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.quieroTruco();
+        jugadorPie.quieroTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeQuiereDosVecesElRetruco(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarRetruco();
+    }
+
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeQuiereDosVecesElTruco(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.quieroTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTrucoConRetrucoCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.cantarTruco();
+    }
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarRetrucoDespuesDelValeCuatro(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarRetrucoDespuesDelValeCuatroCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.cantarRetruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTrucoDespuesDelValeCuatroCantado(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.cantarTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeIntentaCantarTrucoDespuesDelValeCuatro(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.cantarValeCuatro();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarTruco();
+    }
+
+    @Test(expected = NoSePuedeCantarAhoraException.class)
+    public void testSeQuiere2VecesElRetruco(){
+        mesaTester.nuevaRonda();
+        jugadorMano.cantarTruco();
+        jugadorPie.quieroTruco();
+        jugadorPie.cantarRetruco();
+        jugadorMano.quieroTruco();
+        jugadorMano.quieroTruco();
+    }
+
+
 }

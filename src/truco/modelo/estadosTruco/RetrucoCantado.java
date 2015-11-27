@@ -7,7 +7,7 @@ public class RetrucoCantado implements EstadoTruco {
     public int getPuntaje() {
         return 2;
     }
-
+/*
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa) {
         //Si no son iguales,se lanza una excepcion
@@ -16,7 +16,7 @@ public class RetrucoCantado implements EstadoTruco {
         }
         return new RetrucoQuerido();
     }
-
+*/
     @Override
     public EstadoTruco cantarTruco() {
         throw new NoSePuedeCantarAhoraException();

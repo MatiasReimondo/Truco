@@ -13,11 +13,12 @@ public class ValeCuatroQuerido implements EstadoTruco {
         return 4;
     }
 
+    /*
     @Override
     public EstadoTruco avanzarEstado(Mesa mesa) {
         return null;
     }
-
+    */
     @Override
     public EstadoTruco cantarTruco() {
         throw new NoSePuedeCantarAhoraException();

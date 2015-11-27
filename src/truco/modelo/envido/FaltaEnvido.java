@@ -12,8 +12,7 @@ public class  FaltaEnvido extends Envido {
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor) {
         if(equipoGanador.getPuntaje()<15 && equipoPerdedor.getPuntaje()<15 || equipoGanador.getPuntaje()>15 && equipoPerdedor.getPuntaje()<15)
             return 30 - equipoGanador.getPuntaje();
-        if(equipoGanador.getPuntaje()<15 && equipoPerdedor.getPuntaje()>15 || equipoGanador.getPuntaje()>15 && equipoPerdedor.getPuntaje()>15)
-            return 30 - equipoPerdedor.getPuntaje();
-        return 0;
+
+        return 30 - equipoPerdedor.getPuntaje();
     }
 }
