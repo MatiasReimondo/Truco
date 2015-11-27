@@ -1,5 +1,6 @@
 package truco.modelo;
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.excepciones.*;
 
 import java.util.ArrayList;
@@ -87,6 +88,19 @@ public class Jugador {
 
     public boolean tieneFlor() {
         return mano.size() >= 3 && mano.get(0).getPalo().equals(mano.get(1).getPalo()) && mano.get(0).getPalo().equals(mano.get(2).getPalo());
+    }
+
+    public void irseAlMazo(){
+        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTantoPendiente().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlorEnJuego()==null){
+            mesa.siguienteJugador();
+            mesa.getJugadorActivo().getEquipo().sumarPuntos(2);
+            mesa.getRonda().terminar();
+        }
+        else{
+            mesa.siguienteJugador();
+            mesa.getJugadorActivo().getEquipo().sumarPuntos(1);
+            mesa.getRonda().terminar();
+        }
     }
 
     /**ENVIDO**/

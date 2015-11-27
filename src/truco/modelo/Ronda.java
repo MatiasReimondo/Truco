@@ -16,7 +16,7 @@ public class Ronda {
     private final Vector<Equipo> resultados;
     private final Mesa mesa;
 
-    private final Envido tantoEnJuego;
+    private Envido tantoEnJuego;
     private Envido tantoPendiente;
     private Flor florEnJuego;
     private EstadoTruco trucoEnJuego;
@@ -53,6 +53,10 @@ public class Ronda {
         return trucoEnJuego;
     }
 
+    public Envido getTantoPendiente(){
+        return tantoPendiente;
+    }
+
     /**SETTERS**/
     public void setTrucoEnJuego(EstadoTruco estado){
         trucoEnJuego=estado;
@@ -77,7 +81,7 @@ public class Ronda {
     }
 
     public void cambiarTantoEnJuego(){
-        tantoEnJuego.anidarEnvido(tantoPendiente);
+         tantoEnJuego.anidarEnvido(tantoPendiente);
     }
 
     public void activarFlor() {

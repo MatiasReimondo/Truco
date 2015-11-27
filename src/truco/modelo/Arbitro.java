@@ -59,6 +59,7 @@ public class Arbitro {
             throw new SoloSePuedeCantarFlorUnaVezException();
     }
 
+
     public void jugadorPuedeCantarContraflor(){
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
             throw new FlorSoloSeCantaEnLaPrimeraException();

@@ -73,12 +73,12 @@ public class Mesa {
     public void resolverEnvido(){
 
         int envidoMax=0;
-        this.jugadorActivo=this.getJugadorMano();
-        resetJugadorActivo();
+        Jugador auxiliar=jugadorActivo;
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
         Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
 
         for(int i=0;i<nroJugadores;i++) {
+            jugadorActivo=jugadores.get(i);
             if (jugadorActivo.quiereMostrarEnvido())
                 if (jugadorActivo.getEnvido() > envidoMax) {
                     envidoMax = jugadorActivo.getEnvido();
@@ -87,9 +87,9 @@ public class Mesa {
                         equipoGanador = jugadorActivo.getEquipo();
                     }
             }
-            this.siguienteJugador();
         }
             equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
+        jugadorActivo=auxiliar;
     }
 
     public void resolverFlor(){
@@ -156,17 +156,22 @@ public class Mesa {
     }
 
     public void jugadorAnterior() {
-        if(iterJugadorActivo.hasPrevious())
+        if(iterJugadorActivo.hasPrevious()) {
             iterJugadorActivo.previous();
-        else {
-            iterJugadorActivo = jugadores.listIterator();
-            iterJugadorActivo.next();
+            if (iterJugadorActivo.hasPrevious())
+                jugadorActivo = iterJugadorActivo.previous();
+            else {
+                while (iterJugadorActivo.hasNext())
+                    iterJugadorActivo.next();
+                iterJugadorActivo.previous();
+                jugadorActivo = iterJugadorActivo.previous();
+            }
         }
-        if(iterJugadorActivo.hasPrevious())
-            jugadorActivo=iterJugadorActivo.previous();
         else {
-            iterJugadorActivo=jugadores.listIterator();
-            jugadorActivo=iterJugadorActivo.next();
+            while (iterJugadorActivo.hasNext())
+                iterJugadorActivo.next();
+            iterJugadorActivo.previous();
+            jugadorActivo=iterJugadorActivo.previous();
         }
         iterJugadorActivo.next();
     }

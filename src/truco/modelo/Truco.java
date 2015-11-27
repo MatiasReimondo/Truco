@@ -8,7 +8,6 @@ import truco.modelo.excepciones.JugadorPreExistenteException;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("ALL")
 public class Truco {
 
     private List<Equipo> equipos;
@@ -31,6 +30,10 @@ public class Truco {
         throw new JugadorInexistenteException();
     }
 
+    public Mesa getMesa(){
+        return mesa;
+    }
+
     public Equipo getEquipo(String nombreEquipo){
         for(Equipo equipo:equipos)
             if(equipo.getNombre().equals(nombreEquipo))
@@ -41,7 +44,8 @@ public class Truco {
     /**ACCIONES**/
     public void empezarJuego(){
         mesa.setJugadores(jugadores);
-        mesa.nuevaRonda();
+        for(Jugador jugador:jugadores)
+            jugador.setMesa(mesa);
     }
 
     public void nuevoEquipo(String nombreEquipo){
@@ -58,7 +62,7 @@ public class Truco {
         this.getEquipo(equipo);
         try{this.getJugador(nombreJugador);} catch (JugadorInexistenteException e) {
             Jugador nuevoJugador = new Jugador(nombreJugador);
-            nuevoJugador.setNombre(nombreJugador);
+            nuevoJugador.setEquipo(this.getEquipo(equipo));
             jugadores.add(nuevoJugador);
 
             return;
@@ -70,5 +74,11 @@ public class Truco {
         mesa.getArbitro().florHabilitada();
     }
 
+    public boolean terminado() {
+        for(Equipo equipo:equipos)
+            if(equipo.getPuntaje()>=30)
+                return true;
+        return false;
+    }
 }
 

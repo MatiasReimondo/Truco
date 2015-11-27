@@ -1,10 +1,10 @@
 package integracion;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
 import truco.modelo.excepciones.*;
 
@@ -129,7 +129,7 @@ public class CasosParticulares {
         jugadorPie.quieroEnvido();
     }
 
-    @Test(expected = NoSePuedeCantarEnvidoDespuesDeRealEnvidoException.class)
+    @Test(expected = SoloSePuedeCantarFaltaEnvidoDespuesDeRealEnvidoException.class)
     public void testSeIntentaCantarEnvidoDespuesDeRealEnvido(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarEnvido(new RealEnvido());
@@ -170,6 +170,7 @@ public class CasosParticulares {
         mesaTester.getArbitro().florHabilitada();
         jugadorPie.cantarFlor();
     }
+
     @Test(expected = SoloSePuedeCantarFlorUnaVezException.class)
     public void testSeIntentaCantarFlor2Veces(){
         mesaTester.nuevaRonda();
@@ -237,5 +238,17 @@ public class CasosParticulares {
         jugadorPie.jugarCarta(5,Palo.ESPADA);
         mesaTester.resolverMano();
         mesaTester.resolverMano();
+    }
+
+    @Test(expected = FaltaEnvidoYaCantadoException.class)
+    public void testSeIntentaCantarFaltaEnvido2VecesDespuesDeRealEnvido(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.cantarEnvido(new RealEnvido());
+        jugadorPie.quieroEnvido();
+        jugadorPie.cantarEnvido(new FaltaEnvido());
+        jugadorMano.quieroEnvido();
+        jugadorMano.cantarEnvido(new FaltaEnvido());
+        jugadorPie.quieroEnvido();
     }
 }

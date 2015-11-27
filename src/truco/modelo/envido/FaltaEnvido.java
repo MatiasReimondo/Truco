@@ -2,7 +2,7 @@ package truco.modelo.envido;
 
 import truco.modelo.Equipo;
 
-public class FaltaEnvido extends Envido {
+public class  FaltaEnvido extends Envido {
 
     public FaltaEnvido() {
 

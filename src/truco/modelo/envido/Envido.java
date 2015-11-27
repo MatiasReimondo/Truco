@@ -24,6 +24,8 @@ public class Envido {
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){
         if(subEnvido==null)
             return puntos;
+        if(subEnvido.getClass().equals(FaltaEnvido.class))
+            return subEnvido.getPuntos(equipoGanador,equipoPerdedor);
         return puntos+subEnvido.getPuntos(equipoGanador,equipoPerdedor);
     }
 }
