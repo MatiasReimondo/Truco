@@ -80,5 +80,21 @@ public class Truco {
                 return true;
         return false;
     }
+
+    /****** Metodos creados para el funcionamiento de la interfaz grafica ***********/
+    public List<Carta> getCartasDelJugador(String nombreDeJugador){
+
+        for(Jugador jugador: this.jugadores){
+            if (jugador.getNombre().equals(nombreDeJugador)){
+                return jugador.getMano();
+            }
+        }
+        throw new JugadorInexistenteException();
+    }
+
+    public List<Jugador> getJugadores (){
+        return this.jugadores;
+    }
+
 }
 
