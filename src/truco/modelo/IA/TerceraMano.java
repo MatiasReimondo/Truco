@@ -39,6 +39,7 @@ public class TerceraMano implements Comportamiento {
 
         if(mesa.getRonda().getTrucoEnJuego().getClass().equals(RetrucoQuerido.class) && r.nextInt(10)<2)        //70% de cantar Vale Cuatro.
             IA.cantarValeCuatro();
+
     }
 
     @Override
