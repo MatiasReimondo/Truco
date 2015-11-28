@@ -33,7 +33,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorVertical = contenedorVertical;
         this.contenedorDeCartas = new HBox();
         this.contenedorDeEquipos = new HBox();
-
+        this.contenedorDeEstados = new VBox();
         this.contenedorDeEquipo1 = new VBox();
         this.contenedorDeEquipo2 = new VBox();
         this.juego = juego;
