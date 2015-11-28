@@ -10,12 +10,13 @@ public class Jugador {
 
     /**ATRIBUTOS**/
     private String nombre;
-    private final List<Carta> mano;
+    private List<Carta> mano;
     private Mesa mesa;
     private Equipo equipo;
     private static final int MAXIMO_CARTAS= 3;
 
     /**CONSTRUCTOR**/
+    public Jugador(){}
     public Jugador(String unNombre){
         this.nombre =unNombre;
         this.mano =new ArrayList<>();
@@ -200,6 +201,12 @@ public class Jugador {
         this.mano.add(unaCarta);
     }
 
+    public int getFuerzaTotal(){
+        int suma=0;
+        for(Carta carta:mano)
+            suma=suma+carta.getFuerza();
+        return suma;
+    }
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
