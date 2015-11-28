@@ -1,4 +1,4 @@
-<project xmlns:ivy="antlib:org.apache.ivy.ant" name="algo3.tp1.vista.Programa" basedir="." default="test">
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="truco.vista.Programa" basedir="." default="test">
 	<property name="build" location="build" />
 	<property name="libs" location="libs" />
 	<property name="classes.dir" location="build" />
@@ -205,7 +205,7 @@
 	</target>
 
 	<target name="ejecutar.aplicacion" depends="empaquetar">
-		<java classname="algo3.tp1.vista.Programa" fork="true">
+		<java classname="truco.vista.Programa" fork="true">
 			<classpath refid="classpath" />
 			<!--<classpath location="${build}/dist/algo3.jar" />-->
 		</java>
