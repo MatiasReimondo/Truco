@@ -43,10 +43,10 @@ public class Programa extends Application {
 
         /****** Contenedor principal de la aplicacion *******/
         VBox contenedorPrincipal = new VBox(contenedorHorizontalDeOpciones,contenedorVertical);
-        contenedorPrincipal.setSpacing(10);
+        contenedorPrincipal.setSpacing(20);
         contenedorPrincipal.setPadding(new Insets(5));
 
-        Scene scene = new Scene(contenedorPrincipal,500,300);
+        Scene scene = new Scene(contenedorPrincipal,600,400);
         primaryStage.setScene(scene);
         primaryStage.show();
 
