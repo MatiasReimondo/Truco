@@ -37,11 +37,5 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
         this.botonNuevoJuego.setOnAction(graficadorDeConfiguracionEventHandler);
 
 
-
-        /*
-        GraficadorDeNuevoJuegoEventHandler graficadorDeNuevoJuegoEventHandler = new GraficadorDeNuevoJuegoEventHandler(this.contenedorVertical, this.juego);
-        this.botonNuevoJuego.setOnAction(graficadorDeNuevoJuegoEventHandler);
-        TextoNuevoJuegoEventHandler textoNuevoJuegoEventHandler = new TextoNuevoJuegoEventHandler(this.botonNuevoJuego);
-        */
     }
 }

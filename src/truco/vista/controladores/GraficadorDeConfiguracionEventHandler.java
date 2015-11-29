@@ -91,7 +91,12 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
         this.contenedorConfiguracionFlor.getChildren().add(jugarConFlor);
 
         Button botonFlorSi = new Button("SI");
+        BotonFlorSiEventHandler botonFlorSiEventHandler = new BotonFlorSiEventHandler(this.juego);
+        botonFlorSi.setOnAction(botonFlorSiEventHandler);
+
         Button botonFlorNo = new Button("NO");
+        BotonFlorNoEventHandler botonFlorNoEventHandler = new BotonFlorNoEventHandler(this.juego);
+        botonFlorNo.setOnAction(botonFlorNoEventHandler);
 
         this.contenedorConfiguracionFlor.getChildren().add(botonFlorSi);
         this.contenedorConfiguracionFlor.getChildren().add(botonFlorNo);

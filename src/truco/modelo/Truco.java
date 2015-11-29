@@ -74,6 +74,10 @@ public class Truco {
         mesa.getArbitro().florHabilitada();
     }
 
+    public void seJuegaSinFlor(){
+        mesa.getArbitro().florDeshabilitada();
+    }
+
     public boolean terminado() {
         for(Equipo equipo:equipos)
             if(equipo.getPuntaje()>=30)

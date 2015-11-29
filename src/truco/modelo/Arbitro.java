@@ -70,6 +70,8 @@ public class Arbitro {
         flor=true;
     }
 
+    public void florDeshabilitada(){flor= false;}
+
     public void seJuegaConFlor(){
         if(!flor)
             throw new NoSeJuegaConFlorException();
