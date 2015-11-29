@@ -106,7 +106,12 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorDeEstados.getChildren().addAll(new Label("TURNO:"), new Label("MANO:"), new Label("-----------"));
 
         //Botones de estados de las primeras opciones activas del juego
-        this.contenedorDeEstados.getChildren().add( new Button("ENVIDO") );
+
+        Button botonEnvido = new Button("ENVIDO");
+        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonEnvido.setOnAction(botonEnvidoEventHandler);
+
+        this.contenedorDeEstados.getChildren().add( botonEnvido );
         this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
         this.contenedorDeEstados.getChildren().add( new Button("FLOR") );
 
