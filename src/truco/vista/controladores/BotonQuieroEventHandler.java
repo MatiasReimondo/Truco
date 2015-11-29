@@ -7,19 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
 import truco.modelo.Truco;
-import truco.modelo.envido.Envido;
 
 import java.util.List;
 
 
-public class BotonEnvidoEventHandler implements EventHandler<ActionEvent> {
+public class BotonQuieroEventHandler implements EventHandler<ActionEvent> {
 
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
 
 
-    public BotonEnvidoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
+    public BotonQuieroEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
@@ -31,7 +30,8 @@ public class BotonEnvidoEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getJugador("J1").cantarEnvido(new Envido());
+        this.juego.getJugador("J2").quieroEnvido();
+        this.juego.getMesa().resolverEnvido();
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
@@ -42,8 +42,8 @@ public class BotonEnvidoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeCartas.getChildren().clear();
 
         String nombreDeCarta;
-        List<Carta> cartas = this.juego.getCartasDelJugador("J2");
-        this.contenedorDeCartas.getChildren().add( new Label("Cartas de J2") );
+        List<Carta> cartas = this.juego.getCartasDelJugador("J1");
+        this.contenedorDeCartas.getChildren().add( new Label("Cartas de J1") );
 
         for (Carta unaCarta: cartas){
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
@@ -56,16 +56,7 @@ public class BotonEnvidoEventHandler implements EventHandler<ActionEvent> {
     private void graficarContenedorDeEstados(){
         this.contenedorDeEstados.getChildren().clear();
 
-        Button botonQuiero = new Button("QUIERO");
-        BotonQuieroEventHandler botonQuieroEventHandler = new BotonQuieroEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
-        botonQuiero.setOnAction(botonQuieroEventHandler);
-
-
-        this.contenedorDeEstados.getChildren().add(botonQuiero);
-        this.contenedorDeEstados.getChildren().add( new Button("ENVIDO") );
-        this.contenedorDeEstados.getChildren().add( new Button("REAL ENVIDO") );
-        this.contenedorDeEstados.getChildren().add( new Button("FALTA ENVIDO") );
-
+        this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 

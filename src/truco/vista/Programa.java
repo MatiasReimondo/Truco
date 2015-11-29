@@ -70,7 +70,7 @@ public class Programa extends Application {
         nuevoJuego.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
         nuevoJuego.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
 
-        nuevoJuego.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
+        nuevoJuego.getJugador("J2").levantarCarta(new Carta(4, Palo.BASTO));
         nuevoJuego.getJugador("J2").levantarCarta(new Carta(7, Palo.BASTO));
         nuevoJuego.getJugador("J2").levantarCarta(new Carta(10, Palo.BASTO));
 
