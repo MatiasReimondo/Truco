@@ -33,8 +33,15 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorVertical.getChildren().add(this.botonNuevoJuego);
         this.contenedorVertical.getChildren().add(this.botonSalirJuego);
 
+        GraficadorDeConfiguracionEventHandler graficadorDeConfiguracionEventHandler = new GraficadorDeConfiguracionEventHandler(this.contenedorVertical, this.juego);
+        this.botonNuevoJuego.setOnAction(graficadorDeConfiguracionEventHandler);
+
+
+
+        /*
         GraficadorDeNuevoJuegoEventHandler graficadorDeNuevoJuegoEventHandler = new GraficadorDeNuevoJuegoEventHandler(this.contenedorVertical, this.juego);
         this.botonNuevoJuego.setOnAction(graficadorDeNuevoJuegoEventHandler);
         TextoNuevoJuegoEventHandler textoNuevoJuegoEventHandler = new TextoNuevoJuegoEventHandler(this.botonNuevoJuego);
+        */
     }
 }
