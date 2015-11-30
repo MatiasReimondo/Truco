@@ -30,7 +30,7 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego=crearModelo();
+        this.juego=new Truco();
         //Se limpia el contenedor
         this.contenedorVertical.getChildren().clear();
 
