@@ -54,16 +54,16 @@ public class Arbitro {
 
     public void jugadorPuedeCantarFlor(){
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
-            throw new FlorSoloSeCantaEnLaPrimeraException();
+            throw new FlorSeCantaEnLaPrimeraException();
         if(mesa.getRonda().getFlorEnJuego()!=null)
-            throw new SoloSePuedeCantarFlorUnaVezException();
+            throw new FlorYaCantadaException();
     }
 
     public void jugadorPuedeCantarContraflor(){
         if(!mesa.getRonda().seEstaJugandoLaPrimera())
-            throw new FlorSoloSeCantaEnLaPrimeraException();
+            throw new FlorSeCantaEnLaPrimeraException();
         if(mesa.getRonda().getFlorEnJuego()==null)
-            throw new ContraFlorSoloSePuedeCantarDespuesDeFlorException();
+            throw new FlorNoCantadaException();
     }
 
     public void florHabilitada(){
@@ -74,6 +74,6 @@ public class Arbitro {
 
     public void seJuegaConFlor(){
         if(!flor)
-            throw new NoSeJuegaConFlorException();
+            throw new FlorNoHabilitadaException();
     }
 }

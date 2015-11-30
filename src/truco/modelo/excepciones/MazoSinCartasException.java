@@ -1,4 +1,4 @@
 package truco.modelo.excepciones;
 
-public class MazoSinCartasException extends PrecondicionesDelTrucoVioladasException {
+public class MazoSinCartasException extends ReglaDelTrucoVioladaException {
 }

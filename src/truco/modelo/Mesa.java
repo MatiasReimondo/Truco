@@ -86,7 +86,7 @@ public class Mesa {
         if(ronda.termino())
             throw new RondaTerminadaException();
         if(ronda.getTantoEnJuego().getClass().equals(EnvidoNoCantado.class))
-            throw new NoSeCantoEnvidoException();
+            throw new EnvidoNoCantadoException();
         int envidoMax=0;
         Jugador auxiliar=jugadorActivo;
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
@@ -141,7 +141,7 @@ public class Mesa {
             throw new RondaTerminadaException();
 
         if(ronda.getManoActual().size()<nroJugadores)
-            throw new ManoNoTerminadaException();
+            throw new CartasInsuficientesEnLaMesaException();
         int maxFza = 0;
         Equipo equipoGanador=null;
 

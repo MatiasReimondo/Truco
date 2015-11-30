@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import truco.modelo.*;
-import truco.modelo.excepciones.LimiteDeCartasEnLaManoExcedidoException;
+import truco.modelo.excepciones.ManoExcedidaEnCartasException;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.modelo.excepciones.MazoSinCartasException;
 import truco.modelo.excepciones.NoEsTurnoDelJugadorException;
@@ -49,7 +49,7 @@ public class MesaTest {
         Assert.assertFalse(mesaTester.getJugadores() == null);
     }
 
-    @Test(expected = LimiteDeCartasEnLaManoExcedidoException.class)
+    @Test(expected = ManoExcedidaEnCartasException.class)
     public void testRobarCartaLanzaExcepcion(){
         for(int i=0;i<5;i++)
             jugadorJuan.robarCartaDelMazo();

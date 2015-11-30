@@ -1,7 +1,7 @@
 package truco.modelo;
 
 
-import truco.modelo.excepciones.NumeroDeCartaInvalidoParaElTrucoException;
+import truco.modelo.excepciones.CartaIlegalParaElTruco;
 
 import java.util.Hashtable;
 
@@ -15,7 +15,7 @@ public class Carta {
     /**CONSTRUCTOR**/
     public Carta(int unNumero, Palo unPalo){
         if(unNumero<0 || unNumero>12 || unNumero==8 || unNumero==9)
-            throw new NumeroDeCartaInvalidoParaElTrucoException();
+            throw new CartaIlegalParaElTruco();
 
         this.palo = unPalo;
         this.numero= unNumero;

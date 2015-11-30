@@ -1,4 +1,4 @@
 package truco.modelo.excepciones;
 
-public class CantidadDeJugadoresInsuficienteException extends PrecondicionesDelTrucoVioladasException {
+public class CantidadDeJugadoresInsuficienteException extends ReglaDelTrucoVioladaException {
 }

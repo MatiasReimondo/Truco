@@ -68,7 +68,7 @@ public class Jugador {
     /**ACCIONES**/
     public void robarCartaDelMazo(){
         if(this.mano.size() >= MAXIMO_CARTAS)
-            throw new LimiteDeCartasEnLaManoExcedidoException();
+            throw new ManoExcedidaEnCartasException();
         if(this.mesa.getMazo().getCartas().size()==0)
             throw new MazoSinCartasException();
         this.mano.add(this.mesa.getMazo().getCartas().removeFirst());
@@ -83,7 +83,7 @@ public class Jugador {
                 mesa.siguienteJugador();
                 return;
             }
-      throw new CartaNoEstaEnLaManoException();
+      throw new CartaNoEncontradaException();
     }
 
     public boolean tieneFlor() {
@@ -205,13 +205,13 @@ public class Jugador {
 
     public void quieroFlor(){
         if(!this.tieneFlor())
-            throw new NoSePuedeQuererSinTenerFlorException();
+            throw new JugadorNoTieneFlorException();
     }
 
     /**AUXILIARES**/
-    public void levantarCarta(Carta unaCarta) throws LimiteDeCartasEnLaManoExcedidoException {
+    public void levantarCarta(Carta unaCarta) throws ManoExcedidaEnCartasException {
         if(this.mano.size() >=  MAXIMO_CARTAS)
-            throw new LimiteDeCartasEnLaManoExcedidoException();
+            throw new ManoExcedidaEnCartasException();
         this.mano.add(unaCarta);
     }
 

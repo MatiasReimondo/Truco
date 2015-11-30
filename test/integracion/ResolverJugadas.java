@@ -12,7 +12,7 @@ import truco.modelo.estadosTruco.RetrucoQuerido;
 import truco.modelo.estadosTruco.TrucoCantado;
 import truco.modelo.estadosTruco.TrucoQuerido;
 import truco.modelo.excepciones.JugadorNoTieneFlorException;
-import truco.modelo.excepciones.NoSeJuegaConFlorException;
+import truco.modelo.excepciones.FlorNoHabilitadaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class ResolverJugadas {
 
     }
 
-    @Test (expected=NoSeJuegaConFlorException.class)
+    @Test (expected=FlorNoHabilitadaException.class)
     public void testSeCantaFlorPeroSeEstaJugnadoSinFlor(){
         mesaTester.nuevaRonda();
 

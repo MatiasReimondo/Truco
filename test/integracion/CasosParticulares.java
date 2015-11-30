@@ -45,7 +45,7 @@ public class CasosParticulares {
         mesaTester.setJugadores(listaJugadores);
     }
 
-    @Test(expected = CartaNoEstaEnLaManoException.class)
+    @Test(expected = CartaNoEncontradaException.class)
     public void testJugarUnaCartaQueNoEstaEnLaMano(){
         mesaTester.nuevaRonda();
         jugadorMano.jugarCarta(10, Palo.BASTO);
@@ -85,7 +85,7 @@ public class CasosParticulares {
         jugadorMano.cantarTruco();
     }
 
-    @Test(expected = NoSePuedeQuererSinTenerFlorException.class)
+    @Test(expected = JugadorNoTieneFlorException.class)
     public void testQuererFlorSinTener(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();
@@ -120,7 +120,7 @@ public class CasosParticulares {
         mesaTester.setJugadores(listaJugadores);
     }
 
-    @Test(expected = NoSePuedeCantarMasDeDosVecesEnvidoException.class)
+    @Test(expected = EnvidoEnvidoYaCantadoException.class)
     public void testSeIntentaCantarEnvido3Veces(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarEnvido(new Envido());
@@ -140,7 +140,7 @@ public class CasosParticulares {
         jugadorMano.aceptarEnvido();
     }
 
-    @Test(expected = FlorSoloSeCantaEnLaPrimeraException.class)
+    @Test(expected = FlorSeCantaEnLaPrimeraException.class)
     public void testSeIntentaCantarFlorEnLaSegundaMano(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();
@@ -153,7 +153,7 @@ public class CasosParticulares {
         jugadorMano.cantarFlor();
     }
 
-    @Test(expected = FlorSoloSeCantaEnLaPrimeraException.class)
+    @Test(expected = FlorSeCantaEnLaPrimeraException.class)
     public void testSeIntentaCantarContraFlorEnLaSegundaMano(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();
@@ -173,7 +173,7 @@ public class CasosParticulares {
         jugadorPie.cantarFlor();
     }
 
-    @Test(expected = SoloSePuedeCantarFlorUnaVezException.class)
+    @Test(expected = FlorYaCantadaException.class)
     public void testSeIntentaCantarFlor2Veces(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();
@@ -191,7 +191,7 @@ public class CasosParticulares {
         jugadorPie.cantarFlor();
     }
 
-    @Test(expected = ContraFlorSoloSePuedeCantarDespuesDeFlorException.class)
+    @Test(expected = FlorNoCantadaException.class)
     public void testSeIntentaCantarContraflorAntesDeFlor(){
         mesaTester.nuevaRonda();
         mesaTester.getArbitro().florHabilitada();
