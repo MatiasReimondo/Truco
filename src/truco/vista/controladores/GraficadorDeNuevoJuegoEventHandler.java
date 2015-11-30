@@ -59,6 +59,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         HBox contenedorDeCartasYEquipos = new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas);
         contenedorDeCartasYEquipos.setSpacing(90);
         contenedorDeCartasYEquipos.setPadding( new Insets(30));
+        this.graficarCartaElegidaEnLaMesa();
 
         this.contenedorVertical.getChildren().addAll( contenedorDeCartasYEquipos);
 
@@ -71,7 +72,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
         String nombreDeCarta;
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        this.contenedorDeCartas.getChildren().add( new Label("Cartas del jugador") );
+        this.contenedorDeCartas.getChildren().add( new Label( this.juego.getMesa().getJugadorActivo().getNombre()) );
 
         for (Carta unaCarta: cartas){
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
@@ -139,5 +140,19 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "), new Label("Equipo2 = "));
 
         this.contenedorDeEstados.setSpacing(5);
+    }
+
+    private void graficarCartaElegidaEnLaMesa(){
+
+        Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
+        String jugadorActivo = etiquetaNombre.getText();
+        int posicion;
+        for ( posicion = 1; posicion < 4; posicion++) {
+
+            Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
+            BotonCartaElegidaEventHandler botonCartaElegidaEventHandler = new BotonCartaElegidaEventHandler(this.contenedorDeCartas,this.contenedorDeEquipo1,jugadorActivo, unaCarta);
+            unaCarta.setOnAction(botonCartaElegidaEventHandler);
+            TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
+        }
     }
 }
