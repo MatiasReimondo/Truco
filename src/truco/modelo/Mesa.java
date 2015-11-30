@@ -85,7 +85,7 @@ public class Mesa {
 
         if(ronda.termino())
             throw new RondaTerminadaException();
-        if(ronda.getTantoEnJuego().getClass().equals(EnvidoNoCantado.class))
+        if(ronda.getEnvido().getClass().equals(EnvidoNoCantado.class))
             throw new EnvidoNoCantadoException();
         int envidoMax=0;
         Jugador auxiliar=jugadorActivo;
@@ -103,7 +103,7 @@ public class Mesa {
                     }
             }
         }
-            equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
+            equipoGanador.sumarPuntos(this.ronda.getEnvido().getPuntos(equipoGanador, equipoPerdedor));
         jugadorActivo=auxiliar;
 
     }

@@ -16,8 +16,7 @@ public class Ronda {
     private final Vector<Equipo> resultados;
     private final Mesa mesa;
 
-    private Envido tantoEnJuego;
-    private Envido tantoPendiente;
+    private Envido envido;
     private Flor flor;
     private EstadoTruco truco;
 
@@ -26,8 +25,7 @@ public class Ronda {
         manoActual= new HashMap<>();
         primera=true;
         resultados=new Vector<>();
-        tantoEnJuego =new EnvidoNoCantado();
-        tantoPendiente=new EnvidoNoCantado();
+        envido =new EnvidoNoCantado();
         this.mesa=mesa;
         truco =new TrucoNoCantado();
     }
@@ -41,8 +39,8 @@ public class Ronda {
         return flor;
     }
 
-    public Envido getTantoEnJuego() {
-        return tantoEnJuego;
+    public Envido getEnvido() {
+        return envido;
     }
 
     public Vector<Equipo> getResultados() {
@@ -51,10 +49,6 @@ public class Ronda {
 
     public EstadoTruco getTruco(){
         return truco;
-    }
-
-    public Envido getTantoPendiente(){
-        return tantoPendiente;
     }
 
     /**SETTERS**/
@@ -72,20 +66,12 @@ public class Ronda {
         return primera;
     }
 
+    public void cambiarEnvido(){
+        envido=envido.cambiarEnvido();
+    }
+
     public void agregarCarta(Jugador jugador,Carta carta) {
         manoActual.put(jugador,carta);
-    }
-
-    public void subirApuestaDelEnvido(Envido envido) {
-        tantoPendiente=envido;
-    }
-
-    public void cambiarTantoEnJuego(){
-         if(tantoEnJuego.getClass().equals(EnvidoNoCantado.class))
-             tantoEnJuego=tantoPendiente;
-         else
-             tantoEnJuego.anidarEnvido(tantoPendiente);
-        tantoPendiente=null;
     }
 
     public void activarFlor() {

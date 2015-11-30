@@ -91,7 +91,7 @@ public class Jugador {
     }
 
     public void irseAlMazo(){
-        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTantoPendiente().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlor()==null){
+        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getEnvido().getEnvidoCantado()==null && mesa.getRonda().getFlor()==null){
             mesa.siguienteJugador();
             mesa.getJugadorActivo().getEquipo().sumarPuntos(2);
             mesa.jugadorAnterior();
@@ -115,7 +115,7 @@ public class Jugador {
         if(mesa.getJugadorEnEspera()==null) {
             mesa.siguienteJugador();
             mesa.setJugadorEnEspera(this);
-            mesa.getRonda().subirApuestaDelEnvido(envido);
+            mesa.getRonda().getEnvido().setEnvidoCantado(envido);
             return;
         }
         if(mesa.getJugadorEnEspera().equals(this))
@@ -123,7 +123,7 @@ public class Jugador {
         else
             mesa.jugadorAnterior();
 
-        mesa.getRonda().subirApuestaDelEnvido(envido);
+        mesa.getRonda().getEnvido().setEnvidoCantado(envido);
     }
 
     public void quieroEnvido(){
@@ -131,12 +131,13 @@ public class Jugador {
         mesa.setJugadorActivo(mesa.getJugadorEnEspera());
         mesa.setJugadorEnEspera(null);
     }
+
     public void aceptarEnvido(){
-        mesa.getRonda().cambiarTantoEnJuego();
+        mesa.getRonda().cambiarEnvido();
     }
 
     public void noQuieroEnvido(){
-        mesa.getEquipoOponente().sumarPuntos(mesa.getRonda().getTantoEnJuego().getPuntos(this.getEquipo(), mesa.getJugadorActivo().getEquipo()));
+        mesa.getEquipoOponente().sumarPuntos(mesa.getRonda().getEnvido().getPuntos(this.getEquipo(), mesa.getJugadorActivo().getEquipo()));
         mesa.setJugadorActivo(mesa.getJugadorEnEspera());
         mesa.setJugadorEnEspera(null);
     }

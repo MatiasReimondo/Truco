@@ -105,10 +105,10 @@ public class PrimeraMano implements Comportamiento {
 
     }
     private boolean enJuego(Mesa mesa,Class envido){
-        return mesa.getRonda().getTantoEnJuego().getClass().equals(envido);
+        return mesa.getRonda().getEnvido().getClass().equals(envido);
     }
 
     private boolean seCanto(Mesa mesa, Class envido){
-        return mesa.getRonda().getTantoPendiente().getClass().equals(envido);
+        return mesa.getRonda().getEnvido().getEnvidoCantado().getClass().equals(envido);
     }
 }
