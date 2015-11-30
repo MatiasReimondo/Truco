@@ -56,6 +56,8 @@ public class CasosParticulares {
         mesaTester.nuevaRonda();
         jugadorMano.levantarCarta(new Carta(4, Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(5, Palo.ESPADA));
+        jugadorMano.jugarCarta(4,Palo.ESPADA);
+        jugadorPie.jugarCarta(5,Palo.ESPADA);
         mesaTester.resolverMano();
         jugadorMano.cantarEnvido(new Envido());
     }

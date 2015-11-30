@@ -1,6 +1,6 @@
 package truco.modelo;
-import truco.modelo.excepciones.ListaJugadoresVaciaException;
-import truco.modelo.excepciones.RondaTerminadaException;
+import truco.modelo.envido.EnvidoNoCantado;
+import truco.modelo.excepciones.*;
 
 import java.util.*;
 
@@ -11,15 +11,17 @@ public class Mesa {
     private Ronda ronda;
     private List<Jugador> jugadores;
     private int nroJugadores;
-    private ListIterator<Jugador> iterJugadorActivo;
     private Jugador jugadorActivo;
+    private Jugador jugadorEnEspera;
     private final Arbitro arbitro;
+    private int posicionador;
 
     /**CONSTRUCTOR**/
     public Mesa() {
         mazo = new Mazo();
         arbitro =new Arbitro();
         arbitro.setMesa(this);
+        posicionador=0;
     }
 
     /**SETTERS**/
@@ -29,9 +31,16 @@ public class Mesa {
 
         this.jugadores =listaJugadores;
         nroJugadores =listaJugadores.size();
-        iterJugadorActivo=jugadores.listIterator();
     }
 
+    public void setJugadorEnEspera(Jugador jugador){
+        jugadorEnEspera=jugador;
+    }
+
+    public void setJugadorActivo(Jugador jugadorActivo){
+        while(this.jugadorActivo!=jugadorActivo)
+            this.siguienteJugador();
+    }
     /**GETTERS**/
     public Mazo getMazo(){
         return mazo;
@@ -49,6 +58,10 @@ public class Mesa {
         return ronda;
     }
 
+    public Jugador getJugadorEnEspera(){
+        return jugadorEnEspera;
+    }
+
     public Jugador getJugadorActivo() {
         return jugadorActivo;
     }
@@ -61,9 +74,7 @@ public class Mesa {
         return arbitro;
     }
 
-
     /**ACCIONES**/
-
     public void repartirCartas(){
         for(Jugador jugador: jugadores)
             for(int i=0;i<3;i++)
@@ -72,13 +83,17 @@ public class Mesa {
 
     public void resolverEnvido(){
 
+        if(ronda.termino())
+            throw new RondaTerminadaException();
+        if(ronda.getTantoEnJuego().getClass().equals(EnvidoNoCantado.class))
+            throw new NoSeCantoEnvidoException();
         int envidoMax=0;
         Jugador auxiliar=jugadorActivo;
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
         Equipo equipoPerdedor=jugadores.get(nroJugadores-1).getEquipo();
 
-        for(int i=0;i<nroJugadores;i++) {
-            jugadorActivo=jugadores.get(i);
+        for(Jugador jugador:jugadores){
+            jugadorActivo=jugador;
             if (jugadorActivo.quiereMostrarEnvido())
                 if (jugadorActivo.getEnvido() > envidoMax) {
                     envidoMax = jugadorActivo.getEnvido();
@@ -95,12 +110,17 @@ public class Mesa {
 
     public void resolverFlor(){
 
+        if(ronda.termino())
+            throw new RondaTerminadaException();
+        if(ronda.getFlorEnJuego()==null)
+            throw new FlorNoCantadaException();
         int florMax=0;
+        Jugador auxiliar=jugadorActivo;
         this.jugadorActivo=this.getJugadorMano();
-        resetJugadorActivo();
         Equipo equipoGanador=this.getJugadorMano().getEquipo();
 
-        for(int i=0;i<nroJugadores;i++) {
+        for(Jugador jugador:jugadores){
+            jugadorActivo=jugador;
             if (jugadorActivo.quiereMostrarEnvido())
                 if (jugadorActivo.getFlor() > florMax) {
                     florMax = jugadorActivo.getEnvido();
@@ -112,6 +132,7 @@ public class Mesa {
                         equipoGanador = jugadorActivo.getEquipo();
             this.siguienteJugador();
         }
+        jugadorActivo=auxiliar;
         equipoGanador.sumarPuntos(ronda.getFlorEnJuego().getPuntos());
     }
 
@@ -119,6 +140,8 @@ public class Mesa {
         if(ronda.termino())
             throw new RondaTerminadaException();
 
+        if(ronda.getManoActual().size()<nroJugadores)
+            throw new ManoNoTerminadaException();
         int maxFza = 0;
         Equipo equipoGanador=null;
 
@@ -140,7 +163,6 @@ public class Mesa {
         mazo=new Mazo();
         mazo.mezclar();
         jugadorActivo=this.jugadores.get(0);
-        iterJugadorActivo= jugadores.listIterator(1);
 
         for(Jugador jugador:jugadores)
             jugador.getMano().clear();
@@ -148,38 +170,18 @@ public class Mesa {
 
     /**AUXILIARES**/
     public void siguienteJugador(){
-        if(iterJugadorActivo.hasNext())
-            jugadorActivo= iterJugadorActivo.next();
-        else{
-            iterJugadorActivo=jugadores.listIterator();
-            jugadorActivo= iterJugadorActivo.next();
-        }
+
+        if(posicionador==nroJugadores-1)
+            posicionador=-1;
+        jugadorActivo=jugadores.get(++posicionador);
+
     }
 
     public void jugadorAnterior() {
-        if(iterJugadorActivo.hasPrevious()) {
-            iterJugadorActivo.previous();
-            if (iterJugadorActivo.hasPrevious())
-                jugadorActivo = iterJugadorActivo.previous();
-            else {
-                while (iterJugadorActivo.hasNext())
-                    iterJugadorActivo.next();
-                iterJugadorActivo.previous();
-                jugadorActivo = iterJugadorActivo.previous();
-            }
-        }
-        else {
-            while (iterJugadorActivo.hasNext())
-                iterJugadorActivo.next();
-            iterJugadorActivo.previous();
-            jugadorActivo=iterJugadorActivo.previous();
-        }
-        iterJugadorActivo.next();
-    }
 
-    private void resetJugadorActivo(){
-        iterJugadorActivo=jugadores.listIterator();
-        iterJugadorActivo.next();
+        if(posicionador==0)
+            posicionador=nroJugadores;
+        jugadorActivo=jugadores.get(--posicionador);
     }
 
     public void actualizarJugadorMano(){

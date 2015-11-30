@@ -80,7 +80,6 @@ public class Jugador {
         for(Carta carta: mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)){
                 mesa.getRonda().agregarCarta(this,carta);
-                mano.remove(carta);
                 mesa.siguienteJugador();
                 return;
             }
@@ -95,11 +94,13 @@ public class Jugador {
         if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTantoPendiente().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlorEnJuego()==null){
             mesa.siguienteJugador();
             mesa.getJugadorActivo().getEquipo().sumarPuntos(2);
+            mesa.jugadorAnterior();
             mesa.getRonda().terminar();
         }
         else{
             mesa.siguienteJugador();
             mesa.getJugadorActivo().getEquipo().sumarPuntos(1);
+            mesa.jugadorAnterior();
             mesa.getRonda().terminar();
         }
     }
@@ -111,8 +112,16 @@ public class Jugador {
 
     public void cantarEnvido(Envido envido){
         mesa.getArbitro().jugadorPuedeCantarTanto(this);
+        if(mesa.getRonda().getTantoEnJuego().getClass().equals(EnvidoNoCantado.class)) {
+            mesa.siguienteJugador();
+            mesa.setJugadorEnEspera(this);
+        }
+        else {
+            mesa.setJugadorActivo(mesa.getJugadorEnEspera());
+            mesa.setJugadorEnEspera(this);
+        }
+
         mesa.getRonda().subirApuestaDelEnvido(envido);
-        mesa.siguienteJugador();
     }
 
     public void quieroEnvido(){
@@ -120,9 +129,8 @@ public class Jugador {
     }
 
     public void noQuieroEnvido(){
-        mesa.siguienteJugador();
-        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTantoEnJuego().getPuntos(this.getEquipo(),mesa.getJugadorActivo().getEquipo()));
         mesa.jugadorAnterior();
+        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTantoEnJuego().getPuntos(this.getEquipo(),mesa.getJugadorActivo().getEquipo()));
     }
 
     /**TRUCO**/
@@ -135,13 +143,13 @@ public class Jugador {
     public void cantarRetruco(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarRetruco());
-        mesa.siguienteJugador();
+        mesa.jugadorAnterior();
     }
 
     public void cantarValeCuatro(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarValecuatro());
-        mesa.siguienteJugador();
+        mesa.jugadorAnterior();
     }
 
     public void quieroTruco() {
@@ -207,6 +215,7 @@ public class Jugador {
             suma=suma+carta.getFuerza();
         return suma;
     }
+
     private int sumarEnvido(Carta carta1, Carta carta2){
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);

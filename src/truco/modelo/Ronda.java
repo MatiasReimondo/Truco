@@ -81,9 +81,11 @@ public class Ronda {
     }
 
     public void cambiarTantoEnJuego(){
-         tantoEnJuego.anidarEnvido(tantoPendiente);
-        tantoPendiente=new EnvidoNoCantado();
-
+         if(tantoEnJuego.getClass().equals(EnvidoNoCantado.class))
+             tantoEnJuego=tantoPendiente;
+         else
+             tantoEnJuego.anidarEnvido(tantoPendiente);
+        tantoPendiente=null;
     }
 
     public void activarFlor() {
