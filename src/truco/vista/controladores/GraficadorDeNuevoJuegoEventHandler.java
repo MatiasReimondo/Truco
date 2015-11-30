@@ -86,20 +86,20 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         Label etiquetaEquipo1 = new Label("Equipo1");
         this.contenedorDeEquipo1.getChildren().add(etiquetaEquipo1);
         for (Jugador unJugador: this.juego.getJugadores()){
-            if (this.juego.getEquipo("Equipo-1").jugadorPertenece(unJugador.getNombre())) {
+           // if (this.juego.getEquipo("Equipo-1").jugadorPertenece(unJugador.getNombre())) {
                 this.contenedorDeEquipo1.getChildren().add(new Label(unJugador.getNombre()));
-            }
+            //}
         }
-        this.contenedorDeEquipo1.setSpacing(50);
+        this.contenedorDeEquipo1.setSpacing(20);
 
         Label etiquetaEquipo2 = new Label("Equipo2");
         this.contenedorDeEquipo2.getChildren().add(etiquetaEquipo2);
         for (Jugador unJugador: this.juego.getJugadores()){
-            if (this.juego.getEquipo("Equipo-2").jugadorPertenece(unJugador.getNombre())) {
+           // if (this.juego.getEquipo("Equipo-2").jugadorPertenece(unJugador.getNombre())) {
                 this.contenedorDeEquipo2.getChildren().add(new Label(unJugador.getNombre()));
-            }
+           // }
         }
-        this.contenedorDeEquipo2.setSpacing(50);
+        this.contenedorDeEquipo2.setSpacing(20);
 
         //Se apilan los contenedores de cada equipo horizontalmente
         this.contenedorDeEquipos.getChildren().addAll(this.contenedorDeEquipo1, this.contenedorDeEquipo2);

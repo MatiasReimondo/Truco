@@ -21,13 +21,13 @@ public class BotonDosJugadoresEventHandler implements EventHandler<ActionEvent> 
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego=crearModeloDosJugadores();
+        crearModeloDosJugadores(this.juego);
     }
 
 
-    private Truco crearModeloDosJugadores(){
+    private Truco crearModeloDosJugadores(Truco nuevoJuego){
 
-        Truco nuevoJuego = new Truco();
+
         nuevoJuego.nuevoEquipo("Equipo-1");
         nuevoJuego.nuevoEquipo("Equipo-2");
 

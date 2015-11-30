@@ -32,6 +32,7 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
 
         this.juego.getMesa().getJugadorActivo().quieroEnvido();
         this.juego.getMesa().resolverEnvido();
+        this.juego.getMesa().getJugadorActivo().pasar();
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
