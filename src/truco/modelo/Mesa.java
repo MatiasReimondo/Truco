@@ -144,17 +144,23 @@ public class Mesa {
             throw new CartasInsuficientesEnLaMesaException();
         int maxFza = 0;
         Equipo equipoGanador=null;
+        Jugador jugadorGanador=null;
 
         for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoEnJuego().entrySet() )
             if (parJugadorCarta.getValue().getFuerza() > maxFza) {
                 maxFza = parJugadorCarta.getValue().getFuerza();
                 equipoGanador = parJugadorCarta.getKey().getEquipo();
+                jugadorGanador=parJugadorCarta.getKey();
             }
              else if (parJugadorCarta.getValue().getFuerza() == maxFza)
-                if(!parJugadorCarta.getKey().getEquipo().equals(equipoGanador))
-                    equipoGanador=null;
+                if(!parJugadorCarta.getKey().getEquipo().equals(equipoGanador)) {
+                    equipoGanador = null;
+                    jugadorGanador=null;
+                }
 
         this.evaluarMano(equipoGanador);
+        if(jugadorGanador!=null)
+            this.setJugadorActivo(jugadorGanador);
         ronda.avanzarALaSiguienteMano();
     }
 
@@ -163,6 +169,7 @@ public class Mesa {
         mazo=new Mazo();
         mazo.mezclar();
         jugadorActivo=this.jugadores.get(0);
+        posicionador=0;
 
         for(Jugador jugador:jugadores)
             jugador.getMano().clear();

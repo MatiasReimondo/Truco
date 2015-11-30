@@ -78,8 +78,8 @@ public class CasosParticulares {
         jugadorPie.jugarCarta(3,Palo.BASTO);
         mesaTester.resolverMano();
 
-        jugadorMano.jugarCarta(2,Palo.BASTO);
         jugadorPie.jugarCarta(1,Palo.BASTO);
+        jugadorMano.jugarCarta(2,Palo.BASTO);
         mesaTester.resolverMano();
 
         jugadorMano.cantarTruco();

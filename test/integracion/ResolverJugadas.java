@@ -290,8 +290,8 @@ public class ResolverJugadas {
         jugadorPie.jugarCarta(3,Palo.BASTO);
         mesaTester.resolverMano();
 
-        jugadorMano.jugarCarta(2,Palo.BASTO);
         jugadorPie.jugarCarta(1,Palo.BASTO);
+        jugadorMano.jugarCarta(2,Palo.BASTO);
         mesaTester.resolverMano();
 
         Assert.assertEquals(0,equipoMano.getPuntaje());
@@ -318,8 +318,8 @@ public class ResolverJugadas {
         jugadorPie.jugarCarta(7,Palo.BASTO);
         mesaTester.resolverMano();
 
-        jugadorMano.jugarCarta(2,Palo.BASTO);
         jugadorPie.jugarCarta(10,Palo.BASTO);
+        jugadorMano.jugarCarta(2,Palo.BASTO);
         mesaTester.resolverMano();
 
         Assert.assertEquals(1,equipoMano.getPuntaje());

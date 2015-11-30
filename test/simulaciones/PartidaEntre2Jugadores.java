@@ -193,8 +193,9 @@ public class PartidaEntre2Jugadores {
         juego.getMesa().resolverMano();
 
         Assert.assertFalse(juego.getMesa().getRonda().termino());
-        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);
         juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
+        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);
+
         juego.getMesa().resolverMano();
         Assert.assertEquals(20,juego.getEquipo("E1").getPuntaje());
         Assert.assertTrue(juego.getMesa().getRonda().termino());
