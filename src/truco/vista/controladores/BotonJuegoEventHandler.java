@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
 import truco.modelo.Palo;
 import truco.modelo.Truco;
+import truco.vista.controladores.configuracion.GraficadorDeConfiguracionEventHandler;
 
 /*********************************************************************************
  ************************ BotonJuegoEventHandler ********************************

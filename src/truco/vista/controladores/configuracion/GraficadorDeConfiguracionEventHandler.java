@@ -1,4 +1,4 @@
-package truco.vista.controladores;
+package truco.vista.controladores.configuracion;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import truco.modelo.Truco;
+import truco.vista.controladores.GraficadorDeNuevoJuegoEventHandler;
+import truco.vista.controladores.TextoNuevoJuegoEventHandler;
 
 
 /**
@@ -72,13 +74,25 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
         Label cantidadDeJugadores = new Label("CantidadDeJugadores");
         this.contenedorConfiguracionJugadores.getChildren().add(cantidadDeJugadores);
 
-        Button dosJugadores = new Button("Dos Jugadores");
-        Button cuatroJugadores = new Button("Cuatro Jugadores");
-        Button seisJugadores = new Button("Seis Jugadores");
+        Button botonDosJugadores = new Button("Dos Jugadores");
+        BotonDosJugadoresEventHandler botonDosJugadoresEventHandler = new BotonDosJugadoresEventHandler(this.juego);
+        botonDosJugadores.setOnAction(botonDosJugadoresEventHandler);
+
+        Button botonCuatroJugadores = new Button("Cuatro Jugadores");
+        BotonCuatroJugadoresEventHandler botonCuatroJugadoresEventHandler = new BotonCuatroJugadoresEventHandler(this.juego);
+        botonCuatroJugadores.setOnAction(botonCuatroJugadoresEventHandler);
+
+        Button botonSeisJugadores = new Button("Seis Jugadores");
+        BotonSeisJugadoresEventHandler botonSeisJugadoresEventHandler = new BotonSeisJugadoresEventHandler(this.juego);
+        botonSeisJugadores.setOnAction(botonSeisJugadoresEventHandler);
+
+
         VBox opcionesCantidad= new VBox();
-        opcionesCantidad.getChildren().add(dosJugadores);
-        opcionesCantidad.getChildren().add(cuatroJugadores);
-        opcionesCantidad.getChildren().add(seisJugadores);
+
+
+        opcionesCantidad.getChildren().add(botonDosJugadores);
+        opcionesCantidad.getChildren().add(botonCuatroJugadores);
+        opcionesCantidad.getChildren().add(botonSeisJugadores);
 
         this.contenedorConfiguracionJugadores.getChildren().addAll(opcionesCantidad);
 

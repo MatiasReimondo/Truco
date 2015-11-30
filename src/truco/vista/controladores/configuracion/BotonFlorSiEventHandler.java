@@ -1,4 +1,4 @@
-package truco.vista.controladores;
+package truco.vista.controladores.configuracion;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
