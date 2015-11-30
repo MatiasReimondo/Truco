@@ -18,8 +18,8 @@ public class Ronda {
 
     private Envido tantoEnJuego;
     private Envido tantoPendiente;
-    private Flor florEnJuego;
-    private EstadoTruco trucoEnJuego;
+    private Flor flor;
+    private EstadoTruco truco;
 
     /**CONSTRUCTOR**/
     public Ronda(Mesa mesa){
@@ -29,16 +29,16 @@ public class Ronda {
         tantoEnJuego =new EnvidoNoCantado();
         tantoPendiente=new EnvidoNoCantado();
         this.mesa=mesa;
-        trucoEnJuego=new TrucoNoCantado();
+        truco =new TrucoNoCantado();
     }
 
     /**GETTERS**/
-    public HashMap<Jugador,Carta> getManoActual(){
+    public HashMap<Jugador,Carta> getManoEnJuego(){
         return manoActual;
     }
 
-    public Flor getFlorEnJuego(){
-        return florEnJuego;
+    public Flor getFlor(){
+        return flor;
     }
 
     public Envido getTantoEnJuego() {
@@ -49,8 +49,8 @@ public class Ronda {
         return resultados;
     }
 
-    public EstadoTruco getTrucoEnJuego(){
-        return trucoEnJuego;
+    public EstadoTruco getTruco(){
+        return truco;
     }
 
     public Envido getTantoPendiente(){
@@ -59,7 +59,7 @@ public class Ronda {
 
     /**SETTERS**/
     public void setTrucoEnJuego(EstadoTruco estado){
-        trucoEnJuego=estado;
+        truco =estado;
     }
 
     /**ACCIONES**/
@@ -89,7 +89,7 @@ public class Ronda {
     }
 
     public void activarFlor() {
-        florEnJuego =new Flor();
+        flor =new Flor();
     }
 
     public void terminar(){

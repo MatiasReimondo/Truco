@@ -82,7 +82,7 @@ public class PrimeraMano implements Comportamiento {
 
     public void comportamientoNormal(Mesa mesa,Jugador IA){
         comportamientoEnvido(mesa,IA);
-        if(mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoCantado.class))
+        if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class))
             comportamientoTruco(mesa,IA);
         else
             jugarCartaMasFuerte(IA);            //IA siempre intenta ganar la primera.

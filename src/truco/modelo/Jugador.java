@@ -91,7 +91,7 @@ public class Jugador {
     }
 
     public void irseAlMazo(){
-        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTantoPendiente().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlorEnJuego()==null){
+        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTantoPendiente().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlor()==null){
             mesa.siguienteJugador();
             mesa.getJugadorActivo().getEquipo().sumarPuntos(2);
             mesa.jugadorAnterior();
@@ -144,30 +144,30 @@ public class Jugador {
     /**TRUCO**/
     public void cantarTruco(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
-        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarTruco());
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarTruco());
         mesa.siguienteJugador();
     }
 
     public void cantarRetruco(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
-        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarRetruco());
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarRetruco());
         mesa.jugadorAnterior();
     }
 
     public void cantarValeCuatro(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
-        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().cantarValecuatro());
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarValecuatro());
         mesa.jugadorAnterior();
     }
 
     public void quieroTruco() {
         mesa.getArbitro().jugadorPuedeAccionar(this);
-        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTrucoEnJuego().quiero());
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().quiero());
     }
 
     public void noQuieroTruco(){
         mesa.siguienteJugador();
-        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTrucoEnJuego().getPuntaje());
+        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTruco().getPuntaje());
         mesa.jugadorAnterior();
         mesa.getRonda().terminar();
     }
@@ -184,7 +184,7 @@ public class Jugador {
         mesa.siguienteJugador();
         if(!mesa.getJugadorActivo().tieneFlor()){
             mesa.jugadorAnterior();
-            mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getFlorEnJuego().getPuntos());
+            mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getFlor().getPuntos());
         }
 
     }
@@ -193,7 +193,7 @@ public class Jugador {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
         mesa.getArbitro().jugadorPuedeCantarContraflor();
-        mesa.getRonda().getFlorEnJuego().contraflor();
+        mesa.getRonda().getFlor().contraflor();
         mesa.siguienteJugador();
     }
 
@@ -201,7 +201,7 @@ public class Jugador {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getArbitro().seJuegaConFlor();
         mesa.getArbitro().jugadorPuedeCantarContraflor();
-        mesa.getRonda().getFlorEnJuego().contraflorAlResto();
+        mesa.getRonda().getFlor().contraflorAlResto();
         mesa.siguienteJugador();
     }
 

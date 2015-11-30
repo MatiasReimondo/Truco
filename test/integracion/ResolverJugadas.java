@@ -488,13 +488,13 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
 
         jugadorMano.cantarTruco();
-        Assert.assertTrue(mesaTester.getRonda().getTrucoEnJuego().getClass().equals(TrucoCantado.class));
+        Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(TrucoCantado.class));
         jugadorPie.quieroTruco();
-        Assert.assertTrue(mesaTester.getRonda().getTrucoEnJuego().getClass().equals(TrucoQuerido.class));
+        Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(TrucoQuerido.class));
         jugadorPie.cantarRetruco();
-        Assert.assertTrue(mesaTester.getRonda().getTrucoEnJuego().getClass().equals(RetrucoCantado.class));
+        Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(RetrucoCantado.class));
         jugadorMano.quieroTruco();
-        Assert.assertTrue(mesaTester.getRonda().getTrucoEnJuego().getClass().equals(RetrucoQuerido.class));
+        Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(RetrucoQuerido.class));
         jugadorMano.jugarCarta(3,Palo.BASTO);
         jugadorPie.jugarCarta(5,Palo.BASTO);
         mesaTester.resolverMano();
