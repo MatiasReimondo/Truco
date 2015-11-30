@@ -10,6 +10,9 @@ import truco.modelo.Carta;
 import javafx.scene.control.Label;
 import truco.modelo.Jugador;
 import truco.modelo.Truco;
+import truco.vista.controladores.envido.BotonEnvidoEventHandler;
+import truco.vista.controladores.envido.BotonFaltaEnvidoEventHandler;
+import truco.vista.controladores.envido.BotonRealEnvidoEventHandler;
 
 import java.util.List;
 
@@ -67,8 +70,8 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
     private void graficarContenedorDeCartas() {
 
         String nombreDeCarta;
-        List<Carta> cartas = this.juego.getCartasDelJugador("J1");
-        this.contenedorDeCartas.getChildren().add( new Label("Cartas de J1") );
+        List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
+        this.contenedorDeCartas.getChildren().add( new Label("Cartas del jugador") );
 
         for (Carta unaCarta: cartas){
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
@@ -111,7 +114,19 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
         botonEnvido.setOnAction(botonEnvidoEventHandler);
 
+        Button botonRealEnvido = new Button("REAL ENVIDO");
+        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonRealEnvido.setOnAction(botonRealEnvidoEventHandler);
+
+
+        Button botonFaltaEnvido = new Button("FALTA ENVIDO");
+        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
+
+
         this.contenedorDeEstados.getChildren().add( botonEnvido );
+        this.contenedorDeEstados.getChildren().add( botonRealEnvido );
+        this.contenedorDeEstados.getChildren().add( botonFaltaEnvido );
         this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
         this.contenedorDeEstados.getChildren().add( new Button("FLOR") );
 

@@ -3,6 +3,8 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import truco.modelo.Carta;
+import truco.modelo.Palo;
 import truco.modelo.Truco;
 
 /*********************************************************************************
@@ -27,6 +29,7 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
+        this.juego=crearModelo();
         //Se limpia el contenedor
         this.contenedorVertical.getChildren().clear();
 
@@ -37,5 +40,30 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
         this.botonNuevoJuego.setOnAction(graficadorDeConfiguracionEventHandler);
 
 
+    }
+
+
+    private Truco crearModelo(){
+
+        Truco nuevoJuego = new Truco();
+        nuevoJuego.nuevoEquipo("Equipo-1");
+        nuevoJuego.nuevoEquipo("Equipo-2");
+
+        nuevoJuego.nuevoJugador("J1","Equipo-1");
+        nuevoJuego.nuevoJugador("J2", "Equipo-2");
+
+        nuevoJuego.empezarJuego();
+        nuevoJuego.getMesa().nuevaRonda();
+
+        nuevoJuego.getJugador("J1").levantarCarta(new Carta(5, Palo.ESPADA));
+        nuevoJuego.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
+        nuevoJuego.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
+
+        nuevoJuego.getJugador("J2").levantarCarta(new Carta(4, Palo.BASTO));
+        nuevoJuego.getJugador("J2").levantarCarta(new Carta(7, Palo.BASTO));
+        nuevoJuego.getJugador("J2").levantarCarta(new Carta(10, Palo.BASTO));
+
+
+        return nuevoJuego;
     }
 }

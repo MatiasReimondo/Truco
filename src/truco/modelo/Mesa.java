@@ -90,6 +90,7 @@ public class Mesa {
         }
             equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
         jugadorActivo=auxiliar;
+
     }
 
     public void resolverFlor(){

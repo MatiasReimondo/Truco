@@ -1,4 +1,4 @@
-package truco.vista.controladores;
+package truco.vista.controladores.envido;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,18 +7,19 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
 import truco.modelo.Truco;
+import truco.modelo.envido.RealEnvido;
 
 import java.util.List;
 
 
-public class BotonQuieroEventHandler implements EventHandler<ActionEvent> {
+public class BotonRealEnvidoEventHandler implements EventHandler<ActionEvent> {
 
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
 
 
-    public BotonQuieroEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
+    public BotonRealEnvidoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
@@ -30,8 +31,7 @@ public class BotonQuieroEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getJugador("J2").quieroEnvido();
-        this.juego.getMesa().resolverEnvido();
+        this.juego.getMesa().getJugadorActivo().cantarEnvido(new RealEnvido());
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
@@ -42,8 +42,8 @@ public class BotonQuieroEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeCartas.getChildren().clear();
 
         String nombreDeCarta;
-        List<Carta> cartas = this.juego.getCartasDelJugador("J1");
-        this.contenedorDeCartas.getChildren().add( new Label("Cartas de J1") );
+        List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
+        this.contenedorDeCartas.getChildren().add( new Label("Cartas de jugador") );
 
         for (Carta unaCarta: cartas){
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
@@ -56,7 +56,23 @@ public class BotonQuieroEventHandler implements EventHandler<ActionEvent> {
     private void graficarContenedorDeEstados(){
         this.contenedorDeEstados.getChildren().clear();
 
-        this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
+        Button botonQuiero = new Button("QUIERO");
+        BotonQuieroTantoEventHandler botonQuieroTantoEventHandler = new BotonQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonQuiero.setOnAction(botonQuieroTantoEventHandler);
+
+        Button botonNoQuiero = new Button("NO QUIERO");
+        BotonNoQuieroTantoEventHandler botonNoQuieroTantoEventHandler = new BotonNoQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonNoQuiero.setOnAction(botonNoQuieroTantoEventHandler);
+
+        Button botonReFaltaEnvido = new Button("FALTA ENVIDO");
+        BotonReFaltaEnvidoEventHandler botonReFaltaEnvidoEventHandler = new BotonReFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonReFaltaEnvido.setOnAction(botonReFaltaEnvidoEventHandler);
+
+
+        this.contenedorDeEstados.getChildren().add(botonQuiero);
+        this.contenedorDeEstados.getChildren().add(botonNoQuiero);
+        this.contenedorDeEstados.getChildren().add(botonReFaltaEnvido );
+
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
