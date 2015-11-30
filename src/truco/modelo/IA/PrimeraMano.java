@@ -8,7 +8,6 @@ import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
 import truco.modelo.estadosTruco.TrucoCantado;
-import truco.modelo.estadosTruco.TrucoNoCantado;
 
 import java.util.Random;
 
@@ -36,14 +35,14 @@ public class PrimeraMano implements Comportamiento {
        if(seCanto(mesa, Envido.class) && !enJuego(mesa,Envido.class)) {     //Si el jugador canta envido...
            if (IA.getEnvido() >= 27 && r.nextInt(10) > 1) {                 //Si IA tiene al menos 27 de envido, tiene un 20% de probabilidad de no quererlo.
                if (IA.getEnvido() >= 28 && r.nextInt(10) > 3) {             //Si IA tiene al menos 28 de tanto, tiene 60% de probabilidad de volver a cantar Envido.
-                   IA.quieroEnvido();
+                   IA.aceptarEnvido();
                    IA.cantarEnvido(new Envido());
                }
                if (IA.getEnvido() >= 29 && r.nextInt(10) > 4) {             //Si IA tiene al menos 29 de tanto, tiene 50% de subir la apuesta a Real Envido.
-                   IA.quieroEnvido();
+                   IA.aceptarEnvido();
                    IA.cantarEnvido(new RealEnvido());
                }
-               IA.quieroEnvido();
+               IA.aceptarEnvido();
            }
        }
        else
@@ -52,14 +51,14 @@ public class PrimeraMano implements Comportamiento {
         if(seCanto(mesa,Envido.class) && enJuego(mesa,Envido.class)){
             if (IA.getEnvido() >= 29 && r.nextInt(10) > 2) {                 //Si IA tiene al menos 29 de envido, tiene un 30% de probabilidad de no quererlo.
                 if (IA.getEnvido() >=31  && r.nextInt(10) > 3) {             //Si IA tiene al menos 31 de tanto, tiene 60% de probabilidad de subir la apuesta a RealEnvido.
-                    IA.quieroEnvido();
+                    IA.aceptarEnvido();
                     IA.cantarEnvido(new RealEnvido());
                 }
                 if (IA.getEnvido() >= 32 && r.nextInt(10) > 2) {             //Si IA tiene al menos 32 de tanto, tiene 70% de subir la apuesta a Falta Envido.
-                    IA.quieroEnvido();
+                    IA.aceptarEnvido();
                     IA.cantarEnvido(new FaltaEnvido());
                 }
-                IA.quieroEnvido();
+                IA.aceptarEnvido();
             }
             else
                 IA.noQuieroEnvido();
@@ -67,17 +66,17 @@ public class PrimeraMano implements Comportamiento {
         if(seCanto(mesa,RealEnvido.class) && enJuego(mesa,Envido.class)){
             if (IA.getEnvido() >= 30 && r.nextInt(10) > 2) {                 //Si IA tiene al menos 29 de envido, tiene un 30% de probabilidad de no quererlo.
                 if (IA.getEnvido() >= 32 && r.nextInt(10) > 2) {             //Si IA tiene al menos 32 de tanto, tiene 70% de subir la apuesta a Falta Envido.
-                    IA.quieroEnvido();
+                    IA.aceptarEnvido();
                     IA.cantarEnvido(new FaltaEnvido());
                 }
-                IA.quieroEnvido();
+                IA.aceptarEnvido();
             }
             else
                 IA.noQuieroEnvido();
         }
         if(seCanto(mesa,FaltaEnvido.class))
             if(IA.getEnvido()>=31 && r.nextInt(10)!=0){                       //Si IA tiene al menos 31 de tanto, tiene 10% de probabilidad de no querer el Falta Envido.
-                IA.quieroEnvido();
+                IA.aceptarEnvido();
             }
     }
 

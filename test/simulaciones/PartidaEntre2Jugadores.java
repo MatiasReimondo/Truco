@@ -42,11 +42,10 @@ public class PartidaEntre2Jugadores {
         juego.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
 
         juego.getJugador("J1").cantarEnvido(new Envido());                  Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getJugador("J2").quieroEnvido();                              Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
+        juego.getJugador("J2").quieroEnvido();                              Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().resolverEnvido();
         Assert.assertEquals(2,juego.getEquipo("E1").getPuntaje());
 
-        juego.getMesa().jugadorAnterior();                                  Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().resolverMano();
@@ -107,9 +106,9 @@ public class PartidaEntre2Jugadores {
         
         Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().getJugadorActivo().cantarEnvido(new RealEnvido());
         juego.getMesa().getJugadorActivo().noQuieroEnvido();
         Assert.assertEquals(8,juego.getEquipo("E1").getPuntaje());
@@ -166,10 +165,10 @@ public class PartidaEntre2Jugadores {
         juego.getJugador("J2").levantarCarta(new Carta(10, Palo.COPA));
 
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().getJugadorActivo().cantarEnvido(new FaltaEnvido());
         Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J1"));
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().resolverEnvido();
 
         Assert.assertEquals(18,juego.getEquipo("E2").getPuntaje());
@@ -227,11 +226,11 @@ public class PartidaEntre2Jugadores {
         juego.getJugador("J2").levantarCarta(new Carta(10, Palo.COPA));
 
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().getJugadorActivo().cantarEnvido(new RealEnvido());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().resolverEnvido();
 
         Assert.assertEquals(30,juego.getEquipo("E1").getPuntaje());

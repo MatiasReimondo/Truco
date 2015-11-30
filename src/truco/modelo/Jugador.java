@@ -105,10 +105,6 @@ public class Jugador {
         }
     }
 
-    public void pasar(){
-        mesa.setJugadorActivo(mesa.getJugadorEnEspera());
-    }
-
     /**ENVIDO**/
     public boolean quiereMostrarEnvido() {
         return true;
@@ -116,19 +112,25 @@ public class Jugador {
 
     public void cantarEnvido(Envido envido){
         mesa.getArbitro().jugadorPuedeCantarTanto(this);
-        if(mesa.getRonda().getTantoEnJuego().getClass().equals(EnvidoNoCantado.class)) {
+        if(mesa.getJugadorEnEspera()==null) {
             mesa.siguienteJugador();
             mesa.setJugadorEnEspera(this);
+            mesa.getRonda().subirApuestaDelEnvido(envido);
+            return;
         }
-        else {
-            mesa.setJugadorActivo(mesa.getJugadorEnEspera());
-            mesa.setJugadorEnEspera(this);
-        }
+        if(mesa.getJugadorEnEspera().equals(this))
+            mesa.siguienteJugador();
+        else
+            mesa.jugadorAnterior();
 
         mesa.getRonda().subirApuestaDelEnvido(envido);
     }
 
     public void quieroEnvido(){
+        aceptarEnvido();
+        mesa.setJugadorActivo(mesa.getJugadorEnEspera());
+    }
+    public void aceptarEnvido(){
         mesa.getRonda().cambiarTantoEnJuego();
     }
 

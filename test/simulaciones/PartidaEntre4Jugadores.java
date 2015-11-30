@@ -7,8 +7,6 @@ import truco.modelo.Carta;
 import truco.modelo.Palo;
 import truco.modelo.Truco;
 import truco.modelo.envido.Envido;
-import truco.modelo.envido.EnvidoNoCantado;
-import truco.modelo.envido.RealEnvido;
 
 public class PartidaEntre4Jugadores {
 
@@ -54,10 +52,10 @@ public class PartidaEntre4Jugadores {
         juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(5,Palo.BASTO);        Assert.assertEquals(juego.getJugador("J3"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(juego.getJugador("J4"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
 
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(juego.getJugador("J3"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().quieroEnvido();
+        juego.getMesa().getJugadorActivo().aceptarEnvido();
         juego.getMesa().resolverEnvido();
         Assert.assertEquals(4,juego.getEquipo("E2").getPuntaje());
 

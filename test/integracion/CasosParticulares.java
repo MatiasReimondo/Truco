@@ -124,20 +124,20 @@ public class CasosParticulares {
     public void testSeIntentaCantarEnvido3Veces(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new Envido());
-        jugadorMano.quieroEnvido();
+        jugadorMano.aceptarEnvido();
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
     }
 
     @Test(expected = SoloSePuedeCantarFaltaEnvidoDespuesDeRealEnvidoException.class)
     public void testSeIntentaCantarEnvidoDespuesDeRealEnvido(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new Envido());
-        jugadorMano.quieroEnvido();
+        jugadorMano.aceptarEnvido();
     }
 
     @Test(expected = FlorSoloSeCantaEnLaPrimeraException.class)
@@ -247,11 +247,11 @@ public class CasosParticulares {
         mesaTester.nuevaRonda();
 
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new FaltaEnvido());
-        jugadorMano.quieroEnvido();
+        jugadorMano.aceptarEnvido();
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
     }
 
     @Test(expected = NoSePuedeCantarAhoraException.class)
@@ -344,7 +344,6 @@ public class CasosParticulares {
         jugadorPie.cantarRetruco();
     }
 
-
     @Test(expected = NoSePuedeCantarAhoraException.class)
     public void testSeQuiereDosVecesElValeCuatro(){
         mesaTester.nuevaRonda();
@@ -367,7 +366,6 @@ public class CasosParticulares {
         jugadorMano.cantarRetruco();
     }
 
-
     @Test(expected = NoSePuedeCantarAhoraException.class)
     public void testSeQuiereDosVecesElTruco(){
         mesaTester.nuevaRonda();
@@ -384,6 +382,7 @@ public class CasosParticulares {
         jugadorPie.cantarRetruco();
         jugadorMano.cantarTruco();
     }
+
     @Test(expected = NoSePuedeCantarAhoraException.class)
     public void testSeIntentaCantarRetrucoDespuesDelValeCuatro(){
         mesaTester.nuevaRonda();
@@ -438,6 +437,14 @@ public class CasosParticulares {
         jugadorPie.cantarRetruco();
         jugadorMano.quieroTruco();
         jugadorMano.quieroTruco();
+    }
+
+    @Test
+    public void testElEnvidoEstaPrimero(){
+        mesaTester.nuevaRonda();
+
+        jugadorMano.cantarTruco();
+        jugadorPie.cantarEnvido(new Envido());
     }
 
 

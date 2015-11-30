@@ -31,7 +31,7 @@ public class BotonReFaltaEnvidoEventHandler implements EventHandler<ActionEvent>
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getMesa().getJugadorActivo().quieroEnvido();
+        this.juego.getMesa().getJugadorActivo().aceptarEnvido();
         this.juego.getMesa().getJugadorActivo().cantarEnvido(new FaltaEnvido());
 
         graficarContenedorDeCartas();

@@ -520,7 +520,7 @@ public class ResolverJugadas {
     public void testEnvidoEnvidoNoQueridoSuma2(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new Envido());
         jugadorMano.noQuieroEnvido();
         Assert.assertEquals(2,equipoPie.getPuntaje());
@@ -539,7 +539,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
 
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
 
         Assert.assertEquals(2,equipoMano.getPuntaje());
@@ -558,11 +558,11 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
 
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new Envido());
-        jugadorMano.quieroEnvido();
+        jugadorMano.aceptarEnvido();
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
 
         Assert.assertEquals(7,equipoMano.getPuntaje());
@@ -581,7 +581,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
 
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
 
         Assert.assertEquals(2,equipoPie.getPuntaje());
@@ -598,7 +598,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(2,equipoMano.getPuntaje());
         equipoMano.resetPuntos();
@@ -611,7 +611,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(3,equipoMano.getPuntaje());
         equipoMano.resetPuntos();
@@ -624,9 +624,9 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(4,equipoMano.getPuntaje());
         equipoMano.resetPuntos();
@@ -639,9 +639,9 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(5,equipoMano.getPuntaje());
         equipoMano.resetPuntos();
@@ -658,7 +658,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new Envido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(2,equipoMano.getPuntaje());
 
@@ -674,7 +674,7 @@ public class ResolverJugadas {
             jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
             jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
             jugadorMano.cantarEnvido(new FaltaEnvido());
-            jugadorPie.quieroEnvido();
+            jugadorPie.aceptarEnvido();
             mesaTester.resolverEnvido();
             Assert.assertEquals(30,equipoMano.getPuntaje());
     }
@@ -691,7 +691,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(30,equipoMano.getPuntaje());
     }
@@ -708,7 +708,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(12,equipoMano.getPuntaje());
     }
@@ -725,9 +725,9 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new RealEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         jugadorPie.cantarEnvido(new FaltaEnvido());
-        jugadorMano.quieroEnvido();
+        jugadorMano.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(12,equipoMano.getPuntaje());
     }
@@ -744,7 +744,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(30,equipoPie.getPuntaje());
     }
@@ -762,7 +762,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(32,equipoPie.getPuntaje());
     }
@@ -780,7 +780,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(5,Palo.ESPADA));
         jugadorPie.levantarCarta(new Carta(4,Palo.ESPADA));
         jugadorMano.cantarEnvido(new FaltaEnvido());
-        jugadorPie.quieroEnvido();
+        jugadorPie.aceptarEnvido();
         mesaTester.resolverEnvido();
         Assert.assertEquals(28,equipoMano.getPuntaje());
     }
