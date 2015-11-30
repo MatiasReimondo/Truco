@@ -30,9 +30,10 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getMesa().getJugadorActivo().aceptarEnvido();
+        this.juego.getMesa().getJugadorActivo().quieroEnvido();
         this.juego.getMesa().resolverEnvido();
-        this.juego.getMesa().getJugadorActivo().pasar();
+
+
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
