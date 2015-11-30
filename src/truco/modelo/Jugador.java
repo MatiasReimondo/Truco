@@ -105,6 +105,10 @@ public class Jugador {
         }
     }
 
+    public void pasar(){
+        mesa.setJugadorActivo(mesa.getJugadorEnEspera());
+    }
+
     /**ENVIDO**/
     public boolean quiereMostrarEnvido() {
         return true;
