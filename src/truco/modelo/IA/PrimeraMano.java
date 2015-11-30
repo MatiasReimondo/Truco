@@ -82,7 +82,7 @@ public class PrimeraMano implements Comportamiento {
 
     public void comportamientoNormal(Mesa mesa,Jugador IA){
         comportamientoEnvido(mesa,IA);
-        if(mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoCantado.class))
+        if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class))
             comportamientoTruco(mesa,IA);
         else
             jugarCartaMasFuerte(IA);            //IA siempre intenta ganar la primera.
@@ -105,10 +105,10 @@ public class PrimeraMano implements Comportamiento {
 
     }
     private boolean enJuego(Mesa mesa,Class envido){
-        return mesa.getRonda().getTantoEnJuego().getClass().equals(envido);
+        return mesa.getRonda().getEnvido().getClass().equals(envido);
     }
 
     private boolean seCanto(Mesa mesa, Class envido){
-        return mesa.getRonda().getTantoPendiente().getClass().equals(envido);
+        return mesa.getRonda().getEnvido().getEnvidoCantado().getClass().equals(envido);
     }
 }

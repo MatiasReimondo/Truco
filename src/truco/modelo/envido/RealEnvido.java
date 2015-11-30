@@ -1,32 +1,49 @@
 package truco.modelo.envido;
 
 import truco.modelo.Equipo;
-import truco.modelo.excepciones.FaltaEnvidoYaCantadoException;
 import truco.modelo.excepciones.SoloSePuedeCantarFaltaEnvidoDespuesDeRealEnvidoException;
 
 
 public class RealEnvido extends Envido {
 
-    private final int puntos;
-    private Envido subEnvido;
+    private final int puntos=3;
+    private Envido envidoAnidado;
+    private Envido envidoCantado;
 
-    public RealEnvido(){
-        this.puntos=3;
+    public RealEnvido(){}
+
+    @Override
+    public Envido cambiarEnvido(){
+        envidoCantado.acumularEnvido(this);
+        return envidoCantado;
     }
 
     @Override
-    public void anidarEnvido(Envido envido){
-       if(!envido.getClass().equals(FaltaEnvido.class))
+    public void setEnvidoCantado(Envido envido){
+        if(!envido.getClass().equals(FaltaEnvido.class))
             throw new SoloSePuedeCantarFaltaEnvidoDespuesDeRealEnvidoException();
-        if(subEnvido!=null)
-            throw new FaltaEnvidoYaCantadoException();
-        subEnvido=envido;
+        envidoCantado=envido;
+    }
+
+    @Override
+    public void acumularEnvido(Envido envido) {
+        envidoAnidado=envido;
     }
 
     @Override
     public int getPuntos(Equipo equipoGanador,Equipo equipoPerdedor){
-        if(subEnvido==null)
-            return this.puntos;
-        return subEnvido.getPuntos(equipoGanador,equipoPerdedor);
+        if(this.noHayMas(this))
+            return puntos;
+        return puntos+envidoAnidado.getPuntos(equipoGanador,equipoPerdedor);
+    }
+
+    @Override
+    public boolean noHayMas(Envido envido){
+        return envidoAnidado==null;
+    }
+
+    @Override
+    public Envido getEnvidoCantado() {
+        return envidoCantado;
     }
 }

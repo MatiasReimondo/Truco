@@ -75,10 +75,11 @@ public class PartidaEntre4Jugadores {
 
         Assert.assertFalse(juego.getMesa().getRonda().termino());
 
-        juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
+
         juego.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);
         juego.getMesa().getJugadorActivo().jugarCarta(6,Palo.ESPADA);
         juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.COPA);
+        juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
         juego.getMesa().resolverMano();
         Assert.assertTrue(juego.getMesa().getRonda().termino());
         Assert.assertEquals(7,juego.getEquipo("E2").getPuntaje());

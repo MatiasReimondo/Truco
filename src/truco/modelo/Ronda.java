@@ -16,50 +16,44 @@ public class Ronda {
     private final Vector<Equipo> resultados;
     private final Mesa mesa;
 
-    private Envido tantoEnJuego;
-    private Envido tantoPendiente;
-    private Flor florEnJuego;
-    private EstadoTruco trucoEnJuego;
+    private Envido envido;
+    private Flor flor;
+    private EstadoTruco truco;
 
     /**CONSTRUCTOR**/
     public Ronda(Mesa mesa){
         manoActual= new HashMap<>();
         primera=true;
         resultados=new Vector<>();
-        tantoEnJuego =new EnvidoNoCantado();
-        tantoPendiente=new EnvidoNoCantado();
+        envido =new EnvidoNoCantado();
         this.mesa=mesa;
-        trucoEnJuego=new TrucoNoCantado();
+        truco =new TrucoNoCantado();
     }
 
     /**GETTERS**/
-    public HashMap<Jugador,Carta> getManoActual(){
+    public HashMap<Jugador,Carta> getManoEnJuego(){
         return manoActual;
     }
 
-    public Flor getFlorEnJuego(){
-        return florEnJuego;
+    public Flor getFlor(){
+        return flor;
     }
 
-    public Envido getTantoEnJuego() {
-        return tantoEnJuego;
+    public Envido getEnvido() {
+        return envido;
     }
 
     public Vector<Equipo> getResultados() {
         return resultados;
     }
 
-    public EstadoTruco getTrucoEnJuego(){
-        return trucoEnJuego;
-    }
-
-    public Envido getTantoPendiente(){
-        return tantoPendiente;
+    public EstadoTruco getTruco(){
+        return truco;
     }
 
     /**SETTERS**/
     public void setTrucoEnJuego(EstadoTruco estado){
-        trucoEnJuego=estado;
+        truco =estado;
     }
 
     /**ACCIONES**/
@@ -72,24 +66,16 @@ public class Ronda {
         return primera;
     }
 
+    public void cambiarEnvido(){
+        envido=envido.cambiarEnvido();
+    }
+
     public void agregarCarta(Jugador jugador,Carta carta) {
         manoActual.put(jugador,carta);
     }
 
-    public void subirApuestaDelEnvido(Envido envido) {
-        tantoPendiente=envido;
-    }
-
-    public void cambiarTantoEnJuego(){
-         if(tantoEnJuego.getClass().equals(EnvidoNoCantado.class))
-             tantoEnJuego=tantoPendiente;
-         else
-             tantoEnJuego.anidarEnvido(tantoPendiente);
-        tantoPendiente=null;
-    }
-
     public void activarFlor() {
-        florEnJuego =new Flor();
+        flor =new Flor();
     }
 
     public void terminar(){

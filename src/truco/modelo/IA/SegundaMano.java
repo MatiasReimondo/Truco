@@ -25,19 +25,19 @@ public class SegundaMano implements Comportamiento {
     public void comportamientoTruco(Mesa mesa,Jugador IA){
         Random r=new Random();
 
-            if( mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoCantado.class) || mesa.getRonda().getTrucoEnJuego().getClass().equals(RetrucoCantado.class) || (mesa.getRonda().getTrucoEnJuego().getClass().equals(ValeCuatroCantado.class) && r.nextInt(10)<2)) {
+            if( mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) || (mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class) && r.nextInt(10)<2)) {
                 IA.quieroTruco();
             }
-            if(mesa.getRonda().getTrucoEnJuego().getClass().equals(ValeCuatroCantado.class) || r.nextInt(10)<3)     //60% de querer el Vale Cuatro.
+            if(mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class) || r.nextInt(10)<3)     //60% de querer el Vale Cuatro.
                 IA.quieroTruco();
 
-            if(mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoNoCantado.class))
+            if(mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class))
                 IA.cantarTruco();
 
-            if(mesa.getRonda().getTrucoEnJuego().getClass().equals(TrucoQuerido.class))
+            if(mesa.getRonda().getTruco().getClass().equals(TrucoQuerido.class))
                 IA.cantarRetruco();
 
-            if(mesa.getRonda().getTrucoEnJuego().getClass().equals(RetrucoQuerido.class) && r.nextInt(10)<2)        //70% de cantar Vale Cuatro.
+            if(mesa.getRonda().getTruco().getClass().equals(RetrucoQuerido.class) && r.nextInt(10)<2)        //70% de cantar Vale Cuatro.
                 IA.cantarValeCuatro();
     }
 

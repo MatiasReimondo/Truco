@@ -17,7 +17,7 @@ public class ValeCuatroCantado implements EstadoTruco {
     public EstadoTruco avanzarEstado(Mesa mesa) {
 
         //Si no son iguales,se lanza una excepcion
-        if ( !mesa.getRonda().getTrucoEnJuego().getClass().equals( ValeCuatroCantado.class) ) {
+        if ( !mesa.getRonda().getTruco().getClass().equals( ValeCuatroCantado.class) ) {
             throw new NoSePuedeCantarAhoraException();
         }
         return new ValeCuatroQuerido();

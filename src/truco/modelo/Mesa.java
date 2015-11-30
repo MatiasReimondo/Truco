@@ -85,7 +85,7 @@ public class Mesa {
 
         if(ronda.termino())
             throw new RondaTerminadaException();
-        if(ronda.getTantoEnJuego().getClass().equals(EnvidoNoCantado.class))
+        if(ronda.getEnvido().getClass().equals(EnvidoNoCantado.class))
             throw new EnvidoNoCantadoException();
         int envidoMax=0;
         Jugador auxiliar=jugadorActivo;
@@ -103,7 +103,7 @@ public class Mesa {
                     }
             }
         }
-            equipoGanador.sumarPuntos(this.ronda.getTantoEnJuego().getPuntos(equipoGanador, equipoPerdedor));
+            equipoGanador.sumarPuntos(this.ronda.getEnvido().getPuntos(equipoGanador, equipoPerdedor));
         jugadorActivo=auxiliar;
 
     }
@@ -112,7 +112,7 @@ public class Mesa {
 
         if(ronda.termino())
             throw new RondaTerminadaException();
-        if(ronda.getFlorEnJuego()==null)
+        if(ronda.getFlor()==null)
             throw new FlorNoCantadaException();
         int florMax=0;
         Jugador auxiliar=jugadorActivo;
@@ -133,28 +133,34 @@ public class Mesa {
             this.siguienteJugador();
         }
         jugadorActivo=auxiliar;
-        equipoGanador.sumarPuntos(ronda.getFlorEnJuego().getPuntos());
+        equipoGanador.sumarPuntos(ronda.getFlor().getPuntos());
     }
 
     public void resolverMano() {
         if(ronda.termino())
             throw new RondaTerminadaException();
 
-        if(ronda.getManoActual().size()<nroJugadores)
+        if(ronda.getManoEnJuego().size()<nroJugadores)
             throw new CartasInsuficientesEnLaMesaException();
         int maxFza = 0;
         Equipo equipoGanador=null;
+        Jugador jugadorGanador=null;
 
-        for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoActual().entrySet() )
+        for (Map.Entry<Jugador, Carta> parJugadorCarta : ronda.getManoEnJuego().entrySet() )
             if (parJugadorCarta.getValue().getFuerza() > maxFza) {
                 maxFza = parJugadorCarta.getValue().getFuerza();
                 equipoGanador = parJugadorCarta.getKey().getEquipo();
+                jugadorGanador=parJugadorCarta.getKey();
             }
              else if (parJugadorCarta.getValue().getFuerza() == maxFza)
-                if(!parJugadorCarta.getKey().getEquipo().equals(equipoGanador))
-                    equipoGanador=null;
+                if(!parJugadorCarta.getKey().getEquipo().equals(equipoGanador)) {
+                    equipoGanador = null;
+                    jugadorGanador=null;
+                }
 
         this.evaluarMano(equipoGanador);
+        if(jugadorGanador!=null)
+            this.setJugadorActivo(jugadorGanador);
         ronda.avanzarALaSiguienteMano();
     }
 
@@ -163,12 +169,21 @@ public class Mesa {
         mazo=new Mazo();
         mazo.mezclar();
         jugadorActivo=this.jugadores.get(0);
+        posicionador=0;
 
         for(Jugador jugador:jugadores)
             jugador.getMano().clear();
     }
 
     /**AUXILIARES**/
+
+    public Equipo getEquipoOponente(){
+        siguienteJugador();
+        Equipo equipo=jugadorActivo.getEquipo();
+        jugadorAnterior();
+        return equipo;
+
+    }
     public void siguienteJugador(){
 
         if(posicionador==nroJugadores-1)
@@ -195,15 +210,15 @@ public class Mesa {
             case 1: {
                 if (ronda.getResultados().contains(null) || ronda.getResultados().contains(equipo))
                     if (equipo != null) {
-                        equipo.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
+                        equipo.sumarPuntos(ronda.getTruco().getPuntaje());
                         ronda.terminar();
                         return;
                     }
                 ronda.resultadoMano(equipo);
                 return;
             }
-            case 2: {if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
-                    else equipo.sumarPuntos(ronda.getTrucoEnJuego().getPuntaje());
+            case 2: {if(equipo==null) this.getJugadorMano().getEquipo().sumarPuntos(ronda.getTruco().getPuntaje());
+                    else equipo.sumarPuntos(ronda.getTruco().getPuntaje());
                     ronda.terminar();
             }
         }
