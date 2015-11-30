@@ -73,6 +73,7 @@ public class PartidaEntre2Jugadores {
 
         juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());
         Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J1"));
+        System.out.println(juego.getMesa().getJugadorEnEspera().getNombre());
         juego.getMesa().getJugadorActivo().noQuieroEnvido();
 
         Assert.assertEquals(1,juego.getEquipo("E2").getPuntaje());

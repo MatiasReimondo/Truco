@@ -169,6 +169,14 @@ public class Mesa {
     }
 
     /**AUXILIARES**/
+
+    public Equipo getEquipoOponente(){
+        siguienteJugador();
+        Equipo equipo=jugadorActivo.getEquipo();
+        jugadorAnterior();
+        return equipo;
+
+    }
     public void siguienteJugador(){
 
         if(posicionador==nroJugadores-1)

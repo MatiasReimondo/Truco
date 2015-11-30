@@ -129,14 +129,16 @@ public class Jugador {
     public void quieroEnvido(){
         aceptarEnvido();
         mesa.setJugadorActivo(mesa.getJugadorEnEspera());
+        mesa.setJugadorEnEspera(null);
     }
     public void aceptarEnvido(){
         mesa.getRonda().cambiarTantoEnJuego();
     }
 
     public void noQuieroEnvido(){
-        mesa.jugadorAnterior();
-        mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTantoEnJuego().getPuntos(this.getEquipo(),mesa.getJugadorActivo().getEquipo()));
+        mesa.getEquipoOponente().sumarPuntos(mesa.getRonda().getTantoEnJuego().getPuntos(this.getEquipo(), mesa.getJugadorActivo().getEquipo()));
+        mesa.setJugadorActivo(mesa.getJugadorEnEspera());
+        mesa.setJugadorEnEspera(null);
     }
 
     /**TRUCO**/
