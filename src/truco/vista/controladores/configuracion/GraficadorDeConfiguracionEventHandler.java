@@ -93,10 +93,10 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
         opcionesCantidad.getChildren().add(botonDosJugadores);
         opcionesCantidad.getChildren().add(botonCuatroJugadores);
         opcionesCantidad.getChildren().add(botonSeisJugadores);
+        opcionesCantidad.setSpacing(10);
 
         this.contenedorConfiguracionJugadores.getChildren().addAll(opcionesCantidad);
-
-
+        this.contenedorConfiguracionJugadores.setSpacing(10);
     }
 
     private void graficarConfiguracionFlor() {
@@ -114,6 +114,7 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
 
         this.contenedorConfiguracionFlor.getChildren().add(botonFlorSi);
         this.contenedorConfiguracionFlor.getChildren().add(botonFlorNo);
+        this.contenedorConfiguracionFlor.setSpacing(10);
 
 
 

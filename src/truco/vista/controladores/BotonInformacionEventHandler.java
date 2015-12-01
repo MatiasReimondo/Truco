@@ -31,8 +31,8 @@ public class BotonInformacionEventHandler implements EventHandler<ActionEvent> {
         this.contenedorVertical.getChildren().add( new Label("  7507.- Algoritmos y programacion 3 : Tp final 'Truco'") );
         this.contenedorVertical.getChildren().add( new Label("          GRUPO NRO 2 "));
         this.contenedorVertical.getChildren().add( new Label("  Integrantes:            Padron nro:"));
-        this.contenedorVertical.getChildren().add( new Label("  Ezequiel Cruz Avila     "));
-        this.contenedorVertical.getChildren().add( new Label("  Matias Reimondo         "));
-        this.contenedorVertical.getChildren().add( new Label("  Jessica Aguila Visitacion  "));
+        this.contenedorVertical.getChildren().add( new Label("  Ezequiel Cruz Avila        95784"));
+        this.contenedorVertical.getChildren().add( new Label("  Matias Reimondo            95899"));
+        this.contenedorVertical.getChildren().add( new Label("  Jessica Aguila Visitacion  93551"));
     }
 }
