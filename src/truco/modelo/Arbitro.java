@@ -1,6 +1,7 @@
 package truco.modelo;
 
 
+import truco.modelo.estadosTruco.TrucoCantado;
 import truco.modelo.excepciones.*;
 
 import java.util.List;
@@ -38,6 +39,8 @@ public class Arbitro {
     }
 
     public void jugadorPuedeCantarTanto(Jugador jugador){
+        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class))
+            return;
         if(jugadorEsPie(jugador) && mesa.getRonda().seEstaJugandoLaPrimera())
             return;
         if(mesa.getNroJugadores()==2 && mesa.getRonda().seEstaJugandoLaPrimera())

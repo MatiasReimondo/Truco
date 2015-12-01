@@ -158,10 +158,13 @@ public class Mesa {
                     jugadorGanador=null;
                 }
 
-        this.evaluarMano(equipoGanador);
         if(jugadorGanador!=null)
             this.setJugadorActivo(jugadorGanador);
-        ronda.avanzarALaSiguienteMano();
+
+        this.evaluarMano(equipoGanador);
+
+        if(!ronda.termino())
+            ronda.avanzarALaSiguienteMano();
     }
 
     public void nuevaRonda(){
@@ -170,12 +173,15 @@ public class Mesa {
         mazo.mezclar();
         jugadorActivo=this.jugadores.get(0);
         posicionador=0;
-
-        for(Jugador jugador:jugadores)
-            jugador.getMano().clear();
+        jugadorEnEspera=null;
+        this.limpiarCartasRestantes();
     }
 
     /**AUXILIARES**/
+    private void limpiarCartasRestantes(){
+        for(Jugador jugador:jugadores)
+            jugador.getMano().clear();
+    }
 
     public Equipo getEquipoOponente(){
         siguienteJugador();

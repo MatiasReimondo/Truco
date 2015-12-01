@@ -7,86 +7,170 @@ import truco.modelo.Carta;
 import truco.modelo.Palo;
 import truco.modelo.Truco;
 import truco.modelo.envido.Envido;
+import truco.modelo.envido.RealEnvido;
 
 public class PartidaEntre4Jugadores {
 
-    private Truco juego;
+    private Truco truco;
 
     @Before
     public void setup(){
 
-        juego=new Truco();
-        juego.nuevoEquipo("E1");
-        juego.nuevoEquipo("E2");
+        truco =new Truco();
+        truco.nuevoEquipo("E1");
+        truco.nuevoEquipo("E2");
 
-        juego.nuevoJugador("J1","E1");
-        juego.nuevoJugador("J2","E2");
-        juego.nuevoJugador("J3","E1");
-        juego.nuevoJugador("J4","E2");
+        truco.nuevoJugador("J1", "E1");
+        truco.nuevoJugador("J2", "E2");
+        truco.nuevoJugador("J3", "E1");
+        truco.nuevoJugador("J4", "E2");
     }
 
     @Test
     public void PartidaCompletaEntre4Jugadores(){
-        juego.empezarJuego();
+        truco.empezarJuego();
 
         /**RONDA 1**/
-        juego.getMesa().nuevaRonda();
+        truco.getMesa().nuevaRonda();
 
-        juego.getJugador("J1").levantarCarta(new Carta(3, Palo.ESPADA));
-        juego.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
-        juego.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
+        truco.getJugador("J1").levantarCarta(new Carta(3, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
 
-        juego.getJugador("J2").levantarCarta(new Carta(2, Palo.ESPADA));
-        juego.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
-        juego.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
+        truco.getJugador("J2").levantarCarta(new Carta(2, Palo.ESPADA));
+        truco.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
+        truco.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
 
-        juego.getJugador("J3").levantarCarta(new Carta(6,Palo.ESPADA));
-        juego.getJugador("J3").levantarCarta(new Carta(4,Palo.ESPADA));
-        juego.getJugador("J3").levantarCarta(new Carta(3,Palo.COPA));
+        truco.getJugador("J3").levantarCarta(new Carta(6,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(4,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(3,Palo.COPA));
 
-        juego.getJugador("J4").levantarCarta(new Carta(10,Palo.ORO));
-        juego.getJugador("J4").levantarCarta(new Carta(4,Palo.COPA));
-        juego.getJugador("J4").levantarCarta(new Carta(7,Palo.COPA));
-
-
-        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(5,Palo.BASTO);        Assert.assertEquals(juego.getJugador("J3"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(juego.getJugador("J4"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().aceptarEnvido();
-
-        juego.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(juego.getJugador("J3"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().aceptarEnvido();
-        juego.getMesa().resolverEnvido();
-        Assert.assertEquals(4,juego.getEquipo("E2").getPuntaje());
-
-        juego.getMesa().getJugadorActivo().jugarCarta(4,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J4"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(4,Palo.COPA);         Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().resolverMano();
-
-        juego.getMesa().getJugadorActivo().cantarTruco();                   Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().quieroTruco();
-        juego.getMesa().getJugadorActivo().cantarRetruco();                 Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().quieroTruco();
-        juego.getMesa().getJugadorActivo().jugarCarta(3,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ORO);          Assert.assertEquals(juego.getJugador("J3"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(3,Palo.COPA);         Assert.assertEquals(juego.getJugador("J4"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.ORO);         Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().resolverMano();
-
-        Assert.assertFalse(juego.getMesa().getRonda().termino());
+        truco.getJugador("J4").levantarCarta(new Carta(10,Palo.ORO));
+        truco.getJugador("J4").levantarCarta(new Carta(4,Palo.COPA));
+        truco.getJugador("J4").levantarCarta(new Carta(7,Palo.COPA));
 
 
-        juego.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);
-        juego.getMesa().getJugadorActivo().jugarCarta(6,Palo.ESPADA);
-        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.COPA);
-        juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
-        juego.getMesa().resolverMano();
-        Assert.assertTrue(juego.getMesa().getRonda().termino());
-        Assert.assertEquals(7,juego.getEquipo("E2").getPuntaje());
+        truco.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);       Assert.assertEquals(truco.getJugador("J2"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(5,Palo.BASTO);        Assert.assertEquals(truco.getJugador("J3"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().aceptarEnvido();
+
+        truco.getMesa().getJugadorActivo().cantarEnvido(new Envido());      Assert.assertEquals(truco.getJugador("J3"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().aceptarEnvido();
+        truco.getMesa().resolverEnvido();
+        Assert.assertEquals(4, truco.getEquipo("E2").getPuntaje());
+
+        truco.getMesa().getJugadorActivo().jugarCarta(4,Palo.ESPADA);       Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(4,Palo.COPA);         Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().resolverMano();
+
+        truco.getMesa().getJugadorActivo().cantarTruco();                   Assert.assertEquals(truco.getJugador("J2"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().quieroTruco();
+        truco.getMesa().getJugadorActivo().cantarRetruco();                 Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().quieroTruco();
+        truco.getMesa().getJugadorActivo().jugarCarta(3,Palo.ESPADA);       Assert.assertEquals(truco.getJugador("J2"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(7,Palo.ORO);          Assert.assertEquals(truco.getJugador("J3"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(3,Palo.COPA);         Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(10,Palo.ORO);         Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().resolverMano();
+
+        Assert.assertFalse(truco.getMesa().getRonda().termino());
+
+
+        truco.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);
+        truco.getMesa().getJugadorActivo().jugarCarta(6,Palo.ESPADA);
+        truco.getMesa().getJugadorActivo().jugarCarta(7,Palo.COPA);
+        truco.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
+        truco.getMesa().resolverMano();
+        Assert.assertTrue(truco.getMesa().getRonda().termino());
+        Assert.assertEquals(7, truco.getEquipo("E2").getPuntaje());
 
         /**RONDA 2**/
-        juego.getMesa().nuevaRonda();
-        Assert.assertTrue(juego.getMesa().getArbitro().jugadorEsMano(juego.getJugador("J2")));
-        Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J2"));
+        truco.getMesa().nuevaRonda();
+        Assert.assertTrue(truco.getMesa().getArbitro().jugadorEsMano(truco.getJugador("J2")));
+        Assert.assertEquals(truco.getMesa().getJugadorActivo(), truco.getJugador("J2"));
+
+        truco.getJugador("J1").levantarCarta(new Carta(3, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
+
+        truco.getJugador("J2").levantarCarta(new Carta(2, Palo.ESPADA));
+        truco.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
+        truco.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
+
+        truco.getJugador("J3").levantarCarta(new Carta(6,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(4,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(3,Palo.COPA));
+
+        truco.getJugador("J4").levantarCarta(new Carta(10,Palo.ORO));
+        truco.getJugador("J4").levantarCarta(new Carta(4,Palo.COPA));
+        truco.getJugador("J4").levantarCarta(new Carta(7,Palo.COPA));
+
+        truco.getMesa().getJugadorActivo().jugarCarta(7,Palo.ORO);
+        truco.getMesa().getJugadorActivo().jugarCarta(6,Palo.ESPADA);               Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().cantarEnvido(new Envido());              Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().aceptarEnvido();
+        truco.getMesa().getJugadorActivo().cantarEnvido(new Envido());              Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().aceptarEnvido();
+        truco.getMesa().getJugadorActivo().cantarEnvido(new RealEnvido());          Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().quieroEnvido();                          Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().resolverEnvido();
+        Assert.assertEquals(14,truco.getEquipo("E2").getPuntaje());
+        Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().jugarCarta(10,Palo.ORO);
+        truco.getMesa().getJugadorActivo().cantarTruco();
+        truco.getMesa().getJugadorActivo().quieroTruco();
+        truco.getMesa().getJugadorActivo().cantarRetruco();                      Assert.assertEquals(truco.getJugador("J1"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().noQuieroTruco();
+        Assert.assertEquals(16,truco.getEquipo("E2").getPuntaje());
+        Assert.assertTrue(truco.getMesa().getRonda().termino());
+
+        /** RONDA 3 **/
+        truco.getMesa().nuevaRonda();
+        Assert.assertTrue(truco.getMesa().getArbitro().jugadorEsMano(truco.getJugador("J3")));
+        Assert.assertEquals(truco.getMesa().getJugadorActivo(), truco.getJugador("J3"));
+
+        truco.getJugador("J1").levantarCarta(new Carta(3, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
+        truco.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
+
+        truco.getJugador("J2").levantarCarta(new Carta(3, Palo.ORO));
+        truco.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
+        truco.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
+
+        truco.getJugador("J3").levantarCarta(new Carta(6,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(4,Palo.ESPADA));
+        truco.getJugador("J3").levantarCarta(new Carta(3,Palo.COPA));
+
+        truco.getJugador("J4").levantarCarta(new Carta(10,Palo.ORO));
+        truco.getJugador("J4").levantarCarta(new Carta(4,Palo.COPA));
+        truco.getJugador("J4").levantarCarta(new Carta(7,Palo.COPA));
+
+        truco.getMesa().getJugadorActivo().cantarTruco();                       Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().cantarEnvido(new Envido());          //El envido esta primero
+        truco.getMesa().getJugadorActivo().quieroEnvido();
+        truco.getMesa().resolverEnvido();
+        Assert.assertEquals(truco.getJugador("J4"), truco.getMesa().getJugadorActivo());
+        truco.getMesa().getJugadorActivo().quieroTruco();
+        truco.getMesa().jugadorAnterior();
+        Assert.assertEquals(18,truco.getEquipo("E2").getPuntaje());
+        truco.getMesa().getJugadorActivo().jugarCarta(3,Palo.COPA);
+        truco.getMesa().getJugadorActivo().jugarCarta(4,Palo.COPA);
+        truco.getMesa().getJugadorActivo().jugarCarta(3,Palo.ESPADA);
+        truco.getMesa().getJugadorActivo().jugarCarta(3,Palo.ORO);
+        truco.getMesa().resolverMano();
+        Assert.assertFalse(truco.getMesa().getRonda().termino());
+        Assert.assertEquals(truco.getJugador("J3"), truco.getMesa().getJugadorActivo());        //Parda
+        truco.getMesa().getJugadorActivo().jugarCarta(6,Palo.ESPADA);
+        truco.getMesa().getJugadorActivo().jugarCarta(10,Palo.ORO);
+        truco.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
+        truco.getMesa().getJugadorActivo().jugarCarta(7,Palo.ORO);
+
+        truco.getMesa().resolverMano();
+        Assert.assertTrue(truco.getMesa().getRonda().termino());
+        Assert.assertEquals(20,truco.getEquipo("E2").getPuntaje());
+
+
+
     }
 }
