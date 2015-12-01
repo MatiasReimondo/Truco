@@ -16,7 +16,7 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
     private Truco juego;
     private VBox contenedorVertical;
     private Button botonNuevoJuego;
-    private Button botonSalirJuego;
+    //private Button botonSalirJuego;
 
     /*********** Metodos de la clase **********/
     public BotonJuegoEventHandler( VBox contenedorVertical, Truco juego){
@@ -24,7 +24,7 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
         this.juego = juego;
         this.contenedorVertical = contenedorVertical;
         this.botonNuevoJuego = new Button("Nuevo");
-        this.botonSalirJuego = new Button("Salir");
+        //this.botonSalirJuego = new Button("Salir");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class BotonJuegoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorVertical.getChildren().clear();
 
         this.contenedorVertical.getChildren().add(this.botonNuevoJuego);
-        this.contenedorVertical.getChildren().add(this.botonSalirJuego);
+        //this.contenedorVertical.getChildren().add(this.botonSalirJuego);
 
         GraficadorDeConfiguracionEventHandler graficadorDeConfiguracionEventHandler = new GraficadorDeConfiguracionEventHandler(this.contenedorVertical, this.juego);
         this.botonNuevoJuego.setOnAction(graficadorDeConfiguracionEventHandler);

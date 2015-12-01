@@ -24,8 +24,6 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
     private Button cartaElegida;
     private Truco juego;
     private HBox contenedorPrincipal;
-    //private VBox cartasJ1;
-    //private VBox cartasJ2;
 
     /*********** Metodos de la clase ************/
     public BotonCartaElegidaEventHandler(HBox contenedor, Truco juego, Button botonCarta){
@@ -35,8 +33,6 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
         this.nombreDeJugadoresDelEquipo = this.nombreDeJugadores();
         this.cartaElegida = botonCarta;
         this.contenedorDeCartas = (VBox) contenedor.getChildren().get(2);
-        //this.cartasJ1 = new VBox();
-        //this.cartasJ2 = new VBox();
         this.juego = juego;
         this.contenedorPrincipal=contenedor;
     }
@@ -47,7 +43,6 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
         this.contenedorDeEquipo1.getChildren().clear();
         graficarJugadorConCartaElegida();
         graficarContenedorDeCartas();
-        //this.graficarContenedorDeCartasJ2();
         graficarCartaElegidaJugador2EnLaMesa();
     }
 
@@ -65,8 +60,14 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
     }
 
     private void graficarContenedorDeCartas() {
-        //this.contenedorDeCartas = this.cartasJ1;
+
+        //Se muestra en la etiqueta que es el turno del jugador activo, esto es en el contenedor de estados
+        VBox contenedorDeEstados = (VBox) this.contenedorPrincipal.getChildren().get(0);
+        contenedorDeEstados.getChildren().remove(0);
+        contenedorDeEstados.getChildren().add(0, new Label("TURNO:"+this.juego.getMesa().getJugadorActivo().getNombre()));
+
         this.contenedorDeCartas.getChildren().clear();
+
         String nombreDeCarta;
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
         this.contenedorDeCartas.getChildren().add(new Label(this.juego.getMesa().getJugadorActivo().getNombre()));
@@ -98,39 +99,19 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
                     this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0,1)), Palo.valueOf(carta.substring(2)));
                     this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
                 }
-                //this.cartasJ1= this.contenedorDeCartas;
             }
         }
     }
 
     private void graficarCartaElegidaJugador2EnLaMesa(){
 
-        //Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
         int posicion;
         for (posicion=1;posicion<(this.juego.getMesa().getJugadorActivo().getMano().size()+1); posicion++) {
-            //
-            Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            /*Button unaCarta = (Button) this.cartasJ2.getChildren().get(posicion);
-            BotonCartaElegidaEventHandler botonCartaElegidaJugador2EventHandler = new BotonCartaElegidaEventHandler(this.contenedorPrincipal,this.juego,unaCarta);
-            unaCarta.setOnAction(botonCartaElegidaJugador2EventHandler);
-            TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.cartasJ2);*/
 
+            Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
             BotonCartaElegidaJugador2EventHandler botonCartaElegidaJugador2EventHandler = new BotonCartaElegidaJugador2EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
             unaCarta.setOnAction(botonCartaElegidaJugador2EventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }
     }
-   /* private void graficarContenedorDeCartasJ2() {
-        String nombreDeCarta;
-        List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        this.cartasJ2.getChildren().add(new Label(this.juego.getMesa().getJugadorActivo().getNombre()));
-
-        for (Carta unaCarta: cartas){
-            nombreDeCarta = Integer.toString(unaCarta.getNumero())+" "+ unaCarta.getPalo().toString();
-            this.cartasJ2.getChildren().add(new Button(nombreDeCarta));
-        }
-
-        this.cartasJ2.setSpacing(10);
-    }*/
-
 }

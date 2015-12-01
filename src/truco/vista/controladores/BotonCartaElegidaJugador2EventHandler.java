@@ -61,6 +61,11 @@ public class BotonCartaElegidaJugador2EventHandler implements EventHandler<Actio
 
     private void graficarContenedorDeCartas() {
 
+        //Se muestra en la etiqueta que es el turno del jugador activo, esto es en el contenedor de estados
+        VBox contenedorDeEstados = (VBox) this.contenedorPrincipal.getChildren().get(0);
+        contenedorDeEstados.getChildren().remove(0);
+        contenedorDeEstados.getChildren().add(0, new Label("TURNO:"+this.juego.getMesa().getJugadorActivo().getNombre()));
+
         this.contenedorDeCartas.getChildren().clear();
 
         String nombreDeCarta;

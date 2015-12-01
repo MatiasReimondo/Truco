@@ -9,10 +9,7 @@ import javafx.scene.control.Button;
 import truco.modelo.Carta;
 import truco.modelo.Palo;
 import truco.modelo.Truco;
-import truco.vista.controladores.BotonInformacionEventHandler;
-import truco.vista.controladores.BotonJuegoEventHandler;
-import truco.vista.controladores.TextoInformacionEventHandler;
-import truco.vista.controladores.TextoJuegoEventHandler;
+import truco.vista.controladores.*;
 
 /*********************************************************************************
  ********************************* Programa **************************************
@@ -38,7 +35,10 @@ public class Programa extends Application {
         Button botonJuego = new Button("Jugar");
         this.agregarBotonesDelJuegoAContenedor(botonJuego, contenedorVertical, juegoTruco);
 
-        HBox contenedorHorizontalDeOpciones = new HBox(botonJuego, botonInformacion);
+        Button botonSalir = new Button("Salir");
+        this.salir(botonSalir, contenedorVertical);
+
+        HBox contenedorHorizontalDeOpciones = new HBox(botonJuego, botonInformacion, botonSalir);
         contenedorHorizontalDeOpciones.setSpacing(30);
 
         /****** Contenedor principal de la aplicacion *******/
@@ -51,7 +51,6 @@ public class Programa extends Application {
         primaryStage.show();
 
     }
-
 
     /************ Metodos privados ***************/
     private Truco crearModelo(){
@@ -92,4 +91,12 @@ public class Programa extends Application {
         TextoJuegoEventHandler textoJuegoEventHandler = new TextoJuegoEventHandler(botonJuego);
         contenedorDeBotones.setSpacing(5);
     }
+
+    private void salir(Button botonSalir, VBox contenedorVertical) {
+
+        BotonSalirEventHandler botonSalirEventHandler = new BotonSalirEventHandler(contenedorVertical);
+        botonSalir.setOnAction(botonSalirEventHandler);
+        TextoSalirDelJuegoEventHandler textoSalirEventHandler = new TextoSalirDelJuegoEventHandler(botonSalir);
+    }
+
 }

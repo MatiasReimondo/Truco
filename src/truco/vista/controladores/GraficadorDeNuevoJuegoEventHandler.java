@@ -71,6 +71,10 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
     //Grafica botoneras de cada una de las cartas que tiene un determinado  jugador
     private void graficarContenedorDeCartas() {
 
+        //Se muestra en la etiqueta que es el turno del jugador activo, esto es en el contenedor de estados
+        this.contenedorDeEstados.getChildren().remove(0);
+        this.contenedorDeEstados.getChildren().add(0, new Label("TURNO:"+this.juego.getMesa().getJugadorActivo().getNombre()));
+
         String nombreDeCarta;
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
         this.contenedorDeCartas.getChildren().add( new Label( this.juego.getMesa().getJugadorActivo().getNombre()) );
@@ -150,7 +154,6 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
     private void graficarCartaElegidaEnLaMesa(){
 
-        Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
         int posicion;
         for( posicion =1; posicion < this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
