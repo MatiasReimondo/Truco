@@ -13,6 +13,7 @@ import truco.modelo.Truco;
 import truco.vista.controladores.envido.BotonEnvidoEventHandler;
 import truco.vista.controladores.envido.BotonFaltaEnvidoEventHandler;
 import truco.vista.controladores.envido.BotonRealEnvidoEventHandler;
+import truco.vista.controladores.truco.BotonTrucoEventHandler;
 
 import java.util.List;
 
@@ -127,11 +128,16 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
+        Button botonTruco = new Button("TRUCO");
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        botonTruco.setOnAction(botonTrucoEventHandler);
+
 
         this.contenedorDeEstados.getChildren().add( botonEnvido );
         this.contenedorDeEstados.getChildren().add( botonRealEnvido );
         this.contenedorDeEstados.getChildren().add( botonFaltaEnvido );
-        this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
+
+        this.contenedorDeEstados.getChildren().add( botonTruco );
         this.contenedorDeEstados.getChildren().add( new Button("FLOR") );
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
