@@ -76,7 +76,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorDeCartas.getChildren().add( new Label( this.juego.getMesa().getJugadorActivo().getNombre()) );
 
         for (Carta unaCarta: cartas){
-            nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
+            nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" "+ unaCarta.getPalo().toString();
             this.contenedorDeCartas.getChildren().add(new Button(nombreDeCarta));
         }
 

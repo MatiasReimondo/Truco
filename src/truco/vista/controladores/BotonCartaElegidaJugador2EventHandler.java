@@ -65,7 +65,7 @@ public class BotonCartaElegidaJugador2EventHandler implements EventHandler<Actio
 
         String nombreDeCarta;
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        this.contenedorDeCartas.getChildren().add( new Label("Cartas de jugador") );
+        this.contenedorDeCartas.getChildren().add( new Label(this.juego.getMesa().getJugadorActivo().getNombre()) );
 
         for (Carta unaCarta: cartas){
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
@@ -79,15 +79,20 @@ public class BotonCartaElegidaJugador2EventHandler implements EventHandler<Actio
     private void graficarJugadorConCartaElegida() {
 
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        for (String elemento: this.nombreDeJugadoresDelEquipo) {
+        for (String elemento : this.nombreDeJugadoresDelEquipo) {
 
             this.contenedorDeEquipo2.getChildren().add(new Label(elemento));
 
-            if (this.juego.getMesa().getJugadorActivo().getNombre().equals(elemento)){
+            if (this.juego.getMesa().getJugadorActivo().getNombre().equals(elemento)) {
                 String carta = this.cartaElegida.getText();
                 this.contenedorDeEquipo2.getChildren().add(new Label(carta));
-                this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0,1)), Palo.valueOf(carta.substring(2)));
-                this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
+                if (carta.substring(2, 3).equals(" ")) {
+                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0, 2)), Palo.valueOf(carta.substring(3)));
+                    this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
+                } else {
+                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0, 1)), Palo.valueOf(carta.substring(2)));
+                    this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
+                }
             }
         }
     }
