@@ -15,10 +15,10 @@ import java.util.List;
 /*********************************************************************************
  *****************  BotonCartaElegidaEventHandler  *******************************
  *********************************************************************************/
-public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> {
+public class BotonCartaElegidaEquipo2EventHandler implements EventHandler<ActionEvent> {
 
     /******* Atributos de la clase ***********/
-    private VBox contenedorDeEquipo1;
+    private VBox contenedorDeEquipo2;
     private List<String> nombreDeJugadoresDelEquipo;
     private VBox contenedorDeCartas;
     private Button cartaElegida;
@@ -26,10 +26,10 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
     private HBox contenedorPrincipal;
 
     /*********** Metodos de la clase ************/
-    public BotonCartaElegidaEventHandler(HBox contenedor, Truco juego, Button botonCarta){
+    public BotonCartaElegidaEquipo2EventHandler(HBox contenedor, Truco juego, Button botonCarta){
 
         //obtengo el contenedor de equipo1 que esta apilado en el contenedor de equipos.
-        this.contenedorDeEquipo1 = (VBox) ((HBox) contenedor.getChildren().get(1)).getChildren().get(0);
+        this.contenedorDeEquipo2 = (VBox) ((HBox) contenedor.getChildren().get(1)).getChildren().get(1);
         this.nombreDeJugadoresDelEquipo = this.nombreDeJugadores();
         this.cartaElegida = botonCarta;
         this.contenedorDeCartas = (VBox) contenedor.getChildren().get(2);
@@ -40,10 +40,15 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
     @Override
     public void handle(ActionEvent event) {
 
-        this.contenedorDeEquipo1.getChildren().clear();
+        this.contenedorDeEquipo2.getChildren().clear();
         graficarJugadorConCartaElegida();
+
+        if(this.juego.getMesa().getRonda().getManoEnJuego().size()== this.juego.getJugadores().size()){
+            this.juego.getMesa().resolverMano();
+        }
         graficarContenedorDeCartas();
-        graficarCartaElegidaJugador2EnLaMesa();
+        graficarCartaElegidaEnLaMesa();
+
     }
 
     /* Devuelve una lista de nombres de todos los jugadores que pertenece al equipo.*/
@@ -51,8 +56,8 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
 
         List<String> jugadoresDelEquipo = new ArrayList<>();
         int posicion;
-        for ( posicion = 0; posicion < this.contenedorDeEquipo1.getChildren().size(); posicion++){
-            Label nombreDeJugador = (Label) this.contenedorDeEquipo1.getChildren().get(posicion);
+        for ( posicion = 0; posicion < this.contenedorDeEquipo2.getChildren().size(); posicion++){
+            Label nombreDeJugador = (Label) this.contenedorDeEquipo2.getChildren().get(posicion);
             jugadoresDelEquipo.add(nombreDeJugador.getText());
         }
 
@@ -70,10 +75,10 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
 
         String nombreDeCarta;
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        this.contenedorDeCartas.getChildren().add(new Label(this.juego.getMesa().getJugadorActivo().getNombre()));
+        this.contenedorDeCartas.getChildren().add( new Label(this.juego.getMesa().getJugadorActivo().getNombre()) );
 
         for (Carta unaCarta: cartas){
-            nombreDeCarta = Integer.toString(unaCarta.getNumero())+" "+ unaCarta.getPalo().toString();
+            nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" " + unaCarta.getPalo().toString();
             this.contenedorDeCartas.getChildren().add(new Button(nombreDeCarta));
         }
 
@@ -84,33 +89,32 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
     private void graficarJugadorConCartaElegida() {
 
         List<Carta> cartas = this.juego.getMesa().getJugadorActivo().getMano();
-        for (String elemento: this.nombreDeJugadoresDelEquipo) {
+        for (String elemento : this.nombreDeJugadoresDelEquipo) {
 
-            this.contenedorDeEquipo1.getChildren().add(new Label(elemento));
+            this.contenedorDeEquipo2.getChildren().add(new Label(elemento));
 
-            if (this.juego.getMesa().getJugadorActivo().getNombre().equals(elemento)){
+            if (this.juego.getMesa().getJugadorActivo().getNombre().equals(elemento)) {
                 String carta = this.cartaElegida.getText();
-                this.contenedorDeEquipo1.getChildren().add(new Label(carta));
-                if ( carta.substring(2,3).equals(" ") ){
-                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0,2)), Palo.valueOf(carta.substring(3)));
+                this.contenedorDeEquipo2.getChildren().add(new Label(carta));
+                if (carta.substring(2, 3).equals(" ")) {
+                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0, 2)), Palo.valueOf(carta.substring(3)));
                     this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
-                }
-                else {
-                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0,1)), Palo.valueOf(carta.substring(2)));
+                } else {
+                    this.juego.getMesa().getJugadorActivo().jugarCarta(Integer.parseInt(carta.substring(0, 1)), Palo.valueOf(carta.substring(2)));
                     this.contenedorDeCartas.getChildren().remove(this.cartaElegida);
                 }
             }
         }
     }
 
-    private void graficarCartaElegidaJugador2EnLaMesa(){
+    private void graficarCartaElegidaEnLaMesa(){
 
+        Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
         int posicion;
-        for (posicion=1;posicion<(this.juego.getMesa().getJugadorActivo().getMano().size()+1); posicion++) {
-
+        for ( posicion =1; posicion < this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            BotonCartaElegidaJugador2EventHandler botonCartaElegidaJugador2EventHandler = new BotonCartaElegidaJugador2EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
-            unaCarta.setOnAction(botonCartaElegidaJugador2EventHandler);
+            BotonCartaElegidaEquipo1EventHandler botonCartaElegidaEquipo1EventHandler = new BotonCartaElegidaEquipo1EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
+            unaCarta.setOnAction(botonCartaElegidaEquipo1EventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }
     }

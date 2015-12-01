@@ -146,8 +146,10 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
-        //barra del estado final del juego,por ahora vacia
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "), new Label("Equipo2 = "));
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
 
         this.contenedorDeEstados.setSpacing(5);
     }
@@ -157,8 +159,8 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         int posicion;
         for( posicion =1; posicion < this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            BotonCartaElegidaEventHandler botonCartaElegidaEventHandler = new BotonCartaElegidaEventHandler(this.contenedorPrincipal,this.juego,unaCarta);
-            unaCarta.setOnAction(botonCartaElegidaEventHandler);
+            BotonCartaElegidaEquipo1EventHandler botonCartaElegidaEquipo1EventHandler = new BotonCartaElegidaEquipo1EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
+            unaCarta.setOnAction(botonCartaElegidaEquipo1EventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }
     }
