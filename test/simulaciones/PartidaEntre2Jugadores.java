@@ -41,18 +41,24 @@ public class PartidaEntre2Jugadores {
         juego.getJugador("J2").levantarCarta(new Carta(5, Palo.BASTO));
         juego.getJugador("J2").levantarCarta(new Carta(7, Palo.ORO));
 
-        juego.getJugador("J1").cantarEnvido(new Envido());                  Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getJugador("J2").quieroEnvido();                              Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
+        juego.getJugador("J1").cantarEnvido(new Envido());
+        Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
+        juego.getJugador("J2").quieroEnvido();
+        Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().resolverEnvido();
         Assert.assertEquals(2,juego.getEquipo("E1").getPuntaje());
 
-        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);       Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
+        juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ESPADA);
+        Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
+        juego.getMesa().getJugadorActivo().jugarCarta(2,Palo.ESPADA);
+        Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().resolverMano();
 
-        juego.getMesa().getJugadorActivo().cantarTruco();                   Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
+        juego.getMesa().getJugadorActivo().cantarTruco();
+        Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().aceptarTruco();
-        juego.getMesa().jugadorAnterior();                                  Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
+        juego.getMesa().jugadorAnterior();
+        Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
         juego.getMesa().getJugadorActivo().jugarCarta(5,Palo.BASTO);
         juego.getMesa().resolverMano();
