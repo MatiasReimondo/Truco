@@ -258,9 +258,9 @@ public class CasosParticulares {
     public void testSeIntentaCantarRetruco2Veces(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarRetruco();
     }
 
@@ -268,7 +268,7 @@ public class CasosParticulares {
     public void testSeIntentaCantarTruco2Veces(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarTruco();
     }
 
@@ -276,11 +276,11 @@ public class CasosParticulares {
     public void testSeIntentaCantarValeCuatro2Veces(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarValeCuatro();
     }
 
@@ -288,9 +288,9 @@ public class CasosParticulares {
     public void testSeIntentaCantarValeCuatroConValeCuatroCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
         jugadorPie.cantarValeCuatro();
     }
@@ -299,7 +299,7 @@ public class CasosParticulares {
     public void testSeIntentaCantarValeCuatroConRetrucoCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
         jugadorMano.cantarValeCuatro();
     }
@@ -315,7 +315,7 @@ public class CasosParticulares {
     public void testSeIntentaCantarRetrucoConRetrucoCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
         jugadorMano.cantarRetruco();
     }
@@ -331,9 +331,9 @@ public class CasosParticulares {
     public void testSeIntentaCantarTrucoDespuesDelRetruco(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarTruco();
     }
 
@@ -348,21 +348,21 @@ public class CasosParticulares {
     public void testSeQuiereDosVecesElValeCuatro(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
-        jugadorPie.quieroTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
+        jugadorPie.aceptarTruco();
     }
 
     @Test(expected = NoSePuedeCantarAhoraException.class)
     public void testSeQuiereDosVecesElRetruco(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarRetruco();
     }
 
@@ -370,15 +370,15 @@ public class CasosParticulares {
     public void testSeQuiereDosVecesElTruco(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
+        jugadorPie.aceptarTruco();
     }
 
     @Test(expected = NoSePuedeCantarAhoraException.class)
     public void testSeIntentaCantarTrucoConRetrucoCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
         jugadorMano.cantarTruco();
     }
@@ -387,11 +387,11 @@ public class CasosParticulares {
     public void testSeIntentaCantarRetrucoDespuesDelValeCuatro(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
     }
 
@@ -399,9 +399,9 @@ public class CasosParticulares {
     public void testSeIntentaCantarRetrucoDespuesDelValeCuatroCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
         jugadorPie.cantarRetruco();
     }
@@ -410,9 +410,9 @@ public class CasosParticulares {
     public void testSeIntentaCantarTrucoDespuesDelValeCuatroCantado(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
         jugadorPie.cantarTruco();
     }
@@ -421,11 +421,11 @@ public class CasosParticulares {
     public void testSeIntentaCantarTrucoDespuesDelValeCuatro(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarTruco();
     }
 
@@ -433,10 +433,10 @@ public class CasosParticulares {
     public void testSeQuiere2VecesElRetruco(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
+        jugadorMano.aceptarTruco();
     }
 
     @Test

@@ -442,7 +442,7 @@ public class ResolverJugadas {
         jugadorPie.levantarCarta(new Carta(10, Palo.BASTO));
 
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         mesaTester.jugadorAnterior();
         jugadorMano.jugarCarta(3,Palo.BASTO);
         jugadorPie.jugarCarta(5,Palo.BASTO);
@@ -468,9 +468,9 @@ public class ResolverJugadas {
     public void testValeCuatroNoQueridoSon3Puntos(){
         mesaTester.nuevaRonda();
         jugadorMano.cantarTruco();
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         jugadorPie.cantarRetruco();
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         jugadorMano.cantarValeCuatro();
         jugadorPie.noQuieroTruco();
         Assert.assertEquals(3,equipoMano.getPuntaje());
@@ -489,11 +489,11 @@ public class ResolverJugadas {
 
         jugadorMano.cantarTruco();
         Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(TrucoCantado.class));
-        jugadorPie.quieroTruco();
+        jugadorPie.aceptarTruco();
         Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(TrucoQuerido.class));
         jugadorPie.cantarRetruco();
         Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(RetrucoCantado.class));
-        jugadorMano.quieroTruco();
+        jugadorMano.aceptarTruco();
         Assert.assertTrue(mesaTester.getRonda().getTruco().getClass().equals(RetrucoQuerido.class));
         jugadorMano.jugarCarta(3,Palo.BASTO);
         jugadorPie.jugarCarta(5,Palo.BASTO);

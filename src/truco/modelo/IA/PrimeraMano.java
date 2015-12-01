@@ -11,15 +11,32 @@ import truco.modelo.estadosTruco.TrucoCantado;
 
 import java.util.Random;
 
-public class PrimeraMano implements Comportamiento {
+public class PrimeraMano extends Comportamiento {
+
+    private Mesa mesa;
+    private Jugador IA;
 
     @Override
-    public Comportamiento avanzarALaSiguienteMano(Mesa mesa){
-        return new SegundaMano();
+    public void setMesa(Mesa mesa){
+        this.mesa=mesa;
     }
 
     @Override
-    public void comportamientoEnvido(Mesa mesa, Jugador IA){
+    public void setJugador(Jugador IA){
+        this.IA=IA;
+    }
+
+    @Override
+    public Comportamiento siguienteComportamiento(){
+
+        SegundaMano segundaMano=new SegundaMano();
+        segundaMano.setMesa(this.mesa);
+        segundaMano.setJugador(this.IA);
+        return  segundaMano;
+    }
+
+    @Override
+    public void comportamientoEnvido(){
         Random r=new Random();
 
         if(seCanto(mesa,EnvidoNoCantado.class)) {
@@ -80,18 +97,18 @@ public class PrimeraMano implements Comportamiento {
             }
     }
 
-    public void comportamientoNormal(Mesa mesa,Jugador IA){
-        comportamientoEnvido(mesa,IA);
+    public void comportamientoNormal(){
+        comportamientoEnvido();
         if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class))
-            comportamientoTruco(mesa,IA);
+            comportamientoTruco();
         else
             jugarCartaMasFuerte(IA);            //IA siempre intenta ganar la primera.
     }
 
     @Override
-    public void comportamientoTruco(Mesa mesa,Jugador IA){
+    public void comportamientoTruco(){
             if(IA.getFuerzaTotal()>=25)
-                IA.quieroTruco();
+                IA.aceptarTruco();
             else
                 IA.noQuieroTruco();
     }
@@ -104,6 +121,7 @@ public class PrimeraMano implements Comportamiento {
         IA.jugarCarta(cartaMax.getNumero(),cartaMax.getPalo());
 
     }
+
     private boolean enJuego(Mesa mesa,Class envido){
         return mesa.getRonda().getEnvido().getClass().equals(envido);
     }

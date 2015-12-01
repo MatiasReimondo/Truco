@@ -51,7 +51,7 @@ public class EstadosTrucoTest {
     public void seCantaTruco(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
 
 
         Assert.assertEquals(2, mesa.getRonda().getTruco().getPuntaje());
@@ -62,9 +62,9 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetruco(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
         jugadorPepe.cantarRetruco();
-        jugadorJuan.quieroTruco();
+        jugadorJuan.aceptarTruco();
 
         Assert.assertEquals(3,mesa.getRonda().getTruco().getPuntaje());
 
@@ -74,11 +74,11 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetrucoValeCuatro(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
         jugadorPepe.cantarRetruco();
-        jugadorJuan.quieroTruco();
+        jugadorJuan.aceptarTruco();
         jugadorJuan.cantarValeCuatro();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
 
         Assert.assertEquals(4,mesa.getRonda().getTruco().getPuntaje());
 
@@ -87,7 +87,7 @@ public class EstadosTrucoTest {
     @Test (expected = NoSePuedeCantarAhoraException.class)
     public void seQuiereCuandoNoHayNadaCantado(){
         mesa.nuevaRonda();
-        jugadorJuan.quieroTruco();
+        jugadorJuan.aceptarTruco();
 
 
 
@@ -112,7 +112,7 @@ public class EstadosTrucoTest {
     public void seCantaTrucoValeCuatro(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
         jugadorPepe.cantarValeCuatro();
     }
 
@@ -121,7 +121,7 @@ public class EstadosTrucoTest {
     public void seCantaTrucoRetrucoNoSeQuiere(){
         mesa.nuevaRonda();
         jugadorJuan.cantarTruco();
-        jugadorPepe.quieroTruco();
+        jugadorPepe.aceptarTruco();
         jugadorPepe.cantarRetruco();
         jugadorJuan.noQuieroTruco();
         Assert.assertEquals(2, jugadorPepe.getEquipo().getPuntaje());

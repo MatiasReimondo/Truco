@@ -51,7 +51,7 @@ public class PartidaEntre2Jugadores {
         juego.getMesa().resolverMano();
 
         juego.getMesa().getJugadorActivo().cantarTruco();                   Assert.assertEquals(juego.getJugador("J2"),juego.getMesa().getJugadorActivo());
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         juego.getMesa().jugadorAnterior();                                  Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.COPA);
         juego.getMesa().getJugadorActivo().jugarCarta(5,Palo.BASTO);
@@ -84,10 +84,10 @@ public class PartidaEntre2Jugadores {
 
         Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J2"));
         juego.getMesa().getJugadorActivo().cantarTruco();
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         Assert.assertEquals(juego.getMesa().getJugadorActivo(), juego.getJugador("J1"));
         juego.getMesa().getJugadorActivo().cantarRetruco();
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J2"));
         juego.getMesa().getJugadorActivo().jugarCarta(7,Palo.ORO);
         juego.getMesa().getJugadorActivo().jugarCarta(5,Palo.ESPADA);
@@ -175,11 +175,11 @@ public class PartidaEntre2Jugadores {
 
 
         juego.getMesa().getJugadorActivo().cantarTruco();               Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J2"));
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         juego.getMesa().getJugadorActivo().cantarRetruco();             Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J1"));
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         juego.getMesa().getJugadorActivo().cantarValeCuatro();          Assert.assertEquals(juego.getMesa().getJugadorActivo(),juego.getJugador("J2"));
-        juego.getMesa().getJugadorActivo().quieroTruco();
+        juego.getMesa().getJugadorActivo().aceptarTruco();
         juego.getMesa().jugadorAnterior();
         Assert.assertEquals(juego.getJugador("J1"),juego.getMesa().getJugadorActivo());
         juego.getMesa().getJugadorActivo().jugarCarta(10,Palo.ESPADA);

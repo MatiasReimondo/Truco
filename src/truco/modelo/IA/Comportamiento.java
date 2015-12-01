@@ -3,14 +3,18 @@ package truco.modelo.IA;
 import truco.modelo.Jugador;
 import truco.modelo.Mesa;
 
-public interface Comportamiento {
+public abstract class Comportamiento {
 
-     Comportamiento avanzarALaSiguienteMano(Mesa mesa);
+     abstract Comportamiento siguienteComportamiento();
 
-     void comportamientoNormal(Mesa mesa,Jugador IA);
+     abstract void setMesa(Mesa mesa);
 
-     void comportamientoEnvido(Mesa mesa,Jugador IA);
+     abstract void setJugador(Jugador IA);
 
-     void comportamientoTruco(Mesa mesa,Jugador IA);
+     abstract void comportamientoNormal();
+
+     abstract void comportamientoEnvido();
+
+     abstract void comportamientoTruco();
 
 }

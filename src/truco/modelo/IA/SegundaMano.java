@@ -9,27 +9,43 @@ import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
 import java.util.Random;
 
 
-public class SegundaMano implements Comportamiento {
+public class SegundaMano extends Comportamiento {
+
+    private Mesa mesa;
+    private Jugador IA;
 
     @Override
-    public Comportamiento avanzarALaSiguienteMano(Mesa mesa) {
-        return new TerceraMano();
+    public void setMesa(Mesa mesa){
+        this.mesa=mesa;
     }
 
     @Override
-    public void comportamientoEnvido(Mesa mesa, Jugador IA) {
+    public void setJugador(Jugador IA){
+        this.IA=IA;
+    }
+
+    @Override
+    public Comportamiento siguienteComportamiento() {
+        TerceraMano terceraMano=new TerceraMano();
+        terceraMano.setMesa(mesa);
+        terceraMano.setJugador(IA);
+        return  terceraMano;
+    }
+
+    @Override
+    public void comportamientoEnvido() {
         throw new JugadorNoHabilitadoParaCantarTanto();
     }
 
     @Override
-    public void comportamientoTruco(Mesa mesa,Jugador IA){
+    public void comportamientoTruco(){
         Random r=new Random();
 
             if( mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) || (mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class) && r.nextInt(10)<2)) {
-                IA.quieroTruco();
+                IA.aceptarTruco();
             }
             if(mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class) || r.nextInt(10)<3)     //60% de querer el Vale Cuatro.
-                IA.quieroTruco();
+                IA.aceptarTruco();
 
             if(mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class))
                 IA.cantarTruco();
@@ -42,9 +58,9 @@ public class SegundaMano implements Comportamiento {
     }
 
     @Override
-    public void comportamientoNormal(Mesa mesa,Jugador IA){
+    public void comportamientoNormal(){
         if(mesa.getRonda().getResultados().contains(IA.getEquipo()))
-            comportamientoTruco(mesa,IA);
+            comportamientoTruco();
         else
             jugarCartaMasFuerte(IA);
     }

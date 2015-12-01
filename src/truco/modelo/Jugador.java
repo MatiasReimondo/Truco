@@ -161,7 +161,11 @@ public class Jugador {
         mesa.jugadorAnterior();
     }
 
-    public void quieroTruco() {
+    public void quieroTruco(){
+        mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().quiero());
+        mesa.jugadorAnterior();
+    }
+    public void aceptarTruco() {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().quiero());
     }
