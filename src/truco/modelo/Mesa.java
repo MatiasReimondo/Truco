@@ -1,4 +1,6 @@
 package truco.modelo;
+import truco.modelo.IA.Comportamiento;
+import truco.modelo.IA.PrimeraMano;
 import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.excepciones.*;
 
@@ -15,6 +17,8 @@ public class Mesa {
     private Jugador jugadorEnEspera;
     private final Arbitro arbitro;
     private int posicionador;
+    private Comportamiento IA;
+    private boolean jugadorVsIA;
 
     /**CONSTRUCTOR**/
     public Mesa() {
@@ -40,6 +44,11 @@ public class Mesa {
     public void setJugadorActivo(Jugador jugadorActivo){
         while(this.jugadorActivo!=jugadorActivo)
             this.siguienteJugador();
+    }
+
+    public void setIA(Comportamiento comportamiento){
+        IA=comportamiento;
+        jugadorVsIA=true;
     }
     /**GETTERS**/
     public Mazo getMazo(){
@@ -72,6 +81,10 @@ public class Mesa {
 
     public Arbitro getArbitro() {
         return arbitro;
+    }
+
+    public Comportamiento getIA(){
+        return IA;
     }
 
     /**ACCIONES**/
@@ -174,14 +187,14 @@ public class Mesa {
         jugadorActivo=this.jugadores.get(0);
         posicionador=0;
         jugadorEnEspera=null;
-        this.limpiarCartasRestantes();
+
+        if(jugadorVsIA)
+            IA=IA.volverAlComienzo();
+
+        jugadores.forEach(truco.modelo.Jugador::dejarCartas);
     }
 
     /**AUXILIARES**/
-    private void limpiarCartasRestantes(){
-        for(Jugador jugador:jugadores)
-            jugador.getMano().clear();
-    }
 
     public Equipo getEquipoOponente(){
         siguienteJugador();
@@ -190,6 +203,7 @@ public class Mesa {
         return equipo;
 
     }
+
     public void siguienteJugador(){
 
         if(posicionador==nroJugadores-1)

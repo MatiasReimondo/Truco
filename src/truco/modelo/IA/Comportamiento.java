@@ -5,16 +5,18 @@ import truco.modelo.Mesa;
 
 public abstract class Comportamiento {
 
-     abstract Comportamiento siguienteComportamiento();
+     public abstract Comportamiento siguienteEtapa();
 
-     abstract void setMesa(Mesa mesa);
+     public abstract Comportamiento volverAlComienzo();
 
-     abstract void setJugador(Jugador IA);
+     public abstract void setMesa(Mesa mesa);
 
-     abstract void comportamientoNormal();
+     public abstract void setJugador(Jugador IA);
 
-     abstract void comportamientoEnvido();
+     public abstract void comportamientoNormal();
 
-     abstract void comportamientoTruco();
+     public abstract void comportamientoEnvido();
+
+     public abstract void comportamientoTruco();
 
 }

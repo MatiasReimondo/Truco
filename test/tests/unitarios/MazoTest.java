@@ -1,4 +1,4 @@
-package truco.tests.unitarios;
+package tests.unitarios;
 
 import org.junit.Assert;
 import org.junit.Test;

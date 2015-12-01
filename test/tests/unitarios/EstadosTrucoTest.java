@@ -1,4 +1,4 @@
-package truco.tests.unitarios;
+package tests.unitarios;
 
 
 import junit.framework.Assert;

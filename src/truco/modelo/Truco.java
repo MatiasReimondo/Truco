@@ -1,5 +1,7 @@
 package truco.modelo;
 
+import truco.modelo.IA.Comportamiento;
+import truco.modelo.IA.PrimeraMano;
 import truco.modelo.excepciones.EquipoInexistenteException;
 import truco.modelo.excepciones.EquipoPreExistenteException;
 import truco.modelo.excepciones.JugadorInexistenteException;
@@ -13,6 +15,7 @@ public class Truco {
     private List<Equipo> equipos;
     private List<Jugador> jugadores;
     private Mesa mesa;
+    private boolean jugadorVsIA;
 
     /**CONSTRUCTOR**/
     public Truco(){
@@ -83,6 +86,15 @@ public class Truco {
             if(equipo.getPuntaje()>=30)
                 return true;
         return false;
+    }
+
+    public void jugadorVsIA(){
+        Jugador jugador=new Jugador("Robotruco");
+        jugadores.add(jugador);
+        Comportamiento comportamiento=new PrimeraMano();
+        comportamiento.setMesa(this.mesa);
+        comportamiento.setJugador(jugador);
+        mesa.setIA(comportamiento);
     }
 
     /****** Metodos creados para el funcionamiento de la interfaz grafica ***********/

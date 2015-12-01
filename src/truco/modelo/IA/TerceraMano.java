@@ -25,10 +25,17 @@ public class TerceraMano extends Comportamiento {
 
 
     @Override
-    public Comportamiento siguienteComportamiento(){
+    public Comportamiento siguienteEtapa(){
         return null;
     }
 
+    @Override
+    public Comportamiento volverAlComienzo(){
+        PrimeraMano primeraMano=new PrimeraMano();
+        primeraMano.setJugador(IA);
+        primeraMano.setMesa(mesa);
+        return primeraMano;
+    }
     @Override
     public void comportamientoEnvido() {
         throw new JugadorNoHabilitadoParaCantarTanto();

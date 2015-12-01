@@ -11,6 +11,7 @@ public class Jugador {
     /**ATRIBUTOS**/
     private String nombre;
     private List<Carta> mano;
+    private List<Carta> respaldo;
     private Mesa mesa;
     private Equipo equipo;
     private static final int MAXIMO_CARTAS= 3;
@@ -20,6 +21,7 @@ public class Jugador {
     public Jugador(String unNombre){
         this.nombre =unNombre;
         this.mano =new ArrayList<>();
+        this.respaldo=new ArrayList<>();
     }
 
     /**SETTERS**/
@@ -50,13 +52,13 @@ public class Jugador {
 
     public int getEnvido() {
 
-        int envidoMax=sumarEnvido(mano.get(0), mano.get(1));
+        int envidoMax=sumarEnvido(respaldo.get(0), respaldo.get(1));
 
-        if (sumarEnvido(mano.get(1), mano.get(2))>envidoMax)
-            envidoMax=sumarEnvido(mano.get(1), mano.get(2));
+        if (sumarEnvido(respaldo.get(1), respaldo.get(2))>envidoMax)
+            envidoMax=sumarEnvido(respaldo.get(1), respaldo.get(2));
 
-        if(sumarEnvido(mano.get(0), mano.get(2))>envidoMax)
-            envidoMax=sumarEnvido(mano.get(0), mano.get(2));
+        if(sumarEnvido(respaldo.get(0), respaldo.get(2))>envidoMax)
+            envidoMax=sumarEnvido(respaldo.get(0), respaldo.get(2));
 
         return envidoMax;
     }
@@ -72,6 +74,7 @@ public class Jugador {
         if(this.mesa.getMazo().getCartas().size()==0)
             throw new MazoSinCartasException();
         this.mano.add(this.mesa.getMazo().getCartas().removeFirst());
+        respaldo.add(mano.get(mano.size()-1));
     }
 
     public void jugarCarta(int numero, Palo palo) {
@@ -80,6 +83,7 @@ public class Jugador {
         for(Carta carta: mano)
             if(carta.getNumero()==numero && carta.getPalo().equals(palo)){
                 mesa.getRonda().agregarCarta(this,carta);
+                mano.remove(carta);
                 mesa.siguienteJugador();
                 return;
             }
@@ -220,6 +224,7 @@ public class Jugador {
         if(this.mano.size() >=  MAXIMO_CARTAS)
             throw new ManoExcedidaEnCartasException();
         this.mano.add(unaCarta);
+        this.respaldo.add(unaCarta);
     }
 
     public int getFuerzaTotal(){
@@ -233,6 +238,11 @@ public class Jugador {
         if(carta1.getPalo().equals(carta2.getPalo()))
             return (carta1.getValorEnvido()+carta2.getValorEnvido()+20);
         return Math.max(carta1.getValorEnvido(),carta2.getValorEnvido());
+    }
+
+    public void dejarCartas(){
+        mano.clear();
+        respaldo.clear();
     }
 
 
