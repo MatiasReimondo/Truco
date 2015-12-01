@@ -31,6 +31,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
     private HBox contenedorDeEquipos;
     private VBox contenedorDeCartas;
+    private HBox contenedorPrincipal;
 
     /********** Metodos de la clase **************/
     public GraficadorDeNuevoJuegoEventHandler(VBox contenedorVertical, Truco juego){
@@ -57,13 +58,12 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.graficarContenedorDeEquipos();
         this.graficarContenedorDeCartas();
 
-        HBox contenedorDeCartasYEquipos = new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas);
-        contenedorDeCartasYEquipos.setSpacing(90);
-        contenedorDeCartasYEquipos.setPadding( new Insets(30));
+        this.contenedorPrincipal= new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas);
+        this.contenedorPrincipal.setSpacing(90);
+        this.contenedorPrincipal.setPadding(new Insets(30));
+        this.contenedorVertical.getChildren().addAll(this.contenedorPrincipal);
+
         this.graficarCartaElegidaEnLaMesa();
-
-        this.contenedorVertical.getChildren().addAll( contenedorDeCartasYEquipos);
-
     }
 
     /************** Metodos privados **************/
@@ -151,12 +151,10 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
     private void graficarCartaElegidaEnLaMesa(){
 
         Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
-        String jugadorActivo = etiquetaNombre.getText();
         int posicion;
         for ( posicion = 1; posicion < 4; posicion++) {
-
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            BotonCartaElegidaEventHandler botonCartaElegidaEventHandler = new BotonCartaElegidaEventHandler(this.contenedorDeCartas,this.contenedorDeEquipo1,jugadorActivo, unaCarta);
+            BotonCartaElegidaEventHandler botonCartaElegidaEventHandler = new BotonCartaElegidaEventHandler(this.contenedorPrincipal,this.juego,unaCarta);
             unaCarta.setOnAction(botonCartaElegidaEventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }
