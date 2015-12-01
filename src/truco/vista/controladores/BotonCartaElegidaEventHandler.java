@@ -96,7 +96,7 @@ public class BotonCartaElegidaEventHandler implements EventHandler<ActionEvent> 
 
         Label etiquetaNombre = (Label) this.contenedorDeCartas.getChildren().get(0);
         int posicion;
-        for ( posicion = 1; posicion < 4; posicion++) {
+        for (posicion=1;posicion<this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
             BotonCartaElegidaJugador2EventHandler botonCartaElegidaJugador2EventHandler = new BotonCartaElegidaJugador2EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
             unaCarta.setOnAction(botonCartaElegidaJugador2EventHandler);
