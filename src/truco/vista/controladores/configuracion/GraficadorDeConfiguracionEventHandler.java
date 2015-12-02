@@ -11,10 +11,6 @@ import truco.modelo.Truco;
 import truco.vista.controladores.GraficadorDeNuevoJuegoEventHandler;
 import truco.vista.controladores.TextoNuevoJuegoEventHandler;
 
-
-/**
- * Created by shaun on 29/11/2015.
- */
 public class GraficadorDeConfiguracionEventHandler implements EventHandler<ActionEvent> {
 
     private Truco juego;
@@ -105,19 +101,21 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
         this.contenedorConfiguracionFlor.getChildren().add(jugarConFlor);
 
         Button botonFlorSi = new Button("SI");
-        BotonFlorSiEventHandler botonFlorSiEventHandler = new BotonFlorSiEventHandler(this.juego);
-        botonFlorSi.setOnAction(botonFlorSiEventHandler);
+        setBotonFlorSi(botonFlorSi);
 
         Button botonFlorNo = new Button("NO");
-        BotonFlorNoEventHandler botonFlorNoEventHandler = new BotonFlorNoEventHandler(this.juego);
-        botonFlorNo.setOnAction(botonFlorNoEventHandler);
-
-        this.contenedorConfiguracionFlor.getChildren().add(botonFlorSi);
-        this.contenedorConfiguracionFlor.getChildren().add(botonFlorNo);
+        setBotonFLorNo(botonFlorNo);
+        this.contenedorConfiguracionFlor.getChildren().addAll(botonFlorSi,botonFlorNo);
         this.contenedorConfiguracionFlor.setSpacing(10);
 
+    }
 
+    private void setBotonFlorSi(Button button){
+        button.setOnAction(e-> juego.seJuegaConFlor());
+    }
 
+    private void setBotonFLorNo(Button buttonFlorNo){
+        buttonFlorNo.setOnAction(e->juego.seJuegaSinFlor());
     }
 }
 
