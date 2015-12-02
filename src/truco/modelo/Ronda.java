@@ -2,6 +2,7 @@ package truco.modelo;
 
 import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
+import truco.modelo.envido.EnvidoTerminado;
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 
@@ -89,5 +90,9 @@ public class Ronda {
 
     public void resultadoMano(Equipo equipoGanador) {
         resultados.add(equipoGanador);
+    }
+
+    public void envidoTerminado() {
+        envido=new EnvidoTerminado();
     }
 }
