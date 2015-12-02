@@ -1,6 +1,5 @@
 package truco.modelo;
 import truco.modelo.IA.Comportamiento;
-import truco.modelo.IA.PrimeraMano;
 import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.excepciones.*;
 
@@ -48,7 +47,12 @@ public class Mesa {
 
     public void setIA(Comportamiento comportamiento){
         IA=comportamiento;
+        IA.setMesa(this);
         jugadorVsIA=true;
+    }
+
+    public void setJugadorIA(Jugador jugador){
+        IA.setJugador(jugador);
     }
     /**GETTERS**/
     public Mazo getMazo(){
@@ -116,8 +120,9 @@ public class Mesa {
                     }
             }
         }
-            equipoGanador.sumarPuntos(this.ronda.getEnvido().getPuntos(equipoGanador, equipoPerdedor));
+        equipoGanador.sumarPuntos(this.ronda.getEnvido().getPuntos(equipoGanador, equipoPerdedor));
         jugadorActivo=auxiliar;
+        ronda.envidoTerminado();
 
     }
 
@@ -189,7 +194,7 @@ public class Mesa {
         jugadorEnEspera=null;
 
         if(jugadorVsIA)
-            IA=IA.volverAlComienzo();
+            IA=IA.reiniciar();
 
         jugadores.forEach(truco.modelo.Jugador::dejarCartas);
     }

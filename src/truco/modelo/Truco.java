@@ -1,7 +1,7 @@
 package truco.modelo;
 
 import truco.modelo.IA.Comportamiento;
-import truco.modelo.IA.PrimeraMano;
+import truco.modelo.IA.PreEnvido;
 import truco.modelo.excepciones.EquipoInexistenteException;
 import truco.modelo.excepciones.EquipoPreExistenteException;
 import truco.modelo.excepciones.JugadorInexistenteException;
@@ -91,7 +91,7 @@ public class Truco {
     public void jugadorVsIA(){
         Jugador jugador=new Jugador("Robotruco");
         jugadores.add(jugador);
-        Comportamiento comportamiento=new PrimeraMano();
+        Comportamiento comportamiento=new PreEnvido();
         comportamiento.setMesa(this.mesa);
         comportamiento.setJugador(jugador);
         mesa.setIA(comportamiento);
