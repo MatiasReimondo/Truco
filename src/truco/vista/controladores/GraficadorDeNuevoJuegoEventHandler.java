@@ -141,14 +141,13 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
-        VBox contenedorDeCartasSuplente= contenedorDeCartas;
 
         Button botonTruco = new Button("TRUCO");
-        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos,this.contenedorVertical);
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonTruco.setOnAction(botonTrucoEventHandler);
 
         Button botonFlor = new Button("FLOR");
-        BotonFlorEventHandler botonFlorEventHandler = new BotonFlorEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos,this.contenedorVertical);
+        BotonFlorEventHandler botonFlorEventHandler = new BotonFlorEventHandler(this.juego,this.contenedorDeEstados,this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonFlor.setOnAction(botonFlorEventHandler);
 
 

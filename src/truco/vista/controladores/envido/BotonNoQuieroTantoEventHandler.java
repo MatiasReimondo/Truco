@@ -12,6 +12,7 @@ import truco.modelo.Jugador;
 import truco.modelo.Truco;
 import truco.vista.controladores.BotonCartaElegidaEquipo1EventHandler;
 import truco.vista.controladores.TextoCartaElegidaEventHandler;
+import truco.vista.controladores.truco.BotonTrucoEventHandler;
 
 import java.util.List;
 
@@ -82,7 +83,11 @@ public class BotonNoQuieroTantoEventHandler implements EventHandler<ActionEvent>
 
         this.contenedorDeEstados.getChildren().clear();
 
-        this.contenedorDeEstados.getChildren().add( new Button("TRUCO") );
+        Button botonTruco = new Button("TRUCO");
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
+        botonTruco.setOnAction(botonTrucoEventHandler);
+
+        this.contenedorDeEstados.getChildren().add( botonTruco);
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
