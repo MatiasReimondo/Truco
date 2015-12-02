@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
 import truco.modelo.Truco;
+import truco.modelo.estadosTruco.TrucoCantado;
 
 import java.util.List;
 
@@ -34,7 +35,9 @@ public class BotonReTrucoEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getMesa().getJugadorActivo().quieroTruco();
+        if(this.juego.getMesa().getRonda().getTruco().getClass().equals(new TrucoCantado().getClass())) {
+            this.juego.getMesa().getJugadorActivo().quieroTruco();
+        }
         this.juego.getMesa().getJugadorActivo().cantarRetruco();
 
         graficarContenedorDeCartas();
