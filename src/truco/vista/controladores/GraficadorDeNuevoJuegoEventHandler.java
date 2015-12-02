@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
-import javafx.scene.control.Label;
 import truco.modelo.Jugador;
 import truco.modelo.Truco;
 import truco.vista.controladores.envido.BotonEnvidoEventHandler;
@@ -55,6 +55,9 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
         //Se limpia el contenedor
         this.contenedorVertical.getChildren().clear();
+        this.juego.getMesa().nuevaRonda();
+        this.juego.getMesa().getMazo().mezclar();
+        this.juego.getMesa().repartirCartas();
 
         this.graficarContenedorDeEstados();
         this.graficarContenedorDeEquipos();
@@ -66,7 +69,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorPrincipal.setPadding(new Insets(30));
         this.contenedorVertical.getChildren().addAll(this.contenedorPrincipal);
 
-        this.graficarCartaElegidaEnLaMesa();
+       this.graficarCartaElegidaEnLaMesa();
     }
 
 
@@ -88,6 +91,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
             nombreDeCarta = Integer.toString(unaCarta.getNumero()) +" "+ unaCarta.getPalo().toString();
             this.contenedorDeCartas.getChildren().add(new Button(nombreDeCarta));
         }
+
 
         this.contenedorDeCartas.setSpacing(10);
     }
@@ -137,9 +141,16 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
+        VBox contenedorDeCartasSuplente= contenedorDeCartas;
+
         Button botonTruco = new Button("TRUCO");
-        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos);
         botonTruco.setOnAction(botonTrucoEventHandler);
+
+        Button botonFlor = new Button("FLOR");
+        BotonFlorEventHandler botonFlorEventHandler = new BotonFlorEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos);
+        botonFlor.setOnAction(botonFlorEventHandler);
+
 
 
         this.contenedorDeEstados.getChildren().add( botonEnvido );
@@ -147,7 +158,9 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorDeEstados.getChildren().add( botonFaltaEnvido );
 
         this.contenedorDeEstados.getChildren().add( botonTruco );
-        this.contenedorDeEstados.getChildren().add( new Button("FLOR") );
+        if(this.juego.getMesa().getArbitro().getFlor()) {
+            this.contenedorDeEstados.getChildren().add(botonFlor);
+        }
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
@@ -171,7 +184,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         int posicion;
         for( posicion =1; posicion < this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            BotonCartaElegidaEquipo1EventHandler botonCartaElegidaEquipo1EventHandler = new BotonCartaElegidaEquipo1EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
+            BotonCartaElegidaEquipo1EventHandler botonCartaElegidaEquipo1EventHandler = new BotonCartaElegidaEquipo1EventHandler(this.contenedorPrincipal,this.juego,unaCarta,this.contenedorVertical);
             unaCarta.setOnAction(botonCartaElegidaEquipo1EventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }

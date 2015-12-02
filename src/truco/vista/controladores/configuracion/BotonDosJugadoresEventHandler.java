@@ -39,11 +39,11 @@ public class BotonDosJugadoresEventHandler implements EventHandler<ActionEvent> 
 
         nuevoJuego.getJugador("J1").levantarCarta(new Carta(5, Palo.ESPADA));
         nuevoJuego.getJugador("J1").levantarCarta(new Carta(7, Palo.ESPADA));
-        nuevoJuego.getJugador("J1").levantarCarta(new Carta(10, Palo.COPA));
+        nuevoJuego.getJugador("J1").levantarCarta(new Carta(10, Palo.ESPADA));
 
         nuevoJuego.getJugador("J2").levantarCarta(new Carta(4, Palo.BASTO));
         nuevoJuego.getJugador("J2").levantarCarta(new Carta(7, Palo.BASTO));
-        nuevoJuego.getJugador("J2").levantarCarta(new Carta(10, Palo.BASTO));
+        nuevoJuego.getJugador("J2").levantarCarta(new Carta(10, Palo.COPA));
 
 
         return nuevoJuego;

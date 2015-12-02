@@ -25,9 +25,10 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
     private Button cartaElegida;
     private Truco juego;
     private HBox contenedorPrincipal;
+    private VBox contenedorVertical;
 
     /*********** Metodos de la clase ************/
-    public BotonCartaElegidaEquipo1EventHandler(HBox contenedor, Truco juego, Button botonCarta){
+    public BotonCartaElegidaEquipo1EventHandler(HBox contenedor, Truco juego, Button botonCarta, VBox contenedorVertical ){
 
         //obtengo el contenedor de equipo1 que esta apilado en el contenedor de equipos.
         this.contenedorDeEquipo1 = (VBox) ((HBox) contenedor.getChildren().get(1)).getChildren().get(0);
@@ -37,6 +38,7 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
         this.contenedorDePuntos= (VBox) contenedor.getChildren().get(3);
         this.juego = juego;
         this.contenedorPrincipal=contenedor;
+        this.contenedorVertical=contenedorVertical;
     }
 
     @Override
@@ -47,6 +49,14 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
 
         if(this.juego.getMesa().getRonda().getManoEnJuego().size()== this.juego.getJugadores().size()){
             this.juego.getMesa().resolverMano();
+
+        }
+        if(this.juego.getMesa().getRonda().termino()){
+            Button nuevaRonda = new Button("NUEVA RONDA");
+            GraficadorDeNuevoJuegoEventHandler graficadorDeNuevoJuegoEventHandler = new GraficadorDeNuevoJuegoEventHandler(this.contenedorVertical,this.juego);
+            nuevaRonda.setOnAction(graficadorDeNuevoJuegoEventHandler);
+            contenedorVertical.getChildren().add(nuevaRonda);
+
         }
         graficarContenedorDeCartas();
         graficarContenedorDePuntos();
@@ -127,7 +137,7 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
         for (posicion=1;posicion<(this.juego.getMesa().getJugadorActivo().getMano().size()+1); posicion++) {
 
             Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
-            BotonCartaElegidaEquipo2EventHandler botonCartaElegidaEquipo2EventHandler = new BotonCartaElegidaEquipo2EventHandler(this.contenedorPrincipal,this.juego,unaCarta);
+            BotonCartaElegidaEquipo2EventHandler botonCartaElegidaEquipo2EventHandler = new BotonCartaElegidaEquipo2EventHandler(this.contenedorPrincipal,this.juego,unaCarta,this.contenedorVertical);
             unaCarta.setOnAction(botonCartaElegidaEquipo2EventHandler);
             TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
         }

@@ -17,6 +17,10 @@ public class Arbitro {
         this.mesa=mesa;
     }
 
+    public boolean getFlor(){
+        return flor;
+    }
+
     public void evaluarListaDeJugadores(List<Jugador> jugadores){
 
         if(jugadores.isEmpty()) throw new ListaJugadoresVaciaException();
