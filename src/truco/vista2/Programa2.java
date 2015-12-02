@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import truco.modelo.Truco;
+import truco.vista2.botoneras.BotoneraInicial;
 
 public class Programa2 extends Application {
 
     private Truco truco;
     private MesaGrafica mesaGrafica;
-    private ManoGrafica manoGrafica;
+    private StackPane stackCentral;
+    private StackPane stackIzquierdo;
+    private StackPane stackDerecho;
 
     public static void main(String[] args) {
         launch(args);
@@ -29,14 +32,38 @@ public class Programa2 extends Application {
         mesaGrafica.linkearJugadores(truco.getMesa().getJugadores());
         truco.getMesa().nuevaRonda();
         truco.getMesa().repartirCartas();
-        manoGrafica=new ManoGrafica(truco.getMesa(),mesaGrafica);
+    }
+    public void actualizarPuntaje() {
+        stackDerecho.getChildren().clear();
+        stackDerecho.getChildren().addAll(new PuntajesGrafico(truco,this));
     }
 
+    public void actualizarManoGrafica() {
+        stackCentral.getChildren().addAll(new ManoGrafica(truco.getMesa(),mesaGrafica));
+    }
+
+    public void actualizarNuevaRonda(){
+        truco.getMesa().nuevaRonda();
+        truco.getMesa().repartirCartas();
+        stackIzquierdo.getChildren().clear();
+        stackIzquierdo.getChildren().addAll(new BotoneraInicial(truco.getMesa(),this));
+        stackCentral.getChildren().clear();
+        mesaGrafica=new MesaGrafica(truco.getMesa(),this);
+        stackCentral.getChildren().addAll(mesaGrafica);
+        actualizarManoGrafica();
+        this.actualizarPuntaje();
+    }
+    public StackPane getStackCentral(){
+        return stackCentral;
+    }
+
+    public StackPane getStackIzquierdo(){
+        return stackIzquierdo;
+    }
 
     private Parent armarDisplay(){
 
         this.setup2Jugadores();
-
 
         //BASE Y FONDO
         Pane base=new Pane();
@@ -50,16 +77,22 @@ public class Programa2 extends Application {
         baseLayout.setPadding(new Insets(5,5,5,5));
 
         //ZONA IZQUIERDA
-        StackPane stackIzquierdo=new StackPane(new Botonera());
-        stackIzquierdo.setAlignment(Pos.CENTER_LEFT);
+        stackIzquierdo=new StackPane();
+        stackIzquierdo.getChildren().addAll(new BotoneraInicial(truco.getMesa(),this));
+        stackIzquierdo.setAlignment(Pos.BOTTOM_LEFT);
 
         //ZONA CENTRO
-        StackPane stackCentral=new StackPane();
+        stackCentral=new StackPane();
         stackCentral.setAlignment(Pos.CENTER);
         stackCentral.getChildren().addAll(this.mesaGrafica,new ManoGrafica(truco.getMesa(),this.mesaGrafica));
 
+        //ZONA DERECHA
+        stackDerecho=new StackPane();
+        stackDerecho.getChildren().addAll(new PuntajesGrafico(truco,this));
+        stackDerecho.setAlignment(Pos.TOP_RIGHT);
+
         //ZONA MANO DEL JUGADOR ACTIVO
-        baseLayout.getChildren().addAll(stackIzquierdo,stackCentral);
+        baseLayout.getChildren().addAll(stackIzquierdo,stackCentral,stackDerecho);
         base.getChildren().addAll(fondo, baseLayout);
 
         return base;
@@ -78,7 +111,5 @@ public class Programa2 extends Application {
     }
 
 
-    public ManoGrafica getManoGrafica() {
-        return manoGrafica;
-    }
+
 }

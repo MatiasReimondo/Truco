@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import truco.modelo.Carta;
 import truco.modelo.Mesa;
 
@@ -23,14 +24,16 @@ public class CartaGrafica extends Parent {
         this.mesa=mesa;
         this.mesaGrafica=mesaGrafica;
 
-        Rectangle background=new Rectangle(100,120);
+        Rectangle background=new Rectangle(100,140);
         background.setArcHeight(20);
         background.setArcWidth(20);
         background.setFill(Color.YELLOW);
-        Text text=new Text(String.valueOf(carta.getNumero())+" DE "+carta.getPalo());
+        Text text=new Text(String.valueOf(carta.getNumero())+"\n"+" DE "+"\n"+carta.getPalo());
+        text.setTextAlignment(TextAlignment.CENTER);
         text.setWrappingWidth(90);
         getChildren().add(new StackPane(background, text));
-        setBotonJugar();
+
+        boton.setOnAction(e->mesaGrafica.jugarCartaGrafica(this));
         getChildren().add(boton);
 
     }
@@ -39,10 +42,5 @@ public class CartaGrafica extends Parent {
         return carta;
     }
 
-    public void setBotonJugar(){
 
-        boton.setOnAction(e->{
-            mesaGrafica.jugarCartaGrafica(this);
-        });
-    }
 }

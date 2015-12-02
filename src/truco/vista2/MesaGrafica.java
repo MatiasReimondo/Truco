@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MesaGrafica extends StackPane {
 
-    private  ManoGrafica manoGrafica;
     private Mesa mesa;
     private Programa2 interfaz;
     private SlotJugador slotJugador1=new SlotJugador();
@@ -24,15 +23,14 @@ public class MesaGrafica extends StackPane {
 
     public MesaGrafica(Mesa mesa, Programa2 interfaz){
 
-        this.manoGrafica=manoGrafica;
         this.interfaz=interfaz;
         this.mesa=mesa;
 
         this.setWidth(400);
-        this.setHeight(200);
+        this.setHeight(300);
         this.setPadding(new Insets(5,5,5,5));
 
-        Rectangle fondo=new Rectangle(350,350);
+        Rectangle fondo=new Rectangle(400,380);
         fondo.setFill(Color.RED);
         fondo.setArcHeight(30);
         fondo.setArcWidth(30);
@@ -100,9 +98,17 @@ public class MesaGrafica extends StackPane {
         }
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
-        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
+        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores()) {
             mesa.resolverMano();
-        interfaz.getManoGrafica().renovar();
+
+        }
+        if(mesa.getRonda().termino())
+            interfaz.actualizarNuevaRonda();
+        else {
+            interfaz.getStackCentral().getChildren().remove(1);
+            interfaz.actualizarManoGrafica();
+        }
+
 
         }
 
