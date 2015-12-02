@@ -62,7 +62,7 @@ public class BotonValeCuatroEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeEstados.getChildren().clear();
 
         Button botonQuieroValeCuatro = new Button("QUIERO");
-        BotonQuieroValeCuatroEventHandler botonQuieroValeCuatroEventHandler = new BotonQuieroValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonQuieroValeCuatroEventHandler botonQuieroValeCuatroEventHandler = new BotonQuieroValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonQuieroValeCuatro.setOnAction(botonQuieroValeCuatroEventHandler);
 
         Button botonNoQuiero = new Button("NO QUIERO");
