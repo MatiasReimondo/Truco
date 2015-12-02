@@ -46,7 +46,7 @@ public class Programa extends Application {
         contenedorPrincipal.setSpacing(20);
         contenedorPrincipal.setPadding(new Insets(5));
 
-        Scene scene = new Scene(contenedorPrincipal,800,600);
+        Scene scene = new Scene(contenedorPrincipal,800,400);
         primaryStage.setScene(scene);
         primaryStage.show();
 
