@@ -26,6 +26,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
     private VBox contenedorVertical;
 
     private VBox contenedorDeEstados;
+    private VBox contenedorDePuntos;
     private VBox contenedorDeEquipo1;
     private VBox contenedorDeEquipo2;
 
@@ -40,6 +41,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.contenedorVertical = contenedorVertical;
 
         this.contenedorDeEstados = new VBox();
+        this.contenedorDePuntos= new VBox();
         this.contenedorDeCartas = new VBox();
 
         this.contenedorDeEquipos = new HBox();
@@ -57,14 +59,17 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         this.graficarContenedorDeEstados();
         this.graficarContenedorDeEquipos();
         this.graficarContenedorDeCartas();
+        this.graficarContenedorDePuntos();
 
-        this.contenedorPrincipal= new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas);
+        this.contenedorPrincipal= new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas,this.contenedorDePuntos);
         this.contenedorPrincipal.setSpacing(90);
         this.contenedorPrincipal.setPadding(new Insets(30));
         this.contenedorVertical.getChildren().addAll(this.contenedorPrincipal);
 
         this.graficarCartaElegidaEnLaMesa();
     }
+
+
 
     /************** Metodos privados **************/
 
@@ -120,20 +125,20 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         //Botones de estados de las primeras opciones activas del juego
 
         Button botonEnvido = new Button("ENVIDO");
-        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonEnvido.setOnAction(botonEnvidoEventHandler);
 
         Button botonRealEnvido = new Button("REAL ENVIDO");
-        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
         botonRealEnvido.setOnAction(botonRealEnvidoEventHandler);
 
 
         Button botonFaltaEnvido = new Button("FALTA ENVIDO");
-        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
         Button botonTruco = new Button("TRUCO");
-        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
         botonTruco.setOnAction(botonTrucoEventHandler);
 
 
@@ -146,13 +151,20 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
-        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
-        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
-
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
 
         this.contenedorDeEstados.setSpacing(5);
     }
+
+    private void graficarContenedorDePuntos() {
+
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+
+        this.contenedorDePuntos.setSpacing(5);
+    }
+
 
     private void graficarCartaElegidaEnLaMesa(){
 

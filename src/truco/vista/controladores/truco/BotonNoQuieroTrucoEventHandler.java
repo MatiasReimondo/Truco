@@ -20,13 +20,15 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
+    private VBox contenedorDePuntos;
 
 
-    public BotonNoQuieroTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas) {
+    public BotonNoQuieroTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos) {
 
         this.juego = juego;
         this.contenedorDeEstados = contenedorDeEstados;
         this.contenedorDeCartas = contenedorDeCartas;
+        this.contenedorDePuntos=contenedorDePuntos;
 
     }
 
@@ -38,6 +40,7 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
+        graficarContenedorDePuntos();
     }
 
     private void graficarContenedorDeCartas() {
@@ -61,21 +64,21 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
 
 
         Button botonReTruco = new Button("RE TRUCO");
-        BotonReTrucoEventHandler botonReTrucoEventHandler = new BotonReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonReTrucoEventHandler botonReTrucoEventHandler = new BotonReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonReTruco.setOnAction(botonReTrucoEventHandler);
 
 
         Button botonEnvido = new Button("ENVIDO");
-        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonEnvido.setOnAction(botonEnvidoEventHandler);
 
 
         Button botonRealEnvido = new Button("REAL ENVIDO");
-        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonRealEnvido.setOnAction(botonRealEnvidoEventHandler);
 
         Button botonFaltaEnvido = new Button("FALTA ENVIDO");
-        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
 
@@ -87,11 +90,17 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
 
         this.contenedorDeEstados.getChildren().add(new Label("-----------"));
 
-        String puntajeEquipo1 = Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
-        String puntajeEquipo2 = Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
-
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = " + puntajeEquipo1), new Label("Equipo2 = " + puntajeEquipo2));
-
         this.contenedorDeEstados.setSpacing(5);
+    }
+
+    private void graficarContenedorDePuntos() {
+        this.contenedorDePuntos.getChildren().clear();
+
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+
+        this.contenedorDePuntos.setSpacing(5);
     }
 }

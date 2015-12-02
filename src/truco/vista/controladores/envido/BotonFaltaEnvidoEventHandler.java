@@ -17,13 +17,15 @@ public class BotonFaltaEnvidoEventHandler implements EventHandler<ActionEvent> {
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
+    private VBox contenedorDePuntos;
 
 
-    public BotonFaltaEnvidoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
+    public BotonFaltaEnvidoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
         this.contenedorDeCartas= contenedorDeCartas;
+        this.contenedorDePuntos=contenedorDePuntos;
 
     }
 
@@ -34,6 +36,7 @@ public class BotonFaltaEnvidoEventHandler implements EventHandler<ActionEvent> {
         this.juego.getMesa().getJugadorActivo().cantarEnvido(new FaltaEnvido());
 
         graficarContenedorDeCartas();
+        graficarContenedorDePuntos();
         graficarContenedorDeEstados();
     }
 
@@ -57,11 +60,11 @@ public class BotonFaltaEnvidoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeEstados.getChildren().clear();
 
         Button botonQuiero = new Button("QUIERO");
-        BotonQuieroTantoEventHandler botonQuieroTantoEventHandler = new BotonQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonQuieroTantoEventHandler botonQuieroTantoEventHandler = new BotonQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonQuiero.setOnAction(botonQuieroTantoEventHandler);
 
         Button botonNoQuiero = new Button("NO QUIERO");
-        BotonNoQuieroTantoEventHandler botonNoQuieroTantoEventHandler = new BotonNoQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonNoQuieroTantoEventHandler botonNoQuieroTantoEventHandler = new BotonNoQuieroTantoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonNoQuiero.setOnAction(botonNoQuieroTantoEventHandler);
 
 
@@ -71,13 +74,21 @@ public class BotonFaltaEnvidoEventHandler implements EventHandler<ActionEvent> {
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
-        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
-        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
-
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
 
         this.contenedorDeEstados.setSpacing(5);
     }
+
+    private void graficarContenedorDePuntos() {
+        this.contenedorDePuntos.getChildren().clear();
+
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+
+        this.contenedorDePuntos.setSpacing(5);
+    }
+
 
 
 

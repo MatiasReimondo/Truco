@@ -19,6 +19,7 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
 
     /******* Atributos de la clase ***********/
     private VBox contenedorDeEquipo1;
+    private VBox contenedorDePuntos;
     private List<String> nombreDeJugadoresDelEquipo;
     private VBox contenedorDeCartas;
     private Button cartaElegida;
@@ -33,6 +34,7 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
         this.nombreDeJugadoresDelEquipo = this.nombreDeJugadores();
         this.cartaElegida = botonCarta;
         this.contenedorDeCartas = (VBox) contenedor.getChildren().get(2);
+        this.contenedorDePuntos= (VBox) contenedor.getChildren().get(3);
         this.juego = juego;
         this.contenedorPrincipal=contenedor;
     }
@@ -47,6 +49,7 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
             this.juego.getMesa().resolverMano();
         }
         graficarContenedorDeCartas();
+        graficarContenedorDePuntos();
         graficarCartaElegidaJugador2EnLaMesa();
     }
 
@@ -82,6 +85,17 @@ public class BotonCartaElegidaEquipo1EventHandler implements EventHandler<Action
         }
 
         this.contenedorDeCartas.setSpacing(10);
+    }
+
+    private void graficarContenedorDePuntos() {
+        this.contenedorDePuntos.getChildren().clear();
+
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+
+        this.contenedorDePuntos.setSpacing(5);
     }
 
     /* Cada vez que el jugador en turno selecciona una nueva carta se pasa a graficar en la mesa. */

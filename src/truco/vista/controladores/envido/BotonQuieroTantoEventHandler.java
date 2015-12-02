@@ -16,12 +16,14 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
+    private VBox contenedorDePuntos;
 
 
-    public BotonQuieroTantoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas){
+    public BotonQuieroTantoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
+        this.contenedorDePuntos=contenedorDePuntos;
         this.contenedorDeCartas= contenedorDeCartas;
 
     }
@@ -33,9 +35,8 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
         this.juego.getMesa().getJugadorActivo().quieroEnvido();
         this.juego.getMesa().resolverEnvido();
 
-
-
         graficarContenedorDeCartas();
+        graficarContenedorDePuntos();
         graficarContenedorDeEstados();
     }
 
@@ -62,12 +63,18 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 
+       this.contenedorDeEstados.setSpacing(5);
+    }
+
+    private void graficarContenedorDePuntos() {
+        this.contenedorDePuntos.getChildren().clear();
+
         String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
         String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
 
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
 
-        this.contenedorDeEstados.setSpacing(5);
+        this.contenedorDePuntos.setSpacing(5);
     }
 
 

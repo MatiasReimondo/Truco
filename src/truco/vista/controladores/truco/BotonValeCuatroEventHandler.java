@@ -16,13 +16,15 @@ public class BotonValeCuatroEventHandler implements EventHandler<ActionEvent> {
     private Truco juego;
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
+    private VBox contenedorDePuntos;
 
 
-    public BotonValeCuatroEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas) {
+    public BotonValeCuatroEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos) {
 
         this.juego = juego;
         this.contenedorDeEstados = contenedorDeEstados;
         this.contenedorDeCartas = contenedorDeCartas;
+        this.contenedorDePuntos=contenedorDePuntos;
 
     }
 
@@ -35,6 +37,7 @@ public class BotonValeCuatroEventHandler implements EventHandler<ActionEvent> {
 
         graficarContenedorDeCartas();
         graficarContenedorDeEstados();
+        graficarContenedorDePuntos();
     }
 
     private void graficarContenedorDeCartas() {
@@ -57,11 +60,11 @@ public class BotonValeCuatroEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeEstados.getChildren().clear();
 
         Button botonQuieroValeCuatro = new Button("QUIERO");
-        BotonQuieroValeCuatroEventHandler botonQuieroValeCuatroEventHandler = new BotonQuieroValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonQuieroValeCuatroEventHandler botonQuieroValeCuatroEventHandler = new BotonQuieroValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
         botonQuieroValeCuatro.setOnAction(botonQuieroValeCuatroEventHandler);
 
         Button botonNoQuiero = new Button("NO QUIERO");
-        BotonNoQuieroTrucoEventHandler botonNoQuieroTrucoEventHandler = new BotonNoQuieroTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas);
+        BotonNoQuieroTrucoEventHandler botonNoQuieroTrucoEventHandler = new BotonNoQuieroTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
         botonNoQuiero.setOnAction(botonNoQuieroTrucoEventHandler);
 
 
@@ -71,12 +74,19 @@ public class BotonValeCuatroEventHandler implements EventHandler<ActionEvent> {
 
         this.contenedorDeEstados.getChildren().add(new Label("-----------"));
 
-        String puntajeEquipo1 = Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
-        String puntajeEquipo2 = Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
-
-        this.contenedorDeEstados.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = " + puntajeEquipo1), new Label("Equipo2 = " + puntajeEquipo2));
-
         this.contenedorDeEstados.setSpacing(5);
+    }
+
+    private void graficarContenedorDePuntos() {
+
+        this.contenedorDePuntos.getChildren().clear();
+
+        String puntajeEquipo1= Integer.toString(this.juego.getEquipo("Equipo-1").getPuntaje());
+        String puntajeEquipo2= Integer.toString(this.juego.getEquipo("Equipo-2").getPuntaje());
+
+        this.contenedorDePuntos.getChildren().addAll(new Label("PUNTAJE:"), new Label("Equipo1 = "+puntajeEquipo1), new Label("Equipo2 = "+puntajeEquipo2));
+
+        this.contenedorDePuntos.setSpacing(5);
     }
 }
 
