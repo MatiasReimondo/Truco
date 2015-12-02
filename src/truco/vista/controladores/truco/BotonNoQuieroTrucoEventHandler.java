@@ -21,14 +21,16 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
     private VBox contenedorDePuntos;
+    private VBox contenedorVertical;
 
 
-    public BotonNoQuieroTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos) {
+    public BotonNoQuieroTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos,VBox contenedorVertical) {
 
         this.juego = juego;
         this.contenedorDeEstados = contenedorDeEstados;
         this.contenedorDeCartas = contenedorDeCartas;
         this.contenedorDePuntos=contenedorDePuntos;
+        this.contenedorVertical=contenedorVertical;
 
     }
 
@@ -64,21 +66,21 @@ public class BotonNoQuieroTrucoEventHandler implements EventHandler<ActionEvent>
 
 
         Button botonReTruco = new Button("RE TRUCO");
-        BotonReTrucoEventHandler botonReTrucoEventHandler = new BotonReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonReTrucoEventHandler botonReTrucoEventHandler = new BotonReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonReTruco.setOnAction(botonReTrucoEventHandler);
 
 
         Button botonEnvido = new Button("ENVIDO");
-        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonEnvido.setOnAction(botonEnvidoEventHandler);
 
 
         Button botonRealEnvido = new Button("REAL ENVIDO");
-        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonRealEnvido.setOnAction(botonRealEnvidoEventHandler);
 
         Button botonFaltaEnvido = new Button("FALTA ENVIDO");
-        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
 

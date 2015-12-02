@@ -129,31 +129,34 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         //Botones de estados de las primeras opciones activas del juego
 
         Button botonEnvido = new Button("ENVIDO");
-        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonEnvidoEventHandler botonEnvidoEventHandler = new BotonEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonEnvido.setOnAction(botonEnvidoEventHandler);
 
         Button botonRealEnvido = new Button("REAL ENVIDO");
-        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonRealEnvidoEventHandler botonRealEnvidoEventHandler = new BotonRealEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonRealEnvido.setOnAction(botonRealEnvidoEventHandler);
 
 
         Button botonFaltaEnvido = new Button("FALTA ENVIDO");
-        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonFaltaEnvidoEventHandler botonFaltaEnvidoEventHandler = new BotonFaltaEnvidoEventHandler(this.juego,this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonFaltaEnvido.setOnAction(botonFaltaEnvidoEventHandler);
 
         VBox contenedorDeCartasSuplente= contenedorDeCartas;
 
         Button botonTruco = new Button("TRUCO");
-        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos);
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos,this.contenedorVertical);
         botonTruco.setOnAction(botonTrucoEventHandler);
 
         Button botonFlor = new Button("FLOR");
-        BotonFlorEventHandler botonFlorEventHandler = new BotonFlorEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos);
+        BotonFlorEventHandler botonFlorEventHandler = new BotonFlorEventHandler(this.juego,this.contenedorDeEstados,contenedorDeCartasSuplente, this.contenedorDePuntos,this.contenedorVertical);
         botonFlor.setOnAction(botonFlorEventHandler);
 
 
 
+
+
         this.contenedorDeEstados.getChildren().add( botonEnvido );
+
         this.contenedorDeEstados.getChildren().add( botonRealEnvido );
         this.contenedorDeEstados.getChildren().add( botonFaltaEnvido );
 
@@ -161,6 +164,7 @@ public class GraficadorDeNuevoJuegoEventHandler implements EventHandler<ActionEv
         if(this.juego.getMesa().getArbitro().getFlor()) {
             this.contenedorDeEstados.getChildren().add(botonFlor);
         }
+
 
         this.contenedorDeEstados.getChildren().add( new Label("-----------") );
 

@@ -2,11 +2,16 @@ package truco.vista.controladores.envido;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
+import truco.modelo.Jugador;
 import truco.modelo.Truco;
+import truco.vista.controladores.BotonCartaElegidaEquipo1EventHandler;
+import truco.vista.controladores.TextoCartaElegidaEventHandler;
 
 import java.util.List;
 
@@ -17,14 +22,24 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
     private VBox contenedorDePuntos;
+    private VBox contenedorVertical;
+    private HBox contenedorPrincipal;
+    private VBox contenedorDeEquipo1;
+    private VBox contenedorDeEquipo2;
+    private HBox contenedorDeEquipos;
 
 
-    public BotonQuieroTantoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos){
+    public BotonQuieroTantoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos,VBox contenedorVertical){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
         this.contenedorDePuntos=contenedorDePuntos;
         this.contenedorDeCartas= contenedorDeCartas;
+        this.contenedorVertical=contenedorVertical;
+        this.contenedorDeEquipo1=new VBox();
+        this.contenedorDeEquipo2=new VBox();
+        this.contenedorDeEquipos =(HBox)contenedorVertical.getChildren().get(0);
+
 
     }
 
@@ -35,9 +50,17 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
         this.juego.getMesa().getJugadorActivo().quieroEnvido();
         this.juego.getMesa().resolverEnvido();
 
-        graficarContenedorDeCartas();
-        graficarContenedorDePuntos();
-        graficarContenedorDeEstados();
+        this.graficarContenedorDeEstados();
+        this.graficarContenedorDeEquipos();
+        this.graficarContenedorDeCartas();
+        this.graficarContenedorDePuntos();
+
+        this.contenedorPrincipal= new HBox(this.contenedorDeEstados, this.contenedorDeEquipos, this.contenedorDeCartas,this.contenedorDePuntos);
+        this.contenedorPrincipal.setSpacing(90);
+        this.contenedorPrincipal.setPadding(new Insets(30));
+        this.contenedorVertical.getChildren().addAll(this.contenedorPrincipal);
+
+        this.graficarCartaElegidaEnLaMesa();
     }
 
     private void graficarContenedorDeCartas() {
@@ -77,6 +100,46 @@ public class BotonQuieroTantoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDePuntos.setSpacing(5);
     }
 
+    private void graficarContenedorDeEquipos(){
 
+        contenedorDeEquipos.getChildren().clear();
 
+        Label etiquetaEquipo1 = new Label("Equipo1");
+        this.contenedorDeEquipo1.getChildren().add(etiquetaEquipo1);
+        for (Jugador unJugador: this.juego.getJugadores()){
+            if (this.juego.getEquipo("Equipo-1").equals(unJugador.getEquipo())) {
+                this.contenedorDeEquipo1.getChildren().add(new Label(unJugador.getNombre()));
+            }
+        }
+        this.contenedorDeEquipo1.setSpacing(20);
+
+        Label etiquetaEquipo2 = new Label("Equipo2");
+        this.contenedorDeEquipo2.getChildren().add(etiquetaEquipo2);
+        for (Jugador unJugador: this.juego.getJugadores()){
+            if (this.juego.getEquipo("Equipo-2").equals(unJugador.getEquipo())) {
+                this.contenedorDeEquipo2.getChildren().add(new Label(unJugador.getNombre()));
+            }
+        }
+        this.contenedorDeEquipo2.setSpacing(20);
+
+        //Se apilan los contenedores de cada equipo horizontalmente
+        this.contenedorDeEquipos.getChildren().addAll(this.contenedorDeEquipo1, this.contenedorDeEquipo2);
+        this.contenedorDeEquipos.setSpacing(60);
+    }
+
+    private void graficarCartaElegidaEnLaMesa(){
+
+        int posicion;
+        for( posicion =1; posicion < this.juego.getMesa().getJugadorActivo().getMano().size()+1; posicion++) {
+            Button unaCarta = (Button) this.contenedorDeCartas.getChildren().get(posicion);
+            BotonCartaElegidaEquipo1EventHandler botonCartaElegidaEquipo1EventHandler = new BotonCartaElegidaEquipo1EventHandler(this.contenedorPrincipal,this.juego,unaCarta,this.contenedorVertical);
+            unaCarta.setOnAction(botonCartaElegidaEquipo1EventHandler);
+            TextoCartaElegidaEventHandler textoCartaElegidaEventHandler = new TextoCartaElegidaEventHandler(unaCarta, this.contenedorDeCartas);
+        }
+    }
 }
+
+
+
+
+

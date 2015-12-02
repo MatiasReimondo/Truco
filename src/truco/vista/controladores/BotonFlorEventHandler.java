@@ -18,14 +18,16 @@ public class BotonFlorEventHandler implements EventHandler<ActionEvent> {
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
     private VBox contenedorDePuntos;
+    private VBox contenedorVertical;
 
 
-    public BotonFlorEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos){
+    public BotonFlorEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos, VBox contenedorVertical){
 
         this.juego = juego;
         this.contenedorDeEstados= contenedorDeEstados;
         this.contenedorDeCartas= contenedorDeCartas;
         this.contenedorDePuntos=contenedorDePuntos;
+        this.contenedorVertical=contenedorVertical;
 
     }
 
@@ -58,7 +60,7 @@ public class BotonFlorEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeEstados.getChildren().clear();
 
         Button botonTruco = new Button("TRUCO");
-        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonTrucoEventHandler botonTrucoEventHandler = new BotonTrucoEventHandler(this.juego,this.contenedorDeEstados,this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonTruco.setOnAction(botonTrucoEventHandler);
 
         this.contenedorDeEstados.getChildren().add(botonTruco );

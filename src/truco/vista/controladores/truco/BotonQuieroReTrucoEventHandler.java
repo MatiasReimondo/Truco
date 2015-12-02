@@ -17,14 +17,16 @@ public class BotonQuieroReTrucoEventHandler implements EventHandler<ActionEvent>
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
     private VBox contenedorDePuntos;
+    private VBox contenedorVertical;
 
 
-    public BotonQuieroReTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos) {
+    public BotonQuieroReTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos, VBox contenedorVertical) {
 
         this.juego = juego;
         this.contenedorDeEstados = contenedorDeEstados;
         this.contenedorDeCartas = contenedorDeCartas;
         this.contenedorDePuntos= contenedorDePuntos;
+        this.contenedorVertical=contenedorVertical;
 
     }
 
@@ -60,7 +62,7 @@ public class BotonQuieroReTrucoEventHandler implements EventHandler<ActionEvent>
 
 
         Button botonValeCuatro = new Button("VALE CUATRO");
-        BotonValeCuatroEventHandler botonValeCuatroEventHandler = new BotonValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonValeCuatroEventHandler botonValeCuatroEventHandler = new BotonValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonValeCuatro.setOnAction(botonValeCuatroEventHandler);
 
         this.contenedorDeEstados.getChildren().add(botonValeCuatro);

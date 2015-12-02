@@ -17,14 +17,16 @@ public class BotonReTrucoEventHandler implements EventHandler<ActionEvent> {
     private VBox contenedorDeEstados;
     private VBox contenedorDeCartas;
     private VBox contenedorDePuntos;
+    private VBox contenedorVertical;
 
 
-    public BotonReTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos) {
+    public BotonReTrucoEventHandler(Truco juego, VBox contenedorDeEstados, VBox contenedorDeCartas, VBox contenedorDePuntos,VBox contenedorVertical) {
 
         this.juego = juego;
         this.contenedorDeEstados = contenedorDeEstados;
         this.contenedorDeCartas = contenedorDeCartas;
         this.contenedorDePuntos= contenedorDePuntos;
+        this.contenedorVertical=contenedorVertical;
 
     }
 
@@ -60,15 +62,15 @@ public class BotonReTrucoEventHandler implements EventHandler<ActionEvent> {
         this.contenedorDeEstados.getChildren().clear();
 
         Button botonQuiero = new Button("QUIERO");
-        BotonQuieroReTrucoEventHandler botonQuieroReTrucoEventHandler = new BotonQuieroReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonQuieroReTrucoEventHandler botonQuieroReTrucoEventHandler = new BotonQuieroReTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonQuiero.setOnAction(botonQuieroReTrucoEventHandler);
 
         Button botonNoQuiero = new Button("NO QUIERO");
-        BotonNoQuieroTrucoEventHandler botonNoQuieroTrucoEventHandler = new BotonNoQuieroTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos);
+        BotonNoQuieroTrucoEventHandler botonNoQuieroTrucoEventHandler = new BotonNoQuieroTrucoEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas,this.contenedorDePuntos,this.contenedorVertical);
         botonNoQuiero.setOnAction(botonNoQuieroTrucoEventHandler);
 
         Button botonValeCuatro = new Button("VALE CUATRO");
-        BotonValeCuatroEventHandler botonValeCuatroEventHandler = new BotonValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos);
+        BotonValeCuatroEventHandler botonValeCuatroEventHandler = new BotonValeCuatroEventHandler(this.juego, this.contenedorDeEstados, this.contenedorDeCartas, this.contenedorDePuntos,this.contenedorVertical);
         botonValeCuatro.setOnAction(botonValeCuatroEventHandler);
 
         this.contenedorDeEstados.getChildren().add(botonQuiero);
