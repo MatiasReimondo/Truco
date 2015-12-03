@@ -91,13 +91,11 @@ public class Mesa {
         return IA;
     }
 
-
     /**ACCIONES**/
 
     public boolean IA_Activada() {
         return jugadorVsIA;
     }
-
 
     public void repartirCartas(){
         for(Jugador jugador: jugadores)

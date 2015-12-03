@@ -2,6 +2,7 @@ package truco.vista2.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -12,6 +13,7 @@ import truco.modelo.Mesa;
 import truco.modelo.envido.Envido;
 import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
+import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
 import truco.vista2.Programa;
 
 
@@ -48,9 +50,9 @@ public class BotoneraInicial extends StackPane {
         vBox.getChildren().addAll(new Label("ACCIONES:"),botonEnvido,botonRealEnvido,botonFaltaEnvido,botonTruco,botonIrseAlMazo);
         this.getChildren().addAll(vBox);
 
-        setBotonEnvido();
-        setBotonFaltaEnvido();
-        setBotonRealEnvido();
+        setBotonEnvido(botonEnvido,new Envido());
+        setBotonEnvido(botonRealEnvido,new RealEnvido());
+        setBotonEnvido(botonFaltaEnvido,new FaltaEnvido());
         setBotonIrseAlMazo();
         setBotonTruco();
 
@@ -65,30 +67,18 @@ public class BotoneraInicial extends StackPane {
         });
     }
 
-    void setBotonEnvido() {
-        botonEnvido.setOnAction(e -> {
-            mesa.getJugadorActivo().cantarEnvido(new Envido());
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
-            interfaz.reloadPanelDerecho();
-        });
-    }
-
-    void setBotonRealEnvido(){
-        botonRealEnvido.setOnAction(e -> {
-            mesa.getJugadorActivo().cantarEnvido(new RealEnvido());
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
-            interfaz.reloadPanelDerecho();
-        });
-    }
-
-    void setBotonFaltaEnvido(){
-        botonFaltaEnvido.setOnAction(e -> {
-            mesa.getJugadorActivo().cantarEnvido(new FaltaEnvido());
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
-            interfaz.reloadPanelDerecho();
+    void setBotonEnvido(Button boton,Envido envido) {
+        boton.setOnAction(e -> {
+            try {
+                mesa.getArbitro().jugadorPuedeCantarTanto(mesa.getJugadorActivo());
+                mesa.getJugadorActivo().cantarEnvido(envido);
+                interfaz.getPanelIzquierdo().getChildren().clear();
+                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+                interfaz.reloadPanelDerecho();
+            } catch (JugadorNoHabilitadoParaCantarTanto b)
+            {
+                diplayErrorJugadorNoEnvido();
+            }
         });
     }
 
@@ -97,6 +87,14 @@ public class BotoneraInicial extends StackPane {
             mesa.getJugadorActivo().irseAlMazo();
             interfaz.nuevaRondaGrafica();
         });
+    }
+
+    void diplayErrorJugadorNoEnvido(){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(null);
+        alert.setHeaderText(" Solo el pie canta el tanto");
+        alert.getDialogPane().setPrefSize(250,50);
+        alert.show();
     }
 
 
