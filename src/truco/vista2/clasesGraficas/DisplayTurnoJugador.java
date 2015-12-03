@@ -18,12 +18,12 @@ public class DisplayTurnoJugador extends Parent {
         background.setArcHeight(20);
         background.setArcWidth(20);
 
-        background.setFill(Color.WHITE);
+        background.setFill(Color.BLUE);
         Text text=new Text("TURNO: \n"+mesa.getJugadorActivo().getNombre());
         text.setWrappingWidth(90);
         text.setTextAlignment(TextAlignment.CENTER);
         StackPane pane=new StackPane();
-        pane.setAlignment(Pos.TOP_CENTER);
+        pane.setAlignment(Pos.CENTER);
         pane.getChildren().addAll(background,text);
         this.getChildren().addAll(pane);
 

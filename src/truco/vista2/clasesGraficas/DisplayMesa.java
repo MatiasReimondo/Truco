@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -95,9 +96,8 @@ public class DisplayMesa extends StackPane {
             showErrorResponderApuesta();
             return;
         }
-            this.encontrarSlot(mesa.getJugadorActivo()).getChildren().clear();
-
-        this.encontrarSlot(mesa.getJugadorActivo()).getChildren().add(cartaGrafica);
+        this.encontrarSlot(mesa.getJugadorActivo()).getChildren().clear();
+        this.encontrarSlot(mesa.getJugadorActivo()).getChildren().addAll(cartaGrafica, new Label(mesa.getJugadorActivo().getNombre()));
 
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());

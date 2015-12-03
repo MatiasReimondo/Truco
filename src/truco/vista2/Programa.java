@@ -32,7 +32,7 @@ public class Programa extends Application {
 
     public void actualizarPuntajeGrafico() {
         panelDerecho.getChildren().clear();
-        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco,this));
+        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco));
     }
 
     public void actualizarManoGrafica() {
@@ -43,10 +43,7 @@ public class Programa extends Application {
     public void nuevaRondaGrafica(){
         truco.getMesa().nuevaRonda();
         truco.getMesa().repartirCartas();
-/*
-        panelIzquierdo.getChildren().clear();
-        panelIzquierdo.getChildren().addAll(new BotoneraInicial(truco.getMesa(),this));
-*/
+
         reloadPanelIzquierdo();
         reloadPanelCentral();
         reloadPanelDerecho();
@@ -83,7 +80,7 @@ public class Programa extends Application {
         StackPane pane=new StackPane();
         pane.getChildren().addAll(new DisplayTurnoJugador(truco.getMesa(),this));
         pane.setAlignment(Pos.BOTTOM_CENTER);
-        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco,this),pane);
+        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco),pane);
     }
 
     public void reloadPanelIzquierdo(){
@@ -191,7 +188,7 @@ public class Programa extends Application {
         reloadPanelCentral();
 
         //ZONA DERECHA
-        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco,this));
+        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco));
         panelDerecho.setAlignment(Pos.TOP_CENTER);
         reloadPanelDerecho();
 

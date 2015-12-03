@@ -2,6 +2,7 @@ package truco.vista2.clasesGraficas;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -14,7 +15,7 @@ import truco.vista2.Programa;
 public class DisplayPuntaje extends Parent {
 
     private Truco truco;
-    public DisplayPuntaje(Truco truco, Programa interfaz){
+    public DisplayPuntaje(Truco truco){
 
         this.truco=truco;
         Rectangle background=new Rectangle(160,70);
@@ -28,7 +29,15 @@ public class DisplayPuntaje extends Parent {
         pane.setAlignment(Pos.TOP_CENTER);
         pane.getChildren().addAll(background,text);
         this.getChildren().addAll(pane);
+        if(this.truco.terminado())
+            displayEquipoGanador();
+    }
 
-
+    private void displayEquipoGanador(){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(" Juego Terminado\n Resultados: "+truco.getEquipo1().getNombre()+": "+truco.getEquipo1().getPuntaje()+" "+truco.getEquipo2().getNombre()+": "+truco.getEquipo2().getPuntaje());
+        alert.getDialogPane().setPrefSize(350,50);
+        alert.show();
     }
 }

@@ -26,7 +26,9 @@ public class Truco {
         jugadores =new ArrayList<>();
         mesa=new Mesa();
         equipo1=new Equipo();
+        equipo1.setNombre("EQUIPO 1");
         equipo2=new Equipo();
+        equipo2.setNombre("EQUIPO 2");
 
     }
 
@@ -175,7 +177,8 @@ public class Truco {
         for(Equipo equipo:equipos)
             if(equipo.getPuntaje()>=30)
                 return true;
-        return false;
+        return (equipo1.getPuntaje()>=30 || equipo2.getPuntaje()>=30);
+
     }
 
     public void jugadorVsIA(){
