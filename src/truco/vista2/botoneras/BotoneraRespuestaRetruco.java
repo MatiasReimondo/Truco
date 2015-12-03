@@ -40,6 +40,7 @@ public class BotoneraRespuestaRetruco extends StackPane{
 
         vBox.getChildren().addAll(new Label("ACCIONES:"), botonQuiero, botonNoQuiero, botonValeCuatro);
 
+        getChildren().addAll(vBox);
         setBotonNoQuiero();
         setBotonQuiero();
         setBotonvaleCuatro();
@@ -59,7 +60,7 @@ public class BotoneraRespuestaRetruco extends StackPane{
             mesa.getJugadorActivo().aceptarTruco();
             mesa.getJugadorActivo().cantarRetruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaRetruco(mesa, interfaz));
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
             interfaz.reloadPanelDerecho();
         });
     }

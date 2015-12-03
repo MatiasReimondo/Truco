@@ -19,7 +19,6 @@ public class Truco {
 
     private List<Jugador> jugadores;
     private Mesa mesa;
-    private boolean IA_Activada;
 
     /**CONSTRUCTOR**/
     public Truco(){
@@ -62,6 +61,7 @@ public class Truco {
 
     public void nuevoJuego2Jugadores(){
 
+        jugadores.clear();
         Jugador j1=new Jugador("Jugador 1");
         Jugador j2=new Jugador("Jugador 2");
 
@@ -77,6 +77,9 @@ public class Truco {
     }
 
     public void nuevoJuego4Jugadores(){
+
+        jugadores.clear();
+
         Jugador j1=new Jugador("Jugador 1");
         Jugador j2=new Jugador("Jugador 2");
         Jugador j3=new Jugador("Jugador 3");
@@ -100,6 +103,9 @@ public class Truco {
     }
 
     public void nuevoJuego6Jugadores(){
+
+        jugadores.clear();
+
         Jugador j1=new Jugador("Jugador 1");
         Jugador j2=new Jugador("Jugador 2");
         Jugador j3=new Jugador("Jugador 3");
@@ -173,6 +179,7 @@ public class Truco {
     }
 
     public void jugadorVsIA(){
+        jugadores.clear();
         Jugador jugadorHumano=new Jugador("Jugador Humano");
         jugadorHumano.setEquipo(equipo1);
         Jugador jugador=new Jugador("Robotruco");
@@ -184,8 +191,7 @@ public class Truco {
         comportamiento.setMesa(this.mesa);
         comportamiento.setJugador(jugador);
         mesa.setIA(comportamiento);
-
-        IA_Activada=true;
+        mesa.setJugadorIA(jugador);
     }
 
     public List<Jugador> getJugadores (){

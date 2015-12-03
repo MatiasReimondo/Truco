@@ -180,6 +180,7 @@ public class Jugador {
     public void quieroTruco(){
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().quiero());
         mesa.jugadorAnterior();
+        tieneElQuiero=true;
     }
 
     public void aceptarTruco() {

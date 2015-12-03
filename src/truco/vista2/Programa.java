@@ -87,14 +87,14 @@ public class Programa extends Application {
     }
 
     public void reloadPanelIzquierdo(){
-        panelIzquierdo =new StackPane();
+        panelIzquierdo.getChildren().clear();
         panelIzquierdo.getChildren().addAll(new BotoneraInicial(truco.getMesa(),this));
         panelIzquierdo.setAlignment(Pos.BOTTOM_LEFT);
     }
 
     private void displayConfiguracion(){
         Stage stage=new Stage();
-        stage.setTitle("Configuracion");
+        stage.setTitle("TRUCO : Configuracion");
         HBox triBox=new HBox();
         triBox.setPrefSize(350,100);
 
@@ -110,6 +110,7 @@ public class Programa extends Application {
         VBox vBox=new VBox();
         vBox.setPadding(new Insets(10,10,10,10));
         vBox.getChildren().addAll(textoFlor,botonera);
+        vBox.setAlignment(Pos.CENTER);
         panelIzquierdo.getChildren().addAll(vBox);
 
         //CANTIDAD DE JUGADORES
@@ -152,7 +153,7 @@ public class Programa extends Application {
         boton3vs3.setOnAction(e->truco.nuevoJuego6Jugadores());
         botonVsIA.setOnAction(e->truco.jugadorVsIA());
 
-        setBotonComenzar(botonComenzar,stage);
+        setBotonComenzar(botonComenzar, stage);
 
 
         stage.show();
@@ -208,7 +209,7 @@ public class Programa extends Application {
             catch (ListaJugadoresVaciaException b) {
                 Alert alert=new Alert(Alert.AlertType.ERROR);
                 alert.setTitle(null);
-                alert.setContentText("Debe elegir alguna modalidad de juego antes de comenzar");
+                alert.setHeaderText("Debe elegir alguna modalidad de juego antes de comenzar");
                 displayConfiguracion();
                 alert.show();
                 stage.close();

@@ -2,13 +2,16 @@ package truco.vista2.clasesGraficas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import truco.modelo.Jugador;
 import truco.modelo.Mesa;
+import truco.modelo.estadosTruco.RetrucoCantado;
+import truco.modelo.estadosTruco.TrucoCantado;
+import truco.modelo.estadosTruco.ValeCuatroCantado;
 import truco.vista2.Programa;
 import truco.vista2.botoneras.BotoneraPostEnvido;
 
@@ -87,7 +90,13 @@ public class DisplayMesa extends StackPane {
 
     public void jugarCartaGrafica(CartaGrafica cartaGrafica) {
 
-        this.encontrarSlot(mesa.getJugadorActivo()).getChildren().clear();
+        if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class))
+        {
+            showErrorResponderApuesta();
+            return;
+        }
+            this.encontrarSlot(mesa.getJugadorActivo()).getChildren().clear();
+
         this.encontrarSlot(mesa.getJugadorActivo()).getChildren().add(cartaGrafica);
 
 
@@ -115,4 +124,11 @@ public class DisplayMesa extends StackPane {
     }
 
 
+    private void showErrorResponderApuesta(){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(null);
+        alert.setHeaderText("Debe responder la apuesta antes de jugar");
+        alert.getDialogPane().setPrefSize(250,50);
+        alert.show();
+    }
 }
