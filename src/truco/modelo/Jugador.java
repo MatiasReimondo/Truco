@@ -18,6 +18,7 @@ public class Jugador {
     private Mesa mesa;
     private Equipo equipo;
     private static final int MAXIMO_CARTAS= 3;
+    private boolean tieneElQuiero;
 
     /**CONSTRUCTOR**/
     public Jugador(){}
@@ -112,6 +113,10 @@ public class Jugador {
         }
     }
 
+    public boolean tieneElQuiero(){
+        return tieneElQuiero;
+    }
+
     /**ENVIDO**/
     public boolean quiereMostrarEnvido() {
         return true;
@@ -154,6 +159,7 @@ public class Jugador {
     public void cantarTruco(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarTruco());
+        tieneElQuiero=false;
         mesa.siguienteJugador();
     }
 
@@ -161,12 +167,14 @@ public class Jugador {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarRetruco());
         mesa.jugadorAnterior();
+        tieneElQuiero=false;
     }
 
     public void cantarValeCuatro(){
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().cantarValecuatro());
         mesa.jugadorAnterior();
+        tieneElQuiero=false;
     }
 
     public void quieroTruco(){
@@ -177,6 +185,7 @@ public class Jugador {
     public void aceptarTruco() {
         mesa.getArbitro().jugadorPuedeAccionar(this);
         mesa.getRonda().setTrucoEnJuego(mesa.getRonda().getTruco().quiero());
+        tieneElQuiero=true;
     }
 
     public void noQuieroTruco(){

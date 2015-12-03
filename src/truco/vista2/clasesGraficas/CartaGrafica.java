@@ -1,40 +1,36 @@
-package truco.vista2;
+package truco.vista2.clasesGraficas;
 
 import javafx.scene.Parent;
 
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import truco.modelo.Carta;
-import truco.modelo.Mesa;
+import truco.modelo.excepciones.RondaTerminadaException;
 
 public class CartaGrafica extends Parent {
 
-    private MesaGrafica mesaGrafica;
     private Carta carta;
-    private Button boton=new Button("Jugar");
-    private Mesa mesa;
 
-    public CartaGrafica(Carta carta,Mesa mesa,MesaGrafica mesaGrafica){
+    public CartaGrafica(Carta carta,DisplayMesa displayMesa){
 
         this.carta=carta;
-        this.mesa=mesa;
-        this.mesaGrafica=mesaGrafica;
 
-        Rectangle background=new Rectangle(100,140);
+        Rectangle background=new Rectangle(80,120);
         background.setArcHeight(20);
         background.setArcWidth(20);
-        background.setFill(Color.YELLOW);
+        background.setFill(Color.GREENYELLOW);
         Text text=new Text(String.valueOf(carta.getNumero())+"\n"+" DE "+"\n"+carta.getPalo());
         text.setTextAlignment(TextAlignment.CENTER);
         text.setWrappingWidth(90);
         getChildren().add(new StackPane(background, text));
 
-        boton.setOnAction(e->mesaGrafica.jugarCartaGrafica(this));
-        getChildren().add(boton);
+        setOnMouseClicked(e ->{ try{
+            displayMesa.jugarCartaGrafica(this);} catch (RondaTerminadaException b)
+        {showErrorRondaTerminada();}});
 
     }
 
@@ -42,5 +38,12 @@ public class CartaGrafica extends Parent {
         return carta;
     }
 
+    private void showErrorRondaTerminada(){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(null);
+        alert.setHeaderText("          La ronda ya termino");
+        alert.getDialogPane().setPrefSize(250,50);
+        alert.show();
+    }
 
 }

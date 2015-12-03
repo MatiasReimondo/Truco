@@ -1,7 +1,9 @@
 package truco.vista2.botoneras;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -10,12 +12,12 @@ import truco.modelo.Mesa;
 import truco.modelo.envido.Envido;
 import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
-import truco.vista2.Programa2;
+import truco.vista2.Programa;
 
 
 public class BotoneraInicial extends StackPane {
 
-    private StackPane stackIzquierdo;
+    private Programa interfaz;
     private Mesa mesa;
     private Button botonEnvido=new Button("ENVIDO");
     private Button botonRealEnvido=new Button("REAL ENVIDO");
@@ -23,26 +25,27 @@ public class BotoneraInicial extends StackPane {
     private Button botonTruco=new Button("TRUCO");
     private Button botonIrseAlMazo=new Button("IRSE AL MAZO");
 
-    public BotoneraInicial(){}
-    public BotoneraInicial(Mesa mesa,Programa2 interfaz){
+    public BotoneraInicial(Mesa mesa,Programa interfaz){
 
-        Rectangle rectangle=new Rectangle(150,550);
+        Rectangle rectangle=new Rectangle(150,350);
 
-        stackIzquierdo=interfaz.getStackIzquierdo();
+        this.interfaz=interfaz;
         this.mesa=mesa;
-        this.setHeight(550);
+
+        this.setHeight(350);
         this.setWidth(150);
+        setPadding(new Insets(5,5,5,5));
         rectangle.setArcHeight(30);
         rectangle.setArcWidth(30);
-        rectangle.setFill(Color.GREEN);
+        rectangle.setFill(Color.RED);
         this.getChildren().addAll(rectangle);
 
         VBox vBox=new VBox();
-        vBox.setSpacing(50);
+        vBox.setSpacing(30);
         vBox.setAlignment(Pos.CENTER);
 
 
-        vBox.getChildren().addAll(botonEnvido,botonRealEnvido,botonFaltaEnvido,botonTruco,botonIrseAlMazo);
+        vBox.getChildren().addAll(new Label("ACCIONES:"),botonEnvido,botonRealEnvido,botonFaltaEnvido,botonTruco,botonIrseAlMazo);
         this.getChildren().addAll(vBox);
 
         setBotonEnvido();
@@ -56,38 +59,43 @@ public class BotoneraInicial extends StackPane {
     private void setBotonTruco() {
         botonTruco.setOnAction(e->{
             mesa.getJugadorActivo().cantarTruco();
-            stackIzquierdo.getChildren().clear();
-            stackIzquierdo.getChildren().addAll(new BotoneraRespuestaTruco(mesa,stackIzquierdo));
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa,interfaz));
+            interfaz.reloadPanelDerecho();
         });
     }
 
     void setBotonEnvido() {
         botonEnvido.setOnAction(e -> {
             mesa.getJugadorActivo().cantarEnvido(new Envido());
-            stackIzquierdo.getChildren().clear();
-            stackIzquierdo.getChildren().addAll(new BotoneraRespuestaEnvido(mesa, stackIzquierdo));
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+            interfaz.reloadPanelDerecho();
         });
     }
 
     void setBotonRealEnvido(){
         botonRealEnvido.setOnAction(e -> {
             mesa.getJugadorActivo().cantarEnvido(new RealEnvido());
-            stackIzquierdo.getChildren().clear();
-            stackIzquierdo.getChildren().addAll(new BotoneraRespuestaEnvido(mesa, stackIzquierdo));
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+            interfaz.reloadPanelDerecho();
         });
     }
 
     void setBotonFaltaEnvido(){
         botonFaltaEnvido.setOnAction(e -> {
             mesa.getJugadorActivo().cantarEnvido(new FaltaEnvido());
-            stackIzquierdo.getChildren().clear();
-            stackIzquierdo.getChildren().addAll(new BotoneraRespuestaEnvido(mesa, stackIzquierdo));
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+            interfaz.reloadPanelDerecho();
         });
     }
 
     void setBotonIrseAlMazo(){
         botonIrseAlMazo.setOnAction(e->{
             mesa.getJugadorActivo().irseAlMazo();
+            interfaz.nuevaRondaGrafica();
         });
     }
 

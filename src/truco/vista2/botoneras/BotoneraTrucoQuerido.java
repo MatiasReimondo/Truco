@@ -2,6 +2,7 @@ package truco.vista2.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -9,17 +10,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import truco.modelo.Mesa;
+import truco.modelo.envido.EnvidoTerminado;
 import truco.vista2.Programa;
 
-public class BotoneraRespuestaRetruco extends StackPane{
+import java.util.Collection;
+
+
+public class BotoneraTrucoQuerido extends StackPane{
 
     private Programa interfaz;
     private Mesa mesa;
-    Button botonQuiero=new Button("QUIERO");
-    private Button botonValeCuatro =new Button("VALE CUATRO");
+    private Button botonRetruco=new Button("RETRUCO");
     private Button botonNoQuiero=new Button("NO QUIERO");
 
-    public BotoneraRespuestaRetruco(Mesa mesa,Programa interfaz){
+    public BotoneraTrucoQuerido(Mesa mesa,Programa interfaz){
 
         Rectangle rectangle=new Rectangle(150,350);
 
@@ -38,28 +42,23 @@ public class BotoneraRespuestaRetruco extends StackPane{
         vBox.setSpacing(50);
         vBox.setAlignment(Pos.CENTER);
 
-        vBox.getChildren().addAll(new Label("ACCIONES:"), botonQuiero, botonNoQuiero, botonValeCuatro);
+        vBox.getChildren().addAll(new Label("ACCIONES:"),botonRetruco);
+        vBox.getChildren().addAll(botonNoQuiero);
 
+        getChildren().addAll(vBox);
         setBotonNoQuiero();
-        setBotonQuiero();
-        setBotonvaleCuatro();
+        setBotonRetruco();
+
     }
 
-    private void setBotonQuiero(){
-        botonQuiero.setOnAction(e->{
-            mesa.getJugadorActivo().quieroTruco();
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraTrucoQuerido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
-        });
-    }
+    private void setBotonRetruco(){
+        botonRetruco.setOnAction(e->{
+            if(!mesa.getJugadorActivo().tieneElQuiero())
 
-    private void setBotonvaleCuatro(){
-        botonValeCuatro.setOnAction(e -> {
             mesa.getJugadorActivo().aceptarTruco();
             mesa.getJugadorActivo().cantarRetruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaRetruco(mesa, interfaz));
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaRetruco(mesa,interfaz));
             interfaz.reloadPanelDerecho();
         });
     }
@@ -67,7 +66,10 @@ public class BotoneraRespuestaRetruco extends StackPane{
     private void setBotonNoQuiero(){
         botonNoQuiero.setOnAction(e->{
             mesa.getJugadorActivo().noQuieroTruco();
+            interfaz.nuevaRondaGrafica();
             interfaz.reloadPanelDerecho();
         });
     }
+
 }
+

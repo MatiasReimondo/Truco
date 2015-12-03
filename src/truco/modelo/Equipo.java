@@ -9,6 +9,9 @@ public class Equipo {
     private final Map<String,Jugador> integrantes;
 
     /**CONSTRUCTOR**/
+    public Equipo(){
+        this.integrantes=new HashMap<>();
+    }
     public Equipo(String nombreDelEquipo){
         this.nombre= nombreDelEquipo;
         this.integrantes=new HashMap<>();

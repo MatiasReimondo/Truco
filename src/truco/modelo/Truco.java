@@ -13,15 +13,21 @@ import java.util.List;
 public class Truco {
 
     private List<Equipo> equipos;
+
+    private Equipo equipo1;
+    private Equipo equipo2;
+
     private List<Jugador> jugadores;
     private Mesa mesa;
-    private boolean jugadorVsIA;
+    private boolean IA_Activada;
 
     /**CONSTRUCTOR**/
     public Truco(){
         equipos=new ArrayList<>();
         jugadores =new ArrayList<>();
         mesa=new Mesa();
+        equipo1=new Equipo();
+        equipo2=new Equipo();
 
     }
 
@@ -44,7 +50,85 @@ public class Truco {
         throw new EquipoInexistenteException();
     }
 
+    public Equipo getEquipo1(){
+        return equipo1;
+    }
+
+    public Equipo getEquipo2(){
+        return equipo2;
+    }
+
     /**ACCIONES**/
+
+    public void nuevoJuego2Jugadores(){
+
+        Jugador j1=new Jugador("Jugador 1");
+        Jugador j2=new Jugador("Jugador 2");
+
+        jugadores.add(j1);
+        jugadores.add(j2);
+
+        j1.setEquipo(equipo1);
+        j2.setEquipo(equipo2);
+
+        equipo1.agregarIntegrante(j1);
+        equipo2.agregarIntegrante(j2);
+
+    }
+
+    public void nuevoJuego4Jugadores(){
+        Jugador j1=new Jugador("Jugador 1");
+        Jugador j2=new Jugador("Jugador 2");
+        Jugador j3=new Jugador("Jugador 3");
+        Jugador j4=new Jugador("Jugador 4");
+
+        jugadores.add(j1);
+        jugadores.add(j2);
+        jugadores.add(j3);
+        jugadores.add(j4);
+
+        j1.setEquipo(equipo1);
+        j2.setEquipo(equipo2);
+        j3.setEquipo(equipo1);
+        j4.setEquipo(equipo2);
+
+        equipo1.agregarIntegrante(j1);
+        equipo2.agregarIntegrante(j2);
+        equipo1.agregarIntegrante(j3);
+        equipo2.agregarIntegrante(j4);
+
+    }
+
+    public void nuevoJuego6Jugadores(){
+        Jugador j1=new Jugador("Jugador 1");
+        Jugador j2=new Jugador("Jugador 2");
+        Jugador j3=new Jugador("Jugador 3");
+        Jugador j4=new Jugador("Jugador 4");
+        Jugador j5=new Jugador("Jugador 5");
+        Jugador j6=new Jugador("Jugador 6");
+
+        jugadores.add(j1);
+        jugadores.add(j2);
+        jugadores.add(j3);
+        jugadores.add(j4);
+        jugadores.add(j5);
+        jugadores.add(j6);
+
+        j1.setEquipo(equipo1);
+        j2.setEquipo(equipo2);
+        j3.setEquipo(equipo1);
+        j4.setEquipo(equipo2);
+        j5.setEquipo(equipo1);
+        j6.setEquipo(equipo2);
+
+        equipo1.agregarIntegrante(j1);
+        equipo2.agregarIntegrante(j2);
+        equipo1.agregarIntegrante(j3);
+        equipo2.agregarIntegrante(j4);
+        equipo1.agregarIntegrante(j5);
+        equipo2.agregarIntegrante(j6);
+    }
+
     public void empezarJuego(){
         mesa.setJugadores(jugadores);
         for(Jugador jugador:jugadores)
@@ -89,23 +173,19 @@ public class Truco {
     }
 
     public void jugadorVsIA(){
+        Jugador jugadorHumano=new Jugador("Jugador Humano");
+        jugadorHumano.setEquipo(equipo1);
         Jugador jugador=new Jugador("Robotruco");
+        jugador.setEquipo(equipo2);
+        jugadores.add(jugadorHumano);
         jugadores.add(jugador);
+
         Comportamiento comportamiento=new PreEnvido();
         comportamiento.setMesa(this.mesa);
         comportamiento.setJugador(jugador);
         mesa.setIA(comportamiento);
-    }
 
-    /****** Metodos creados para el funcionamiento de la interfaz grafica ***********/
-    public List<Carta> getCartasDelJugador(String nombreDeJugador){
-
-        for(Jugador jugador: this.jugadores){
-            if (jugador.getNombre().equals(nombreDeJugador)){
-                return jugador.getMano();
-            }
-        }
-        throw new JugadorInexistenteException();
+        IA_Activada=true;
     }
 
     public List<Jugador> getJugadores (){
