@@ -11,8 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import truco.modelo.Truco;
 
-import truco.vista.controladores.GraficadorDeNuevoJuegoEventHandler;
-
 public class GraficadorDeConfiguracionEventHandler implements EventHandler<ActionEvent> {
 
     private Truco juego;
@@ -32,7 +30,7 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
 
         this.graficarConfiguracionFlor();
         this.graficarContenedorJugadores();
-        this.graficarComenzarJuego();
+        this.graficarConfiguracionAI();
 
         contenedorSegundario.setSpacing(90);
         contenedorSegundario.setPadding( new Insets(30));
@@ -41,13 +39,14 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
 
     }
 
-    private void graficarComenzarJuego() {
+    private void graficarConfiguracionAI() {
 
-        Button botonComenzar = new Button("Empezar Partida");
-        GraficadorDeNuevoJuegoEventHandler graficadorDeNuevoJuegoEventHandler = new GraficadorDeNuevoJuegoEventHandler(this.contenedorPrincipal, this.juego);
-        botonComenzar.setOnAction(graficadorDeNuevoJuegoEventHandler);
+        Button configurarAI = new Button("JUGADORES PC");
 
-        contenedorSegundario.getChildren().add(new HBox(botonComenzar));
+        GraficadorConfiguracionAIEventHandler graficadorConfiguracionAIEventHandler = new GraficadorConfiguracionAIEventHandler(this.contenedorPrincipal, this.juego);
+        configurarAI.setOnAction(graficadorConfiguracionAIEventHandler);
+
+        contenedorSegundario.getChildren().add(new HBox(configurarAI));
     }
 
     private void graficarContenedorJugadores() {
@@ -62,6 +61,7 @@ public class GraficadorDeConfiguracionEventHandler implements EventHandler<Actio
 
         VBox opcionesCantidad= new VBox(cantidadDeJugadores,botonJugadores, textField);
         opcionesCantidad.setSpacing(10);
+
 
         HBox hBox=new HBox(opcionesCantidad);
         hBox.setSpacing(10);
