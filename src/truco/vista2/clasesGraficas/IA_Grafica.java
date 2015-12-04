@@ -66,7 +66,7 @@ public class IA_Grafica {
 
 
         // CUANDO LA IA NO QUIERE EL ENVIDO
-        if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) && truco.getMesa().getRonda().getManoEnJuego().size()>0 && truco.getMesa().getRonda().seEstaJugandoLaPrimera()) {
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) && truco.getMesa().getRonda().getManoEnJuego().size()<=0 && truco.getMesa().getRonda().seEstaJugandoLaPrimera()) {
             interfaz.getHistorial().jugadorNoQuisoEnvido(truco.getMesa().getJugadorIA(), new Envido());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(truco.getMesa(),interfaz));
