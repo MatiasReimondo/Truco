@@ -28,9 +28,10 @@ public class IA_Grafica {
                 truco.getMesa().resolverMano();
             }
             while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
-                System.out.println("Sigue siendo turno de la IA, despues de la primera accion");
+
                 truco.getMesa().getIA().accionar();
                 interfaz.getControlIA().mostrarAcciones();
+                System.out.println("La IA ya acciono");
 
                 if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores()) {
                     System.out.println("Despues de que la IA acciona, se termino la mano en juego");
