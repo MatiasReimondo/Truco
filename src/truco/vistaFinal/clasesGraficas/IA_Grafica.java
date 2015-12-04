@@ -61,7 +61,7 @@ public class IA_Grafica {
     private void comportamientoTrucoGrafico(){
 
         // CUANDO LA IA QUIERE EL TRUCO
-        if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoQuerido.class)){
+        if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoQuerido.class) && truco.getMesa().getJugadorIA().tieneElQuiero()){
             interfaz.getHistorial().jugadorQuisoTruco(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getTruco());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraTrucoQuerido(truco.getMesa(),interfaz));
@@ -69,7 +69,7 @@ public class IA_Grafica {
         }
 
         // CUANDO LA IA QUIERE EL RETRUCO
-        if(truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoQuerido.class)){
+        if(truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoQuerido.class) && truco.getMesa().getJugadorIA().tieneElQuiero()){
             interfaz.getHistorial().jugadorQuisoTruco(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getTruco());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraTrucoQuerido(truco.getMesa(),interfaz));
@@ -77,7 +77,7 @@ public class IA_Grafica {
         }
 
         // CUANDO LA IA QUIERE EL RETRUCO
-        if(truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroQuerido.class)){
+        if(truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroQuerido.class) && truco.getMesa().getJugadorIA().tieneElQuiero()){
             interfaz.getHistorial().jugadorQuisoTruco(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getTruco());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraTrucoQuerido(truco.getMesa(),interfaz));
