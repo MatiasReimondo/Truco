@@ -42,7 +42,7 @@ public class IA_Grafica {
                     interfaz.finalDeRonda();
                     break;
                 }
-                System.out.println(4);
+                System.out.println("Se llega al final del loop");
             }
         }
     }
