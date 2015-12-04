@@ -87,4 +87,9 @@ public class Historial extends TextArea {
         this.appendText(contadorAccion+". Se resolvio el tanto en juego.\n");
         contadorAccion++;
     }
+
+    public void jugadorCantoFlor(Jugador jugador) {
+        this.appendText(contadorAccion+". "+jugador.getNombre()+" canto Flor.\n");
+        contadorAccion++;
+    }
 }

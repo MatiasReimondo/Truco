@@ -26,8 +26,12 @@ public class IA_Grafica {
             while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
                 truco.getMesa().getIA().accionar();
                 interfaz.getControlIA().mostrarAcciones();
+
                 if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
                     truco.getMesa().resolverMano();
+
+                if(truco.getMesa().getRonda().termino())
+                    break;
             }
         }
     }
@@ -88,7 +92,6 @@ public class IA_Grafica {
             interfaz.getHistorial().jugadorCantoTruco(truco.getMesa().getJugadorIA());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
-            return;
         }
     }
 

@@ -244,12 +244,20 @@ public class Mesa {
         switch (ronda.getResultados().size()){
             case 0: ronda.resultadoMano(equipo); return;
             case 1: {
-                if (ronda.getResultados().contains(null) || ronda.getResultados().contains(equipo))
+                if(ronda.getResultados().contains(null)) {
                     if (equipo != null) {
                         equipo.sumarPuntos(ronda.getTruco().getPuntaje());
                         ronda.terminar();
                         return;
                     }
+                    ronda.resultadoMano(null);
+                    return;
+                }
+                if (ronda.getResultados().contains(equipo)){
+                    equipo.sumarPuntos(ronda.getTruco().getPuntaje());
+                    ronda.terminar();
+                    return;
+                }
                 ronda.resultadoMano(equipo);
                 return;
             }

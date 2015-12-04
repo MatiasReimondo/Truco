@@ -83,4 +83,8 @@ public class Arbitro {
         if(!flor)
             throw new FlorNoHabilitadaException();
     }
+
+    public boolean florEncendida(){
+        return flor;
+    }
 }
