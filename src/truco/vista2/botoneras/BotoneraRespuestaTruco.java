@@ -70,6 +70,7 @@ public class BotoneraRespuestaTruco extends StackPane {
             mesa.getJugadorActivo().quieroTruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraTrucoQuerido(mesa,interfaz));
+
             interfaz.getControlIA().accionarGrafico();
             interfaz.reload_PanelDerecho();
         });
@@ -91,9 +92,12 @@ public class BotoneraRespuestaTruco extends StackPane {
                 mesa.getJugadorActivo().aceptarTruco();
                 interfaz.getHistorial().jugadorCantoRetruco(mesa.getJugadorActivo());
                 mesa.getJugadorActivo().cantarRetruco();
-                interfaz.getPanelIzquierdo().getChildren().clear();
-                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
+
                 interfaz.getControlIA().accionarGrafico();
+                if(!mesa.IA_Activada()) {
+                    interfaz.getPanelIzquierdo().getChildren().clear();
+                    interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
+                }
                 interfaz.reload_PanelDerecho();
             }
         });
@@ -106,10 +110,12 @@ public class BotoneraRespuestaTruco extends StackPane {
             else {
                 interfaz.getHistorial().jugadorCantoValeCuatro(mesa.getJugadorActivo());
                 mesa.getJugadorActivo().aceptarTruco();
-                mesa.getJugadorActivo().cantarRetruco();
-                interfaz.getPanelIzquierdo().getChildren().clear();
-                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
+                mesa.getJugadorActivo().cantarValeCuatro();
                 interfaz.getControlIA().accionarGrafico();
+                if(!mesa.IA_Activada()) {
+                    interfaz.getPanelIzquierdo().getChildren().clear();
+                    interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
+                }
                 interfaz.reload_PanelDerecho();
             }
         });
