@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import truco.modelo.Carta;
 import truco.modelo.Truco;
+import truco.modelo.excepciones.JugadorNoTieneFlorException;
+import truco.vista.controladores.excepcionesVista.VentanaException;
 import truco.vista.controladores.truco.BotonTrucoEventHandler;
 
 import java.util.List;
@@ -35,9 +37,16 @@ public class BotonFlorEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
 
-        this.juego.getMesa().getJugadorActivo().cantarFlor();
-        graficarContenedorDeEstados();
-        graficarContenedorDePuntos();
+        try {
+            this.juego.getMesa().getJugadorActivo().cantarFlor();
+            graficarContenedorDeEstados();
+            graficarContenedorDePuntos();
+        }
+        catch (JugadorNoTieneFlorException e){
+            VentanaException ventanaException= new VentanaException();
+            ventanaException.display("NO HAY FLOR","NO TENES FLOR EN LA MANO");
+
+        }
     }
 
     private void graficarContenedorDeCartas() {
