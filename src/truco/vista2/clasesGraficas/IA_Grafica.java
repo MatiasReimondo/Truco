@@ -20,7 +20,7 @@ public class IA_Grafica {
     }
 
     public void accionarGrafico(){
-        if(truco.getMesa().IA_Activada()) {
+        if(truco.getMesa().IA_Activada() && esTurnoDeLaIA()) {
             if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
                 truco.getMesa().resolverMano();
             while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
