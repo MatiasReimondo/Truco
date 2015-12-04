@@ -1,4 +1,4 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import truco.modelo.Carta;
 import truco.modelo.Mesa;
-import truco.vista2.Programa;
+import truco.vistaFinal.Programa;
 
 public class DisplayMano extends StackPane {
 

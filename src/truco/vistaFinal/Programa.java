@@ -1,4 +1,4 @@
-package truco.vista2;
+package truco.vistaFinal;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,8 +10,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import truco.modelo.Truco;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
-import truco.vista2.botoneras.BotoneraInicial;
-import truco.vista2.clasesGraficas.*;
+import truco.vistaFinal.botoneras.BotoneraInicial;
+import truco.vistaFinal.clasesGraficas.*;
 
 public class Programa extends Application {
 

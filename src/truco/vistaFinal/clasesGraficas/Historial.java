@@ -1,9 +1,8 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.scene.control.TextArea;
 import truco.modelo.Carta;
 import truco.modelo.Jugador;
-import truco.modelo.Truco;
 import truco.modelo.envido.Envido;
 import truco.modelo.estadosTruco.EstadoTruco;
 import truco.modelo.estadosTruco.RetrucoCantado;

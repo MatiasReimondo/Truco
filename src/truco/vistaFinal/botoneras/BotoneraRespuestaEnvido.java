@@ -1,4 +1,4 @@
-package truco.vista2.botoneras;
+package truco.vistaFinal.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +13,7 @@ import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
-import truco.vista2.Programa;
+import truco.vistaFinal.Programa;
 
 public class BotoneraRespuestaEnvido extends StackPane{
 

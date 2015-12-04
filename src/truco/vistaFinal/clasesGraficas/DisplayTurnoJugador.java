@@ -1,4 +1,4 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -8,7 +8,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import truco.modelo.Mesa;
-import truco.vista2.Programa;
+import truco.vistaFinal.Programa;
 
 public class DisplayTurnoJugador extends Parent {
 

@@ -1,4 +1,4 @@
-package truco.vista2.botoneras;
+package truco.vistaFinal.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,7 +15,7 @@ import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
 import truco.modelo.excepciones.JugadorNoHabilitadoParaCantarTanto;
 import truco.modelo.excepciones.JugadorNoTieneFlorException;
-import truco.vista2.Programa;
+import truco.vistaFinal.Programa;
 
 
 public class BotoneraInicial extends StackPane {

@@ -1,4 +1,4 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,8 +14,8 @@ import truco.modelo.estadosTruco.RetrucoCantado;
 import truco.modelo.estadosTruco.TrucoCantado;
 import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.estadosTruco.ValeCuatroCantado;
-import truco.vista2.Programa;
-import truco.vista2.botoneras.BotoneraPostEnvido;
+import truco.vistaFinal.Programa;
+import truco.vistaFinal.botoneras.BotoneraPostEnvido;
 
 import java.util.List;
 

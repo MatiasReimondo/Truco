@@ -1,4 +1,4 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

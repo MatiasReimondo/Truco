@@ -1,13 +1,13 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import truco.modelo.Truco;
 import truco.modelo.envido.*;
 import truco.modelo.estadosTruco.*;
-import truco.vista2.Programa;
-import truco.vista2.botoneras.BotoneraPostEnvido;
-import truco.vista2.botoneras.BotoneraRespuestaEnvido;
-import truco.vista2.botoneras.BotoneraRespuestaTruco;
-import truco.vista2.botoneras.BotoneraTrucoQuerido;
+import truco.vistaFinal.Programa;
+import truco.vistaFinal.botoneras.BotoneraPostEnvido;
+import truco.vistaFinal.botoneras.BotoneraRespuestaEnvido;
+import truco.vistaFinal.botoneras.BotoneraRespuestaTruco;
+import truco.vistaFinal.botoneras.BotoneraTrucoQuerido;
 
 public class IA_Grafica {
 

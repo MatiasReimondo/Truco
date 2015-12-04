@@ -1,4 +1,4 @@
-package truco.vista2.botoneras;
+package truco.vistaFinal.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import truco.modelo.Mesa;
 import truco.modelo.estadosTruco.*;
-import truco.vista2.Programa;
+import truco.vistaFinal.Programa;
 
 
 public class BotoneraTrucoQuerido extends StackPane{

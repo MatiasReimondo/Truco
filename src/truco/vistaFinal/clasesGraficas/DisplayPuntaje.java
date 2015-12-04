@@ -1,4 +1,4 @@
-package truco.vista2.clasesGraficas;
+package truco.vistaFinal.clasesGraficas;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -9,7 +9,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import truco.modelo.Truco;
-import truco.vista2.Programa;
 
 
 public class DisplayPuntaje extends Parent {
