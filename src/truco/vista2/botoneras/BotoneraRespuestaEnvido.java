@@ -75,11 +75,13 @@ public class BotoneraRespuestaEnvido extends StackPane{
             mesa.getJugadorActivo().quieroEnvido();
             mesa.resolverEnvido();
             interfaz.getHistorial().envidoResuelto();
-            interfaz.getControlIA().accionarGrafico();
             interfaz.actualizarPuntajeGrafico();
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa,interfaz));
 
+            interfaz.getControlIA().accionarGrafico();
+            if(!mesa.IA_Activada()) {
+                interfaz.getPanelIzquierdo().getChildren().clear();
+                interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa, interfaz));
+            }
             interfaz.reload_PanelDerecho();
 
         });
@@ -90,9 +92,11 @@ public class BotoneraRespuestaEnvido extends StackPane{
             mesa.getJugadorActivo().aceptarEnvido();
             interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
             mesa.getJugadorActivo().cantarEnvido(envido);
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().add(new BotoneraRespuestaEnvido(mesa,interfaz));
             interfaz.getControlIA().accionarGrafico();
+            if(!mesa.IA_Activada()) {
+                interfaz.getPanelIzquierdo().getChildren().clear();
+                interfaz.getPanelIzquierdo().getChildren().add(new BotoneraRespuestaEnvido(mesa, interfaz));
+            }
             interfaz.reload_PanelDerecho();
         });
     }
