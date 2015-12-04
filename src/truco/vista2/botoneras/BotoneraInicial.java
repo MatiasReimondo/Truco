@@ -62,8 +62,13 @@ public class BotoneraInicial extends StackPane {
         botonTruco.setOnAction(e->{
             interfaz.getHistorial().jugadorCantoTruco(mesa.getJugadorActivo());
             mesa.getJugadorActivo().cantarTruco();
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa,interfaz));
+            interfaz.getControlIA().accionarGrafico();
+
+            if(mesa.IA_Activada()) {
+                interfaz.getPanelIzquierdo().getChildren().clear();
+                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
+            }
+
             interfaz.reload_PanelDerecho();
         });
     }
@@ -74,9 +79,13 @@ public class BotoneraInicial extends StackPane {
                 mesa.getArbitro().jugadorPuedeCantarTanto(mesa.getJugadorActivo());
                 interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
                 mesa.getJugadorActivo().cantarEnvido(envido);
-                interfaz.getControlIA().comportamientoIA();
-               // interfaz.getPanelIzquierdo().getChildren().clear();
-                //interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+                interfaz.getControlIA().accionarGrafico();
+
+                if(!mesa.IA_Activada()) {
+                    interfaz.getPanelIzquierdo().getChildren().clear();
+                    interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+                }
+
                 interfaz.reload_PanelDerecho();
             } catch (JugadorNoHabilitadoParaCantarTanto b)
             {

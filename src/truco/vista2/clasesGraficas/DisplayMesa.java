@@ -104,7 +104,7 @@ public class DisplayMesa extends StackPane {
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
 
-        interfaz.getControlIA().comportamientoIA();
+        interfaz.getControlIA().accionarGrafico();
 
         interfaz.reload_PanelDerecho();
 

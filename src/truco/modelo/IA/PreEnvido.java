@@ -47,7 +47,7 @@ public class PreEnvido implements Comportamiento {
             }
 
        if(seCanto( Envido.class) && !enJuego(Envido.class)) {                           //Caso C: El juegador canto Envido, robot decide si acepta el envido.
-           if (robot.getEnvido() >= 27 && r.nextInt(10) > 1) {
+           if (robot.getEnvido() >= 26 && r.nextInt(10) > 1) {
                if (robot.getEnvido() >= 28 && r.nextInt(10) > 3) {
                    robot.aceptarEnvido();                                                  //Caso C.1: Si robot tiene al menos 28 de envido, puede subir la apuesta a Envido Envido.
                    robot.cantarEnvido(new Envido());
@@ -59,10 +59,10 @@ public class PreEnvido implements Comportamiento {
                    return;
                }
                robot.quieroEnvido();                                                      //Caso C.3: Si robot, no sube la puesta, muy probablemente solo acepte el envido.
-               mesa.resolverEnvido();
+               //
                return;
            } else {
-
+               System.out.print(robot.getEnvido());
                robot.noQuieroEnvido();                                                         //Caso D: Si robot tiene menos de 27 de envido y el jugador canto envido, robot no acepta.
                return;
            }
@@ -80,7 +80,7 @@ public class PreEnvido implements Comportamiento {
                     return;
                 }
                 robot.quieroEnvido();                                                     //Caso E.3: robot solo acepta el Envido Envido;
-                mesa.resolverEnvido();
+                
                 return;
             }
             else {                                                                      //Caso E.4: robot no acepta el Envido Envido;
@@ -96,7 +96,7 @@ public class PreEnvido implements Comportamiento {
                     return;
                 }
                 robot.quieroEnvido();                                                     //Caso F.2: robot acepta la apuesta.
-                mesa.resolverEnvido();
+                
                 return;
             }
             else {
@@ -107,13 +107,8 @@ public class PreEnvido implements Comportamiento {
         if(seCanto(FaltaEnvido.class))
             if(robot.getEnvido()>=31 && r.nextInt(10)!=0){                                 //Caso G: Si robot tiene al menos 31 de tanto, tiene 10% de probabilidad de no querer el Falta Envido.
                 robot.quieroEnvido();
-                mesa.resolverEnvido();
+                
             }
-    }
-
-    public void comportamientoTruco(){
-
-
     }
 
     @Override

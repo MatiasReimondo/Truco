@@ -70,7 +70,7 @@ public class BotoneraRespuestaTruco extends StackPane {
             mesa.getJugadorActivo().quieroTruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraTrucoQuerido(mesa,interfaz));
-            interfaz.getControlIA().comportamientoIA();
+            interfaz.getControlIA().accionarGrafico();
             interfaz.reload_PanelDerecho();
         });
     }
@@ -93,7 +93,7 @@ public class BotoneraRespuestaTruco extends StackPane {
                 mesa.getJugadorActivo().cantarRetruco();
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                interfaz.getControlIA().comportamientoIA();
+                interfaz.getControlIA().accionarGrafico();
                 interfaz.reload_PanelDerecho();
             }
         });
@@ -109,7 +109,7 @@ public class BotoneraRespuestaTruco extends StackPane {
                 mesa.getJugadorActivo().cantarRetruco();
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                interfaz.getControlIA().comportamientoIA();
+                interfaz.getControlIA().accionarGrafico();
                 interfaz.reload_PanelDerecho();
             }
         });

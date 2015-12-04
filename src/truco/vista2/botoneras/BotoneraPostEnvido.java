@@ -48,6 +48,10 @@ public class BotoneraPostEnvido extends StackPane {
         botonTruco.setOnAction(e->{
             interfaz.getHistorial().jugadorCantoTruco(mesa.getJugadorActivo());
             mesa.getJugadorActivo().cantarTruco();
+            interfaz.getControlIA().accionarGrafico();
+            if(mesa.IA_Activada())
+                return;
+
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa,interfaz));
         });

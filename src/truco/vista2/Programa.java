@@ -48,7 +48,7 @@ public class Programa extends Application {
 
         historial.reset();
 
-        controlIA.comportamientoIA();
+        controlIA.accionarGrafico();
 
     }
 
