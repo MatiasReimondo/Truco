@@ -75,7 +75,7 @@ public class DisplayMesa extends StackPane {
         }
     }
 
-    private SlotJugador encontrarSlot(Jugador jugador){
+    public SlotJugador encontrarSlot(Jugador jugador){
         if(slotJugador1.geJugador().equals(jugador))
             return slotJugador1;
         if(slotJugador2.geJugador().equals(jugador))
@@ -91,38 +91,67 @@ public class DisplayMesa extends StackPane {
 
     public void jugarCartaGrafica(CartaGrafica cartaGrafica) {
 
-        if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) || mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class))
-        {
+         if(seCantoAlgo()){
             showErrorResponderApuesta();
             return;
-        }
+         }
+
         this.encontrarSlot(mesa.getJugadorActivo()).getChildren().clear();
         this.encontrarSlot(mesa.getJugadorActivo()).getChildren().addAll(cartaGrafica, new Label(mesa.getJugadorActivo().getNombre()));
 
+        interfaz.getHistorial().jugadorJugoCarta(mesa.getJugadorActivo(), cartaGrafica.getCarta());
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
 
-        interfaz.reloadPanelDerecho();
+        if(mesa.IA_Activada()) comportamientoIA();
+
+        interfaz.reload_PanelDerecho();
 
         if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
             mesa.resolverMano();
 
-        if(!mesa.getRonda().seEstaJugandoLaPrimera()) {
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(mesa,interfaz));
-        }
+        actualizarBotonera();
+
         if(mesa.getRonda().termino()) {
-            interfaz.reloadPanelDerecho();
-            Button botonRonda=new Button("SIGUIENTE RONDA");
-            botonRonda.setOnAction(e->interfaz.nuevaRondaGrafica());
-            botonRonda.setAlignment(Pos.BOTTOM_CENTER);
-            interfaz.getPanelDerecho().getChildren().addAll(new StackPane(botonRonda));
+            finalDeRonda();
         }
         else
             interfaz.actualizarManoGrafica();
 
     }
 
+    public void comportamientoIA(){
+            while(esTurnoDeLaIA() && !mesa.getRonda().termino()) {
+                mesa.getIA().accionar();
+                interfaz.getControlIA().mostrarAccionDeLaIA();
+                if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
+                    mesa.resolverMano();
+            }
+    }
+
+    private boolean esTurnoDeLaIA(){
+        return mesa.getJugadorActivo().equals(mesa.getJugadorIA());
+    }
+    private boolean seCantoAlgo(){
+        return (mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) ||
+                mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) ||
+                mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class));
+    }
+
+    private void finalDeRonda(){
+        interfaz.reload_PanelDerecho();
+        Button botonRonda=new Button("SIGUIENTE RONDA");
+        botonRonda.setOnAction(e->interfaz.nuevaRondaGrafica());
+        botonRonda.setAlignment(Pos.BOTTOM_CENTER);
+        interfaz.getPanelDerecho().getChildren().addAll(new StackPane(botonRonda));
+    }
+
+    private void actualizarBotonera(){
+        if(mesa.getRonda().getResultados().size()==1) {
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(mesa,interfaz));
+        }
+    }
 
     private void showErrorResponderApuesta(){
         Alert alert=new Alert(Alert.AlertType.ERROR);

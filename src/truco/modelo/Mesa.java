@@ -14,6 +14,7 @@ public class Mesa {
     private int nroJugadores;
     private Jugador jugadorActivo;
     private Jugador jugadorEnEspera;
+    private Jugador jugadorIA;
     private final Arbitro arbitro;
     private int posicionador;
     private Comportamiento IA;
@@ -53,10 +54,15 @@ public class Mesa {
 
     public void setJugadorIA(Jugador jugador){
         IA.setJugador(jugador);
+        jugadorIA=jugador;
     }
     /**GETTERS**/
     public Mazo getMazo(){
         return mazo;
+    }
+
+    public Jugador getJugadorIA() {
+        return jugadorIA;
     }
 
     public List<Jugador> getJugadores() {

@@ -11,20 +11,18 @@ import javafx.stage.Stage;
 import truco.modelo.Truco;
 import truco.modelo.excepciones.ListaJugadoresVaciaException;
 import truco.vista2.botoneras.BotoneraInicial;
-import truco.vista2.clasesGraficas.DisplayMesa;
-import truco.vista2.clasesGraficas.DisplayTurnoJugador;
-import truco.vista2.clasesGraficas.DisplayMano;
-import truco.vista2.clasesGraficas.DisplayPuntaje;
+import truco.vista2.clasesGraficas.*;
 
 public class Programa extends Application {
 
     private Truco truco;
+    private Historial historial=new Historial();
     private DisplayMesa displayMesa;
-
     private VBox boxCentral=new VBox();
     private StackPane panelCentral=new StackPane();
     private StackPane panelIzquierdo=new StackPane();
     private StackPane panelDerecho =new StackPane();
+    private IA_Grafica controlIA;
 
     public static void main(String[] args) {
         launch(args);
@@ -44,11 +42,35 @@ public class Programa extends Application {
         truco.getMesa().nuevaRonda();
         truco.getMesa().repartirCartas();
 
-        reloadPanelIzquierdo();
-        reloadPanelCentral();
-        reloadPanelDerecho();
+        reload_PanelIzquierdo();
+        reload_PanelCentral();
+        reload_PanelDerecho();
 
-        actualizarPuntajeGrafico();
+        historial.reset();
+
+        if(truco.getMesa().IA_Activada())
+            displayMesa.comportamientoIA();
+
+    }
+
+    private void setBotonComenzar(Button boton,Stage stage){
+        boton.setOnAction(e -> {
+            try { displayMainwindow();  }
+            catch (ListaJugadoresVaciaException b) {
+                Alert alert=new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(null);
+                alert.setHeaderText("Debe elegir alguna modalidad de juego antes de comenzar");
+                displayConfiguracion();
+                alert.show();
+                stage.close();
+            }stage.close();});
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        truco=new Truco();
+        displayConfiguracion();
+
     }
 
     /*** GETTERS ***/
@@ -63,8 +85,18 @@ public class Programa extends Application {
     public DisplayMesa getDisplayMesa() {
         return displayMesa;
     }
+
+    public IA_Grafica getControlIA(){
+        return controlIA;
+    }
+
+    public Historial getHistorial() {
+        return historial;
+    }
+
+
     /*** RELOAD SCREEN ***/
-    public void reloadPanelCentral(){
+    public void reload_PanelCentral(){
         boxCentral.getChildren().clear();
         displayMesa =new DisplayMesa(truco.getMesa(),this);
         DisplayMano displayMano =new DisplayMano(truco.getMesa(),this);
@@ -75,20 +107,24 @@ public class Programa extends Application {
 
     }
 
-    public void reloadPanelDerecho(){
+    public void reload_PanelDerecho(){
         panelDerecho.getChildren().clear();
-        StackPane pane=new StackPane();
-        pane.getChildren().addAll(new DisplayTurnoJugador(truco.getMesa(),this));
-        pane.setAlignment(Pos.BOTTOM_CENTER);
-        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco),pane);
+
+        VBox box=new VBox();
+        box.setSpacing(30);
+        box.getChildren().addAll(historial,new DisplayTurnoJugador(truco.getMesa(),this));
+        box.setAlignment(Pos.CENTER);
+
+        panelDerecho.getChildren().addAll(new DisplayPuntaje(truco),box);
     }
 
-    public void reloadPanelIzquierdo(){
+    public void reload_PanelIzquierdo(){
         panelIzquierdo.getChildren().clear();
         panelIzquierdo.getChildren().addAll(new BotoneraInicial(truco.getMesa(),this));
         panelIzquierdo.setAlignment(Pos.BOTTOM_LEFT);
     }
 
+    /*** VENTANAS ***/
     private void displayConfiguracion(){
         Stage stage=new Stage();
         stage.setTitle("TRUCO : Configuracion");
@@ -148,7 +184,7 @@ public class Programa extends Application {
         boton1v1.setOnAction(e->truco.nuevoJuego2Jugadores());
         boton2v2.setOnAction(e->truco.nuevoJuego4Jugadores());
         boton3vs3.setOnAction(e->truco.nuevoJuego6Jugadores());
-        botonVsIA.setOnAction(e->truco.jugadorVsIA());
+        botonVsIA.setOnAction(e->{truco.jugadorVsIA(); controlIA=new IA_Grafica(truco,this);});
 
         setBotonComenzar(botonComenzar, stage);
 
@@ -160,7 +196,7 @@ public class Programa extends Application {
 
         Stage stage=new Stage();
         stage.setHeight(500);
-        stage.setWidth(800);
+        stage.setWidth(850);
         stage.setResizable(false);
         stage.setTitle("TRUCO");
 
@@ -172,25 +208,25 @@ public class Programa extends Application {
 
         //BASE Y FONDO
         Pane base=new Pane();
-        base.setPrefSize(800,500);
+        base.setPrefSize(850,500);
 
         Region fondo=new Region();
-        fondo.setPrefSize(800,500);
+        fondo.setPrefSize(850,500);
         fondo.setStyle("-fx-background-color: rgba(0, 0, 0, 1)");
 
         HBox baseLayout=new HBox(5);
         baseLayout.setPadding(new Insets(5,5,5,5));
 
         //ZONA IZQUIERDA
-        reloadPanelIzquierdo();
+        reload_PanelIzquierdo();
 
         //ZONA CENTRO
-        reloadPanelCentral();
+        reload_PanelCentral();
 
         //ZONA DERECHA
         panelDerecho.getChildren().addAll(new DisplayPuntaje(truco));
         panelDerecho.setAlignment(Pos.TOP_CENTER);
-        reloadPanelDerecho();
+        reload_PanelDerecho();
 
         //ZONA MANO DEL JUGADOR ACTIVO
         baseLayout.getChildren().addAll(panelIzquierdo,panelCentral, panelDerecho);
@@ -200,25 +236,6 @@ public class Programa extends Application {
         stage.show();
     }
 
-    private void setBotonComenzar(Button boton,Stage stage){
-        boton.setOnAction(e -> {
-            try { displayMainwindow();  }
-            catch (ListaJugadoresVaciaException b) {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle(null);
-                alert.setHeaderText("Debe elegir alguna modalidad de juego antes de comenzar");
-                displayConfiguracion();
-                alert.show();
-                stage.close();
-            }stage.close();});
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        truco=new Truco();
-        displayConfiguracion();
-
-    }
 
 
 }

@@ -62,61 +62,46 @@ public class BotoneraRespuestaEnvido extends StackPane{
         this.getChildren().addAll(vBox);
 
         setBotonQuiero();
-        setBotonEnvido();
-        setBotonRealEnvido();
-        setBotonFaltaEnvido();
+        setBotonEnvido(botonEnvido,new Envido());
+        setBotonEnvido(botonRealEnvido,new RealEnvido());
+        setBotonEnvido(botonFaltaEnvido,new FaltaEnvido());
         setBotonNoQuiero();
 
     }
 
     private void setBotonQuiero(){
         botonQuiero.setOnAction(e->{
+            interfaz.getHistorial().jugadorQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido().getEnvidoCantado());
             mesa.getJugadorActivo().quieroEnvido();
             mesa.resolverEnvido();
+            interfaz.getHistorial().envidoResuelto();
             interfaz.actualizarPuntajeGrafico();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
 
         });
     }
 
-    private void setBotonEnvido(){
-        botonEnvido.setOnAction(e->{
+    private void setBotonEnvido(Button boton,Envido envido){
+        boton.setOnAction(e->{
             mesa.getJugadorActivo().aceptarEnvido();
-            mesa.getJugadorActivo().cantarEnvido(new Envido());
+            interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
+            mesa.getJugadorActivo().cantarEnvido(envido);
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraRespuestaEnvido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
         });
     }
 
-    private void setBotonRealEnvido(){
-        botonRealEnvido.setOnAction(e->{
-            mesa.getJugadorActivo().aceptarEnvido();
-            mesa.getJugadorActivo().cantarEnvido(new RealEnvido());
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().add(new BotoneraRespuestaEnvido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
-        });
-    }
-
-    private void setBotonFaltaEnvido(){
-        botonFaltaEnvido.setOnAction(e->{
-            mesa.getJugadorActivo().aceptarEnvido();
-            mesa.getJugadorActivo().cantarEnvido(new FaltaEnvido());
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
-        });
-    }
 
     private void setBotonNoQuiero(){
         botonNoQuiero.setOnAction(e->{
+                    interfaz.getHistorial().jugadorNoQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido().getEnvidoCantado());
                     mesa.getJugadorActivo().noQuieroEnvido();
                     interfaz.getPanelIzquierdo().getChildren().clear();
                     interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(mesa,interfaz));
-                    interfaz.reloadPanelDerecho();
+                    interfaz.reload_PanelDerecho();
                 }
         );
     }

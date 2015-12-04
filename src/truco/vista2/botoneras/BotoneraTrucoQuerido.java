@@ -2,7 +2,6 @@ package truco.vista2.botoneras;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,11 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import truco.modelo.Mesa;
-import truco.modelo.envido.EnvidoTerminado;
 import truco.modelo.estadosTruco.*;
 import truco.vista2.Programa;
-
-import java.util.Collection;
 
 
 public class BotoneraTrucoQuerido extends StackPane{
@@ -68,9 +64,10 @@ public class BotoneraTrucoQuerido extends StackPane{
 
     private void setBotonNoQuiero(){
         botonNoQuiero.setOnAction(e->{
+            interfaz.getHistorial().jugadorNoQuisoTruco(mesa.getJugadorActivo(),mesa.getRonda().getTruco());
             mesa.getJugadorActivo().noQuieroTruco();
             interfaz.nuevaRondaGrafica();
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
         });
     }
 
@@ -79,10 +76,11 @@ public class BotoneraTrucoQuerido extends StackPane{
             if(!mesa.getJugadorActivo().tieneElQuiero())
                 showErrorNoTieneElQuiero();
             else {
+                interfaz.getHistorial().jugadorCantoRetruco(mesa.getJugadorActivo());
                 mesa.getJugadorActivo().cantarRetruco();
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                interfaz.reloadPanelDerecho();
+                interfaz.reload_PanelDerecho();
             }
         });
     }
@@ -92,17 +90,19 @@ public class BotoneraTrucoQuerido extends StackPane{
                 if(!mesa.getJugadorActivo().tieneElQuiero())
                     showErrorNoTieneElQuiero();
                 else {
+                    interfaz.getHistorial().jugadorCantoValeCuatro(mesa.getJugadorActivo());
                     mesa.getJugadorActivo().aceptarTruco();
                     mesa.getJugadorActivo().cantarRetruco();
                     interfaz.getPanelIzquierdo().getChildren().clear();
                     interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                    interfaz.reloadPanelDerecho();
+                    interfaz.reload_PanelDerecho();
                 }
         });
     }
 
     void setBotonIrseAlMazo(){
         botonIrseAlMazo.setOnAction(e->{
+            interfaz.getHistorial().jugadorSeFueAlMazo(mesa.getJugadorActivo());
             mesa.getJugadorActivo().irseAlMazo();
             interfaz.nuevaRondaGrafica();
         });

@@ -66,10 +66,11 @@ public class BotoneraRespuestaTruco extends StackPane {
 
     private void setBotonQuiero(){
         botonQuiero.setOnAction(e->{
+            interfaz.getHistorial().jugadorQuisoTruco(mesa.getJugadorActivo(),mesa.getRonda().getTruco());
             mesa.getJugadorActivo().quieroTruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraTrucoQuerido(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
         });
     }
 
@@ -77,7 +78,7 @@ public class BotoneraRespuestaTruco extends StackPane {
         botonNoQuiero.setOnAction(e->{
             mesa.getJugadorActivo().noQuieroTruco();
             interfaz.nuevaRondaGrafica();
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
         });
     }
 
@@ -87,10 +88,11 @@ public class BotoneraRespuestaTruco extends StackPane {
                 showErrorNoTieneElQuiero();
             else {
                 mesa.getJugadorActivo().aceptarTruco();
+                interfaz.getHistorial().jugadorCantoRetruco(mesa.getJugadorActivo());
                 mesa.getJugadorActivo().cantarRetruco();
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                interfaz.reloadPanelDerecho();
+                interfaz.reload_PanelDerecho();
             }
         });
     }
@@ -100,11 +102,12 @@ public class BotoneraRespuestaTruco extends StackPane {
             if(!mesa.getJugadorActivo().tieneElQuiero())
                 showErrorNoTieneElQuiero();
             else {
+                interfaz.getHistorial().jugadorCantoValeCuatro(mesa.getJugadorActivo());
                 mesa.getJugadorActivo().aceptarTruco();
                 mesa.getJugadorActivo().cantarRetruco();
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
-                interfaz.reloadPanelDerecho();
+                interfaz.reload_PanelDerecho();
             }
         });
     }

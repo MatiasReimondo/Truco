@@ -60,21 +60,23 @@ public class BotoneraInicial extends StackPane {
 
     private void setBotonTruco() {
         botonTruco.setOnAction(e->{
+            interfaz.getHistorial().jugadorCantoTruco(mesa.getJugadorActivo());
             mesa.getJugadorActivo().cantarTruco();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa,interfaz));
-            interfaz.reloadPanelDerecho();
+            interfaz.reload_PanelDerecho();
         });
     }
 
-    void setBotonEnvido(Button boton,Envido envido) {
+    private void setBotonEnvido(Button boton,Envido envido) {
         boton.setOnAction(e -> {
             try {
                 mesa.getArbitro().jugadorPuedeCantarTanto(mesa.getJugadorActivo());
+                interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
                 mesa.getJugadorActivo().cantarEnvido(envido);
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
-                interfaz.reloadPanelDerecho();
+                interfaz.reload_PanelDerecho();
             } catch (JugadorNoHabilitadoParaCantarTanto b)
             {
                 diplayErrorJugadorNoEnvido();
@@ -84,6 +86,7 @@ public class BotoneraInicial extends StackPane {
 
     void setBotonIrseAlMazo(){
         botonIrseAlMazo.setOnAction(e->{
+            interfaz.getHistorial().jugadorSeFueAlMazo(mesa.getJugadorActivo());
             mesa.getJugadorActivo().irseAlMazo();
             interfaz.nuevaRondaGrafica();
         });
