@@ -48,8 +48,7 @@ public class Programa extends Application {
 
         historial.reset();
 
-        if(truco.getMesa().IA_Activada())
-            displayMesa.comportamientoIA();
+        controlIA.comportamientoIA();
 
     }
 

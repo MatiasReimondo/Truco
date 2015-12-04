@@ -21,6 +21,22 @@ public class IA_Grafica {
         this.interfaz=interfaz;
     }
 
+    public void comportamientoIA(){
+        if(truco.getMesa().IA_Activada()) {
+            if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
+                truco.getMesa().resolverMano();
+            while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
+                truco.getMesa().getIA().accionar();
+                interfaz.getControlIA().mostrarAccionDeLaIA();
+                if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
+                    truco.getMesa().resolverMano();
+            }
+        }
+    }
+
+    private boolean esTurnoDeLaIA(){
+        return truco.getMesa().getJugadorActivo().equals(truco.getMesa().getJugadorIA());
+    }
     private void mostrarIAJugoCarta(){
 
         interfaz.getDisplayMesa().encontrarSlot(truco.getMesa().getJugadorIA()).getChildren().clear();

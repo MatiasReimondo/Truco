@@ -104,7 +104,7 @@ public class DisplayMesa extends StackPane {
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
 
-        if(mesa.IA_Activada()) comportamientoIA();
+        interfaz.getControlIA().comportamientoIA();
 
         interfaz.reload_PanelDerecho();
 
@@ -121,18 +121,6 @@ public class DisplayMesa extends StackPane {
 
     }
 
-    public void comportamientoIA(){
-            while(esTurnoDeLaIA() && !mesa.getRonda().termino()) {
-                mesa.getIA().accionar();
-                interfaz.getControlIA().mostrarAccionDeLaIA();
-                if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
-                    mesa.resolverMano();
-            }
-    }
-
-    private boolean esTurnoDeLaIA(){
-        return mesa.getJugadorActivo().equals(mesa.getJugadorIA());
-    }
     private boolean seCantoAlgo(){
         return (mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) ||
                 mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) ||
