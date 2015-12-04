@@ -15,14 +15,14 @@ import truco.vista2.clasesGraficas.*;
 
 public class Programa extends Application {
 
-    private Truco truco;
+    private Truco truco=new Truco();
     private Historial historial=new Historial();
     private DisplayMesa displayMesa;
     private VBox boxCentral=new VBox();
     private StackPane panelCentral=new StackPane();
     private StackPane panelIzquierdo=new StackPane();
     private StackPane panelDerecho =new StackPane();
-    private IA_Grafica controlIA;
+    private IA_Grafica controlIA=new IA_Grafica(truco,this);
 
     public static void main(String[] args) {
         launch(args);
@@ -127,8 +127,14 @@ public class Programa extends Application {
     private void displayConfiguracion(){
         Stage stage=new Stage();
         stage.setTitle("TRUCO : Configuracion");
-        HBox triBox=new HBox();
-        triBox.setPrefSize(350,100);
+        HBox cuadBox=new HBox();
+        cuadBox.setPrefSize(450, 100);
+
+        //INFORMACION
+        Button botonInformacion=new Button(" Informacion ");
+        botonInformacion.setAlignment(Pos.CENTER);
+        StackPane panelInformacion=new StackPane(botonInformacion);
+        panelInformacion.setPadding(new Insets(10,10,10,10));
 
         //SE JUEGA O NO CON FLOR
         StackPane panelIzquierdo=new StackPane();
@@ -174,19 +180,19 @@ public class Programa extends Application {
         panelDerecho.setPadding(new Insets(10,10,10,10));
         panelDerecho.getChildren().addAll(botonComenzar);
 
-        triBox.getChildren().addAll(panelIzquierdo,panelCentral,panelDerecho);
-        Scene scene=new Scene(triBox);
+        cuadBox.getChildren().addAll(panelInformacion,panelIzquierdo,panelCentral,panelDerecho);
+        Scene scene=new Scene(cuadBox);
         stage.setScene(scene);
 
+        botonInformacion.setOnAction(e->displayInformacion());
         botonSI.setOnAction(e->truco.seJuegaConFlor());
         botonNO.setOnAction(e->truco.seJuegaSinFlor());
         boton1v1.setOnAction(e->truco.nuevoJuego2Jugadores());
         boton2v2.setOnAction(e->truco.nuevoJuego4Jugadores());
         boton3vs3.setOnAction(e->truco.nuevoJuego6Jugadores());
-        botonVsIA.setOnAction(e->{truco.jugadorVsIA(); controlIA=new IA_Grafica(truco,this);});
+        botonVsIA.setOnAction(e->{truco.jugadorVsIA(); truco.seJuegaSinFlor();});
 
         setBotonComenzar(botonComenzar, stage);
-
 
         stage.show();
     }
@@ -235,6 +241,12 @@ public class Programa extends Application {
         stage.show();
     }
 
-
+    private void displayInformacion(){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Informacion sobre la Aplicacion");
+        alert.setContentText("  7507.- Algoritmos y programacion 3 : Tp final 'Truco'\n GRUPO NRO 2 \n  Integrantes:                     Padron nro:\n  Ezequiel Cruz Avila          95784\n  Matias Reimondo            95899\n  Jessica Aguila Visitacion  93551");
+        alert.setTitle(" TRUCO: Acerca de");
+        alert.show();
+    }
 
 }
