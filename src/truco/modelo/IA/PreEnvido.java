@@ -124,7 +124,7 @@ public class PreEnvido implements Comportamiento {
         if(mesa.getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) || !mesa.getRonda().seEstaJugandoLaPrimera()){
             mesa.setIA(new PostEnvido());
             mesa.setJugadorIA(robot);
-            mesa.getIA().accionar();
+            //mesa.getIA().accionar();
             return;
         }
         if(mesa.getJugadorActivo().equals(robot)) {

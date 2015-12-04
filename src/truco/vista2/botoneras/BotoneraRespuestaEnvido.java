@@ -71,14 +71,15 @@ public class BotoneraRespuestaEnvido extends StackPane{
 
     private void setBotonQuiero(){
         botonQuiero.setOnAction(e->{
-            interfaz.getHistorial().jugadorQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido().getEnvidoCantado());
+            interfaz.getHistorial().jugadorQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido());
             mesa.getJugadorActivo().quieroEnvido();
             mesa.resolverEnvido();
             interfaz.getHistorial().envidoResuelto();
+            interfaz.getControlIA().comportamientoIA();
             interfaz.actualizarPuntajeGrafico();
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa,interfaz));
-            interfaz.getControlIA().comportamientoIA();
+
             interfaz.reload_PanelDerecho();
 
         });

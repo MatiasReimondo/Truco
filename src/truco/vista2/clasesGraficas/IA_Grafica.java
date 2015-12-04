@@ -1,6 +1,8 @@
 package truco.vista2.clasesGraficas;
 
 import truco.modelo.Truco;
+import truco.modelo.envido.Envido;
+import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.envido.EnvidoTerminado;
 import truco.modelo.estadosTruco.RetrucoCantado;
 import truco.modelo.estadosTruco.RetrucoQuerido;
@@ -57,22 +59,35 @@ public class IA_Grafica {
             mostrarIAJugoCarta();
         }
 
-        if(truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null && !truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class)){
-            mostrarIACantoEnvido();
+        // CUANDO LA IA NO QUIERE EL ENVIDO
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) && truco.getMesa().getRonda().getManoEnJuego().size()>0 && truco.getMesa().getRonda().seEstaJugandoLaPrimera()) {
+            interfaz.getHistorial().jugadorNoQuisoEnvido(truco.getMesa().getJugadorIA(), new Envido());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(truco.getMesa(),interfaz));
         }
 
+        // CUANDO LA IA CANTA ALGUN ENVIDO SIN QUE HAYA OTRO CANTADO PREVIAMENTE
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class) && truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null){
+            interfaz.getHistorial().jugadorCantoEnvido(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getEnvido().getEnvidoCantado());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(truco.getMesa(),interfaz));
+        }
+
+        // CUANDO LA IA CANTA TRUCO
         if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoCantado.class)) {
             interfaz.getHistorial().jugadorCantoTruco(truco.getMesa().getJugadorIA());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
         }
 
+        // CUANDO LA IA CANTA RETRUCO
         if(truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoCantado.class)) {
             interfaz.getHistorial().jugadorCantoRetruco(truco.getMesa().getJugadorIA());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
         }
 
+        // CUANDO LA IA CANTA VALE CUATRO
          if(truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroCantado.class)) {
              interfaz.getHistorial().jugadorCantoValeCuatro(truco.getMesa().getJugadorIA());
              interfaz.getPanelIzquierdo().getChildren().clear();
