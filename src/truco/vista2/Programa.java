@@ -110,7 +110,7 @@ public class Programa extends Application {
         panelDerecho.getChildren().clear();
 
         VBox box=new VBox();
-        box.setSpacing(30);
+        box.setSpacing(10);
         box.getChildren().addAll(historial,new DisplayTurnoJugador(truco.getMesa(),this));
         box.setAlignment(Pos.CENTER);
 
