@@ -5,7 +5,6 @@ import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.envido.EnvidoTerminado;
 import truco.modelo.estadosTruco.RetrucoCantado;
-import truco.modelo.estadosTruco.RetrucoQuerido;
 import truco.modelo.estadosTruco.TrucoCantado;
 import truco.modelo.estadosTruco.ValeCuatroCantado;
 import truco.vista2.Programa;
@@ -58,6 +57,13 @@ public class IA_Grafica {
         if(truco.getMesa().getRonda().getManoEnJuego().containsKey(truco.getMesa().getJugadorIA())) {
             mostrarIAJugoCarta();
         }
+        //CUANDO LA IA QUIERE EL ENVIDO
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(Envido.class)){
+            interfaz.getHistorial().jugadorQuisoEnvido(truco.getMesa().getJugadorIA(),new Envido());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(truco.getMesa(),interfaz));
+        }
+
 
         // CUANDO LA IA NO QUIERE EL ENVIDO
         if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) && truco.getMesa().getRonda().getManoEnJuego().size()>0 && truco.getMesa().getRonda().seEstaJugandoLaPrimera()) {
