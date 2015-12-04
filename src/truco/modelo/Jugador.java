@@ -1,6 +1,9 @@
 package truco.modelo;
 import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
+import truco.modelo.estadosTruco.RetrucoCantado;
+import truco.modelo.estadosTruco.TrucoCantado;
+import truco.modelo.estadosTruco.ValeCuatroCantado;
 import truco.modelo.excepciones.CartaNoEncontradaException;
 import truco.modelo.excepciones.JugadorNoTieneFlorException;
 import truco.modelo.excepciones.ManoExcedidaEnCartasException;
@@ -190,6 +193,7 @@ public class Jugador {
     }
 
     public void noQuieroTruco(){
+        if(!mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class) || !mesa.getRonda().getTruco().getClass().equals(RetrucoCantado.class) || !mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class))
         mesa.siguienteJugador();
         mesa.getJugadorActivo().getEquipo().sumarPuntos(mesa.getRonda().getTruco().getPuntaje());
         mesa.jugadorAnterior();

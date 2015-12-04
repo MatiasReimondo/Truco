@@ -104,12 +104,12 @@ public class DisplayMesa extends StackPane {
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
 
+        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
+            mesa.resolverMano();
+
         interfaz.getControlIA().accionarGrafico();
 
         interfaz.reload_PanelDerecho();
-
-        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
-            mesa.resolverMano();
 
         actualizarBotonera();
 

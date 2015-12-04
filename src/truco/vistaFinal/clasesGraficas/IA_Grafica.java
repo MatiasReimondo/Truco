@@ -20,23 +20,16 @@ public class IA_Grafica {
     }
 
     public void accionarGrafico(){
-        System.out.println("Se llamo a accionarGrafico");
         if(truco.getMesa().IA_Activada() && esTurnoDeLaIA()) {
-            System.out.println("La IA esta activada y es turno de la IA");
-            if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores()) {
-                System.out.println("Cuando le toca jugar a la IA primero debe resolver la mano");
-                truco.getMesa().resolverMano();
-            }
-            while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
+
+            while (esTurnoDeLaIA()) {
 
                 truco.getMesa().getIA().accionar();
                 interfaz.getControlIA().mostrarAcciones();
-                System.out.println("La IA ya acciono");
 
-                if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores()) {
-                    System.out.println("Despues de que la IA acciona, se termino la mano en juego");
+                // CASO EN QUE DESPUES DE JUGAR LA IA SE DEBA RESOLVER LA MANO
+                if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
                     truco.getMesa().resolverMano();
-                }
 
                 if(truco.getMesa().getRonda().termino()) {
                     System.out.println("Despues de que la IA acciona, termino la ronda");
@@ -53,7 +46,7 @@ public class IA_Grafica {
     }
 
     public void mostrarAcciones(){
-        showJugarCarta();
+        comportamientoJugarCartaGrafico();
         comportamientoEnvidoGrafico();
         comportamientoTrucoGrafico();
     }
@@ -167,12 +160,16 @@ public class IA_Grafica {
         interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(truco.getMesa(),interfaz));
     }
 
-    private void showJugarCarta(){
+    private void comportamientoJugarCartaGrafico(){
 
         if(truco.getMesa().getRonda().getManoEnJuego().containsKey(truco.getMesa().getJugadorIA())) {
             interfaz.getDisplayMesa().encontrarSlot(truco.getMesa().getJugadorIA()).getChildren().clear();
             interfaz.getDisplayMesa().encontrarSlot(truco.getMesa().getJugadorIA()).getChildren().add(new CartaGrafica(truco.getMesa().getRonda().getManoEnJuego().get(truco.getMesa().getJugadorIA()), interfaz.getDisplayMesa()));
             interfaz.getHistorial().jugadorJugoCarta(truco.getMesa().getJugadorIA(), truco.getMesa().getRonda().getManoEnJuego().get(truco.getMesa().getJugadorIA()));
+        }
+        if(!truco.getMesa().getRonda().termino()){
+            interfaz.actualizarManoGrafica();
+            interfaz.reload_PanelDerecho();
         }
     }
 

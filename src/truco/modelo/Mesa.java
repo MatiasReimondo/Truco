@@ -204,8 +204,11 @@ public class Mesa {
         posicionador=0;
         jugadorEnEspera=null;
 
-        if(jugadorVsIA)
-            IA=IA.reiniciar();
+        if(jugadorVsIA) {
+            IA = IA.reiniciar();
+            IA.setMesa(this);
+            IA.setJugador(jugadorIA);
+        }
 
         jugadores.forEach(truco.modelo.Jugador::dejarCartas);
     }
@@ -251,6 +254,11 @@ public class Mesa {
                         return;
                     }
                     ronda.resultadoMano(null);
+                    return;
+                }
+                if(!ronda.getResultados().contains(null) && equipo==null) {
+                    ronda.getResultados().get(0).sumarPuntos(ronda.getTruco().getPuntaje());
+                    ronda.terminar();
                     return;
                 }
                 if (ronda.getResultados().contains(equipo)){

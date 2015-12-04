@@ -31,27 +31,28 @@ public class PostEnvido implements Comportamiento {
     }
 
     @Override
-    public void accionar(){
-        if(mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class))
-            if(robot.getFuerzaTotal()>=28 || mesa.getRonda().getResultados().contains(robot.getEquipo())) {
+    public void accionar() {
+        if (mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class))
+            if (robot.getFuerzaTotal() >= 28 || mesa.getRonda().getResultados().contains(robot.getEquipo())) {
                 robot.cantarTruco();
                 mesa.setIA(new EsperandoRespuestaTruco());
                 mesa.setJugadorIA(robot);
                 return;
             }
 
-        if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class)) {
+        if (mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class)) {
             if (robot.getFuerzaTotal() >= 25) {
                 robot.quieroTruco();
                 mesa.setIA(new TrucoQuerido());
                 mesa.setJugadorIA(robot);
-                mesa.getIA().accionar();
+                //mesa.getIA().accionar();
                 return;
-            } else {
+            }
+            else {
                 robot.noQuieroTruco();
                 return;
             }
-        }
+    }
         jugarCartaMasFuerte(robot);
     }
 

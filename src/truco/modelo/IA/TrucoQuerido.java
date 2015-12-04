@@ -49,8 +49,10 @@ public class TrucoQuerido implements ComportamientoTrucoQuerido {
                     mesa.setJugadorIA(robot);
                 }
             }
-        else
-            robot.noQuieroTruco();
+        else {
+                robot.noQuieroTruco();
+                return;
+            }
 
         jugarCartaMasFuerte(robot);
     }

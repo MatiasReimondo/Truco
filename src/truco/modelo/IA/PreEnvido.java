@@ -35,6 +35,9 @@ public class PreEnvido implements Comportamiento {
     public void comportamientoEnvido(){
         Random r=new Random();
 
+        if(!mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class))
+            return;
+
         if(mesa.getArbitro().jugadorEsPie(robot) && enJuego(EnvidoNoCantado.class) && mesa.getRonda().getEnvido().getEnvidoCantado()==null && mesa.getRonda().seEstaJugandoLaPrimera())
             if (robot.getEnvido()>=24 && r.nextInt(10)<8) {                            //Caso B: robot es pie, decide si cantar envido en caso de que no se haya cantado previamente.
                 robot.cantarEnvido(new Envido());
@@ -59,7 +62,6 @@ public class PreEnvido implements Comportamiento {
                    return;
                }
                robot.quieroEnvido(); mesa.resolverEnvido();                                                      //Caso C.3: Si robot, no sube la puesta, muy probablemente solo acepte el envido.
-               //
                return;
            } else {
                System.out.print(robot.getEnvido());
@@ -80,7 +82,6 @@ public class PreEnvido implements Comportamiento {
                     return;
                 }
                 robot.quieroEnvido(); mesa.resolverEnvido();                                                     //Caso E.3: robot solo acepta el Envido Envido;
-                
                 return;
             }
             else {                                                                      //Caso E.4: robot no acepta el Envido Envido;
@@ -96,7 +97,6 @@ public class PreEnvido implements Comportamiento {
                     return;
                 }
                 robot.quieroEnvido(); mesa.resolverEnvido();                                                     //Caso F.2: robot acepta la apuesta.
-                
                 return;
             }
             else {
@@ -113,13 +113,15 @@ public class PreEnvido implements Comportamiento {
 
     @Override
     public void accionar(){
-        if(mesa.getRonda().seEstaJugandoLaPrimera())
+        if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)) {
             comportamientoEnvido();
+            //return;
+        }
 
-        if(mesa.getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) || !mesa.getRonda().seEstaJugandoLaPrimera()){
+        if(mesa.getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) || !mesa.getRonda().seEstaJugandoLaPrimera() || !mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)){
             mesa.setIA(new PostEnvido());
             mesa.setJugadorIA(robot);
-            //mesa.getIA().accionar();
+            mesa.getIA().accionar();
             return;
         }
         if(mesa.getJugadorActivo().equals(robot)) {
