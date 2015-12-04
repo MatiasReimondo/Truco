@@ -20,18 +20,29 @@ public class IA_Grafica {
     }
 
     public void accionarGrafico(){
+        System.out.println("Se llamo a accionarGrafico");
         if(truco.getMesa().IA_Activada() && esTurnoDeLaIA()) {
-            if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
+            System.out.println("La IA esta activada y es turno de la IA");
+            if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores()) {
+                System.out.println("Cuando le toca jugar a la IA primero debe resolver la mano");
                 truco.getMesa().resolverMano();
+            }
             while (esTurnoDeLaIA() && !truco.getMesa().getRonda().termino()) {
+                System.out.println("Sigue siendo turno de la IA, despues de la primera accion");
                 truco.getMesa().getIA().accionar();
                 interfaz.getControlIA().mostrarAcciones();
 
-                if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
+                if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores()) {
+                    System.out.println("Despues de que la IA acciona, se termino la mano en juego");
                     truco.getMesa().resolverMano();
+                }
 
-                if(truco.getMesa().getRonda().termino())
+                if(truco.getMesa().getRonda().termino()) {
+                    System.out.println("Despues de que la IA acciona, termino la ronda");
+                    interfaz.finalDeRonda();
                     break;
+                }
+                System.out.println(4);
             }
         }
     }

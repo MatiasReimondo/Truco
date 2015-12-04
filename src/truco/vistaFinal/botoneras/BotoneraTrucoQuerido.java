@@ -91,8 +91,7 @@ public class BotoneraTrucoQuerido extends StackPane{
                     showErrorNoTieneElQuiero();
                 else {
                     interfaz.getHistorial().jugadorCantoValeCuatro(mesa.getJugadorActivo());
-                    mesa.getJugadorActivo().aceptarTruco();
-                    mesa.getJugadorActivo().cantarRetruco();
+                    mesa.getJugadorActivo().cantarValeCuatro();
                     interfaz.getPanelIzquierdo().getChildren().clear();
                     interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
                     interfaz.reload_PanelDerecho();

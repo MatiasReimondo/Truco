@@ -70,10 +70,13 @@ public class BotoneraInicial extends StackPane {
     private void setBotonFlor() {
         botonFlor.setOnAction(e->{
             interfaz.getHistorial().jugadorCantoFlor(mesa.getJugadorActivo());
-            try{mesa.getJugadorActivo().cantarFlor();
-            interfaz.getPanelIzquierdo().getChildren().clear();
-            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
-            interfaz.reload_PanelDerecho();}
+            try{
+                mesa.getJugadorActivo().cantarFlor();
+                mesa.resolverFlor();
+                interfaz.getHistorial().seResolvioLaFlor();
+                interfaz.getPanelIzquierdo().getChildren().clear();
+                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(mesa, interfaz));
+                interfaz.reload_PanelDerecho();}
             catch (JugadorNoTieneFlorException b) {
                 displayErrorNoTieneFlor();
             }

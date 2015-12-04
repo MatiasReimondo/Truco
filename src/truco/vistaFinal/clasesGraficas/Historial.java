@@ -96,4 +96,9 @@ public class Historial extends TextArea {
         this.appendText(contadorAccion+". "+jugador.getNombre()+" canto Flor.\n");
         contadorAccion++;
     }
+
+    public void seResolvioLaFlor() {
+        this.appendText(contadorAccion+". Se resolvio la Flor en juego.\n");
+        contadorAccion++;
+    }
 }
