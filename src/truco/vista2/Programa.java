@@ -190,7 +190,7 @@ public class Programa extends Application {
         boton1v1.setOnAction(e->truco.nuevoJuego2Jugadores());
         boton2v2.setOnAction(e->truco.nuevoJuego4Jugadores());
         boton3vs3.setOnAction(e->truco.nuevoJuego6Jugadores());
-        botonVsIA.setOnAction(e->{truco.jugadorVsIA(); truco.seJuegaSinFlor();});
+        botonVsIA.setOnAction(e->{truco.jugadorVsIA(); controlIA=new IA_Grafica(truco,this);});
 
         setBotonComenzar(botonComenzar, stage);
 

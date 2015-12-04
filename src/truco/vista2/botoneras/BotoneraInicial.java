@@ -79,6 +79,7 @@ public class BotoneraInicial extends StackPane {
                 mesa.getArbitro().jugadorPuedeCantarTanto(mesa.getJugadorActivo());
                 interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
                 mesa.getJugadorActivo().cantarEnvido(envido);
+
                 interfaz.getControlIA().accionarGrafico();
 
                 if(!mesa.IA_Activada()) {
