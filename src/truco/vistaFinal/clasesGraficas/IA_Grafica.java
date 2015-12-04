@@ -116,6 +116,13 @@ public class IA_Grafica {
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(truco.getMesa(), interfaz));
             }
 
+            // CUANDO LA IA CANTA EL ENVIDO SIN TANTO PREVIO
+            if(truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null && !truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) && truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class)){
+                IAcantoEnvido();
+                return;
+            }
+
+
             // CUANDO LA IA QUIERE O SUBE LA APUESTA DEL TANTO
             if (!truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class) && !truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class)) {
                 //  CUANDO LA IA ACEPTA EL ENVIDO
@@ -152,6 +159,12 @@ public class IA_Grafica {
                     showEnvidoQuerido();
             }
         }
+    }
+
+    private void IAcantoEnvido() {
+        interfaz.getHistorial().jugadorCantoEnvido(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getEnvido().getEnvidoCantado());
+        interfaz.getPanelIzquierdo().getChildren().clear();
+        interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(truco.getMesa(),interfaz));
     }
 
     private void showJugarCarta(){
