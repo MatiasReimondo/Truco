@@ -86,7 +86,7 @@ public class BotoneraInicial extends StackPane {
             mesa.getJugadorActivo().cantarTruco();
             interfaz.getControlIA().accionarGrafico();
 
-            if(mesa.IA_Activada()) {
+            if(!mesa.IA_Activada()) {
                 interfaz.getPanelIzquierdo().getChildren().clear();
                 interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa, interfaz));
             }
