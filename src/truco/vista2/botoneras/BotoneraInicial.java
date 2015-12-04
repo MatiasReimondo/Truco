@@ -75,8 +75,8 @@ public class BotoneraInicial extends StackPane {
                 interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),envido);
                 mesa.getJugadorActivo().cantarEnvido(envido);
                 interfaz.getControlIA().comportamientoIA();
-                interfaz.getPanelIzquierdo().getChildren().clear();
-                interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
+               // interfaz.getPanelIzquierdo().getChildren().clear();
+                //interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(mesa, interfaz));
                 interfaz.reload_PanelDerecho();
             } catch (JugadorNoHabilitadoParaCantarTanto b)
             {

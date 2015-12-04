@@ -66,6 +66,25 @@ public class IA_Grafica {
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(truco.getMesa(),interfaz));
         }
 
+        // CUANDO LA IA SOLO QUIERE EL ENVIDO
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(Envido.class) && truco.getMesa().getRonda().getEnvido().getEnvidoCantado()==null){
+            interfaz.getHistorial().jugadorQuisoEnvido(truco.getMesa().getJugadorIA(), truco.getMesa().getRonda().getEnvido());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(truco.getMesa(),interfaz));
+        }
+
+        // CUANDO LA IA QUIERE O SUBE LA APUESTA DEL ENVIDO
+        if(!truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class) && !truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class)){
+            return;
+
+        }
+        // CUANDO LA IA QUIERE EL ENVIDO Y CANTA ENVIDO
+        if(truco.getMesa().getRonda().getEnvido().getClass().equals(Envido.class) && truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null && truco.getMesa().getRonda().getEnvido().getEnvidoCantado().getClass().equals(Envido.class))
+        {
+            interfaz.getHistorial().jugadorCantoEnvido(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getEnvido().getEnvidoCantado());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaEnvido(truco.getMesa(),interfaz));
+        }
         // CUANDO LA IA CANTA ALGUN ENVIDO SIN QUE HAYA OTRO CANTADO PREVIAMENTE
         if(truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class) && truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null){
             interfaz.getHistorial().jugadorCantoEnvido(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getEnvido().getEnvidoCantado());
