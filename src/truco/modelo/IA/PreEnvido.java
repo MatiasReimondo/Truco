@@ -58,7 +58,7 @@ public class PreEnvido implements Comportamiento {
                    robot.cantarEnvido(new RealEnvido());
                    return;
                }
-               robot.quieroEnvido();                                                      //Caso C.3: Si robot, no sube la puesta, muy probablemente solo acepte el envido.
+               robot.quieroEnvido(); mesa.resolverEnvido();                                                      //Caso C.3: Si robot, no sube la puesta, muy probablemente solo acepte el envido.
                //
                return;
            } else {
@@ -79,7 +79,7 @@ public class PreEnvido implements Comportamiento {
                     robot.cantarEnvido(new FaltaEnvido());
                     return;
                 }
-                robot.quieroEnvido();                                                     //Caso E.3: robot solo acepta el Envido Envido;
+                robot.quieroEnvido(); mesa.resolverEnvido();                                                     //Caso E.3: robot solo acepta el Envido Envido;
                 
                 return;
             }
@@ -95,7 +95,7 @@ public class PreEnvido implements Comportamiento {
                     robot.cantarEnvido(new FaltaEnvido());
                     return;
                 }
-                robot.quieroEnvido();                                                     //Caso F.2: robot acepta la apuesta.
+                robot.quieroEnvido(); mesa.resolverEnvido();                                                     //Caso F.2: robot acepta la apuesta.
                 
                 return;
             }
@@ -106,7 +106,7 @@ public class PreEnvido implements Comportamiento {
         }
         if(seCanto(FaltaEnvido.class))
             if(robot.getEnvido()>=31 && r.nextInt(10)!=0){                                 //Caso G: Si robot tiene al menos 31 de tanto, tiene 10% de probabilidad de no querer el Falta Envido.
-                robot.quieroEnvido();
+                robot.quieroEnvido(); mesa.resolverEnvido();
                 
             }
     }
