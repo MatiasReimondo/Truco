@@ -12,6 +12,7 @@ import truco.modelo.Jugador;
 import truco.modelo.Mesa;
 import truco.modelo.estadosTruco.RetrucoCantado;
 import truco.modelo.estadosTruco.TrucoCantado;
+import truco.modelo.estadosTruco.TrucoNoCantado;
 import truco.modelo.estadosTruco.ValeCuatroCantado;
 import truco.vista2.Programa;
 import truco.vista2.botoneras.BotoneraPostEnvido;
@@ -147,7 +148,7 @@ public class DisplayMesa extends StackPane {
     }
 
     private void actualizarBotonera(){
-        if(mesa.getRonda().getResultados().size()==1) {
+        if(mesa.getRonda().getResultados().size()==1 && mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)) {
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraPostEnvido(mesa,interfaz));
         }

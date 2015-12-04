@@ -9,6 +9,7 @@ import truco.modelo.estadosTruco.ValeCuatroCantado;
 import truco.vista2.Programa;
 import truco.vista2.botoneras.BotoneraPostEnvido;
 import truco.vista2.botoneras.BotoneraRespuestaEnvido;
+import truco.vista2.botoneras.BotoneraRespuestaTruco;
 
 public class IA_Grafica {
 
@@ -37,20 +38,29 @@ public class IA_Grafica {
 
         if(truco.getMesa().getRonda().getManoEnJuego().containsKey(truco.getMesa().getJugadorIA())) {
             mostrarIAJugoCarta();
-            return;
         }
+
         if(truco.getMesa().getRonda().getEnvido().getEnvidoCantado()!=null && !truco.getMesa().getRonda().getEnvido().getClass().equals(EnvidoTerminado.class)){
             mostrarIACantoEnvido();
-            return;
         }
-        if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoCantado.class))
+
+        if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoCantado.class)) {
             interfaz.getHistorial().jugadorCantoTruco(truco.getMesa().getJugadorIA());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
+        }
 
-        if(truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoCantado.class))
+        if(truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoCantado.class)) {
             interfaz.getHistorial().jugadorCantoRetruco(truco.getMesa().getJugadorIA());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
+        }
 
-         if(truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroCantado.class))
-            interfaz.getHistorial().jugadorCantoValeCuatro(truco.getMesa().getJugadorIA());
+         if(truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroCantado.class)) {
+             interfaz.getHistorial().jugadorCantoValeCuatro(truco.getMesa().getJugadorIA());
+             interfaz.getPanelIzquierdo().getChildren().clear();
+             interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(truco.getMesa(),interfaz));
+         }
         }
 
 }
