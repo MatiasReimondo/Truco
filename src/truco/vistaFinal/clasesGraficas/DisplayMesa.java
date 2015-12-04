@@ -114,7 +114,7 @@ public class DisplayMesa extends StackPane {
         actualizarBotonera();
 
         if(mesa.getRonda().termino()) {
-            finalDeRonda();
+            interfaz.finalDeRonda();
         }
         else
             interfaz.actualizarManoGrafica();
@@ -127,13 +127,7 @@ public class DisplayMesa extends StackPane {
                 mesa.getRonda().getTruco().getClass().equals(ValeCuatroCantado.class));
     }
 
-    private void finalDeRonda(){
-        interfaz.reload_PanelDerecho();
-        Button botonRonda=new Button("SIGUIENTE RONDA");
-        botonRonda.setOnAction(e->interfaz.nuevaRondaGrafica());
-        botonRonda.setAlignment(Pos.BOTTOM_CENTER);
-        interfaz.getPanelDerecho().getChildren().addAll(new StackPane(botonRonda));
-    }
+
 
     private void actualizarBotonera(){
         if(mesa.getRonda().getResultados().size()==1 && mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)) {

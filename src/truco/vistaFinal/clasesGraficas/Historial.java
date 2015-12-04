@@ -78,7 +78,12 @@ public class Historial extends TextArea {
     }
 
     public void jugadorNoQuisoTruco(Jugador jugador, EstadoTruco truco) {
-        this.appendText(contadorAccion+". "+jugador.getNombre()+" no quiso el "+truco.getClass().getSimpleName()+".\n");
+        if(truco.getClass().equals(TrucoCantado.class))
+            this.appendText(contadorAccion+". "+jugador.getNombre()+" no quiso el Truco.\n");
+        if(truco.getClass().equals(RetrucoCantado.class))
+            this.appendText(contadorAccion+". "+jugador.getNombre()+" no quiso el Retruco.\n");
+        if(truco.getClass().equals(ValeCuatroCantado.class))
+            this.appendText(contadorAccion+". "+jugador.getNombre()+" no quiso el Vale Cuatro.\n");
         contadorAccion++;
     }
 

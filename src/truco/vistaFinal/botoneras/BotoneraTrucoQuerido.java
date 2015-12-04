@@ -66,8 +66,8 @@ public class BotoneraTrucoQuerido extends StackPane{
         botonNoQuiero.setOnAction(e->{
             interfaz.getHistorial().jugadorNoQuisoTruco(mesa.getJugadorActivo(),mesa.getRonda().getTruco());
             mesa.getJugadorActivo().noQuieroTruco();
-            interfaz.nuevaRondaGrafica();
-            interfaz.reload_PanelDerecho();
+            interfaz.finalDeRonda();
+            //interfaz.reload_PanelDerecho();
         });
     }
 

@@ -13,6 +13,7 @@ import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoNoCantado;
 import truco.modelo.envido.FaltaEnvido;
 import truco.modelo.envido.RealEnvido;
+import truco.modelo.estadosTruco.TrucoCantado;
 import truco.vistaFinal.Programa;
 
 public class BotoneraRespuestaEnvido extends StackPane{
@@ -71,16 +72,20 @@ public class BotoneraRespuestaEnvido extends StackPane{
 
     private void setBotonQuiero(){
         botonQuiero.setOnAction(e->{
-            interfaz.getHistorial().jugadorQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido());
+            interfaz.getHistorial().jugadorQuisoEnvido(mesa.getJugadorActivo(),mesa.getRonda().getEnvido().getEnvidoCantado());
             mesa.getJugadorActivo().quieroEnvido();
             mesa.resolverEnvido();
             interfaz.getHistorial().envidoResuelto();
             interfaz.actualizarPuntajeGrafico();
 
             interfaz.getControlIA().accionarGrafico();
+
             if(!mesa.IA_Activada()) {
                 interfaz.getPanelIzquierdo().getChildren().clear();
-                interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa, interfaz));
+                if(mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class))
+                    interfaz.getPanelIzquierdo().getChildren().addAll(new BotoneraRespuestaTruco(mesa,interfaz));
+                else
+                    interfaz.getPanelIzquierdo().getChildren().add(new BotoneraPostEnvido(mesa, interfaz));
             }
             interfaz.reload_PanelDerecho();
 

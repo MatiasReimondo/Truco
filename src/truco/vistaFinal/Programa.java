@@ -52,6 +52,13 @@ public class Programa extends Application {
 
     }
 
+    public void finalDeRonda(){
+        reload_PanelDerecho();
+        Button botonRonda=new Button("SIGUIENTE RONDA");
+        botonRonda.setOnAction(e->nuevaRondaGrafica());
+        botonRonda.setAlignment(Pos.BOTTOM_CENTER);
+        panelDerecho.getChildren().addAll(new StackPane(botonRonda));
+    }
     private void setBotonComenzar(Button boton,Stage stage){
         boton.setOnAction(e -> {
             try { displayMainwindow();  }

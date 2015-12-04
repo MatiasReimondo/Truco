@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import truco.modelo.Mesa;
+import truco.modelo.envido.Envido;
 import truco.modelo.envido.EnvidoTerminado;
 import truco.modelo.estadosTruco.RetrucoCantado;
 import truco.modelo.estadosTruco.TrucoCantado;
@@ -21,7 +22,7 @@ public class BotoneraRespuestaTruco extends StackPane {
     private Programa interfaz;
     private Mesa mesa;
     Button botonQuiero=new Button("QUIERO");
-    private Button botonEnvido=new Button("ENVIDO");
+    private Button botonEnvido=new Button("ENVIDO ESTA PRIMERO");
     private Button botonRetruco=new Button("RETRUCO");
     private Button botonValeCuatro=new Button("VALE CUATRO");
     private Button botonNoQuiero=new Button("NO QUIERO");
@@ -61,7 +62,18 @@ public class BotoneraRespuestaTruco extends StackPane {
         setBotonNoQuiero();
         setBotonRetruco();
         setBotonValeCuatro();
+        setBotonEnvido();
 
+    }
+
+    private void setBotonEnvido(){
+        botonEnvido.setOnAction(e->{
+            interfaz.getHistorial().jugadorCantoEnvido(mesa.getJugadorActivo(),new Envido());
+            mesa.getJugadorActivo().cantarEnvido(new Envido());
+            interfaz.getPanelIzquierdo().getChildren().clear();
+            interfaz.getPanelIzquierdo().getChildren().add(new BotoneraRespuestaEnvido(mesa,interfaz));
+            interfaz.reload_PanelDerecho();
+        });
     }
 
     private void setBotonQuiero(){
@@ -78,9 +90,10 @@ public class BotoneraRespuestaTruco extends StackPane {
 
     private void setBotonNoQuiero(){
         botonNoQuiero.setOnAction(e->{
+            interfaz.getHistorial().jugadorNoQuisoTruco(mesa.getJugadorActivo(),mesa.getRonda().getTruco());
             mesa.getJugadorActivo().noQuieroTruco();
-            interfaz.nuevaRondaGrafica();
-            interfaz.reload_PanelDerecho();
+            interfaz.finalDeRonda();
+            //interfaz.reload_PanelDerecho();
         });
     }
 
