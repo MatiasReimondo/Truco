@@ -41,7 +41,7 @@ public class PostEnvido implements Comportamiento {
             }
 
         if (mesa.getRonda().getTruco().getClass().equals(TrucoCantado.class)) {
-            if (robot.getFuerzaTotal() >= 25) {
+            if (robot.getFuerzaTotal() >= 22 && robot.getMano().size()==3 || robot.getFuerzaTotal()>=14 && robot.getMano().size()==2) {
                 robot.quieroTruco();
                 mesa.setIA(new TrucoQuerido());
                 mesa.setJugadorIA(robot);

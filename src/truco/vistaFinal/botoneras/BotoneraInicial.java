@@ -124,7 +124,7 @@ public class BotoneraInicial extends StackPane {
         botonIrseAlMazo.setOnAction(e -> {
             interfaz.getHistorial().jugadorSeFueAlMazo(mesa.getJugadorActivo());
             mesa.getJugadorActivo().irseAlMazo();
-            interfaz.nuevaRondaGrafica();
+            interfaz.finalDeRonda();
         });
     }
 

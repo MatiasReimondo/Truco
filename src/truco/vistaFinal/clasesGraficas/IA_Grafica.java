@@ -27,16 +27,13 @@ public class IA_Grafica {
                 truco.getMesa().getIA().accionar();
                 interfaz.getControlIA().mostrarAcciones();
 
-                // CASO EN QUE DESPUES DE JUGAR LA IA SE DEBA RESOLVER LA MANO
                 if (truco.getMesa().getRonda().getManoEnJuego().size() == truco.getMesa().getNroJugadores())
                     truco.getMesa().resolverMano();
 
                 if(truco.getMesa().getRonda().termino()) {
-                    System.out.println("Despues de que la IA acciona, termino la ronda");
                     interfaz.finalDeRonda();
                     break;
                 }
-                System.out.println("Se llega al final del loop");
             }
         }
     }
@@ -53,11 +50,19 @@ public class IA_Grafica {
 
     private void comportamientoTrucoGrafico(){
 
+        // CUANDO LA IA NO QUIERE EL TRUCO, RETRUCO, O VALE CUATRO
+        if((truco.getMesa().getRonda().getTruco().getClass().equals(TrucoCantado.class) || truco.getMesa().getRonda().getTruco().getClass().equals(RetrucoCantado.class) || truco.getMesa().getRonda().getTruco().getClass().equals(ValeCuatroCantado.class))&& truco.getMesa().getRonda().termino()) {
+            interfaz.getHistorial().jugadorNoQuisoTruco(truco.getMesa().getJugadorIA(), truco.getMesa().getRonda().getTruco());
+            interfaz.nuevaRondaGrafica();
+            return;
+        }
+
         // CUANDO LA IA QUIERE EL TRUCO
         if(truco.getMesa().getRonda().getTruco().getClass().equals(TrucoQuerido.class) && truco.getMesa().getJugadorIA().tieneElQuiero()){
             interfaz.getHistorial().jugadorQuisoTruco(truco.getMesa().getJugadorIA(),truco.getMesa().getRonda().getTruco());
             interfaz.getPanelIzquierdo().getChildren().clear();
             interfaz.getPanelIzquierdo().getChildren().add(new BotoneraTrucoQuerido(truco.getMesa(),interfaz));
+            System.out.print(2);
             return;
         }
 

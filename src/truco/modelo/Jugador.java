@@ -103,15 +103,11 @@ public class Jugador {
 
     public void irseAlMazo(){
         if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getEnvido().getClass().equals(EnvidoNoCantado.class) && mesa.getRonda().getFlor()==null){
-            mesa.siguienteJugador();
-            mesa.getJugadorActivo().getEquipo().sumarPuntos(2);
-            mesa.jugadorAnterior();
+            mesa.getEquipoOponente().sumarPuntos(2);
             mesa.getRonda().terminar();
         }
         else{
-            mesa.siguienteJugador();
-            mesa.getJugadorActivo().getEquipo().sumarPuntos(1);
-            mesa.jugadorAnterior();
+            mesa.getEquipoOponente().sumarPuntos(1);
             mesa.getRonda().terminar();
         }
     }

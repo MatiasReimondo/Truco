@@ -115,7 +115,6 @@ public class PreEnvido implements Comportamiento {
     public void accionar(){
         if(mesa.getRonda().seEstaJugandoLaPrimera() && mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)) {
             comportamientoEnvido();
-            //return;
         }
 
         if(mesa.getRonda().getEnvido().getClass().equals(EnvidoTerminado.class) || !mesa.getRonda().seEstaJugandoLaPrimera() || !mesa.getRonda().getTruco().getClass().equals(TrucoNoCantado.class)){

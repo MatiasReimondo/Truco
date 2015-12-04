@@ -104,20 +104,25 @@ public class DisplayMesa extends StackPane {
 
         mesa.getJugadorActivo().jugarCarta(cartaGrafica.getCarta().getNumero(), cartaGrafica.getCarta().getPalo());
 
-        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores())
+        if(mesa.getRonda().getManoEnJuego().size()==mesa.getNroJugadores()) {
             mesa.resolverMano();
+            if(mesa.getRonda().termino()) {
+                interfaz.finalDeRonda();
+                return;
+            }
+        }
 
         interfaz.getControlIA().accionarGrafico();
 
+        if(mesa.getRonda().termino()) {
+            interfaz.finalDeRonda();
+            return;
+        }
         interfaz.reload_PanelDerecho();
 
         actualizarBotonera();
 
-        if(mesa.getRonda().termino()) {
-            interfaz.finalDeRonda();
-        }
-        else
-            interfaz.actualizarManoGrafica();
+        interfaz.actualizarManoGrafica();
 
     }
 
