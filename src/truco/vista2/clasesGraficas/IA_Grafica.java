@@ -37,6 +37,7 @@ public class IA_Grafica {
     private boolean esTurnoDeLaIA(){
         return truco.getMesa().getJugadorActivo().equals(truco.getMesa().getJugadorIA());
     }
+
     private void mostrarIAJugoCarta(){
 
         interfaz.getDisplayMesa().encontrarSlot(truco.getMesa().getJugadorIA()).getChildren().clear();
